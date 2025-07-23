@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa"; // Instala react-icons: npm install react-icons
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ const Navbar = () => {
     <nav className="font-[Poppins] bg-white shadow-black shadow-2xl">
       <div className="container mx-auto px-10 py-3 ">
         {/* --- Contenedor Principal --- */}
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center text-sm">
           {/* Logo (siempre visible) */}
           <a href="/">
             <img src="/logoUplin.svg" alt="Logo Uplin" className="w-20 h-10" />

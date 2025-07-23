@@ -10,13 +10,13 @@ const Footer = () => {
             className="h-8 mb-4"
             src="/imgUplinFooter.png"
           />
-          <p className="text-sm tracking-wide font-medium">
-            La Primera Membresía de HR flexible en &nbsp; Latinoamérica
+          <p className="text-xs tracking-wide font-medium">
+            La Primera Membresía de HR flexible en Latinoamérica
           </p>
         </div>
         <div>
-          <h3 className="font-bold mb-4 text-lg">Enlaces Esenciales</h3>
-          <ul className="space-y-2 text-sm tracking-wider">
+          <h3 className="font-bold mb-4 text-sm">Enlaces Esenciales</h3>
+          <ul className="space-y-2 text-xs tracking-wider">
             <li>
               <a className="hover:underline" href="#">
                 Política de privacidad
@@ -40,7 +40,7 @@ const Footer = () => {
           </ul>
         </div>
         <div>
-          <h3 className="font-bold mb-4 text-lg">Síguenos</h3>
+          <h3 className="font-bold mb-4 text-sm">Síguenos</h3>
           <div className="flex space-x-4">
             <a
               className="text-white hover:text-gray-300"
@@ -78,7 +78,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white">
-        <p className="text-center text-sm font-semibold">
+        <p className="text-center text-xs font-semibold">
           © 2025 Uplin. Todos los derechos reservados
         </p>
       </div>
