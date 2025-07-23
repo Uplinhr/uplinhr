@@ -7,8 +7,8 @@ export interface IPlan {
   showTaxes?: boolean;
   isCustom?: boolean;
 }
-
-export interface IPlanCardProps extends IPlan {
-  className?: string;
-  onClick?: () => void;
+export interface QaItem {
+  question: string;
+  answer: string | string[];
+  initialExpanded?: boolean;
 }
