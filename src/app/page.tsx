@@ -9,7 +9,6 @@ export default function TestTailwind() {
       <Presentation/>
       <Solutions/>
       <CardsPlanLanding/>
-      
     </div>
   );
 }
