@@ -1,5 +1,6 @@
 "use client";
-
+import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -12,25 +13,31 @@ const Navbar = () => {
         {/* --- Contenedor Principal --- */}
         <div className="flex justify-between items-center text-sm">
           {/* Logo (siempre visible) */}
-          <a href="/">
-            <img src="/logoUplin.svg" alt="Logo Uplin" className="w-20 h-10" />
-          </a>
+          <Link href="/">
+            <Image
+              src="/logoUplin.svg"
+              alt="Logo Uplin"
+              width={80}
+              height={40}
+              className="w-20 h-10"
+            />
+          </Link>
 
           {/* --- Menú Desktop (visible en lg+) --- */}
           <div className="hidden lg:flex gap-12 items-center">
             <a
-              className="text-[#502B7D] hover:text-[#6b4699] transition-colors"
+              className="text-[#502B7D] hover:text-[#6b4699] transition-colors cursor-pointer"
               href="/quienes-somos"
             >
               Quienes Somos
             </a>
             <a
-              className="text-[#502B7D] hover:text-[#6b4699] transition-colors"
+              className="text-[#502B7D] hover:text-[#6b4699] transition-colors cursor-pointer"
               href="/planes"
             >
               Planes
             </a>
-            <a className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors">
+            <a className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors cursor-pointer">
               Contacto
             </a>
           </div>
@@ -48,19 +55,19 @@ const Navbar = () => {
         {isOpen && (
           <div className="lg:hidden mt-4 pb-4 space-y-3">
             <a
-              className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded transition-colors"
+              className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded transition-colors cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               Quienes Somos
             </a>
             <a
-              className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded transition-colors"
+              className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded transition-colors cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               Planes
             </a>
             <a
-              className="inline-block border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors mt-2"
+              className="inline-block border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors mt-2 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
               Contacto

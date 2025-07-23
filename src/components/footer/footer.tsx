@@ -1,14 +1,16 @@
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import Image from "next/image";
 
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-[#502B7D] to-[#6C4099] text-white py-12 px-4 sm:px-6 lg:px-8 font-[Poppins] ">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-1">
-          <img
+          <Image
             alt="Uplin logo"
-            className="h-8 mb-4"
-            src="/imgUplinFooter.png"
+            src="/logoUplinFooter.svg"
+            width={50}
+            height={50}
           />
           <p className="text-xs tracking-wide font-medium">
             La Primera Membresía de HR flexible en Latinoamérica
