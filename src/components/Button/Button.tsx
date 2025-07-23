@@ -19,41 +19,77 @@ interface ButtonProps{
  */
 const Button = ({link, tag, mode, height, width}: ButtonProps) => {
 
-        const colorConfig = {
-        0: {
-          base: { bg: 'bg-[#502B7D]', text: 'text-white' },
-          hover: { bg: 'hover:bg-white', text: 'hover:text-[#502B7D]' }
-        },
-        1: {
-          base: { bg: 'bg-white', text: 'text-[#502B7D]' },
-          hover: { bg: 'hover:bg-[#502B7D]', text: 'hover:text-white' }
-        },
-        2: {
-          base: { bg: 'bg-[#72C058]', text: 'text-white' },
-          hover: { bg: 'hover:bg-white', text: 'hover:text-[#72C058]' }
-        }
-    };
+  const colorConfig = {
+    0: {
+      base: { 
+        bg: 'bg-[#502B7D]', 
+        text: 'text-white', 
+        border: 'border border-[#502B7D]',
+        fontWeight: 'font-semibold',
+      },
+      hover: { 
+        bg: 'hover:bg-white', 
+        text: 'hover:text-[#502B7D]' 
+      }
+    },
+    1: {
+      base: { 
+        bg: 'bg-white', 
+        text: 'text-[#502B7D]', 
+        border: 'border border-[#502B7D]',
+        fontWeight: 'font-semibold',
+      },
+      hover: { 
+        bg: 'hover:bg-[#502B7D]', 
+        text: 'hover:text-white' 
+      }
+    },
+    2: {
+      base: { 
+        bg: 'bg-[#72C058]', 
+        text: 'text-white', 
+        border: 'border border-[#72C058]',
+        fontWeight: 'font-semibold',
+      },
+      hover: { 
+        bg: 'hover:bg-white', 
+        text: 'hover:text-[#72C058]' 
+      }
+    }
+  };
 
-    const { base, hover } = colorConfig[mode];
+  const { base, hover } = colorConfig[mode];
 
-    return(
-        <div className="flex justify-center">
-            <Link href={link}>
-                <button className={`font-poppins font-semibold 
-                text-[16px] rounded-[6px] px-4 py-2 cursor-pointer
-                transition-colors duration-300 ease-in-out
-                ${base.bg} ${base.text}
-                ${hover.bg} ${hover.text}`}
-                style={{
-                  height: `${height}px`,
-                  width: `${width}px`,
-                  minWidth: 'fit-content'
-                }}>
-                    {tag}
-                </button>
-            </Link>
-        </div>
-    )
+  return(
+    <div className="flex justify-center">
+      <Link href={link}>
+        <button className={`
+          font-poppins 
+          text-[16px] 
+          rounded-[6px] 
+          px-4 py-2 
+          cursor-pointer 
+          transition-colors duration-300 ease-in-out
+          ${base.border}
+          ${base.bg} 
+          ${base.text} 
+          ${base.fontWeight}
+          ${hover.bg} 
+          ${hover.text}
+        `}
+          style={{
+            height: `${height}px`,
+            width: `${width}px`,
+            minWidth: 'fit-content',
+            fontStyle: 'normal',
+            textAlign: 'center',
+          }}
+        >
+          {tag}
+        </button>
+      </Link>
+    </div>
+  )
 }
 
 export default Button
