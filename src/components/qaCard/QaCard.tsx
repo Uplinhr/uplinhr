@@ -10,7 +10,7 @@ export const QaCard = ({ question, answer, initialExpanded = false }: QaItem) =>
   return (
     <div className="w-full max-w-4xl mx-auto mb-4">
       <button
-        className={`w-full p-4 flex justify-between items-center bg-white rounded-lg
+        className={`w-full p-4 flex justify-between items-center cursor-pointer bg-white rounded-lg
                   hover:bg-[#F3EBF8] transition-colors border border-gray-200
                   ${isExpanded ? 'rounded-b-none' : ''}`}
         onClick={() => setIsExpanded(!isExpanded)}
