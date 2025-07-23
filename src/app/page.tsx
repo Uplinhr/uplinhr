@@ -9,15 +9,7 @@ export default function TestTailwind() {
       <Presentation/>
       <Solutions/>
       <CardsPlanLanding/>
-      <div className="my-8 flex justify-center">
-        <Button 
-          link="/planes" 
-          tag="Contáctame" 
-          mode={2} 
-          height={50} 
-          width={180} 
-        />
-      </div>
+      
     </div>
   );
 }
