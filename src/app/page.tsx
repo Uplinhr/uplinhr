@@ -1,10 +1,14 @@
+import Button from "@/components/Button/Button";
+import Solutions from "@/views/Solutions";
+import Presentation from "@/views/Presentation";
+import CardsPlanLanding from "@/views/cardsPlanLanding";
+
 export default function TestTailwind() {
   return (
-  
-        <h1 className="min-h-screen bg-gradient-to-br from-cyan-500 to-blue-700 text-3xl font-bold text-gray-800 mb-4 bg-red">
-          Bienvenido Marco a la Landing de bienvenida
-        </h1>
-      
-    
+    <div className="min-h-screen bg-gradient-to-br from-cyan-500 to-blue-700 ">
+      <Presentation/>
+      <Solutions/>
+      <CardsPlanLanding/>
+    </div>
   );
 }

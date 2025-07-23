@@ -16,3 +16,8 @@ export interface QaItem {
   answer: string | string[];
   initialExpanded?: boolean;
 }
+export interface SolutionProps{
+  icon: string;
+  title: string;
+  description: string;
+}
