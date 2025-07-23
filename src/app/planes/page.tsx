@@ -1,8 +1,10 @@
+import CardsPlan from "@/views/cardsPlan";
 const Planes = () => {
   return (
-    <div className="bg-white h-80">
-      <p>Planes</p>
-    </div>
+    <section className="bg-white h-auto">
+    <CardsPlan/>  
+    
+    </section>
   );
 };
 
