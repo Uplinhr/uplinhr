@@ -2,7 +2,7 @@ import CardSolution from "@/components/CardSolution/CardSolution"
 
 const Solutions = () => {
     return(
-        <div>
+        <div className="mb-16">
             <h1 className="font-poppins text-[28px] text-black font-semibold text-center mb-8">Soluciones de talento flexibles, con el acompañamiento que necesitás</h1>
             <div className="flex flex-wrap gap-6 justify-center">
                 <CardSolution
