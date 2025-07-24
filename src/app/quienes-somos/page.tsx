@@ -148,7 +148,7 @@ const AboutUs = () => {
             <Button
               link="/planes"
               tag="Descubrí nuestros planes"
-              mode={2}
+              mode={3}
               height={50}
               width={180}
             />
