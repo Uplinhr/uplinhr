@@ -8,7 +8,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="font-[Poppins] bg-white shadow-black shadow-2xl">
+    <nav className="font-[Poppins] bg-white shadow-gray-300 shadow-md">
       <div className="container mx-auto px-10 py-3 ">
         {/* --- Contenedor Principal --- */}
         <div className="flex justify-between items-center text-sm">
