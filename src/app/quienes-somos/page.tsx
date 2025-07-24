@@ -1,3 +1,4 @@
+import Button from "@/components/Button/Button";
 import Needs from "@/views/Needs";
 import Image from "next/image";
 import { FaLinkedin } from "react-icons/fa";
@@ -142,19 +143,23 @@ const AboutUs = () => {
             forma más humana de gestionar el talento, estamos acá para
             acompañarte.
           </p>
+
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
-            <a
-              className="px-6 py-3 sm:px-8 sm:py-4 border border-[#502B7D] text-[#502B7D] rounded-lg text-sm font-medium hover:bg-purple-50 transition-colors w-full sm:w-auto"
-              href="/planes"
-            >
-              Descubrí nuestros planes
-            </a>
-            <a
-              className="px-6 py-3 sm:px-8 sm:py-4 bg-[#502B7D] text-white rounded-lg text-sm font-medium hover:bg-[#6b4699] transition-colors w-full sm:w-auto"
-              href="https://outlook.office.com/book/ConectconUplin1@uplinhr.com/?ismsaljsauthenabled"
-            >
-              Agenda una llamada inicial
-            </a>
+            <Button
+              link="/planes"
+              tag="Descubrí nuestros planes"
+              mode={2}
+              height={50}
+              width={180}
+            />
+
+            <Button
+              link="https://outlook.office.com/book/ConectconUplin1@uplinhr.com/?ismsaljsauthenabled"
+              tag="Agenda una llamada inicial"
+              mode={0}
+              height={50}
+              width={180}
+            />
           </div>
         </div>
       </section>
