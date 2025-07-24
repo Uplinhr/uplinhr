@@ -30,7 +30,7 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="#">
+              <a className="hover:underline" href="/preguntas-frecuentes">
                 Preguntas frecuentes (FAQ)
               </a>
             </li>
@@ -66,7 +66,6 @@ const Footer = () => {
               </i>
             </a>
             <div>
-              {/* <h3 className="font-bold mb-4 text-lg invisible md:visible">.</h3> */}
               <p className="text-sm">
                 <a
                   className="hover:underline"

@@ -1,6 +1,6 @@
 import { QaItem } from '@/interfaces/index';
 
-export const GENERAL_QUESTIONS: QaItem[] = [
+export const QUESTIONS: QaItem[] = [
   {
     question: "¿Qué tipo de temas o desafíos específicos puedo abordar en las horas de consultoría con Uplin?",
     answer: "Nuestras horas de consultoría están diseñadas para ser su apoyo experto en cualquier desafío o consulta estratégica de RRHH que su empresa enfrente mes a mes."
@@ -38,10 +38,7 @@ export const GENERAL_QUESTIONS: QaItem[] = [
   {
     question: "¿Cómo se consumen los créditos?",
     answer: "El crédito se consume cuando solicitas el servicio de reclutamiento desde la plataforma. Es decir, una vez realizada la solicitud, se descuenta automáticamente el crédito (o créditos) correspondientes a la vacante solicitada."
-  }
-];
-
-export const PAYMENT_QUESTIONS: QaItem[] = [  
+  },
     {
     question: "¿Qué métodos de pago aceptan?",
     answer: "Aceptamos tarjeta de crédito (a través de link de pago), Mercado Pago y PayPal. También ofrecemos la posibilidad de realizar pagos en moneda local si estás en Argentina."
@@ -54,4 +51,5 @@ export const PAYMENT_QUESTIONS: QaItem[] = [
     question: "¿Puedo cambiar de plan más tarde?",
     answer: "Sí. Podés cambiar de plan en cualquier momento. Nos adaptamos al crecimiento de tu empresa, por lo que si necesitás más créditos o servicios, podés escalar sin complicaciones."
   }
-];
+]
+

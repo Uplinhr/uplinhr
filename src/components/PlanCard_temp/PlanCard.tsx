@@ -15,7 +15,7 @@ const PlanCard = ({
 
   return (
     <div
-      className={`relative bg-white flex flex-col h-full ${
+      className={`transform transition-transform duration-200 hover:scale-[1.03] relative bg-white flex flex-col h-full ${
         isGrowth
           ? "border-[3px] border-[#502B7D] rounded-b-[15px]"
           : "border border-[#D5D5D5] rounded-[15px]"
@@ -43,7 +43,7 @@ const PlanCard = ({
         </div>
       )}
 
-      <div className="p-6 flex flex-col h-full font-poppins">
+      <div className="p-6 flex flex-col h-full font-poppins ">
         <div className="min-h-[180px] mb-2">
           <h3 className="text-2xl font-bold text-black">{plan}</h3>
           <p className="mt-3 w-64 h-28 justify-center text-black/80 text-base font-normal leading-normal">{description}</p>

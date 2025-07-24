@@ -8,7 +8,7 @@ const CardSolution = ({
 }: SolutionProps) => {
 
     return(
-        <div className="bg-white rounded-lg shadow-[0_4px_8px_0_rgba(0,0,0,0.1)]
+        <div className="transform transition-transform duration-200 hover:scale-[1.05] bg-white rounded-lg shadow-[0_4px_8px_0_rgba(0,0,0,0.1)]
         flex flex-col items-center text-center pt-6"
         style={{
             width: '285px',
