@@ -37,9 +37,16 @@ const AboutUs = () => {
                 ponemos en el centro.
               </p>
             </div>
-            <div className="bg-gray-400 aspect-video rounded-lg flex items-center justify-center mt-6 md:mt-0">
-              <span className="text-white">video</span>
-              {/* <video src=""></video> */}
+
+            {/* Versión con iframe de YouTube */}
+            <div className="aspect-video rounded-lg overflow-hidden mt-6 md:mt-0">
+              <iframe
+                src="https://www.youtube.com/embed/PJmeRJxUJQc?autoplay=0&mute=1&controls=1"
+                className="w-full h-full"
+                title="Video de Uplin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
             </div>
           </div>
         </section>
