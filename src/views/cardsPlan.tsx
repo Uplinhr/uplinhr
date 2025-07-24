@@ -1,4 +1,4 @@
-import PlanCard from "@/components/PlanCard/PlanCard";
+import PlanCard from "@/components/planCard/PlanCard";
 import { PLANS_DATA } from "@/utils/plans";
 
 const CardsPlanView = () => {
