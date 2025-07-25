@@ -6,9 +6,10 @@ import Footer from "@/components/footer/footer";
 import Chatbot from "@/components/chatBot/chatBot";
 
 const poppins = Poppins({
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"], // Especifica los pesos que necesitas
+  subsets: ["latin"], // Subconjunto de caracteres
+  display: "swap", // Evita FOIT (Flash of Invisible Text)
   variable: "--font-poppins",
-  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
