@@ -49,7 +49,7 @@ uplin-frontend/
 │   ├── interfaces/         # Tipos e interfaces TypeScript
 │   ├── utils/              # Funciones utilitarias y helpers para renderización de componentes
 │   └── views/              # Vistas principales organizadas por página o feature
-
+```
 ---
 
 ## 🤝 Colaboración
