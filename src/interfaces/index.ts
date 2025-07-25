@@ -22,3 +22,12 @@ export interface SolutionProps{
   title: string;
   description: string;
 }
+
+export interface IOption {
+  id: string;
+  text: string;
+  response?: string;
+  subOptions?: IOption[]; 
+}
+
+

@@ -10,12 +10,17 @@ El objetivo de este repositorio es centralizar y organizar el desarrollo del fro
 
 ---
 
-## Tecnologías Planificadas
+## 🧰 Tecnologías Planificadas
 
 - **React** + **Next.js**
 - **TypeScript**
-- **Vercel** (para deploy)
 - **TailwindCSS** (para estilos)
+- **Vercel** (para deploy)
+- **React Icons** (para íconos)
+- **Framer Motion** (para animaciones)
+- **Vercel** (para deploy)
+- **React Icons** (para íconos)
+- **Framer Motion** (para animaciones)
 
 ---
 
@@ -31,32 +36,22 @@ Cada miembro trabaja en su propia rama y, una vez completadas y probadas las fun
 
 ---
 
-## ⚠️ Estado Actual
+## 🗂️ Estructura del Proyecto
 
-Actualmente, el equipo está organizando la estructura inicial del proyecto. El código del frontend personalizado aún no ha sido implementado, ya que la primera versión será desplegada en Systeme.io. Este repositorio se irá completando a medida que avance la planificación y el desarrollo técnico.
+La estructura actual del proyecto está organizada de la siguiente manera:
 
----
-
-## 🚀 Deploy
-
-El despliegue se realizará en **[Vercel](https://vercel.com/)**, permitiendo integración continua desde GitHub y facilitando vistas previas automáticas por rama.
-
+```
+uplin-frontend/
+├── public/                 # Archivos públicos accesibles desde la raíz (imágenes, íconos, etc.)
+├── src/                    # Código fuente del frontend
+│   ├── app/                # Entradas principales (rutas con Next.js App Router)
+│   ├── components/         # Componentes reutilizables
+│   ├── interfaces/         # Tipos e interfaces TypeScript
+│   ├── utils/              # Funciones utilitarias y helpers para renderización de componentes
+│   └── views/              # Vistas principales organizadas por página o feature
+```
 ---
 
 ## 🤝 Colaboración
 
-Cada integrante del equipo trabajará en su rama individual. Se recomienda mantener commits descriptivos, revisar el código antes de subir y realizar Pull Requests hacia `dev` con cambios validados y funcionales.
-
----
-
-## Conclusión
-
-Este repositorio representa el punto de partida para el desarrollo del frontend propio del proyecto. Si bien el primer MVP se lanzará sobre **Systeme.io**, ya se está planificando la migración a una solución personalizada con tecnologías modernas.
-
-Por el momento, **no se han definido las integraciones con API ni la conexión a bases de datos**. Estas decisiones se tomarán en etapas posteriores del proyecto, en función de las necesidades y del backend que se elija implementar.
-
-El enfoque actual está puesto en:
-
-- Organizar el equipo y el flujo de trabajo.
-- Definir las tecnologías base.
-- Dejar listo el entorno para iniciar el desarrollo cuando sea necesario.
+Cada integrante del equipo trabajará en su rama individual. Se recomienda mantener commits descriptivos, revisar el código antes de subir y realizar Pull Requests hacia dev con cambios validados y funcionales.
