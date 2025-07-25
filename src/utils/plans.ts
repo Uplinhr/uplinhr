@@ -18,7 +18,8 @@ export const PLANS_DATA = [
       "Auditoría del área de talento",
       "Proyectos especiales o desafíos puntuales"
     ],
-    showTaxes: true
+    showTaxes: true,
+    link: "https://www.uplinhr.com/conditions-start-membership"
   },
   {
     plan: "Growth",
@@ -39,7 +40,8 @@ export const PLANS_DATA = [
       "Auditoría del área de talento",
       "Proyectos especiales o desafíos puntuales"
     ],
-    showTaxes: true
+    showTaxes: true,
+    link: "https://www.uplinhr.com/conditions-growth-membership"
   },
   {
     plan: "Premium",
@@ -60,7 +62,8 @@ export const PLANS_DATA = [
     excludes: [
       "Proyectos especiales o desafíos puntuales"
     ],
-    showTaxes: true
+    showTaxes: true, 
+    link: "https://www.uplinhr.com/conditions-premium-membership"
   },
   {
     plan: "Custom",
@@ -81,6 +84,7 @@ export const PLANS_DATA = [
     ],
     excludes: [],
     showTaxes: false,
-    isCustom: true
+    isCustom: true,  
+    link: "https://www.uplinhr.com/fgsdf3254h"
   }
 ];

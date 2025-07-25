@@ -6,6 +6,7 @@ export interface IPlan {
   excludes: string[];
   showTaxes?: boolean;
   isCustom?: boolean;
+  link: string;
 }
 export interface IPlanCardProps extends IPlan {
   className?: string;
