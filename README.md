@@ -11,10 +11,14 @@ El objetivo de este repositorio es centralizar y organizar el desarrollo del fro
 ---
 
 ## 🧰 Tecnologías Planificadas
+## 🧰 Tecnologías Planificadas
 
 - **React** + **Next.js**
 - **TypeScript**
 - **TailwindCSS** (para estilos)
+- **Vercel** (para deploy)
+- **React Icons** (para íconos)
+- **Framer Motion** (para animaciones)
 - **Vercel** (para deploy)
 - **React Icons** (para íconos)
 - **Framer Motion** (para animaciones)
