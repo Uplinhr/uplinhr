@@ -20,12 +20,12 @@ const Footer = () => {
           <h3 className="font-bold mb-4 text-sm">Enlaces Esenciales</h3>
           <ul className="space-y-2 text-xs tracking-wider">
             <li>
-              <a className="hover:underline" href="#">
+              <a className="hover:underline" href="/politicas-privacidad">
                 Política de privacidad
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="#">
+              <a className="hover:underline" href="/terminos-condiciones">
                 Términos y condiciones
               </a>
             </li>
@@ -35,7 +35,7 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="#">
+              <a className="hover:underline" href="https://www.uplinhr.com/fgsdf3254h">
                 Contacto
               </a>
             </li>
