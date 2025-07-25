@@ -11,7 +11,6 @@ El objetivo de este repositorio es centralizar y organizar el desarrollo del fro
 ---
 
 ## 🧰 Tecnologías Planificadas
-## 🧰 Tecnologías Planificadas
 
 - **React** + **Next.js**
 - **TypeScript**
