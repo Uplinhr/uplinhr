@@ -1,5 +1,5 @@
 import { IPlanCardProps } from "@/interfaces";
-
+import Link from "next/link";
 const PlanCard = ({
   plan,
   description,
@@ -10,6 +10,7 @@ const PlanCard = ({
   isCustom = false,
   className = "",
   onClick,
+  link
 }: IPlanCardProps) => {
   const isGrowth = plan.toLowerCase() === "growth";
 
@@ -59,12 +60,14 @@ const PlanCard = ({
             )}
           </div>
           <div className="mt-auto">
-            <button
-              className={`w-full mt-4 hover:cursor-pointer rounded-[6px] border border-[#502B7D] text-center font-[400] text-[16px] leading-[48px] transform transition-transform duration-200 hover:scale-[1.03]
-    ${isGrowth ? "bg-[#502B7D] text-white" : "bg-transparent text-[#502B7D]"}`}
-            >
-              {isCustom ? "Contactar" : `Adquirir ${plan}`}
-            </button>
+            <Link href={link} passHref>
+  <button
+    className={`w-full mt-4 hover:cursor-pointer rounded-[6px] border border-[#502B7D] text-center font-[400] text-[16px] leading-[48px] transform transition-transform duration-200 hover:scale-[1.03]
+      ${isGrowth ? "bg-[#502B7D] text-white" : "bg-transparent text-[#502B7D]"}`}
+  >
+    {isCustom ? "Contactar" : `Adquirir ${plan}`}
+  </button>
+</Link>
           </div>
         </div>
 
