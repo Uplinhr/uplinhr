@@ -3,7 +3,7 @@ import Button from "@/components/Button/Button";
 
 const Presentation = () => {
   return (
-    <div className="bg-gradient-to-r from-[#6C4099] to-[#502B7D] flex flex-wrap items-center gap-3 justify-between pl-8 py-26">
+    <div className="bg-gradient-to-r from-[#6C4099] to-[#502B7D] flex flex-wrap items-center gap-3 justify-between pl-28 py-26">
       <div className="pt-18 max-w-[600px]">
         <p className="font-poppins text-[16px] text-white font-bold text-left tracking-wider">
           RRHH FLEXIBLE <br />
