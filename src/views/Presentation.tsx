@@ -3,8 +3,8 @@ import Button from "@/components/Button/Button";
 
 const Presentation = () => {
   return (
-    <div className="bg-gradient-to-r from-[#6C4099] to-[#502B7D] flex flex-wrap gap-6 justify-center py-26">
-      <div className="pt-18">
+    <div className="bg-gradient-to-r from-[#6C4099] to-[#502B7D] flex flex-wrap items-center gap-3 justify-between pl-8 py-26">
+      <div className="pt-18 max-w-[600px]">
         <p className="font-poppins text-[16px] text-white font-bold text-left tracking-wider">
           RRHH FLEXIBLE <br />
           PARA TU EMPRESA
@@ -27,14 +27,15 @@ const Presentation = () => {
           />
         </div>
       </div>
-
-      <Image
-        alt="Logo Membresia flexible"
-        src="/imgReunionUplin.png"
-        width={750}
-        height={450}
-        className="drop-shadow-[-14px_14px_0_#502B7D]"
-      />
+      <div className="flex-1 min-w-[300px] max-w-[750px]">
+        <Image
+          alt="Logo Membresia flexible"
+          src="/imgReunionUplin.png"
+          width={750}
+          height={450}
+          className="drop-shadow-[-14px_14px_0_#502B7D]"
+        />
+      </div>
     </div>
   );
 };
