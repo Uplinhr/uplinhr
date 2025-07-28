@@ -1,6 +1,10 @@
+import PrivacyPolicies from "@/views/PrivacyPolicies"
+
 const page = () => {
   return (
-    <div>politica de privacidad</div>
+    <div>
+      <PrivacyPolicies/>
+    </div>
   )
 }
 
