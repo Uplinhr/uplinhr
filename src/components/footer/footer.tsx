@@ -1,4 +1,4 @@
-import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import {FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import Image from "next/image";
 
 const Footer = () => {
@@ -52,11 +52,7 @@ const Footer = () => {
                 <FaLinkedinIn />{" "}
               </i>
             </a>
-            <a className="text-white hover:text-gray-300" href="#">
-              <i className="fab fa-facebook-f text-xl">
-                <FaFacebookF />{" "}
-              </i>
-            </a>
+
             <a
               className="text-white hover:text-gray-300"
               href="https://www.instagram.com/uplinhr/"

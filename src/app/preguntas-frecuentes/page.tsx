@@ -2,8 +2,8 @@ import { QAView } from "@/views/qaView";
 
 const page = () => {
   return (
-    <div className="items-center">
-      <h1 className="mt-[28px] mb-[14px] text-center font-semibold text-[30px] text-poppins text-[#6C4099]">
+    <div className="py-8 items-center bg-gradient-to-r from-[#502B7D] to-[#6C4099] min-h-screen">
+      <h1 className="text-[#fff] mb-[14px] text-center font-semibold text-[30px] text-poppins ">
         Preguntas Frecuentes
       </h1>
       <QAView />
