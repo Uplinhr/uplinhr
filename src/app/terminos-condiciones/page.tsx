@@ -1,7 +1,11 @@
+import Conditions from "@/views/TConditions";
+
 const page = () => {
   return (
-    <div>terminos y condiciones</div>
-  )
-}
+    <div>
+      <Conditions />{" "}
+    </div>
+  );
+};
 
-export default page
+export default page;
