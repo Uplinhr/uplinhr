@@ -8,7 +8,8 @@ const ComparativeCard = () => {
       </h1>
 
       <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch px-4">
-        <div className="bg-[#F5F5F5] rounded-xl p-6 max-w-[520px] md:w-1/2 shadow-sm mx-auto md:mx-0 md:self-start">
+       
+        <div className="transform transition-transform duration-200 hover:scale-[1.03] bg-[#F5F5F5] rounded-xl p-6 max-w-[520px] md:w-1/2 shadow-sm mx-auto md:mx-0 md:self-start">
           <h3 className="text-[20px] font-semibold text-black mb-2">
             Esquema tradicional
           </h3>
@@ -29,7 +30,7 @@ const ComparativeCard = () => {
           </ul>
         </div>
 
-        <div className="bg-[#FFFF] rounded-xl p-6 max-w-[520px] md:w-1/2 shadow-md border border-purple-200 mx-auto md:ml-[-30px] md:mr-0 md:self-end relative md:-mt-16 z-10">
+        <div className="transform transition-transform duration-200 hover:scale-[1.03] bg-[#FFFF] rounded-xl p-6 max-w-[520px] md:w-1/2 shadow-md border border-purple-200 mx-auto md:ml-[-30px] md:mr-0 md:self-end relative md:-mt-16 z-10">
           <h3 className="text-[20px] font-semibold text-[#502B7D] mb-2">
             Uplin con créditos
           </h3>

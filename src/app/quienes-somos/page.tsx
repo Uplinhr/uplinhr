@@ -22,7 +22,7 @@ const AboutUs = () => {
 
   return (
     <div className="font-[Poppins]">
-      {/* Hero Section */}
+    
       <div className="px-4 sm:px-6 lg:px-10 mx-auto max-w-7xl">
         <section className="bg-[#502B7D] rounded-2xl p-6 sm:p-8 md:p-12 my-6 sm:my-8">
           <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -38,7 +38,7 @@ const AboutUs = () => {
               </p>
             </div>
 
-            {/* Versión con iframe de YouTube */}
+          
             <div className="aspect-video rounded-lg overflow-hidden mt-6 md:mt-0">
               <iframe
                 src="https://www.youtube.com/embed/PJmeRJxUJQc?autoplay=0&mute=1&controls=1"
@@ -52,7 +52,6 @@ const AboutUs = () => {
         </section>
       </div>
 
-      {/* Text + Graphic Section */}
       <section className="py-5 px-4 sm:px-6 lg:px-10 mx-auto max-w-7xl">
         <div className="grid md:grid-cols-2 items-center gap-8">
           <div className="relative flex justify-center order-2 md:order-1 px-0 md:pl-10 lg:pl-20">
@@ -87,26 +86,26 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+    
       <section className="py-12 sm:py-20 text-center px-4 sm:px-6">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-8 sm:mb-12">
           Conocé nuestro equipo
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto px-4 sm:px-8 lg:px-16">
+        <div className=" grid md:grid-cols-2 gap-6 max-w-4xl mx-auto px-4 sm:px-8 lg:px-16">
           {teamMembers.map((person, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden"
+              className="transform transition-transform duration-200 hover:scale-[1.03] bg-white rounded-2xl shadow-lg overflow-hidden"
             >
               <div className="relative h-64 sm:h-96 w-full">
                 {" "}
-                {/* Altura fija para estilo selfie */}
+              
                 <Image
                   alt={`${person.name}, ${person.role}`}
                   src={person.image}
                   fill
-                  className="object-cover object-top" /* Asegura que la cara esté visible */
+                  className="object-cover object-top"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
@@ -134,12 +133,11 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Needs Section */}
+      
       <section className="py-10 px-4 sm:px-6">
         <Needs />
       </section>
 
-      {/* CTA Section */}
       <section className="flex items-center justify-center my-10 sm:my-14 px-4">
         <div className="bg-white p-6 sm:p-10 md:p-16 rounded-xl shadow-lg max-w-4xl w-full text-center">
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">

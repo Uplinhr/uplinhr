@@ -1,5 +1,4 @@
 import CardsPlan from "@/views/cardsPlan";
-import { QAViewP } from "@/views/qaPayments";
 import Button from "@/components/Button/Button";
 import ComparativeCard from "@/views/comparativeCard";
 const Planes = () => {
@@ -20,13 +19,6 @@ const Planes = () => {
       <CardsPlan />
 
       <ComparativeCard />
-
-      <div className="mt-10 mb-14 font-poppins">
-        <h1 className="mb-[20px] text-center font-semibold text-[28px]">
-          Preguntas Frecuentes
-        </h1>
-        <QAViewP />
-      </div>
 
       <div className="mx-auto mt-10 mb-14 font-poppins w-2/3 h-auto bg-[#FDE6C7] rounded-[20px] px-6 py-10 text-center">
         <h2 className="mb-4 text-black text-[28px] font-stretch-75% leading-10">

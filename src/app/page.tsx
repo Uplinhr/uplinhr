@@ -1,4 +1,3 @@
-import Button from "@/components/Button/Button";
 import Solutions from "@/views/Solutions";
 import Presentation from "@/views/Presentation";
 import CardsPlanLanding from "@/views/cardsPlanLanding";

@@ -6,6 +6,7 @@ export interface IPlan {
   excludes: string[];
   showTaxes?: boolean;
   isCustom?: boolean;
+  link: string;
 }
 export interface IPlanCardProps extends IPlan {
   className?: string;
@@ -21,3 +22,12 @@ export interface SolutionProps{
   title: string;
   description: string;
 }
+
+export interface IOption {
+  id: string;
+  text: string;
+  response?: string;
+  subOptions?: IOption[]; 
+}
+
+
