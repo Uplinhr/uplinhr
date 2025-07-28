@@ -5,7 +5,7 @@ import { QUESTIONS} from '@/utils/qa';
 
 export const QAView = () => {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-5xl">
+    <div className="container mx-auto px-4 max-w-5xl min-h-screen">
         <section>
         <div className="space-y-4">
           {QUESTIONS.map((item, index) => (

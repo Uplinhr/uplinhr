@@ -16,7 +16,7 @@ export const QaCard = ({ question, answer, initialExpanded = false }: QaItem) =>
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <h3 className="text-[#1E1E1E] text-start font-poppins text-base font-semibold leading-6 w-full">
+        <h3 className="text-[#6C4099] text-start font-poppins text-base font-semibold leading-6 w-full">
           {question}
         </h3>
         {isExpanded ? (
@@ -30,7 +30,7 @@ export const QaCard = ({ question, answer, initialExpanded = false }: QaItem) =>
         <div className="p-4 bg-white border border-gray-200 border-t-0 rounded-b-lg">
           {Array.isArray(answer) ? (
             answer.map((paragraph, idx) => (
-              <p key={idx} className="text-black font-poppins text-base font-normal leading-6 mb-2 last:mb-0">
+              <p key={idx} className="text-gray-950 font-poppins text-base font-normal leading-6 mb-2 last:mb-0">
                 {paragraph}
               </p>
             ))
