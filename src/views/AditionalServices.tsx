@@ -6,7 +6,7 @@ const AditionalServices = () => {
       </h1>
       <div className="flex flex-wrap gap-6 justify-center font-poppins">
         
-        <div className="border border-[#502B7D] rounded-[25px] w-full max-w-[400px]">
+        <div className="transform transition-transform duration-200 hover:scale-[1.03] border border-[#502B7D] rounded-[25px] w-full max-w-[400px]">
           <div className="bg-[#6C4099] text-white min-h-[140px] py-4 px-6 rounded-t-[25px] flex flex-col justify-center">
             <h3 className="text-[20px] font-semibold">HR Manager externo</h3>
             <p className="text-[16px] text-white text-opacity-50 mt-2">
@@ -29,7 +29,7 @@ const AditionalServices = () => {
           </div>
         </div>
 
-        <div className="border border-[#502B7D] rounded-[25px] w-full max-w-[440px]">
+        <div className="transform transition-transform duration-200 hover:scale-[1.03] border border-[#502B7D] rounded-[25px] w-full max-w-[440px]">
           <div className="bg-[#CDBADA] min-h-[140px] py-4 px-6 rounded-t-[25px] flex flex-col justify-center">
             <h3 className="text-[20px] font-semibold leading-7">
               ¿Necesitás contratar más perfiles de los que incluye tu plan

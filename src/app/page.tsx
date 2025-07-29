@@ -1,6 +1,6 @@
 import Solutions from "@/views/Solutions";
 import Presentation from "@/views/Presentation";
-import CardsPlanLanding from "@/views/cardsPlanLanding";
+import CardsPlan from "@/views/cardsPlan";
 import ComparativeCard from "@/views/comparativeCard";
 import AditionalServices from "@/views/AditionalServices";
 
@@ -24,7 +24,7 @@ export default function TestTailwind() {
   </div>
 </div>
       <Solutions />
-      <CardsPlanLanding />
+      <CardsPlan />
       <AditionalServices />
       <ComparativeCard />
     </div>
