@@ -61,7 +61,7 @@ const CardsPlanLanding = () => {
               <br />
               <span className="text-white mr-2">✓</span> Acompañamiento experto
               <br />
-              <Link href={"https://www.uplinhr.com/fgsdf3254h"}>
+              <Link href={"https://www.uplinhr.com/contacto"}>
                 <button
                   className={`min-w-50 min-h-4 mt-4 hover:cursor-pointer rounded-[6px] border border-white 
                     text-center font-[600] text-[16px] leading-[48px] transform transition-transform 
