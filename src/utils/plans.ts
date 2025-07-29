@@ -85,6 +85,6 @@ export const PLANS_DATA = [
     excludes: [],
     showTaxes: false,
     isCustom: true,  
-    link: "https://www.uplinhr.com/fgsdf3254h"
+    link: "https://www.uplinhr.com/contacto"
   }
 ];
