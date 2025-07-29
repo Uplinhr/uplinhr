@@ -38,12 +38,12 @@ const Navbar = () => {
             </a>
             <a
               className="text-[#502B7D] hover:text-[#6b4699] transition-colors cursor-pointer"
-              href="https://www.uplinhr.com/fgsdf3254h"
+              href="https://www.uplinhr.com/academy"
             >
               Uplin Academy
             </a>
             
-            <a href="https://www.uplinhr.com/fgsdf3254h" className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors cursor-pointer">
+            <a href="https://www.uplinhr.com/contacto" className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors cursor-pointer">
               Contacto
             </a>
           </div>
