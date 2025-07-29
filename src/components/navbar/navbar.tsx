@@ -13,13 +13,13 @@ const Navbar = () => {
         
         <div className="flex justify-between items-center text-sm">
         
-          <Link href="/">
+          <Link href="/" className="self-start">
             <Image
               src="/logoUplin.svg"
               alt="Logo Uplin"
               width={80}
               height={40}
-              className="w-20 h-10"
+              className="w-20 h-10 block"
             />
           </Link>
 
