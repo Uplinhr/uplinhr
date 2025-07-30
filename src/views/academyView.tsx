@@ -119,7 +119,7 @@ function AcademyView() {
               <div className="mt-6 flex justify-center lg:justify-start">
                 <Button
                   link="https://www.app.uplinhr.com/inscripcion-webinar-madres-y-lideres"
-                  tag="Anotarme a las charlas"
+                  tag="Anotarme a la charla"
                   mode={0}
                   height={45}
                   width={280}
