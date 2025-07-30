@@ -130,7 +130,7 @@ function AcademyView() {
             <div className="lg:w-[45%] flex items-center justify-center">
               <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden rounded-[15px]">
                 <Image
-                  src="/imgkelly.png"
+                  src="/imgKelly.png"
                   alt="Ciclo Uplin"
                   fill
                   className="object-contain object-center transition-transform duration-500 hover:scale-105"
