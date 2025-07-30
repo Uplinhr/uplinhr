@@ -19,7 +19,7 @@ export const PLANS_DATA = [
       "Proyectos especiales o desafíos puntuales"
     ],
     showTaxes: true,
-    link: "https://www.app.uplinhr.com/conditions-start-membership"
+    link: "https://app.uplinhr.com/conditions-start-membership"
   },
   {
     plan: "Growth",
@@ -41,7 +41,7 @@ export const PLANS_DATA = [
       "Proyectos especiales o desafíos puntuales"
     ],
     showTaxes: true,
-    link: "https://www.app.uplinhr.com/conditions-growth-membership"
+    link: "https://app.uplinhr.com/conditions-growth-membership"
   },
   {
     plan: "Premium",
@@ -63,7 +63,7 @@ export const PLANS_DATA = [
       "Proyectos especiales o desafíos puntuales"
     ],
     showTaxes: true, 
-    link: "https://www.app.uplinhr.com/conditions-premium-membership"
+    link: "https://app.uplinhr.com/conditions-premium-membership"
   },
   {
     plan: "Custom",
@@ -85,6 +85,6 @@ export const PLANS_DATA = [
     excludes: [],
     showTaxes: false,
     isCustom: true,  
-    link: "https://www.app.uplinhr.com/contacto"
+    link: "https://app.uplinhr.com/contacto"
   }
 ];

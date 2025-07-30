@@ -43,7 +43,7 @@ const Navbar = () => {
               Uplin Academy
             </a>
             
-            <a href="https://www.app.uplinhr.com/contacto" className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors cursor-pointer">
+            <a href="https://app.uplinhr.com/contacto" className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors cursor-pointer">
               Contacto
             </a>
           </div>
@@ -84,7 +84,7 @@ const Navbar = () => {
             </a>
 
             <a
-              href="https://www.app.uplinhr.com/contacto"
+              href="https://app.uplinhr.com/contacto"
               className="inline-block border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors mt-2 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
