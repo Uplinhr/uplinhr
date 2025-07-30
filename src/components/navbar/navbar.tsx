@@ -38,12 +38,12 @@ const Navbar = () => {
             </a>
             <a
               className="text-[#502B7D] hover:text-[#6b4699] transition-colors cursor-pointer"
-              href="https://www.uplinhr.com/academy"
+              href="/academy"
             >
               Uplin Academy
             </a>
             
-            <a href="https://www.uplinhr.com/contacto" className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors cursor-pointer">
+            <a href="https://www.app.uplinhr.com/contacto" className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors cursor-pointer">
               Contacto
             </a>
           </div>
@@ -76,7 +76,7 @@ const Navbar = () => {
             </a>
             
             <a
-              href="https://www.uplinhr.com/academy"
+              href="/academy"
               className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded transition-colors cursor-pointer"
               onClick={() => setIsOpen(false)}
             >
@@ -84,7 +84,7 @@ const Navbar = () => {
             </a>
 
             <a
-              href="https://www.uplinhr.com/contacto"
+              href="https://www.app.uplinhr.com/contacto"
               className="inline-block border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors mt-2 cursor-pointer"
               onClick={() => setIsOpen(false)}
             >

@@ -10,21 +10,16 @@ const AditionalServices = () => {
           <div className="bg-[#6C4099] text-white min-h-[140px] py-4 px-6 rounded-t-[25px] flex flex-col justify-center">
             <h3 className="text-[20px] font-semibold">HR Manager externo</h3>
             <p className="text-[16px] text-white text-opacity-50 mt-2">
-              Ideal para implementar procesos y acompañar momentos clave.
-            </p>
+              ¿Neceitás sumar a alguien de RRHH sin agrandar tu nómina?  </p>
           </div>
           <div className="px-6 py-4 rounded-b-[25px]">
             <p className="text-[18px] my-4">
-              Sumá una persona experta en gestión de talento a tu equipo, sin
-              contratar en relación de dependencia.
-            </p>
-            <p className="text-[18px] font-medium my-3">
-              Consultá cotización para HR Manager Junior o Middle
-            </p>
+              👉Desde Uplin te ofrecemos un HR Manager externo, con dedicación por proyecto o por tiempo definido, que se integra a tu equipo y acelera los resultados.</p>
+            
             <p className="text-[18px] mb-6 md:mb-12"> 
-              📌 Acompañamiento operativo y estratégico <br />
-              📌 Reuniones semanales y seguimiento <br />
-              📌 Acceso a recursos Uplin.
+              🔷 Acompañamiento operativo y estratégico <br />
+              🔷 Reuniones semanales y seguimiento personalizado <br />
+              🔷 Acceso a recursos, herramientas y soporte de la red Uplin
             </p>
           </div>
         </div>
