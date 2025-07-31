@@ -58,7 +58,7 @@ const ComparativeCard = () => {
           tag="Agenda una llamada"
           mode={0}
           height={50}
-          width={200}
+          width={250}
         />
       </div>
     </div>

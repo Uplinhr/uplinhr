@@ -1,7 +1,7 @@
 import PlanCard from "@/components/planCard/PlanCard";
 import { PLANS_DATA } from "@/utils/plans";
-import Image from "next/image";
-import Link from "next/link";
+/* import Image from "next/image";
+import Link from "next/link"; */
 
 const CardsPlanLanding = () => {
   const nonCustomPlans = PLANS_DATA.filter((plan) => !plan.isCustom);
@@ -19,7 +19,8 @@ const CardsPlanLanding = () => {
         </p>
       </div>
       <section className="py-12 px-4 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 md:gap-16 lg:gap-8">
+          {" "}
           {nonCustomPlans.map((plan) => (
             <PlanCard
               key={plan.plan}
@@ -29,8 +30,8 @@ const CardsPlanLanding = () => {
           ))}
         </div>
       </section>
-
-      <div className="bg-[#6C4099] mx-4 md:mx-14 py-16 rounded-[25px] mb-16">
+{/*Esta parte es un cambio. Dejo el código de antes x las dudas  */}
+      {/* <div className="bg-[#6C4099] mx-4 md:mx-14 py-16 rounded-[25px] mb-16">
         <div className="flex flex-col md:flex-row flex-wrap gap-6 justify-center items-center font-poppins">
           <Image
             className="md:mr-12 mb-6 md:mb-0 rounded-lg"
@@ -61,7 +62,7 @@ const CardsPlanLanding = () => {
               <br />
               <span className="text-white mr-2">✓</span> Acompañamiento experto
               <br />
-              <Link href={"https://www.uplinhr.com/fgsdf3254h"}>
+              <Link href={"https://www.uplinhr.com/contacto"}>
                 <button
                   className={`min-w-50 min-h-4 mt-4 hover:cursor-pointer rounded-[6px] border border-white 
                     text-center font-[600] text-[16px] leading-[48px] transform transition-transform 
@@ -73,7 +74,9 @@ const CardsPlanLanding = () => {
             </p>
           </div>
         </div>
-      </div>
+      </div> */}
+
+
     </div>
   );
 };
