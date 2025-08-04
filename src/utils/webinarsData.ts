@@ -1,0 +1,78 @@
+import { Webinar } from "@/interfaces";
+
+export const upcomingWebinars: Webinar[] =  [{
+    id: "1",
+    tipo: "en vivo",
+    titulo: "Madres y líderes: transformar desde nuestra historia",
+    dirigidoPor: "Kelly Gomez",
+    fecha: "Lunes 4 de agosto | 18:00 HORA ARG",
+    imagenes: ["/imgKelly.png"],
+    link: "#",
+  },
+  {
+    id: "2",
+    tipo: "en vivo",
+    titulo: "Síndrome del Impostor: transformar desde nuestra historia",
+    dirigidoPor: "Melisa Restrepo",
+    fecha: "Lunes 11 de agosto | 17:00 HORA ARG",
+    imagenes: ["/ImgMelissa.png"],
+    link: "#",
+  },
+  {
+    id: "3",
+    tipo: "en vivo",
+    titulo: "Peope Analytics + \n des-automatización: datos con humanidad",
+    dirigidoPor: "Karry Marmolejo",
+    fecha: "Lunes 18 de agosto | 17:00 HORA ARG",
+    imagenes: ["/ImgKarry.png"],
+    link: "#",
+  },
+  {
+    id: "4",
+    tipo: "en vivo",
+    titulo: "Cómo fundar tu área de RRHH: desde la visión del founder",
+    dirigidoPor: "Sol Y Sandri",
+    fecha: "Lunes 25 de agosto | 17:00 HORA ARG",
+    imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
+    link: "#",
+  },
+]
+
+export const recordedWebinars: Webinar[] = [
+   {
+    id: "1",
+    tipo: "grabado",
+    titulo: "Madres y líderes: transformar desde nuestra historia",
+    dirigidoPor: "Kelly Gomez",
+    fecha: "Lunes 4 de agosto | 18:00 HORA ARG",
+    imagenes: ["/imgKelly.png"],
+    link: "#",
+  },
+  {
+    id: "2",
+    tipo: "grabado",
+    titulo: "Síndrome del Impostor: transformar desde nuestra historia",
+    dirigidoPor: "Melisa Restrepo",
+    fecha: "Lunes 11 de agosto | 17:00 HORA ARG",
+    imagenes: ["/ImgMelissa.png"],
+    link: "#",
+  },
+  {
+    id: "3",
+    tipo: "grabado",
+     titulo: "Peope Analytics + \n des-automatización: datos con humanidad",
+    dirigidoPor: "Karry Marmolejo",
+    fecha: "Lunes 18 de agosto | 17:00 HORA ARG",
+    imagenes: ["/ImgKarry.png"],
+    link: "#",
+  },
+  {
+    id: "4",
+    tipo: "grabado",
+    titulo: "Cómo fundar tu área de RRHH: desde la visión del founder",
+    dirigidoPor: "Sol Y Sandri",
+    fecha: "Lunes 25 de agosto | 17:00 HORA ARG",
+    imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
+    link: "#",
+  },
+]

@@ -1,0 +1,114 @@
+"use client";
+import { useState } from "react";
+import UpcomingWebinars from "@/components/webinars/UpcomingWebinars";
+import RecordedWebinars from "@/components/webinars/RecordedWebinars";
+
+export default function WebinarsSection() {
+  const [filter, setFilter] = useState<"todos" | "grabados" | "envivo">(
+    "todos"
+  );
+
+  const renderTitle = () => {
+    if (filter === "grabados") return "Webinars Grabados";
+    if (filter === "envivo") return "Webinars en Vivo";
+    return null;
+  };
+
+  const renderParagraph = () => {
+    if (filter === "grabados")
+      return "Si no pudiste asistir a alguno de nuestros webinars anteriores, aquí puedes ver las grabaciones gratis.";
+    if (filter === "envivo")
+      return "Conoce las charlas que comienzan pronto e inscríbete gratis para interactuar en vivo con los speakers.";
+    return null;
+  };
+
+  return (
+    <section className="w-full flex flex-col lg:flex-row min-h-screen mt-8 bg-white">
+      <aside className="lg:w-1/4 w-full p-4 flex flex-col items-center gap-4">
+        <button
+          onClick={() => setFilter("grabados")}
+          className={`w-full px-4 py-2 rounded-[6px] cursor-pointer border border-black transition-colors
+          ${
+            filter === "grabados"
+              ? "bg-[#A482BB] text-white"
+              : "bg-[rgba(245,245,245,0)] hover:bg-[#A482BB] hover:text-white"
+          }`}
+        >
+          Grabados
+        </button>
+
+        <button
+          onClick={() => setFilter("envivo")}
+          className={`w-full px-4 py-2 rounded-[6px] cursor-pointer border border-black transition-colors
+          ${
+            filter === "envivo"
+              ? "bg-[#FDC57C] text-black"
+              : "bg-[rgba(245,245,245,0)] hover:bg-[#FDC57C] hover:text-black"
+          }`}
+        >
+          En vivo
+        </button>
+
+        <a
+          href="https://app.uplinhr.com/programa-madres-y-lideres"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full px-4 py-2 rounded-[6px] cursor-pointer border border-black bg-transparent text-black text-center hover:bg-black hover:text-white transition-colors duration-300"
+        >
+          Cursos completos
+        </a>
+      </aside>
+
+      <main className="flex-1 px-6 flex flex-col bg-white overflow-y-auto h-[calc(100vh-2rem)] mb-10">
+        {filter !== "todos" && (
+           <div className="w-full bg-white pb-0">
+            <h2 className="text-2xl font-bold pt-0 pb-0">{renderTitle()}</h2>
+            {renderParagraph() && (
+              <p className="mt-2 text-sm mb-2">{renderParagraph()}</p>
+            )}
+          </div>
+        )}
+
+        <div className="mt-4 flex-1">
+          {filter === "todos" && (
+            <>
+              <section>
+                <h2 className="text-2xl font-bold">Webinars en Vivo</h2>
+                <p className="mt-2 text-sm">
+                  Conoce las charlas que comienzan pronto e inscríbete gratis
+                  para interactuar en vivo con los speakers.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                  <UpcomingWebinars />
+                </div>
+              </section>
+
+              <section className="mt-8">
+                <h2 className="text-2xl font-bold">Webinars Grabados</h2>
+                <p className="mt-2 text-sm">
+                  Si no pudiste asistir a alguno de nuestros webinars
+                  anteriores, aquí puedes ver las grabaciones gratis.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                  <RecordedWebinars />
+                </div>
+              </section>
+            </>
+          )}
+
+          {filter === "envivo" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-8">
+              <UpcomingWebinars />
+            </div>
+          )}
+
+          {filter === "grabados" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-8">
+              <RecordedWebinars />
+            </div>
+          )}
+        </div>
+      </main>
+    </section>
+  );
+}

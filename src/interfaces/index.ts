@@ -30,4 +30,14 @@ export interface IOption {
   subOptions?: IOption[]; 
 }
 
+export interface Webinar {
+  id: string;
+  tipo: "en vivo" | "grabado";
+  titulo: string;
+  dirigidoPor: string;
+  fecha: string;
+  imagenes: string[];
+  link: string;          
+}
+
 

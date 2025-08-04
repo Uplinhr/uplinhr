@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Button from "@/components/Button/Button";
+import WebinarsSection from "@/components/webinars/WebinarsSection";
+
 function AcademyView() {
   return (
     <>
@@ -62,85 +63,49 @@ function AcademyView() {
         </div>
       </section>
 
-      <div className="mt-6 w-full max-w-screen-md mx-auto flex flex-wrap items-start gap-y-2 mb-10 font-poppins px-4">
-  <h1 className="text-black text-[clamp(24px,3vw,32px)] font-semibold leading-tight m-0 pr-2.5 shrink-0 w-full lg:w-auto">
-    Ciclo de Charlas Uplin Academy
-  </h1>
+      <section className="px-6 py-10 flex flex-col items-center">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl md:text-3xl font-bold font-[Poppins]">
+            Ciclo de Charlas Uplin Academy
+          </h1>
+          <h3 className="text-base md:text-lg font-[Poppins] mt-2 text-gray-700">
+            Eleva tu Talento y tu Liderazgo
+          </h3>
+        </div>
 
-  <p className="font-poppins font-normal italic text-base mt-1.5 pl-2.5 w-full lg:w-auto">
-    Liderazgo, datos, propósito y cultura para transformar tu forma de trabajar.
-  </p>
-</div>
+        <div className="bg-[#FDEBD3] rounded-[25px] w-full md:w-[80%] lg:w-[80%] p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
+          <div className="md:w-1/2 order-2 md:order-1 px-0 md:pl-6 lg:pl-10">
+            <p className="text-[#000000] font-poppins text-[15px] font-normal leading-[25px]">
+              En Uplin Academy, estamos convencidos de que el crecimiento de tu
+              negocio empieza con el desarrollo de tu equipo. Por eso, te
+              invitamos a nuestro{" "}
+              <span className="font-semibold">
+                ciclo de charlas gratuitas de agosto
+              </span>
+              , diseñado para líderes, emprendedores y profesionales de Recursos
+              Humanos que buscan innovar.
+              <br />
+              <br />
+              <span className="font-semibold">
+                ¡Prepárate para transformar tu gestión de personas!
+              </span>
+            </p>
+          </div>
 
-
-      {/*ESTA SECCION LUEGO TENDRÁ QUE SER UN COMPONENTE PARA RENDERIZR... POR EL MOMENTO QUEDA ASI  */}
-      <section
-        className="w-full pb-14 min-h-screen bg-cover bg-center flex items-center"
-        style={{ backgroundImage: "url('/bgAcademy.png')" }}
-      >
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-[#6C4099] rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row gap-6 overflow-hidden">
-            <div className="lg:w-[55%] space-y-4 text-white font-poppins py-4">
-              <h2 className="text-2xl md:text-3xl font-bold leading-tight">
-                Liderazgo humano en acción
-              </h2>
-              <h3 className="text-lg md:text-xl font-medium">
-                Charlas que inspiran, herramientas que accionan
-              </h3>
-
-              <div className="space-y-3">
-                <p className="text-sm md:text-base font-medium">
-                  ✨ ¿Por qué asistir?:
-                </p>
-                <ul className="space-y-2">
-                  <li className="flex items-start gap-2 text-sm">
-                    <span>✓</span>
-                    <span>
-                      Conectá con líderes que están transformando la gestión de
-                      personas
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <span>✓</span>
-                    <span>Llevate herramientas prácticas y accionables</span>
-                  </li>
-                  <li className="flex items-start gap-2 text-sm">
-                    <span>✓</span>
-                    <span>Accedé a descuentos exclusivos</span>
-                  </li>
-                </ul>
-                <p className="text-sm">🎁 Material descargable de regalo</p>
-                <p className="text-sm font-medium">
-                  📍 Cupos limitados: Reservá tu lugar gratis y no te lo
-                  pierdas.
-                </p>
-              </div>
-
-              <div className="mt-6 flex justify-center lg:justify-start">
-                <Button
-                  link="https://app.uplinhr.com/inscripcion-webinar-madres-y-lideres"
-                  tag="Anotarme a la charla"
-                  mode={0}
-                  height={45}
-                  width={280}
-                />
-              </div>
-            </div>
-
-            <div className="lg:w-[45%] flex items-center justify-center">
-              <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden rounded-[15px]">
-                <Image
-                  src="/imgKelly.png"
-                  alt="Ciclo Uplin"
-                  fill
-                  className="object-contain object-center transition-transform duration-500 hover:scale-105"
-                  priority
-                />
-              </div>
-            </div>
+          <div className="relative flex justify-center order-1 md:order-2 w-full md:w-1/2 px-4 md:px-0">
+            <Image
+              alt="Reunión Uplin Academy"
+              src="/imgReu.jpg"
+              width={600}
+              height={280}
+              className="w-full max-w-[400px] rounded-[25px] object-cover  transition  duration-300  ease-in-out  hover:shadow-xl  hover:scale-105"
+              priority
+            />
           </div>
         </div>
       </section>
+
+      <WebinarsSection />
     </>
   );
 }

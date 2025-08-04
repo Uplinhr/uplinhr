@@ -44,8 +44,8 @@ export const QUESTIONS: QaItem[] = [
     answer: "Aceptamos tarjeta de crédito (a través de link de pago), Mercado Pago y PayPal. También ofrecemos la posibilidad de realizar pagos en moneda local si estás en Argentina."
   },
   {
-    question: "¿Hay descuentos para empresas grandes?",
-    answer: "Sí. Contamos con tarifas preferenciales y propuestas personalizadas para empresas con equipos más grandes o que requieren un mayor volumen de servicios. Escribinos y analizamos juntos la mejor opción."
+    question: "¿Hay descuentos para proyectos grandes?",
+    answer: "Sí. Contamos con tarifas preferenciales y propuestas personalizadas para proyectos con equipos más grandes o que requieren un mayor volumen de servicios. Escribinos y analizamos juntos la mejor opción."
   },
   {
     question: "¿Puedo cambiar de plan más tarde?",
