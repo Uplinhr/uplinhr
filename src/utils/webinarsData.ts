@@ -1,6 +1,6 @@
 import { Webinar } from "@/interfaces";
 
-export const upcomingWebinars: Webinar[] =  [{
+export const upcomingWebinars: Webinar[] =  [/* {
     id: "1",
     tipo: "en vivo",
     titulo: "Madres y líderes: transformar desde nuestra historia",
@@ -8,7 +8,7 @@ export const upcomingWebinars: Webinar[] =  [{
     fecha: "Lunes 4 de agosto | 18:00 HORA ARG",
     imagenes: ["/imgKelly.png"],
     link: "#",
-  },
+  }, */
   {
     id: "2",
     tipo: "en vivo",
@@ -16,7 +16,7 @@ export const upcomingWebinars: Webinar[] =  [{
     dirigidoPor: "Melisa Restrepo",
     fecha: "Lunes 11 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgMelissa.png"],
-    link: "#",
+    link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
   },
   {
     id: "3",
@@ -25,7 +25,7 @@ export const upcomingWebinars: Webinar[] =  [{
     dirigidoPor: "Karry Marmolejo",
     fecha: "Lunes 18 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgKarry.png"],
-    link: "#",
+    link: "https://app.uplinhr.com/inscripcion-datos-humanidad",
   },
   {
     id: "4",
@@ -34,7 +34,7 @@ export const upcomingWebinars: Webinar[] =  [{
     dirigidoPor: "Sol Y Sandri",
     fecha: "Lunes 25 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
-    link: "#",
+    link: "https://app.uplinhr.com/inscripcion-sindrome-impostor",
   },
 ]
 
@@ -46,9 +46,9 @@ export const recordedWebinars: Webinar[] = [
     dirigidoPor: "Kelly Gomez",
     fecha: "Lunes 4 de agosto | 18:00 HORA ARG",
     imagenes: ["/imgKelly.png"],
-    link: "#",
+    link: "https://app.uplinhr.com/registro-charla-gratis-madres-lideres",
   },
-  {
+/*   {
     id: "2",
     tipo: "grabado",
     titulo: "Síndrome del Impostor: transformar desde nuestra historia",
@@ -74,5 +74,5 @@ export const recordedWebinars: Webinar[] = [
     fecha: "Lunes 25 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
     link: "#",
-  },
+  }, */
 ]

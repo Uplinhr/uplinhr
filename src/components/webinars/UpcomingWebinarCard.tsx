@@ -8,6 +8,7 @@ interface Props {
 
 export default function UpcomingWebinarCard({ data }: Props) {
   return (
+    <div className="transform scale-[0.85] origin-top">
     <div className="p-4 rounded-[16px] shadow flex flex-col justify-between bg-gradient-to-b from-purple-400 to-purple-900 min-h-[380px] text-white  transition  duration-300  ease-in-out  hover:shadow-xl  hover:scale-105">
       <div className="flex flex-col gap-2 min-h-[120px]">
         <span className="text-xs font-bold uppercase px-2 py-1 rounded-[8px] bg-gradient-to-r from-yellow-400 to-orange-500 w-fit min-h-[24px]">
@@ -46,6 +47,7 @@ export default function UpcomingWebinarCard({ data }: Props) {
           </button>
         </Link>
       </div>
+    </div>
     </div>
   );
 }
