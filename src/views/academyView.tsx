@@ -63,7 +63,7 @@ function AcademyView() {
         </div>
       </section>
 
-      <section className="px-6 py-10 flex flex-col items-center">
+      <section className="px-6 py-10 flex flex-col items-center mb-12">
         <div className="text-center mb-8">
           <h1 className="text-2xl md:text-3xl font-bold font-[Poppins]">
             Ciclo de Charlas Uplin Academy

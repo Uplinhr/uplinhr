@@ -24,8 +24,9 @@ export default function WebinarsSection() {
 
   return (
     <section className="w-full flex flex-col lg:flex-row min-h-screen mt-8 bg-white">
-     <aside className="w-full lg:mb-10 lg:w-1/5 max-w-[250px] p-4 flex flex-col items-center gap-4 lg:border-r-2 lg:border-[#6C4099]">
-
+   <aside className="w-full max-w-[250px] p-4 flex flex-col items-center gap-4 
+  lg:w-1/5 lg:mb-10 lg:border-r-2 lg:border-[#6C4099] mx-auto">
+  
   <button
     onClick={() => setFilter("grabados")}
     className={`w-full px-4 py-2 rounded-[6px] cursor-pointer border transition-colors duration-300
@@ -54,11 +55,12 @@ export default function WebinarsSection() {
     href="https://app.uplinhr.com/programa-madres-y-lideres"
     target="_blank"
     rel="noopener noreferrer"
-    className="w-full px-4 py-2 rounded-[6px] cursor-pointer border bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center transition  duration-300  ease-in-out  hover:shadow-xl  hover:scale-105"
+    className="w-full px-4 py-2 rounded-[6px] cursor-pointer border bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center transition duration-300 ease-in-out hover:shadow-xl hover:scale-105"
   >
     Cursos completos
   </a>
 </aside>
+
 
 
       <main className="flex-1 px-6 flex flex-col bg-white overflow-y-auto h-[calc(100vh-2rem)] mb-10">
