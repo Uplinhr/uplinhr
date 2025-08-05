@@ -19,7 +19,16 @@ const MaternidadLiderazgo = () => {
             priority
           />
         </div>
-
+        <div className="w-fullfont-[Poppins] bg-white flex flex-col items-center gap-10">
+            <a
+            href="https://app.uplinhr.com/elegir-pais"
+            target="_blank"
+            className="inline-block rounded-[15px] bg-[#502B7D] px-8 py-3 text-white font-medium font-poppins text-[14px] transform hover:scale-105 ease-in-out duration-300"
+          >
+            Inscribirme ahora
+          </a>
+        </div>
+      
         <div className="w-[80%] max-w-6xl flex flex-col lg:flex-row gap-6">
           <div className="flex-1 border border-[#F89A1C] bg-white rounded-[25px] p-6 text-[#000] font-[Poppins] text-[16px] leading-[25px] flex justify-center items-center text-justify transform hover:scale-105 ease-in-out duration-300">
             <div>
