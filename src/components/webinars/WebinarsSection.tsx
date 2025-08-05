@@ -2,7 +2,7 @@
 import { useState } from "react";
 import UpcomingWebinars from "@/components/webinars/UpcomingWebinars";
 import RecordedWebinars from "@/components/webinars/RecordedWebinars";
-
+import Link from "next/link";
 export default function WebinarsSection() {
   const [filter, setFilter] = useState<"todos" | "grabados" | "envivo">(
     "todos"
@@ -24,48 +24,45 @@ export default function WebinarsSection() {
 
   return (
     <section className="w-full flex flex-col lg:flex-row min-h-screen mt-8 bg-white">
-   <aside className="w-full max-w-[250px] p-4 flex flex-col items-center gap-4 
-  lg:w-1/5 lg:mb-10 lg:border-r-2 lg:border-[#6C4099] mx-auto">
-  
-  <button
-    onClick={() => setFilter("grabados")}
-    className={`w-full px-4 py-2 rounded-[6px] cursor-pointer border transition-colors duration-300
+      <aside
+        className="w-full max-w-[250px] p-4 flex flex-col items-center gap-4 
+  lg:w-1/5 lg:mb-10 lg:border-r-2 lg:border-[#6C4099] mx-auto"
+      >
+        <button
+          onClick={() => setFilter("grabados")}
+          className={`w-full px-4 py-2 rounded-[6px] cursor-pointer border transition-colors duration-300
       ${
         filter === "grabados"
           ? "bg-[#6C4099] text-white border-[#6C4099]"
           : "bg-white text-[#6C4099] border-[#6C4099] hover:bg-[#6C4099] hover:text-white"
       }`}
-  >
-    Grabados
-  </button>
+        >
+          Grabados
+        </button>
 
-  <button
-    onClick={() => setFilter("envivo")}
-    className={`w-full px-4 py-2 rounded-[6px] cursor-pointer border transition-colors duration-300
+        <button
+          onClick={() => setFilter("envivo")}
+          className={`w-full px-4 py-2 rounded-[6px] cursor-pointer border transition-colors duration-300
       ${
         filter === "envivo"
           ? "bg-[#6C4099] text-white border-[#6C4099]"
           : "bg-white text-[#6C4099] border-[#6C4099] hover:bg-[#6C4099] hover:text-white"
       }`}
-  >
-    En vivo
-  </button>
+        >
+          En vivo
+        </button>
 
-  <a
-    href="https://app.uplinhr.com/programa-madres-y-lideres"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-full px-4 py-2 rounded-[6px] cursor-pointer border bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center transition duration-300 ease-in-out hover:shadow-xl hover:scale-105"
-  >
-    Cursos completos
-  </a>
-</aside>
-
-
+        <Link
+          href="/cursosCompletos/maternidadYLiderazgo"
+          className="w-full px-4 py-2 rounded-[6px] cursor-pointer border bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center transition duration-300 ease-in-out hover:shadow-xl hover:scale-105"
+        >
+          Cursos completos
+        </Link>
+      </aside>
 
       <main className="flex-1 px-6 flex flex-col bg-white overflow-y-auto h-[calc(100vh-2rem)] mb-10">
         {filter !== "todos" && (
-           <div className="w-full bg-white pb-0">
+          <div className="w-full bg-white pb-0">
             <h2 className="text-2xl font-bold pt-0 pb-0">{renderTitle()}</h2>
             {renderParagraph() && (
               <p className="mt-2 text-sm mb-2">{renderParagraph()}</p>
