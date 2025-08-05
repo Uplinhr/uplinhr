@@ -16,7 +16,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     dirigidoPor: "Melisa Restrepo",
     fecha: "Lunes 11 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgMelissa.png"],
-    link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
+    link: "https://app.uplinhr.com/inscripcion-sindrome-impostor",
   },
   {
     id: "3",
@@ -34,7 +34,9 @@ export const upcomingWebinars: Webinar[] =  [/* {
     dirigidoPor: "Sol Y Sandri",
     fecha: "Lunes 25 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
-    link: "https://app.uplinhr.com/inscripcion-sindrome-impostor",
+    
+    link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
+    
   },
 ]
 
