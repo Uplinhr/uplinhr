@@ -63,7 +63,7 @@ const MaternidadLiderazgo = () => {
         </div>
       </section>
 
-      <section className="min-h-screen w-full bg-white">
+      <section className="min-h-auto w-full bg-white">
         <div className="w-[80%] mx-auto mb-14 md:mb-10">
           <div className="w-full rounded-[25px] border-2 border-[#A482BB] bg-white overflow-hidden shadow-lg">
             <div className="w-full bg-[#CDBADA] py-3 md:py-2 border-b border-[#A482BB]">
@@ -132,7 +132,7 @@ const MaternidadLiderazgo = () => {
         </div>
       </section>
 
-      <section className="w-full font-poppins bg-white flex flex-col items-center mb-8 md:mb-6">
+      <section className="w-full font-poppins bg-white flex flex-col items-center my-8">
         <div className="w-[80%] mx-auto rounded-[25px] bg-gradient-to-r from-[#A482BB] to-[#502B7D] p-0 shadow-lg min-h-[300px] flex items-end transform hover:scale-105 ease-in-out duration-300">
           <div className="flex flex-col md:flex-row w-full gap-x-10">
             <div className="relative w-[240px] h-[260px] md:w-[260px] md:h-[280px] flex-shrink-0 self-center md:self-end ml-0">
