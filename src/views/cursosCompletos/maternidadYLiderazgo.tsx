@@ -149,22 +149,24 @@ const MaternidadLiderazgo = () => {
                 style={{ objectPosition: "top" }}
               />
             </div>
-            <div className="text-white flex-1 flex flex-col justify-center px-6 py-8 ml-10">
-              <h3 className="font-medium text-[20px] mb-3">
-                Facilitadora: Kelly Gómez
-              </h3>
-              <div className="space-y-3 text-[16px]">
-                <p>
-                  Consultora en desarrollo organizacional y liderazgo con
-                  enfoque humano.
-                </p>
-                <p>
-                  Más de 10 años liderando equipos de gestión humana. Mamá,
-                  mentora y apasionada por transformar la cultura organizacional
-                  desde las personas.
-                </p>
-              </div>
-            </div>
+  <div className="text-white flex-1 flex flex-col justify-start px-4 py-4 ml-0 md:justify-center md:px-6 md:py-8 md:ml-10">
+  <h3 className="font-medium text-[18px] md:text-[20px] mb-2 md:mb-3">
+    Facilitadora: Kelly Gómez
+  </h3>
+  <div className="space-y-2 md:space-y-3 text-[15px] md:text-[16px] leading-snug">
+    <p>
+      Consultora en desarrollo organizacional y liderazgo con
+      enfoque humano.
+    </p>
+    <p>
+      Más de 10 años liderando equipos de gestión humana. Mamá,
+      mentora y apasionada por transformar la cultura organizacional
+      desde las personas.
+    </p>
+  </div>
+</div>
+
+
           </div>
         </div>
 
