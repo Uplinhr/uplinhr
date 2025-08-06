@@ -22,7 +22,6 @@ const MaternidadLiderazgo = () => {
         <div className="w-fullfont-[Poppins] bg-white flex flex-col items-center gap-10">
           <a
             href="/cursosCompletos/maternidadYLiderazgo/elegir-pais"
-            target="_blank"
             className="inline-block rounded-[15px] bg-[#502B7D] px-8 py-3 text-white font-medium font-poppins text-[14px] transform hover:scale-105 ease-in-out duration-300"
           >
             Inscribirme ahora
@@ -238,7 +237,6 @@ const MaternidadLiderazgo = () => {
           </p>
           <a
             href="/cursosCompletos/maternidadYLiderazgo/elegir-pais"
-            target="_blank"
             className="inline-block rounded-[15px] bg-[#CDBADA] px-8 py-3 text-black font-medium font-poppins text-[14px] transform hover:scale-105 ease-in-out duration-300"
           >
             Inscribirme ahora

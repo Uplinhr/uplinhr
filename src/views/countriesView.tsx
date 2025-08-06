@@ -5,7 +5,7 @@ import "flag-icons/css/flag-icons.min.css";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {CountriesViewProps } from "@/interfaces/index";
+import { CountriesViewProps } from "@/interfaces/index";
 
 export default function CountriesView({ countries, otherCountries }: CountriesViewProps) {
   return (
@@ -50,11 +50,11 @@ export default function CountriesView({ countries, otherCountries }: CountriesVi
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="flex justify-center col-span-full"
+            className="w-full flex justify-center col-span-full"
           >
             <Link
               href={otherCountries.href}
-              className="bg-white flex flex-col items-center justify-center p-4 rounded-[30px] border border-[#CDBADA] shadow-[0_2px_3px_0_rgba(0,0,0,0.25)] hover:bg-[#F5EFF9] transition-colors w-full max-w-[250px]"
+              className="bg-white flex flex-col items-center justify-center p-4 rounded-[30px] border border-[#CDBADA] shadow-[0_2px_3px_0_rgba(0,0,0,0.25)] hover:bg-[#F5EFF9] transition-colors w-full md:max-w-[250px]"
             >
               <div className="w-8 h-8 mb-2 relative">
                 <Image
