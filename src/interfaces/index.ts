@@ -39,5 +39,16 @@ export interface Webinar {
   imagenes: string[];
   link: string;          
 }
+export interface Country {
+  name: string;
+  code?: string;
+  href: string;
+  icon?: string;
+}
+
+export interface CountriesViewProps {
+  countries: Country[];
+  otherCountries: Country;
+}
 
 
