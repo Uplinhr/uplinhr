@@ -14,7 +14,7 @@ export const cursosCompletos = [
     descripcion:
       "Brinda herramientas prácticas, estrategias probadas y habilidades clave para liderar equipos motivados...",
     direccion: "Dirigida por: Melisa Restrepo",
-    imgPersona: "/imgMelissa.png",
+    imgPersona: "/ImgMelissa.png",
     link: "/cursosCompletos/liderazgoDeEquipos",
   },
   
