@@ -69,7 +69,7 @@ export default function CursosCompletos() {
                 </div>
 
                 <p className="text-sm group-hover:text-gray-800 transition-colors">
-                  Grabaciones isponibles por tiempo ilimitado
+                  Grabaciones disponibles por tiempo ilimitado
                 </p>
                 <div className="absolute inset-0 bg-[#502B7D] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
               </div>
@@ -80,7 +80,7 @@ export default function CursosCompletos() {
                 </div>
 
                 <p className="text-sm group-hover:text-gray-800 transition-colors">
-                  Materiales escargables y herramientas prácticas
+                  Materiales descargables y herramientas prácticas
                 </p>
                 <div className="absolute inset-0 bg-[#502B7D] opacity-0 group-hover:opacity-5 transition-opacity duration-300"></div>
               </div>
