@@ -8,7 +8,7 @@ import { PiCalendarBlankDuotone } from "react-icons/pi";
 const MaternidadLiderazgo = () => {
   return (
     <>
-      <section className="min-h-screen mb-10 w-full px-4 py-10 font-[Poppins] bg-white flex flex-col items-center gap-10">
+      <section className="mb-6 w-full px-4 py-6 font-[Poppins] bg-white flex flex-col items-center gap-10">
         <div className="w-[95%] md:w-[80%] max-w-6xl mx-auto shadow-xl rounded-xl overflow-hidden bg-white flex justify-center transform hover:scale-105 ease-in-out duration-300">
           <Image
             src="/liderazgoHumano.png"

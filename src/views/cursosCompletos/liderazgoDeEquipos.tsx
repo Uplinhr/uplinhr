@@ -8,7 +8,7 @@ import { PiCalendarBlankDuotone } from "react-icons/pi";
 const LiderazgoDeEquipos = () => {
   return (
     <>
-      <section className="min-h-screen mb-10 w-full px-4 py-10 font-[Poppins] bg-white flex flex-col items-center gap-10">
+      <section className="mb-6 w-full px-4 py-6 font-[Poppins] bg-white flex flex-col items-center gap-10">
         <Image
           src="/bannerLiderazgoEquipo.png"
           alt="Certificación en Liderazgo de Equipo"
