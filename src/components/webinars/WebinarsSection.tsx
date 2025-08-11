@@ -53,7 +53,7 @@ export default function WebinarsSection() {
         </button>
 
         <Link
-          href="/cursosCompletos/maternidadYLiderazgo"
+          href="/cursosCompletos"
           className="w-full px-4 py-2 rounded-[6px] cursor-pointer border bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-center transition duration-300 ease-in-out hover:shadow-xl hover:scale-105"
         >
           Cursos completos

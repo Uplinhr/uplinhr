@@ -8,7 +8,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     fecha: "Lunes 4 de agosto | 18:00 HORA ARG",
     imagenes: ["/imgKelly.png"],
     link: "#",
-  }, */
+  }, 
   {
     id: "2",
     tipo: "en vivo",
@@ -17,7 +17,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     fecha: "Lunes 11 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgMelissa.png"],
     link: "https://app.uplinhr.com/inscripcion-sindrome-impostor",
-  },
+  },*/
   {
     id: "3",
     tipo: "en vivo",
@@ -50,16 +50,16 @@ export const recordedWebinars: Webinar[] = [
     imagenes: ["/imgKelly.png"],
     link: "https://app.uplinhr.com/registro-charla-gratis-madres-lideres",
   },
-/*   {
+  {
     id: "2",
     tipo: "grabado",
     titulo: "Síndrome del Impostor: transformar desde nuestra historia",
     dirigidoPor: "Melisa Restrepo",
     fecha: "Lunes 11 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgMelissa.png"],
-    link: "#",
+    link: "https://app.uplinhr.com/registro-charla-gratis-sindrome-impostor",
   },
-  {
+  /* {
     id: "3",
     tipo: "grabado",
      titulo: "Peope Analytics + \n des-automatización: datos con humanidad",

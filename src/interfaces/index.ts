@@ -52,3 +52,11 @@ export interface CountriesViewProps {
 }
 
 
+export interface CardCursoProps {
+  bannerImg: string;
+  titulo: string;
+  descripcion: string;
+  direccion: string;
+  imgPersona: string;
+  link: string;
+}

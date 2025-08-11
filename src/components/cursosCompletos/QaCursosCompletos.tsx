@@ -5,7 +5,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { QaItem } from "@/interfaces/index";
 
-export const QaMaterLider = ({
+export const QaCursosCompletos = ({
   question,
   answer,
   initialExpanded = false,
