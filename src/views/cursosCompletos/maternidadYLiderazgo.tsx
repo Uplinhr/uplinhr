@@ -3,7 +3,7 @@ import { QaCursosCompletos } from "@/components/cursosCompletos/QaCursosCompleto
 import { FAQMATERNIDADYLIDERAZGO } from "@/utils/cursosCompletos/faqMaternidadYLiderazgo";
 import { CiMonitor, CiMoneyBill } from "react-icons/ci";
 import { IoTimeOutline } from "react-icons/io5";
-import { PiCalendarBlankDuotone } from "react-icons/pi";
+/* import { PiCalendarBlankDuotone } from "react-icons/pi"; */
 
 const MaternidadLiderazgo = () => {
   return (
@@ -83,7 +83,7 @@ const MaternidadLiderazgo = () => {
         </div>
 
         <div className="w-[80%] mx-auto my-8 md:my-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="min-h-[120px] rounded-[25px] bg-white shadow-[0_3px_7px_0_rgba(0,0,0,0.25)] p-4 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform ease-in-out duration-300">
               <CiMonitor className="text-[#502B7D]" size={24} />
               <p className="text-[#502B7D] font-poppins text-[16px] font-semibold mt-2 md:mt-1">
@@ -98,11 +98,11 @@ const MaternidadLiderazgo = () => {
                 Duración
               </p>
               <p className="font-poppins text-[14px] font-light mt-1 md:mt-0.5">
-                4 sesiones de 1h cada una
+                4 sesiones de 1 hora cada una
               </p>
             </div>
 
-            <div className="min-h-[120px] rounded-[25px] bg-white shadow-[0_3px_7px_0_rgba(0,0,0,0.25)] p-4 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform ease-in-out duration-300">
+            {/* <div className="min-h-[120px] rounded-[25px] bg-white shadow-[0_3px_7px_0_rgba(0,0,0,0.25)] p-4 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform ease-in-out duration-300">
               <PiCalendarBlankDuotone className="text-[#6D4098]" size={24} />
               <p className="text-[#502B7D] font-poppins text-[16px] font-semibold mt-2 md:mt-1">
                 Inicia
@@ -115,7 +115,7 @@ const MaternidadLiderazgo = () => {
                   cada lunes durante 4 semanas
                 </p>
               </div>
-            </div>
+            </div> */}
 
             <div className="min-h-[120px] rounded-[25px] bg-white shadow-[0_3px_7px_0_rgba(0,0,0,0.25)] p-4 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform ease-in-out duration-300">
               <CiMoneyBill className="text-[#502B7D]" size={24} />
