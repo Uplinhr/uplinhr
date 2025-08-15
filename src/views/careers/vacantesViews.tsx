@@ -52,80 +52,104 @@ const VacantesView = () => {
   }, []);
 
   return (
-  <>
-    <section className="font-poppins text-white bg-[radial-gradient(50%_50%_at_50%_50%,#8F68AC_0%,#6C4099_100%)] text-center h-auto min-h-[30vh] md:min-h-[40vh] w-full flex flex-col justify-center items-center p-5 box-border">
-      <h1 className="text-3xl md:text-4xl font-normal text-center mb-3 md:mb-4">
-        Uplin Careers
-      </h1>
-      <h3 className="text-base md:text-lg font-normal">
-        Si buscas trabajo ¡Uplin es tu mejor aliado!
-      </h3>
-    </section>
+    <>
+      <section className="font-poppins text-white bg-[radial-gradient(50%_50%_at_50%_50%,#8F68AC_0%,#6C4099_100%)] text-center h-auto min-h-[30vh] md:min-h-[60vh] w-full flex flex-col justify-center items-center p-5 box-border">
+        <h1 className="text-3xl md:text-4xl font-normal text-center mb-3 md:mb-4">
+          Uplin Careers
+        </h1>
+        <h3 className="text-base md:text-lg font-normal">
+          Conecta con oportunidades que te impulsen a crecer
+        </h3>
+      </section>
 
-    <section className="flex gap-4 items-center justify-center w-full py-4 mt-2">
-      <Link
-        href="/careers"
-        className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit hover:bg-[#5a3780] transition-colors"
-      >
-        <FiArrowLeft />
-        <span>Atrás</span>
-      </Link>
+      <section className="flex flex-col items-center w-full py-4 mt-2 gap-4">
+        <div className="w-full max-w-md">
+          <h3 className="font-poppins text-[#502B7D] text-center font-semibold">
+            Aquí no solo publicamos vacantes, sino que abrimos <br /> puertas a
+            proyectos que retan, inspiran y transforman.
+          </h3>
+        </div>
 
-      <button
-        onClick={() => window.location.reload()}
-        className="flex items-center justify-center gap-2 cursor-pointer bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit hover:bg-[#5a3780] transition-colors"
-      >
-        <FiRefreshCw className="animate-spin-on-hover hover:animate-spin" />
-        <span>Actualizar</span>
-      </button>
-    </section>
+        <div className="flex gap-4">
+          <Link
+            href="/careers"
+            className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit hover:bg-[#5a3780] transition-colors"
+          >
+            <FiArrowLeft />
+            <span>Atrás</span>
+          </Link>
 
-    <section className="min-h-[60vh] flex justify-center p-6 font-poppins">
-      <div className="w-full">
-        {vacantes.length > 0 && (
-          <h2 className="text-2xl font-bold mb-6 text-[#6C4099] text-center">
-            Vacantes disponibles
-          </h2>
-        )}
+          <button
+            onClick={() => window.location.reload()}
+            className="flex items-center justify-center gap-2 cursor-pointer bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit hover:bg-[#5a3780] transition-colors"
+          >
+            <FiRefreshCw className="animate-spin-on-hover hover:animate-spin" />
+            <span>Actualizar</span>
+          </button>
+        </div>
+      </section>
 
-        {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <TbLoader2 className="animate-spin text-[#6C4099] text-4xl" />
-          </div>
-        ) : (
-          <div className="grid gap-6">
-            {vacantes.length > 0 ? (
-              vacantes.map((v, i) => <CardVacante key={i} vacante={v} />)
-            ) : (
-              <section className="font-poppins text-center max-w-xl mx-auto px-4 py-8 bg-white/5 rounded-lg shadow-md">
-                <p className="text-[#6C4099] text-lg font-semibold mb-3">
-                  No hay vacantes disponibles en este momento
-                </p>
-                <h3 className="text-base md:text-lg mb-6 font-normal text-[#6C4099] leading-relaxed">
-                  ¡Sube tu CV y accede antes a las mejores oportunidades!
-                </h3>
-                <motion.a
-                  href="https://forms.gle/xoXqjr1dWizknQQTA"
-                  target="_blank"
-                  className="bg-[#502B7D] border-2 border-[#502B7D] text-white rounded-full px-4 py-2 md:px-6 md:py-3 no-underline font-bold"
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: "#6C4099",
-                    transition: { duration: 0.2 },
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Carga tu CV aquí
-                </motion.a>
-              </section>
-            )}
-          </div>
-        )}
-      </div>
-    </section>
-  </>
-);
+      <section className="min-h-[60vh] flex justify-center p-6 font-poppins">
+        <div className="w-full">
+          {vacantes.length > 0 && (
+            <h2 className="text-2xl font-bold mb-6 text-[#6C4099] text-center">
+              Vacantes disponibles
+            </h2>
+          )}
 
+          {loading ? (
+            <div className="flex justify-center items-center py-20">
+              <TbLoader2 className="animate-spin text-[#6C4099] text-4xl" />
+            </div>
+          ) : (
+            <div className="grid gap-6">
+              {vacantes.length > 0 ? (
+                vacantes.map((v, i) => <CardVacante key={i} vacante={v} />)
+              ) : (
+                <section className="font-poppins text-center max-w-xl mx-auto px-4 py-4 bg-white/5 rounded-lg shadow-lg flex flex-col items-center gap-6">
+                  <p className="text-[#6C4099] text-lg font-semibold">
+                    Hoy no tenemos vacantes disponibles
+                  </p>
+                  <h3 className="text-base md:text-lg font-normal text-[#6C4099] leading-relaxed">
+                    Déjanos tu CV y se parte de nuestra base de talentos.
+                  </h3>
+
+                  <ul className="space-y-4 text-left w-full max-w-md text-[#6C4099]">
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-[#502B7D] rounded-full mr-3"></span>
+                      Te consideraremos para futuras oportunidades
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-[#502B7D] rounded-full mr-3"></span>
+                      Recibí novedades y vacantes relacionadas a tu perfil
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 bg-[#502B7D] rounded-full mr-3"></span>
+                      Accede a invitaciones de eventos exclusivos de Uplin.
+                    </li>
+                  </ul>
+
+                  <motion.a
+                    href="https://forms.gle/xoXqjr1dWizknQQTA"
+                    target="_blank"
+                    className="bg-[#502B7D] border-2 border-[#502B7D] text-white rounded-full px-4 py-2 md:px-6 md:py-3 no-underline font-bold"
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: "#6C4099",
+                      transition: { duration: 0.2 },
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Quiero unirme a la base de talentos
+                  </motion.a>
+                </section>
+              )}
+            </div>
+          )}
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default VacantesView;
