@@ -42,6 +42,12 @@ const Navbar = () => {
             >
               Uplin Academy
             </a>
+            <a
+              className="text-[#502B7D] hover:text-[#6b4699] transition-colors cursor-pointer"
+              href="/careers"
+            >
+              Uplin Careers
+            </a>
             
             <a href="https://app.uplinhr.com/contacto" className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white transition-colors cursor-pointer">
               Contacto
@@ -81,6 +87,14 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             >
               Uplin Academy
+            </a>
+
+            <a
+              href="/careers"
+              className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded transition-colors cursor-pointer"
+              onClick={() => setIsOpen(false)}
+            >
+              Uplin Careers
             </a>
 
             <a

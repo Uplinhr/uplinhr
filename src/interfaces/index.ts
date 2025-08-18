@@ -60,3 +60,13 @@ export interface CardCursoProps {
   imgPersona: string;
   link: string;
 }
+
+export interface Vacante {
+  nombre_empresa: string;
+  es_anonimo: boolean;
+  nombre_puesto: string;
+  modalidad_trabajo: string;
+  descripcion_empleo: string;
+  ubicacion_empleo: string;
+  enlace_formulario: string;
+}
