@@ -69,4 +69,5 @@ export interface Vacante {
   descripcion_empleo: string;
   ubicacion_empleo: string;
   enlace_formulario: string;
+  area: string
 }

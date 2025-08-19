@@ -5,11 +5,16 @@ import CardVacante from "@/components/careers/CardVacante";
 import { TbLoader2 } from "react-icons/tb";
 import Link from "next/link";
 import Image from "next/image";
-import { FiArrowLeft, FiRefreshCw } from "react-icons/fi";
-import { motion } from "framer-motion";
+import { FiArrowLeft, FiRefreshCw, FiChevronDown } from "react-icons/fi";
+import { FaFilter } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+
 const VacantesView = () => {
   const [vacantes, setVacantes] = useState<Vacante[]>([]);
   const [loading, setLoading] = useState(true);
+  const [areas, setAreas] = useState<string[]>([]);
+  const [selectedArea, setSelectedArea] = useState<string>("");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,21 +32,28 @@ const VacantesView = () => {
         const json = JSON.parse(jsonStr);
         const rows = json.table.rows || [];
 
-        const data: Vacante[] = rows
-          .slice(1)
-          .map(
-            (row: { c: Array<{ v: string | boolean | number | null }> }) => ({
-              nombre_empresa: row.c[0]?.v?.toString() || "",
-              es_anonimo: row.c[1]?.v?.toString() === "Si",
-              nombre_puesto: row.c[2]?.v?.toString() || "",
-              modalidad_trabajo: row.c[3]?.v?.toString() || "",
-              descripcion_empleo: row.c[4]?.v?.toString() || "",
-              ubicacion_empleo: row.c[5]?.v?.toString() || "",
-              enlace_formulario: row.c[6]?.v?.toString() || "",
-            })
-          );
+        const capitalize = (s: string) =>
+          s.replace(/\b\w/g, (c) => c.toUpperCase());
+
+        const data: Vacante[] = rows.slice(1).map(
+          (row: { c: Array<{ v: string | boolean | number | null }> }) => ({
+            nombre_empresa: row.c[0]?.v?.toString() || "",
+            es_anonimo: row.c[1]?.v?.toString() === "Si",
+            nombre_puesto: row.c[2]?.v?.toString() || "",
+            modalidad_trabajo: row.c[3]?.v?.toString() || "",
+            descripcion_empleo: row.c[4]?.v?.toString() || "",
+            ubicacion_empleo: row.c[5]?.v?.toString() || "",
+            enlace_formulario: row.c[6]?.v?.toString() || "",
+            area: row.c[7]?.v ? capitalize(row.c[7]?.v.toString().trim()) : "",
+          })
+        );
 
         setVacantes(data);
+
+        const uniqueAreas = Array.from(
+          new Set(data.map((v) => v.area).filter((a) => a !== ""))
+        );
+        setAreas(uniqueAreas);
       } catch (err) {
         console.error("Error al cargar vacantes:", err);
       } finally {
@@ -51,6 +63,11 @@ const VacantesView = () => {
 
     fetchData();
   }, []);
+
+  const vacantesFiltradas =
+    selectedArea && selectedArea !== "Todas"
+      ? vacantes.filter((v) => v.area === selectedArea)
+      : vacantes;
 
   return (
     <>
@@ -64,7 +81,7 @@ const VacantesView = () => {
       </section>
 
       <section className="w-full flex flex-col md:flex-row items-center justify-center gap-6 py-8 px-5">
-        <div className="order-1 md:order-2 w-full md:w-4/12 bg-white shadow-lg rounded-2xl overflow-hidden transform transition-transform duration-300 hover:scale-105 flex justify-center items-center h-56 md:h-64">
+        <div className="order-1 md:order-2 w-full md:w-4/12 bg-white shadow-lg rounded-2xl overflow-hidden transform transition-transform duration-300 hover:scale-105 flex justify-center items-center h-56 md:h-64 cursor-pointer">
           <Image
             src="/careersImg2.jpg"
             alt="Careers"
@@ -74,7 +91,7 @@ const VacantesView = () => {
           />
         </div>
 
-        <div className="order-2 md:order-1 w-full md:w-4/12 bg-white shadow-lg rounded-2xl p-4 flex flex-col justify-center items-center text-center transform transition-transform duration-300 hover:scale-105 h-56 md:h-64">
+        <div className="order-2 md:order-1 w-full md:w-4/12 bg-white shadow-lg rounded-2xl p-4 flex flex-col justify-center items-center text-center transform transition-transform duration-300 hover:scale-105 h-56 md:h-64 cursor-pointer">
           <h3 className="font-poppins text-[#502B7D] font-semibold text-center text-sm md:text-base">
             Te conectamos con las mejores oportunidades en startups líderes y
             empresas de tecnología de Latam. Compañías con culturas centradas en
@@ -84,27 +101,84 @@ const VacantesView = () => {
         </div>
       </section>
 
-      <section className="w-full flex justify-center gap-4 py-4 px-5 mt-6">
-        <Link
-          href="/careers"
-          className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit hover:bg-[#5a3780] transition-colors"
+      <section className="w-full flex flex-wrap justify-center gap-4 py-4 px-5 mt-6">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
         >
           <FiArrowLeft />
-          <span>Atrás</span>
-        </Link>
+          <Link href="/careers">Atrás</Link>
+        </motion.div>
 
-        <button
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
           onClick={() => window.location.reload()}
-          className="flex items-center justify-center gap-2 cursor-pointer bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit hover:bg-[#5a3780] transition-colors"
         >
           <FiRefreshCw className="animate-spin-on-hover hover:animate-spin" />
-          <span>Actualizar</span>
-        </button>
+          Actualizar
+        </motion.div>
+
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="relative flex items-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        >
+          <FaFilter />
+          <span>{selectedArea || "Filtrar por área"}</span>
+          <motion.div
+            animate={{ rotate: dropdownOpen ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FiChevronDown />
+          </motion.div>
+          <AnimatePresence>
+            {dropdownOpen && areas.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="absolute top-full mt-2 left-0 bg-white text-[#6C4099] shadow-lg rounded-xl py-2 px-4 flex flex-col min-w-[200px] z-10 font-poppins"
+              >
+                <div
+                  className="cursor-pointer py-1 hover:bg-[#6C4099] hover:text-white px-2 rounded-md"
+                  onClick={() => {
+                    setSelectedArea("Todas");
+                    setDropdownOpen(false);
+                  }}
+                >
+                  Todas
+                </div>
+                {areas.map((area, i) => (
+                  <div
+                    key={i}
+                    className="cursor-pointer py-1 hover:bg-[#6C4099] hover:text-white px-2 rounded-md"
+                    onClick={() => {
+                      setSelectedArea(area);
+                      setDropdownOpen(false);
+                    }}
+                  >
+                    {area}
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+          {areas.length === 0 && !dropdownOpen && (
+            <span className="text-white text-sm italic ml-2">
+              No hay áreas disponibles
+            </span>
+          )}
+        </motion.div>
       </section>
 
       <section className="min-h-[60vh] flex justify-center p-6 font-poppins">
         <div className="w-full">
-          {vacantes.length > 0 && (
+          {vacantesFiltradas.length > 0 && (
             <h2 className="text-2xl font-bold mb-6 text-[#6C4099] text-center">
               Vacantes disponibles
             </h2>
@@ -116,8 +190,10 @@ const VacantesView = () => {
             </div>
           ) : (
             <div className="grid gap-6 mb-8">
-              {vacantes.length > 0 ? (
-                vacantes.map((v, i) => <CardVacante key={i} vacante={v} />)
+              {vacantesFiltradas.length > 0 ? (
+                vacantesFiltradas.map((v, i) => (
+                  <CardVacante key={i} vacante={v} />
+                ))
               ) : (
                 <section className="flex flex-col items-center gap-6 px-4 py-8">
                   <p className="text-[#6C4099] text-lg font-semibold text-center">
@@ -147,7 +223,7 @@ const VacantesView = () => {
                     <motion.a
                       href="https://forms.gle/xoXqjr1dWizknQQTA"
                       target="_blank"
-                      className="bg-[#502B7D] border-2 border-[#502B7D] text-white rounded-full px-4 py-2 md:px-6 md:py-3 no-underline font-bold"
+                      className="bg-[#502B7D] border-2 border-[#502B7D] text-white rounded-full px-4 py-2 md:px-6 md:py-3 no-underline font-bold cursor-pointer"
                       whileHover={{
                         scale: 1.05,
                         backgroundColor: "#6C4099",
