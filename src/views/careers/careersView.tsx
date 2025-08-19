@@ -52,7 +52,7 @@ const CareersView = () => {
               whileTap="tap"
               variants={buttonAnimations}
             >
-              Ver vacantes disponibles
+              Ver vacantes
             </motion.a>
           </div>
         </div>
