@@ -17,6 +17,16 @@ export const cursosCompletos = [
     imgPersona: "/ImgMelissa.png",
     link: "/cursosCompletos/liderazgoDeEquipos",
   },
+  {
+    bannerImg: "/imgBannerKarry.jpg",
+    titulo: "  Certificación en People Analytics.",
+    descripcion:
+      "Desde mejorar el clima laboral y elevar el desempeño hasta convertir insights en acciones concretas que generen impacto real.",
+    direccion: "Dirigida por: Karry Marmolejo",
+    imgPersona: "/imgKarry2.png",
+    link: "/cursosCompletos/datosConHumanidad",
+  },
+  
   
   
 ];
