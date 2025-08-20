@@ -17,7 +17,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     fecha: "Lunes 11 de agosto | 17:00 HORA ARG",
     imagenes: ["/ImgMelissa.png"],
     link: "https://app.uplinhr.com/inscripcion-sindrome-impostor",
-  },*/
+  },
   {
     id: "3",
     tipo: "en vivo",
@@ -26,7 +26,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     fecha: "Jueves 21 de agosto | 19:00 HORA ARG",
     imagenes: ["/ImgKarry.png"],
     link: "https://app.uplinhr.com/inscripcion-datos-humanidad",
-  },
+  },*/
   {
     id: "4",
     tipo: "en vivo",
@@ -59,7 +59,7 @@ export const recordedWebinars: Webinar[] = [
     imagenes: ["/ImgMelissa.png"],
     link: "https://app.uplinhr.com/registro-charla-gratis-sindrome-impostor",
   },
-  /* {
+   {
     id: "3",
     tipo: "grabado",
      titulo: "Peope Analytics + \n des-automatización: datos con humanidad",
@@ -68,6 +68,7 @@ export const recordedWebinars: Webinar[] = [
     imagenes: ["/ImgKarry.png"],
     link: "#",
   },
+  /*
   {
     id: "4",
     tipo: "grabado",
