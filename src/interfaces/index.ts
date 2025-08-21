@@ -71,3 +71,43 @@ export interface Vacante {
   enlace_formulario: string;
   area: string
 }
+
+// interfaces.ts
+
+export interface LoginRequest {
+  email: string;
+  contrasenia: string;
+}
+
+export interface User {
+  id: number;
+  nombre: string;
+  apellido: string;
+  email: string;
+  rol: string;
+  estado?: string;
+  fecha_alta?: string;
+  id_plan?: number | null;
+}
+
+export interface LoginData {
+  user: User;
+  token: string;
+}
+
+export interface LoginResponse {
+  success: boolean;
+  message: string;
+  data: LoginData;
+}
+
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+  error: string | null;
+  login: (credentials: LoginRequest) => Promise<void>;
+  logout: () => void;
+  clearError: () => void;
+}

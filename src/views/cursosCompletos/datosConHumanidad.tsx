@@ -115,7 +115,7 @@ const DatosConHumanidad = () => {
                 Inversión
               </p>
               <p className="font-poppins text-[14px] font-light mt-1 md:mt-0.5">
-                Precio general: USD 90
+                Precio general: USD 140
               </p>
             </div>
           </div>
