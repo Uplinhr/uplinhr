@@ -21,7 +21,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
   {
     id: "3",
     tipo: "en vivo",
-    titulo: "Peope Analytics + \n des-automatización: datos con humanidad",
+    titulo: "People Analytics + \n des-automatización: datos con humanidad",
     dirigidoPor: "Karry Marmolejo",
     fecha: "Jueves 21 de agosto | 19:00 HORA ARG",
     imagenes: ["/ImgKarry.png"],
@@ -62,11 +62,11 @@ export const recordedWebinars: Webinar[] = [
    {
     id: "3",
     tipo: "grabado",
-     titulo: "Peope Analytics + \n des-automatización: datos con humanidad",
+     titulo: "People Analytics + \n des-automatización: datos con humanidad",
     dirigidoPor: "Karry Marmolejo",
     fecha: "Disponible",
     imagenes: ["/ImgKarry.png"],
-    link: "#",
+    link: "https://app.uplinhr.com/registro-charla-gratis-datos-con-humanidad",
   },
   /*
   {
