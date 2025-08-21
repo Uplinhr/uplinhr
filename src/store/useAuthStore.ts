@@ -1,4 +1,3 @@
-// store/useAuthStore.ts
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { login as loginService } from "@/services/authService";
@@ -29,6 +28,9 @@ export const useAuthStore = create<AuthState>()(
                 apellido: user.apellido,
                 email: user.email,
                 rol: user.rol,
+                estado: user.estado,
+                fecha_alta: user.fecha_alta,
+                id_plan: user.id_plan
               },
               token,
               isAuthenticated: true,

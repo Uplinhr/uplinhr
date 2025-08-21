@@ -1,4 +1,3 @@
-// services/authService.ts
 import { LoginRequest, LoginResponse } from "@/interfaces";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;

@@ -71,9 +71,6 @@ export interface Vacante {
   enlace_formulario: string;
   area: string
 }
-
-// interfaces.ts
-
 export interface LoginRequest {
   email: string;
   contrasenia: string;
