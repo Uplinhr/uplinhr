@@ -13,10 +13,13 @@ const CardVacante = ({ vacante }: CardVacanteProps) => {
       href={vacante.enlace_formulario}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-white rounded-lg border border-[#C2C2C8] shadow-md cursor-pointer transition-transform hover:scale-[1.02] max-w-[80%] mx-auto"
+      className="
+        block bg-white rounded-lg border border-[#C2C2C8] shadow-md cursor-pointer 
+        transition-transform hover:scale-[1.02] 
+        w-[90%] mx-auto
+      "
     >
       <div className="flex flex-col md:flex-row">
-       
         <div className="p-6 md:w-[75%] border-b md:border-b-0 md:border-r border-[#c2c2c2] break-words">
           <h3 className="text-[#6C4099] font-bold text-lg md:text-xl">
             {vacante.nombre_puesto}
@@ -36,7 +39,6 @@ const CardVacante = ({ vacante }: CardVacanteProps) => {
             {vacante.descripcion_empleo}
           </div>
         </div>
-
         <div className="p-6 md:w-[25%] flex flex-col justify-center gap-2">
           <div className="flex items-center gap-2">
             <FaLocationDot className="text-[#6C4099] flex-shrink-0" />

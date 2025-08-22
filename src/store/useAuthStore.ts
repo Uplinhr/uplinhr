@@ -22,16 +22,7 @@ export const useAuthStore = create<AuthState>()(
             const { user, token } = response.data;
 
             set({
-              user: {
-                id: user.id,
-                nombre: user.nombre,
-                apellido: user.apellido,
-                email: user.email,
-                rol: user.rol,
-                estado: user.estado,
-                fecha_alta: user.fecha_alta,
-                id_plan: user.id_plan
-              },
+              user, 
               token,
               isAuthenticated: true,
               isLoading: false,

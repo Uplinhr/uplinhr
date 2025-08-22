@@ -71,9 +71,34 @@ export interface Vacante {
   enlace_formulario: string;
   area: string
 }
-export interface LoginRequest {
-  email: string;
-  contrasenia: string;
+export interface Plan {
+  id: number | null;
+  nombre: string | null;
+  precio: number | null;
+  horas_cons: number | null;
+  meses_cred: number | null;
+  creditos_mes: number | null;
+}
+
+export interface Creditos {
+  id: number | null;
+  cantidad: number | null;
+  vencimiento: string | null;
+  tipo_credito: string | null;
+}
+
+export interface Consultorias {
+  id: number | null;
+  vencimiento: string | null;
+  horas_totales: number | null;
+  horas_restantes: number | null;
+  fecha_asignacion: string | null;
+}
+
+export interface Empresa {
+  id: number | null;
+  email: string | null;
+  nombre: string | null;
 }
 
 export interface User {
@@ -85,6 +110,15 @@ export interface User {
   estado?: string;
   fecha_alta?: string;
   id_plan?: number | null;
+  plan?: Plan;
+  creditos?: Creditos[];
+  consultorias?: Consultorias;
+  empresas?: Empresa;
+}
+
+export interface LoginRequest {
+  email: string;
+  contrasenia: string;
 }
 
 export interface LoginData {

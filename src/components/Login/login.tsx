@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
@@ -11,43 +11,24 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isClient, setIsClient] = useState(false);
 
-  const { login, isAuthenticated, user, token, isLoading, error, clearError } = useAuthStore();
+  const { login, user, isLoading, error, clearError } = useAuthStore();
   const router = useRouter();
-
-  useEffect(() => setIsClient(true), []);
-
-  // Redirige según rol y estado
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      if (user.estado === 'inactivo' || !token) {
-        router.push('/login');
-      } else if (user.rol === 'admin') {
-        router.push('/dashboard/admin');
-      } else {
-        router.push('/dashboard/user');
-      }
-    }
-  }, [isAuthenticated, user, token, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     clearError();
     try {
       await login({ email, contrasenia: password });
+      if (user?.rol === 'admin') {
+        router.push('/dashboard/admin');
+      } else {
+        router.push('/dashboard/user');
+      }
     } catch (err) {
       console.error(err);
     }
   };
-
-  // Loader mientras se hidrata la página
-  if (!isClient)
-    return (
-      <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#6D4098] to-[#502B7D]">
-        <TbLoader2 className="w-12 h-12 animate-spin" color="#6C4099" />
-      </div>
-    );
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#6D4098] to-[#502B7D]">
@@ -93,14 +74,13 @@ const Login = () => {
             />
             <button
               type="button"
-              className="absolute right-3 bottom-3 text-gray-500 hover:text-gray-700"
+              className="absolute right-3 bottom-3 text-gray-500 hover:text-gray-700 cursor-pointer"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <FaEyeSlash size={20} /> : <IoEyeSharp size={20} />}
+              {showPassword ? <IoEyeSharp size={20} /> : <FaEyeSlash size={20} />}
             </button>
           </div>
 
-          {/* Botón centrado con loader */}
           <div className="flex justify-center">
             <motion.button
               type="submit"
@@ -111,7 +91,7 @@ const Login = () => {
               {isLoading ? (
                 <>
                   <TbLoader2 className="w-5 h-5 animate-spin" color="#fff" />
-                  Iniciando...
+                  Iniciando
                 </>
               ) : (
                 'Entrar'
