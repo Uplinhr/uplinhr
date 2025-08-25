@@ -32,7 +32,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     tipo: "en vivo",
     titulo: "Cómo fundar tu área de RRHH: desde la visión del founder",
     dirigidoPor: "Sol Y Sandri",
-    fecha: "Jueves 28 de agosto | 15:00 HORA ARG",
+    fecha: "Martes 2 de septiembre | 19:00 HS ARG",
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
     
     link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
