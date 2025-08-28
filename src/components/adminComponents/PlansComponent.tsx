@@ -50,9 +50,12 @@ export default function PlansComponent() {
   };
 
   const handleEdit = (plan: Plan) => {
-    setSelectedPlan(plan);
-    setFormData({ ...plan });
+    const currentPlan = planes.find(p => p.id === plan.id);
+  if (currentPlan) {
+    setSelectedPlan(currentPlan);
+    setFormData({ ...currentPlan });
     setShowEditModal(true);
+  }
   };
 
   const handleEditSubmit = async (e: React.FormEvent) => {
@@ -89,11 +92,14 @@ export default function PlansComponent() {
     setFormData({});
   };
 
-  const filteredPlanes = planes.filter((p) => {
-    if (filter === "principales") return !p.custom;
-    if (filter === "custom") return p.custom;
+  const filteredPlanes = planes
+  .filter((p) => {
+    if (!p) return false;
+    if (filter === "principales") return !p?.custom;
+    if (filter === "custom") return p?.custom;
     return true;
-  });
+  })
+  .sort((a, b) => (b?.active === a?.active ? 0 : b?.active ? 1 : -1));
 
   const formatDate = (dateStr: string | null | undefined) => {
     if (!dateStr) return "-";

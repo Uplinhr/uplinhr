@@ -6,11 +6,11 @@ import { Empresa } from "@/interfaces/index";
 
 const EmpresaComponent = () => {
   const { empresas, fetchEmpresas, editEmpresa } = useAdminStore();
+
   const [search, setSearch] = useState("");
   const [estado, setEstado] = useState("Todos");
   const [orden, setOrden] = useState<"asc" | "desc">("asc");
   const [showFilters, setShowFilters] = useState(false);
-
   const [showModal, setShowModal] = useState(false);
   const [idEdit, setIdEdit] = useState<number | null>(null);
   const [nombreEdit, setNombreEdit] = useState("");
@@ -22,6 +22,18 @@ const EmpresaComponent = () => {
   useEffect(() => {
     fetchEmpresas();
   }, [fetchEmpresas]);
+
+  
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showModal]);
 
   const formatDateString = (dateString: string | null | undefined) => {
     if (!dateString) return "N/A";
@@ -68,6 +80,7 @@ const EmpresaComponent = () => {
     });
 
   const openEditModal = (empresa: Empresa) => {
+    if (!empresa) return;
     setIdEdit(empresa?.id ?? null);
     setNombreEdit(empresa?.nombre ?? "");
     setEmailEdit(empresa?.email ?? "");

@@ -72,16 +72,16 @@ export interface Vacante {
   area: string
 }
 export interface Plan {
-  id: number | null;
-  nombre: string | null;
-  creditos_mes: number | null;
-  meses_cred: number | null;
-  horas_cons: number | null;
-  precio: string | null;
-  custom: boolean | null;
-  active?: boolean | null;
-  fecha_alta?: string | null;
-  ultima_mod?: string | null;
+  id?: number;
+  nombre: string;
+  creditos_mes: number;
+  meses_cred: number;
+  horas_cons: number;
+  precio: string;
+  custom: boolean;
+  active?: boolean;
+  fecha_alta?: string;
+  ultima_mod?: string;
 }
 
 export interface Creditos {

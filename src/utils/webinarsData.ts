@@ -38,6 +38,17 @@ export const upcomingWebinars: Webinar[] =  [/* {
     link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
     
   },
+  {
+    id: "5",
+    tipo: "en vivo",
+    titulo: "Cómo fundar tu área de RRHH: desde la visión del founder",
+    dirigidoPor: "Sol Y Sandri",
+    fecha: "Martes 2 de septiembre | 19:00 HS ARG",
+    imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
+    
+    link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
+    
+  },
 ]
 
 export const recordedWebinars: Webinar[] = [
@@ -78,4 +89,17 @@ export const recordedWebinars: Webinar[] = [
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
     link: "#",
   }, */
+  /*
+  {
+    id: "5",
+    tipo: "grabado",
+    titulo: "Offboarding Humano y Estratégico",
+    dirigidoPor: "Ivonne Camacho",
+    fecha: "Martes 2 de septiembre | 19:00 HS ARG",
+    imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
+    
+    link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
+    
+  },
+  */ 
 ]
