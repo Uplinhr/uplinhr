@@ -1,5 +1,12 @@
 import { create } from "zustand";
-import { User, Creditos, Consultorias, Busqueda, Plan, Empresa } from "@/interfaces";
+import {
+  User,
+  Creditos,
+  Consultorias,
+  Busqueda,
+  Plan,
+  Empresa,
+} from "@/interfaces";
 import * as adminService from "@/services/adminService";
 
 interface AdminState {
@@ -9,44 +16,74 @@ interface AdminState {
   consultorias: Consultorias[];
   busquedas: Busqueda[];
   planes: Plan[];
-  empresas: Empresa[]; 
+  empresas: Empresa[];
+  selectedPlan: Plan | null;
   loading: boolean;
   error: string | null;
+
   fetchUsers: () => Promise<void>;
   selectUser: (id: number) => Promise<void>;
   fetchCreditos: () => Promise<void>;
   fetchConsultorias: () => Promise<void>;
   fetchBusquedas: () => Promise<void>;
   fetchPlanes: () => Promise<void>;
-  fetchEmpresas: () => Promise<void>; 
-  editEmpresa: (id: number, body: {
+  selectPlan: (id: number) => Promise<void>;
+
+  createPlan: (body: {
     nombre: string;
-    email: string;
-    active: boolean;
-    id_usuario: number;
-    }) => Promise<void>;
+    creditos_mes: number;
+    meses_cred: number;
+    horas_cons: number;
+    precio: string;
+    custom: boolean;
+  }) => Promise<void>;
+
+  editPlan: (
+    id: number,
+    body: {
+      nombre: string;
+      creditos_mes: number;
+      meses_cred: number;
+      horas_cons: number;
+      precio: string;
+      active: boolean;
+      custom: boolean;
+    }
+  ) => Promise<void>;
+
+  fetchEmpresas: () => Promise<void>;
+  editEmpresa: (
+    id: number,
+    body: {
+      nombre: string;
+      email: string;
+      active: boolean;
+      id_usuario: number;
+    }
+  ) => Promise<void>;
+
   registerUser: (body: {
     nombre: string;
     apellido: string;
     email: string;
     contrasenia: string;
     num_celular?: string;
-    }) => Promise<void>;
+  }) => Promise<void>;
 
-  deleteUser: (id: number,body: {
-        nombre: string;
-        apellido: string;
-        email: string;
-        active: boolean;
-        rol: string;
-    }) => Promise<void>;
+  deleteUser: (
+    id: number,
+    body: {
+      nombre: string;
+      apellido: string;
+      email: string;
+      active: boolean;
+      rol: string;
+    }
+  ) => Promise<void>;
+
   resetPassword: (id: number, contrasenia: string) => Promise<void>;
   activateUser: (id: number) => Promise<void>;
-
-
 }
-
-
 
 export const useAdminStore = create<AdminState>((set, get) => ({
   users: [],
@@ -55,7 +92,8 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   consultorias: [],
   busquedas: [],
   planes: [],
-  empresas: [],   
+  empresas: [],
+  selectedPlan: null,
   loading: false,
   error: null,
 
@@ -125,6 +163,40 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
+  selectPlan: async (id: number) => {
+    set({ loading: true, error: null });
+    try {
+      const plan = await adminService.getPlanById(id);
+      set({ selectedPlan: plan, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al cargar plan", loading: false });
+    }
+  },
+
+  createPlan: async (body) => {
+    set({ loading: true, error: null });
+    try {
+      const newPlan = await adminService.createPlan(body);
+      set({ planes: [...get().planes, newPlan], loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al crear plan", loading: false });
+    }
+  },
+
+  editPlan: async (id, body) => {
+    set({ loading: true, error: null });
+    try {
+      const updatedPlan = await adminService.editPlan(id, body);
+      const planes = get().planes.map((p) => (p.id === id ? updatedPlan : p));
+      set({ planes, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al editar plan", loading: false });
+    }
+  },
+
   fetchEmpresas: async () => {
     set({ loading: true, error: null });
     try {
@@ -136,26 +208,24 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-   editEmpresa: async (id, body) => {
+  editEmpresa: async (id, body) => {
     set({ loading: true, error: null });
     try {
       const empresaActualizada = await adminService.editEmpresa(id, body);
-
       const empresas = get().empresas.map((e) =>
         e.id === id ? empresaActualizada : e
       );
-
       set({ empresas, loading: false });
     } catch (err) {
       console.error(err);
       set({ error: "Error al editar empresa", loading: false });
     }
   },
+
   registerUser: async (body) => {
     set({ loading: true, error: null });
     try {
       const newUser = await adminService.registerUser(body);
-
       set({ users: [...get().users, newUser], loading: false });
     } catch (err) {
       console.error(err);
@@ -167,13 +237,11 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       const updatedUser = await adminService.deleteUser(id, body);
-      const users = get().users.map((u) =>
-        u.id === id ? updatedUser : u
-      );
+      const users = get().users.map((u) => (u.id === id ? updatedUser : u));
       set({ users, loading: false });
     } catch (err) {
       console.error(err);
-      set({ error: "Error al eliminar usuario", loading: false });
+      set({ error: "Error al desactivar usuario", loading: false });
     }
   },
 
@@ -181,9 +249,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       const updatedUser = await adminService.resetPassword(id, contrasenia);
-      const users = get().users.map((u) =>
-        u.id === id ? updatedUser : u
-      );
+      const users = get().users.map((u) => (u.id === id ? updatedUser : u));
       set({ users, loading: false });
     } catch (err) {
       console.error(err);
@@ -192,16 +258,14 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   },
 
   activateUser: async (id: number) => {
-  set({ loading: true, error: null });
-  try {
-    const updatedUser = await adminService.activateUser(id); 
-    const users = get().users.map(u => u.id === id ? updatedUser : u);
-    set({ users, loading: false });
-  } catch (err) {
-    console.error(err);
-    set({ error: "Error al activar usuario", loading: false });
-  }
-},
+    set({ loading: true, error: null });
+    try {
+      const updatedUser = await adminService.activateUser(id);
+      const users = get().users.map((u) => (u.id === id ? updatedUser : u));
+      set({ users, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al activar usuario", loading: false });
+    }
+  },
 }));
-
-

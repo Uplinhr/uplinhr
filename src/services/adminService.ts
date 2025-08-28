@@ -330,7 +330,7 @@ export const resetPassword = async (
 };
 
 export const activateUser = async (id: number) => {
-    const token = getToken();
+  const token = getToken();
 
   const url = `${API_URL}/api/usuarios/enable/${id}`;
   const response = await fetch(url, {
@@ -345,4 +345,89 @@ export const activateUser = async (id: number) => {
     throw new Error("Error al activar usuario");
   }
   return await response.json();
+};
+
+export const getPlanById = async (id: number): Promise<Plan | null> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/planes/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener plan");
+
+    const data: { success: boolean; message: string; data: Plan } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getPlanById:", error);
+    throw error;
+  }
+};
+
+export const createPlan = async (body: {
+  nombre: string;
+  creditos_mes: number;
+  meses_cred: number;
+  horas_cons: number;
+  precio: string;
+  custom: boolean;
+}): Promise<Plan> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/planes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error("Error al crear plan");
+
+    const data: { success: boolean; message: string; data: Plan } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en createPlan:", error);
+    throw error;
+  }
+};
+
+export const editPlan = async (
+  id: number,
+  body: {
+    nombre: string;
+    creditos_mes: number;
+    meses_cred: number;
+    horas_cons: number;
+    precio: string;
+    active: boolean; 
+    custom: boolean;
+  }
+): Promise<Plan> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/planes/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error("Error al editar plan");
+
+    const data: { success: boolean; message: string; data: Plan } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en editPlan:", error);
+    throw error;
+  }
 };

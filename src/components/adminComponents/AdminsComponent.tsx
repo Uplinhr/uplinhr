@@ -154,9 +154,9 @@ export default function AdminsComponent() {
 
   return (
     <div className="w-full bg-white shadow-2xl p-6 rounded-md">
-      <h2 className="text-center text-[#6d4098] font-semibold text-lg mb-4">
+      <h1 className="text-xl md:text-2xl text-center font-bold text-white bg-[#6d4098] p-3 md:p-4 rounded-lg mb-4 md:mb-6">
         Administradores
-      </h2>
+      </h1>
       <div className="flex gap-4 flex-wrap justify-center">
         {admins.map((admin) => (
           <div

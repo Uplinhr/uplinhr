@@ -1,3 +1,4 @@
+'use client'
 import { useEffect, useState } from "react";
 import { useAdminStore } from "@/store/useAdminStore";
 import { FaSearch, FaEdit, FaFilter, FaTimes, FaBars } from "react-icons/fa";

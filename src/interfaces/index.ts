@@ -77,8 +77,11 @@ export interface Plan {
   creditos_mes: number | null;
   meses_cred: number | null;
   horas_cons: number | null;
-  precio: number | null;
+  precio: string | null;
   custom: boolean | null;
+  active?: boolean | null;
+  fecha_alta?: string | null;
+  ultima_mod?: string | null;
 }
 
 export interface Creditos {
