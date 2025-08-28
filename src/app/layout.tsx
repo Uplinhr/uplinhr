@@ -4,11 +4,12 @@ import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import Chatbot from "@/components/chatBot/chatBot";
+import {Toaster} from 'sonner'
 
 const poppins = Poppins({
-  weight: ["400", "500", "600", "700"], // Especifica los pesos que necesitas
-  subsets: ["latin"], // Subconjunto de caracteres
-  display: "swap", // Evita FOIT (Flash of Invisible Text)
+  weight: ["400", "500", "600", "700"], 
+  subsets: ["latin"], 
+  display: "swap", 
   variable: "--font-poppins",
 });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         {children}
         <Footer />
          <Chatbot/>
+         <Toaster position="top-right" />
       </body>
     </html>
   );
