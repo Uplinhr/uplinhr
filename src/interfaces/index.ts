@@ -57,7 +57,7 @@ export interface CardCursoProps {
   titulo: string;
   descripcion: string;
   direccion: string;
-  imgPersona: string;
+  imgPersona: string[];
   link: string;
 }
 

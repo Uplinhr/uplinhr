@@ -5,7 +5,7 @@ export const cursosCompletos = [
     descripcion:
       "Diseñado para integrar el valor de la maternidad como un activo profesional y cultural dentro de los equipos.",
     direccion: "Dirigida por: Kelly Gomez",
-    imgPersona: "/imgKelly.png",
+    imgPersona: ["/imgKelly.png"],
     link: "/cursosCompletos/maternidadYLiderazgo",
   },
   {
@@ -14,7 +14,7 @@ export const cursosCompletos = [
     descripcion:
       "Brinda herramientas prácticas, estrategias probadas y habilidades clave para liderar equipos motivados...",
     direccion: "Dirigida por: Melisa Restrepo",
-    imgPersona: "/ImgMelissa.png",
+    imgPersona: ["/ImgMelissa.png"],
     link: "/cursosCompletos/liderazgoDeEquipos",
   },
   {
@@ -23,10 +23,25 @@ export const cursosCompletos = [
     descripcion:
       "Desde mejorar el clima laboral y elevar el desempeño hasta convertir insights en acciones concretas que generen impacto real.",
     direccion: "Dirigida por: Karry Marmolejo",
-    imgPersona: "/imgKarry2.png",
+    imgPersona: ["/imgKarry2.png"],
     link: "/cursosCompletos/datosConHumanidad",
   },
-  
-  
-  
+  {
+    bannerImg: "/imgCursoSolSandra.jpg",
+    titulo: "Certificación en Herramientas para crear tu área de RRHH en startups",
+    descripcion:
+      "Ya seas founder, líder o responsable de personas, este programa te ayudará a transformar el talento en tu mayor ventaja competitiva.",
+    direccion: "Dirigida por: Sandra Benitez y Marisol López",
+    imgPersona: ["/ImgMSol.png", "/imgSandra.png"],
+    link: "/cursosCompletos/crearAreaRRHH",
+  },
+  {
+    bannerImg: "/imgCursoIvone.jpg",
+    titulo: "Certificación en Offboarding Humano y Estratégico",
+    descripcion:
+      "Aprenderás a minimizar los riesgos, proteger la marca empleadora y fortalecer la moral del equipo.",
+    direccion: "Dirigida por: Ivonne Camacho",
+    imgPersona: ["/imgIvonne.png"],
+    link: "/cursosCompletos/offboarding",
+  },
 ];
