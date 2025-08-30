@@ -50,12 +50,12 @@ export default function PlansComponent() {
   };
 
   const handleEdit = (plan: Plan) => {
-    const currentPlan = planes.find(p => p.id === plan.id);
-  if (currentPlan) {
-    setSelectedPlan(currentPlan);
-    setFormData({ ...currentPlan });
-    setShowEditModal(true);
-  }
+    const currentPlan = planes.find((p) => p.id === plan.id);
+    if (currentPlan) {
+      setSelectedPlan(currentPlan);
+      setFormData({ ...currentPlan });
+      setShowEditModal(true);
+    }
   };
 
   const handleEditSubmit = async (e: React.FormEvent) => {
@@ -93,13 +93,13 @@ export default function PlansComponent() {
   };
 
   const filteredPlanes = planes
-  .filter((p) => {
-    if (!p) return false;
-    if (filter === "principales") return !p?.custom;
-    if (filter === "custom") return p?.custom;
-    return true;
-  })
-  .sort((a, b) => (b?.active === a?.active ? 0 : b?.active ? 1 : -1));
+    .filter((p) => {
+      if (!p) return false;
+      if (filter === "principales") return !p?.custom;
+      if (filter === "custom") return p?.custom;
+      return true;
+    })
+    .sort((a, b) => (b?.active === a?.active ? 0 : b?.active ? 1 : -1));
 
   const formatDate = (dateStr: string | null | undefined) => {
     if (!dateStr) return "-";
@@ -131,6 +131,12 @@ export default function PlansComponent() {
             {f === "custom" && "Planes Custom"}
           </button>
         ))}
+        <button
+          onClick={() => setShowCreateModal(true)}
+          className="px-4 py-2 rounded-md border border-green-600 bg-green-500 text-white cursor-pointer hover:scale-105 transition-transform"
+        >
+          Agregar plan
+        </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -141,7 +147,6 @@ export default function PlansComponent() {
               key={plan.id}
               className="border border-[#6d4098] rounded-xl shadow-sm p-4 flex flex-col justify-between"
             >
-          
               <div className="flex gap-2 mb-2">
                 {plan.active ? (
                   <span className="px-3 py-1 text-sm rounded-md bg-green-500 text-white cursor-pointer">
@@ -153,21 +158,14 @@ export default function PlansComponent() {
                   </span>
                 )}
               </div>
-
               <h2 className="text-xl mb-1">{plan.nombre}</h2>
-
-             
               <p className="mb-2">
                 USD {plan.precio}/mes{" "}
                 <span className="text-sm text-gray-500">+ impuestos</span>
               </p>
-
-             
               <p className="italic text-sm text-gray-500 mb-4">
                 Última modificación: {formatDate(plan.ultima_mod)}
               </p>
-
-           
               <button
                 onClick={() => handleEdit(plan)}
                 className="bg-[#6d4098] text-white rounded-lg px-4 py-2 transition-transform hover:scale-105 cursor-pointer"
@@ -176,20 +174,8 @@ export default function PlansComponent() {
               </button>
             </div>
           ))}
-
-       
-        <div className="border-2 border-dashed rounded-xl flex flex-col items-center justify-center p-6">
-          <p className="mb-4 text-gray-600">¿Deseas agregar un nuevo plan?</p>
-          <button
-            onClick={() => setShowCreateModal(true)}
-            className="bg-[#6d4098] text-white px-6 py-2 rounded-lg hover:scale-105 transition-transform cursor-pointer"
-          >
-            Agregar plan
-          </button>
-        </div>
       </div>
 
-     
       {showEditModal && selectedPlan && formData && (
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4 font-poppins">
           <div
@@ -208,7 +194,6 @@ export default function PlansComponent() {
               Editar plan
             </h3>
             <form onSubmit={handleEditSubmit} className="space-y-3">
-              {/* campos nombre, creditos_mes, meses_cred, horas_cons, precio */}
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-1">
                   Nombre
@@ -222,7 +207,6 @@ export default function PlansComponent() {
                   required
                 />
               </div>
-
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -251,7 +235,6 @@ export default function PlansComponent() {
                   />
                 </div>
               </div>
-
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -280,8 +263,6 @@ export default function PlansComponent() {
                   />
                 </div>
               </div>
-
-              {/* estado y custom */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -329,7 +310,6 @@ export default function PlansComponent() {
                   </select>
                 </div>
               </div>
-
               <div className="flex justify-center gap-3 pt-3">
                 <button
                   type="button"
@@ -384,7 +364,6 @@ export default function PlansComponent() {
                   required
                 />
               </div>
-
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -413,7 +392,6 @@ export default function PlansComponent() {
                   />
                 </div>
               </div>
-
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-medium text-gray-700 mb-1">
@@ -442,7 +420,6 @@ export default function PlansComponent() {
                   />
                 </div>
               </div>
-
               <div>
                 <label className="block text-xs font-medium text-gray-700 mb-1">
                   Custom
@@ -457,7 +434,6 @@ export default function PlansComponent() {
                   <option value="true">Sí</option>
                 </select>
               </div>
-
               <div className="flex justify-center gap-3 pt-3">
                 <button
                   type="button"

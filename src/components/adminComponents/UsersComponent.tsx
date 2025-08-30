@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { FaSearch, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { useAdminStore } from "@/store/useAdminStore";
-import { editUser } from "@/services/adminService";
 import { toast } from "sonner";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
@@ -23,6 +22,7 @@ export default function UsersComponent() {
     resetPassword,
     deleteUser,
     activateUser,
+    editUser,
   } = useAdminStore();
 
   const [search, setSearch] = useState("");
@@ -34,7 +34,7 @@ export default function UsersComponent() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -60,9 +60,9 @@ export default function UsersComponent() {
     fetchCreditos();
     fetchPlanes();
   }, [fetchUsers, fetchCreditos, fetchPlanes]);
-  
+
   const togglePasswordVisibility = () => {
-    setShowPassword(prevState => !prevState);
+    setShowPassword((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -115,6 +115,7 @@ export default function UsersComponent() {
         id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
       });
       await fetchUsers();
+      selectUser(selectedUser.id);
       setShowEditModal(false);
       toast.success("Usuario actualizado exitosamente");
     } catch (error) {
@@ -141,21 +142,23 @@ export default function UsersComponent() {
   const handleRegisterClick = () => {
     setShowRegisterModal(true);
   };
-const handleActivateUser = async () => {
-  if (!selectedUser) return;
-  setLoading(true);
-  try {
-    await activateUser(selectedUser.id); 
-    await fetchUsers();
-    setShowDeleteModal(false);
-    toast.success("Usuario activado exitosamente");
-  } catch (err) {
-    console.error(err);
-    toast.error("Error al activar usuario");
-  } finally {
-    setLoading(false);
-  }
-};
+  const handleActivateUser = async () => {
+    if (!selectedUser) return;
+    setLoading(true);
+    try {
+      await activateUser(selectedUser.id);
+      await fetchUsers();
+      setShowDeleteModal(false);
+      await fetchUsers();
+      selectUser(selectedUser.id);
+      toast.success("Usuario activado exitosamente");
+    } catch (err) {
+      console.error(err);
+      toast.error("Error al activar usuario");
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -208,6 +211,7 @@ const handleActivateUser = async () => {
         rol: selectedUser.rol,
       });
       await fetchUsers();
+      selectUser(selectedUser.id);
       setShowDeleteModal(false);
       toast.success("Usuario desactivado");
     } catch (err) {
@@ -277,35 +281,7 @@ const handleActivateUser = async () => {
                   />
                 </div>
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Rol
-                </label>
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    className={`px-4 py-2 cursor-pointer rounded-md ${
-                      formData.rol === "cliente"
-                        ? "bg-[#6d4098] text-white"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
-                    onClick={() => setFormData({ ...formData, rol: "cliente" })}
-                  >
-                    CLIENTE
-                  </button>
-                  <button
-                    type="button"
-                    className={`px-4 py-2 cursor-pointer rounded-md ${
-                      formData.rol === "admin"
-                        ? "bg-[#6d4098] text-white"
-                        : "bg-gray-200 text-gray-600"
-                    }`}
-                    onClick={() => setFormData({ ...formData, rol: "admin" })}
-                  >
-                    ADMIN
-                  </button>
-                </div>
-              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Estado
@@ -335,24 +311,28 @@ const handleActivateUser = async () => {
                   </button>
                 </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Plan
                 </label>
-                <select
-                  name="id_plan"
-                  value={formData.id_plan}
-                  onChange={handleInputChange}
-                  className="w-full border rounded-md px-3 py-2 text-gray-600"
-                >
-                  <option value="">Seleccionar plan</option>
-                  {planes.map((plan) => (
-                    <option key={plan.id} value={plan.id?.toString()}>
-                      {plan.nombre}
-                    </option>
-                  ))}
-                </select>
+                <div className="max-h-40 overflow-y-auto border rounded-md">
+                  <select
+                    name="id_plan"
+                    value={formData.id_plan}
+                    onChange={handleInputChange}
+                    className="w-full border rounded-md px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white"
+                    size={5}
+                  >
+                    {planes.map((plan) => (
+                      <option key={plan.id} value={plan.id?.toString()}>
+                        {plan.nombre}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email
@@ -365,6 +345,7 @@ const handleActivateUser = async () => {
                   className="w-full border rounded-md px-3 py-2 text-gray-600"
                 />
               </div>
+
               <div className="flex justify-center gap-4 pt-4">
                 <button
                   type="button"
@@ -436,10 +417,10 @@ const handleActivateUser = async () => {
                 className="w-full border rounded-md px-3 py-2 text-gray-600"
                 required
               />
-              
+
               <div className="relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Contraseña"
                   value={registerData.contrasenia}
                   onChange={(e) =>
@@ -456,13 +437,17 @@ const handleActivateUser = async () => {
                   className="absolute right-3 bottom-3 text-gray-500 hover:text-gray-700 cursor-pointer"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? <IoEyeSharp size={20} /> : <FaEyeSlash size={20} />}
+                  {showPassword ? (
+                    <IoEyeSharp size={20} />
+                  ) : (
+                    <FaEyeSlash size={20} />
+                  )}
                 </button>
               </div>
-              
+
               <div className="relative">
                 <input
-                  type={showConfirmPassword ? 'text' : 'password'}
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="Repetir contraseña"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -474,14 +459,21 @@ const handleActivateUser = async () => {
                   className="absolute right-3 bottom-3 text-gray-500 hover:text-gray-700 cursor-pointer"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 >
-                  {showConfirmPassword ? <IoEyeSharp size={20} /> : <FaEyeSlash size={20} />}
+                  {showConfirmPassword ? (
+                    <IoEyeSharp size={20} />
+                  ) : (
+                    <FaEyeSlash size={20} />
+                  )}
                 </button>
               </div>
-              
-              {confirmPassword && registerData.contrasenia !== confirmPassword && (
-                <p className="text-red-500 text-sm">Las contraseñas no coinciden</p>
-              )}
-              
+
+              {confirmPassword &&
+                registerData.contrasenia !== confirmPassword && (
+                  <p className="text-red-500 text-sm">
+                    Las contraseñas no coinciden
+                  </p>
+                )}
+
               <input
                 type="text"
                 placeholder="Número de celular (opcional)"
@@ -506,7 +498,11 @@ const handleActivateUser = async () => {
                 <button
                   className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition cursor-pointer flex items-center justify-center gap-2"
                   type="submit"
-                  disabled={loading || (!!confirmPassword && registerData.contrasenia !== confirmPassword)}
+                  disabled={
+                    loading ||
+                    (!!confirmPassword &&
+                      registerData.contrasenia !== confirmPassword)
+                  }
                 >
                   {loading && <ImSpinner8 className="animate-spin" />}{" "}
                   {loading ? "Procesando..." : "Registrar"}
@@ -537,7 +533,7 @@ const handleActivateUser = async () => {
             <form onSubmit={handleResetPassword} className="space-y-4">
               <div className="relative">
                 <input
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Nueva contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -549,7 +545,11 @@ const handleActivateUser = async () => {
                   className="absolute right-3 bottom-3 text-gray-500 hover:text-gray-700 cursor-pointer"
                   onClick={togglePasswordVisibility}
                 >
-                  {showPassword ? <IoEyeSharp size={20} /> : <FaEyeSlash size={20} />}
+                  {showPassword ? (
+                    <IoEyeSharp size={20} />
+                  ) : (
+                    <FaEyeSlash size={20} />
+                  )}
                 </button>
               </div>
               <div className="flex justify-center gap-4 pt-4">

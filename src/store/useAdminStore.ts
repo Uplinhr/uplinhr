@@ -20,7 +20,7 @@ interface AdminState {
   selectedPlan: Plan | null;
   loading: boolean;
   error: string | null;
-
+  
   fetchUsers: () => Promise<void>;
   selectUser: (id: number) => Promise<void>;
   fetchCreditos: () => Promise<void>;
@@ -80,7 +80,17 @@ interface AdminState {
       rol: string;
     }
   ) => Promise<void>;
-
+  editUser: (
+  id: number,
+  body: {
+    nombre: string;
+    apellido: string;
+    email: string;
+    active: boolean;
+    rol:string;
+    id_plan: number | null;
+  }
+) => Promise<void>;
   resetPassword: (id: number, contrasenia: string) => Promise<void>;
   activateUser: (id: number) => Promise<void>;
 }
@@ -268,4 +278,35 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al activar usuario", loading: false });
     }
   },
+
+  editUser: async (
+  id: number,
+  body: {
+    nombre: string;
+    apellido: string;
+    email: string;
+    active: boolean;
+    rol: string;
+    id_plan: number | null;
+  }
+) => {
+  set({ loading: true, error: null });
+  try {
+    const updatedUser = await adminService.editUser(id, body);
+
+    if (!updatedUser) {
+      throw new Error("No se pudo actualizar el usuario");
+    }
+
+    const users = get().users.map((u) =>
+      u.id === id ? updatedUser : u
+    );
+
+    set({ users, selectedUser: updatedUser, loading: false });
+  } catch (err) {
+    console.error(err);
+    set({ error: "Error al editar usuario", loading: false });
+  }
+},
+
 }));
