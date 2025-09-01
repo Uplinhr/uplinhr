@@ -4,9 +4,8 @@ import AdminDashboard from "@/views/dashboard/AdminDashboard";
 
 const AdminPage = () => {
   return (
-     <ProtectedRoute>
-   
-       <AdminDashboard />
+    <ProtectedRoute>
+      <AdminDashboard />
     </ProtectedRoute>
   );
 };

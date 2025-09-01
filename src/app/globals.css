@@ -5,3 +5,14 @@
 body {
   font-family: var(--font-poppins), sans-serif;
 }
+
+select option {
+  color: #6d4098;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+select option:checked {
+  background: #6d4098 !important;
+  color: #ffffff !important;
+}

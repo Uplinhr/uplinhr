@@ -38,6 +38,17 @@ export const upcomingWebinars: Webinar[] =  [/* {
     link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
     
   },
+  {
+    id: "5",
+    tipo: "en vivo",
+    titulo: "Del ritual vacío al offboarding inteligente",
+    dirigidoPor: "Ivonne Camacho",
+    fecha: "Jueves 4 de septiembre | 19:00 HS ARG",
+    imagenes: ["/imgIvonne.png"],
+    
+    link: "https://app.uplinhr.com/inscripcion-offboarding-inteligente",
+    
+  },
 ]
 
 export const recordedWebinars: Webinar[] = [
@@ -78,4 +89,17 @@ export const recordedWebinars: Webinar[] = [
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
     link: "#",
   }, */
+  /*
+  {
+    id: "5",
+    tipo: "grabado",
+     titulo: "Del ritual vacío al offboarding inteligente",
+    dirigidoPor: "Ivonne Camacho",
+    fecha: "Jueves 4 de septiembre | 19:00 HS ARG",
+    imagenes: ["/imgIvonne.png"],
+    
+    link: "#",
+    
+  },
+  */ 
 ]

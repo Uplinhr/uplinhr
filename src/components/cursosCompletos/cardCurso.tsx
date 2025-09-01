@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CardCursoProps } from "@/interfaces";
+import { CardCursoProps } from "@/interfaces/index";
 
 export const CardCurso = ({
   bannerImg,
@@ -36,14 +36,19 @@ export const CardCurso = ({
           </div>
 
           <div className="flex items-center gap-2 mb-3 mt-4">
-            <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-white flex-shrink-0">
-              <Image
-                src={imgPersona}
-                alt={direccion}
-                fill
-                className="object-cover bg-white"
-              />
-            </div>
+            {imgPersona.map((img, index) => (
+              <div
+                key={index}
+                className="relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-white flex-shrink-0"
+              >
+                <Image
+                  src={img}
+                  alt={`${direccion}-${index}`}
+                  fill
+                  className="object-cover bg-white"
+                />
+              </div>
+            ))}
           </div>
 
           <a href={link} className="block w-full mt-auto">

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
@@ -20,15 +20,20 @@ const Login = () => {
     clearError();
     try {
       await login({ email, contrasenia: password });
-      if (user?.rol === 'admin') {
-        router.push('/dashboard/admin');
-      } else {
-        router.push('/dashboard/user');
-      }
     } catch (err) {
       console.error(err);
     }
   };
+
+  useEffect(() => {
+    if (user?.rol) {
+      if (user.rol === 'admin') {
+        router.push('/dashboard/admin');
+      } else {
+        router.push('/dashboard/user');
+      }
+    }
+  }, [user, router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[#6D4098] to-[#502B7D]">

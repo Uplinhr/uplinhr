@@ -57,7 +57,7 @@ export interface CardCursoProps {
   titulo: string;
   descripcion: string;
   direccion: string;
-  imgPersona: string;
+  imgPersona: string[];
   link: string;
 }
 
@@ -72,34 +72,67 @@ export interface Vacante {
   area: string
 }
 export interface Plan {
-  id: number | null;
-  nombre: string | null;
-  precio: number | null;
-  horas_cons: number | null;
-  meses_cred: number | null;
-  creditos_mes: number | null;
+  id?: number;
+  nombre: string;
+  creditos_mes: number;
+  meses_cred: number;
+  horas_cons: number;
+  precio: string;
+  custom: boolean;
+  active?: boolean;
+  fecha_alta?: string;
+  ultima_mod?: string;
 }
 
 export interface Creditos {
   id: number | null;
-  cantidad: number | null;
   vencimiento: string | null;
   tipo_credito: string | null;
+  cantidad: number | null;
+  fecha_alta: string | null;
+  id_usuario: number | null;
 }
 
 export interface Consultorias {
   id: number | null;
-  vencimiento: string | null;
+  fecha_alta?: string | null;
   horas_totales: number | null;
   horas_restantes: number | null;
-  fecha_asignacion: string | null;
+  vencimiento: string | null;
+  id_usuario?: number | null;
+}
+export interface Busqueda {
+  id: number;
+  fecha_alta: string | null;
+  ultima_mod: string | null;
+  info_busqueda: string | null;
+  creditos_usados: number | null;
+  observaciones: string | null;
+  estado: string | null;
+  id_cred: number | null;
+  id_tipo: number | null;
+  id_proceso: number | null;
 }
 
 export interface Empresa {
   id: number | null;
-  email: string | null;
-  nombre: string | null;
+  nombre: string;
+  nombre_fantasia: string;
+  cuit: string;
+  condicion_iva: string;
+  tipo_societario: string;
+  actividad_principal: string;
+  domicilio_legal_calle_numero: string;
+  domicilio_legal_ciudad: string;
+  domicilio_legal_pais: string;
+  codigo_postal: string;
+  email: string;
+  active: boolean;
+  fecha_alta: string | null;
+  ultima_mod: string | null;
+  id_usuario: number;
 }
+
 
 export interface User {
   id: number;
@@ -107,13 +140,14 @@ export interface User {
   apellido: string;
   email: string;
   rol: string;
-  estado?: string;
+  active?: boolean;
   fecha_alta?: string;
   id_plan?: number | null;
   plan?: Plan;
   creditos?: Creditos[];
   consultorias?: Consultorias;
   empresas?: Empresa;
+  num_celular?: string;
 }
 
 export interface LoginRequest {

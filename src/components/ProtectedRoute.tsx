@@ -13,14 +13,15 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAuthenticated || !token || !user || user.estado === 'inactivo') {
+    if (!isAuthenticated || !token || !user || !user.active) {
       router.push('/login');
-    } else {
-      if (user.rol === 'admin') {
-        router.push('/dashboard/admin');
-      } else if (user.rol === 'user') {
-        router.push('/dashboard/user');
-      }
+      return;
+    }
+
+    if (user.rol === 'admin') {
+      router.push('/dashboard/admin');
+    } else if (user.rol === 'user') {
+      router.push('/dashboard/user');
     }
   }, [isAuthenticated, token, user, router]);
 
