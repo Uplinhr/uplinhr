@@ -18,9 +18,10 @@ interface AdminState {
   planes: Plan[];
   empresas: Empresa[];
   selectedPlan: Plan | null;
+  selectedEmpresa: Empresa | null;
   loading: boolean;
   error: string | null;
-  
+
   fetchUsers: () => Promise<void>;
   selectUser: (id: number) => Promise<void>;
   fetchCreditos: () => Promise<void>;
@@ -28,7 +29,7 @@ interface AdminState {
   fetchBusquedas: () => Promise<void>;
   fetchPlanes: () => Promise<void>;
   selectPlan: (id: number) => Promise<void>;
-
+  selectEmpresa: (id: number) => Promise<void>;
   createPlan: (body: {
     nombre: string;
     creditos_mes: number;
@@ -52,11 +53,35 @@ interface AdminState {
   ) => Promise<void>;
 
   fetchEmpresas: () => Promise<void>;
+  createEmpresa: (body: {
+    nombre: string;
+    email: string;
+    nombre_fantasia: string;
+    cuit: string;
+    condicion_iva: string;
+    tipo_societario: string;
+    actividad_principal: string;
+    domicilio_legal_calle_numero: string;
+    domicilio_legal_ciudad: string;
+    domicilio_legal_pais: string;
+    codigo_postal: string;
+    id_usuario: number;
+  }) => Promise<void>;
+
   editEmpresa: (
     id: number,
     body: {
       nombre: string;
       email: string;
+      nombre_fantasia: string;
+      cuit: string;
+      condicion_iva: string;
+      tipo_societario: string;
+      actividad_principal: string;
+      domicilio_legal_calle_numero: string;
+      domicilio_legal_ciudad: string;
+      domicilio_legal_pais: string;
+      codigo_postal: string;
       active: boolean;
       id_usuario: number;
     }
@@ -81,16 +106,16 @@ interface AdminState {
     }
   ) => Promise<void>;
   editUser: (
-  id: number,
-  body: {
-    nombre: string;
-    apellido: string;
-    email: string;
-    active: boolean;
-    rol:string;
-    id_plan: number | null;
-  }
-) => Promise<void>;
+    id: number,
+    body: {
+      nombre: string;
+      apellido: string;
+      email: string;
+      active: boolean;
+      rol: string;
+      id_plan: number | null;
+    }
+  ) => Promise<void>;
   resetPassword: (id: number, contrasenia: string) => Promise<void>;
   activateUser: (id: number) => Promise<void>;
 }
@@ -104,6 +129,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   planes: [],
   empresas: [],
   selectedPlan: null,
+  selectedEmpresa: null,
   loading: false,
   error: null,
 
@@ -207,31 +233,6 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  fetchEmpresas: async () => {
-    set({ loading: true, error: null });
-    try {
-      const empresas = await adminService.getEmpresas();
-      set({ empresas, loading: false });
-    } catch (err) {
-      console.error(err);
-      set({ error: "Error al cargar empresas", loading: false });
-    }
-  },
-
-  editEmpresa: async (id, body) => {
-    set({ loading: true, error: null });
-    try {
-      const empresaActualizada = await adminService.editEmpresa(id, body);
-      const empresas = get().empresas.map((e) =>
-        e.id === id ? empresaActualizada : e
-      );
-      set({ empresas, loading: false });
-    } catch (err) {
-      console.error(err);
-      set({ error: "Error al editar empresa", loading: false });
-    }
-  },
-
   registerUser: async (body) => {
     set({ loading: true, error: null });
     try {
@@ -280,33 +281,89 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   },
 
   editUser: async (
-  id: number,
-  body: {
-    nombre: string;
-    apellido: string;
-    email: string;
-    active: boolean;
-    rol: string;
-    id_plan: number | null;
-  }
-) => {
-  set({ loading: true, error: null });
-  try {
-    const updatedUser = await adminService.editUser(id, body);
-
-    if (!updatedUser) {
-      throw new Error("No se pudo actualizar el usuario");
+    id: number,
+    body: {
+      nombre: string;
+      apellido: string;
+      email: string;
+      active: boolean;
+      rol: string;
+      id_plan: number | null;
     }
+  ) => {
+    set({ loading: true, error: null });
+    try {
+      const updatedUser = await adminService.editUser(id, body);
 
-    const users = get().users.map((u) =>
-      u.id === id ? updatedUser : u
-    );
+      if (!updatedUser) {
+        throw new Error("No se pudo actualizar el usuario");
+      }
 
-    set({ users, selectedUser: updatedUser, loading: false });
-  } catch (err) {
-    console.error(err);
-    set({ error: "Error al editar usuario", loading: false });
-  }
-},
+      const users = get().users.map((u) => (u.id === id ? updatedUser : u));
 
+      set({ users, selectedUser: updatedUser, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al editar usuario", loading: false });
+    }
+  },
+
+  fetchEmpresas: async () => {
+    set({ loading: true, error: null });
+    try {
+      const empresas = await adminService.getEmpresas();
+      set({ empresas, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al cargar empresas", loading: false });
+    }
+  },
+  createEmpresa: async (body: {
+    nombre: string;
+    email: string;
+    nombre_fantasia: string;
+    cuit: string;
+    condicion_iva: string;
+    tipo_societario: string;
+    actividad_principal: string;
+    domicilio_legal_calle_numero: string;
+    domicilio_legal_ciudad: string;
+    domicilio_legal_pais: string;
+    codigo_postal: string;
+    id_usuario: number;
+  }) => {
+    set({ loading: true, error: null });
+    try {
+      const newEmpresa = await adminService.crearEmpresa(body);
+      set({ empresas: [...get().empresas, newEmpresa], loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al crear empresa", loading: false });
+    }
+  },
+
+  selectEmpresa: async (id: number) => {
+    set({ loading: true, error: null });
+    try {
+      const empresa = await adminService.getEmpresaById(id);
+      set({ selectedEmpresa: empresa, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al cargar empresa", loading: false });
+    }
+  },
+
+  editEmpresa: async (id, body) => {
+    set({ loading: true, error: null });
+    try {
+      const empresaActualizada = await adminService.editEmpresa(id, body);
+      const empresas = get().empresas.map((e) =>
+        e.id === id ? empresaActualizada : e
+      );
+      set({ empresas, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al editar empresa", loading: false });
+    }
+  },
 }));

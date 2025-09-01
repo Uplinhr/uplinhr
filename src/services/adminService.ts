@@ -184,61 +184,6 @@ export const getPlanes = async (): Promise<Plan[]> => {
   }
 };
 
-export const getEmpresas = async (): Promise<Empresa[]> => {
-  try {
-    const token = getToken();
-    const res = await fetch(`${API_URL}/api/empresas/`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!res.ok) throw new Error("Error al obtener empresas");
-
-    const data: { success: boolean; message: string; data: Empresa[] } =
-      await res.json();
-    return data.data;
-  } catch (error) {
-    console.error("Error en getEmpresas:", error);
-    throw error;
-  }
-};
-
-export const editEmpresa = async (
-  id: number,
-  body: {
-    nombre: string;
-    email: string;
-    active: boolean;
-    id_usuario: number;
-  }
-): Promise<Empresa> => {
-  try {
-    const token = getToken();
-    const res = await fetch(`${API_URL}/api/empresas/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        ...body,
-        active: body.active ? 1 : 0,
-      }),
-    });
-
-    if (!res.ok) throw new Error("Error al editar empresa");
-
-    const data: { success: boolean; message: string; data: Empresa } =
-      await res.json();
-    return data.data;
-  } catch (error) {
-    console.error("Error en editEmpresa:", error);
-    throw error;
-  }
-};
-
 export const registerUser = async (body: {
   nombre: string;
   apellido: string;
@@ -431,3 +376,120 @@ export const editPlan = async (
     throw error;
   }
 };
+
+export const crearEmpresa = async (body: {
+  nombre: string;
+  email: string;
+  nombre_fantasia: string;
+  cuit: string;
+  condicion_iva: string;
+  tipo_societario: string;
+  actividad_principal: string;
+  domicilio_legal_calle_numero: string;
+  domicilio_legal_ciudad: string;
+  domicilio_legal_pais: string;
+  codigo_postal: string;
+  id_usuario: number;
+}): Promise<Empresa> => {
+  const token = getToken();
+  const res = await fetch(`${API_URL}/api/empresas`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) throw new Error("Error al crear la empresa");
+
+  const data: { success: boolean; message: string; data: Empresa } =
+    await res.json();
+  return data.data;
+};
+
+export const editEmpresa = async (
+  id: number,
+  body: {
+    nombre: string;
+    email: string;
+    nombre_fantasia: string;
+    cuit: string;
+    condicion_iva: string;
+    tipo_societario: string;
+    actividad_principal: string;
+    domicilio_legal_calle_numero: string;
+    domicilio_legal_ciudad: string;
+    domicilio_legal_pais: string;
+    codigo_postal: string;
+    active: boolean;
+    id_usuario: number;
+  }
+): Promise<Empresa> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/empresas/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        ...body,
+        active: body.active ? 1 : 0,
+      }),
+    });
+
+    if (!res.ok) throw new Error("Error al editar empresa");
+
+    const data: { success: boolean; message: string; data: Empresa } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en editEmpresa:", error);
+    throw error;
+  }
+};
+
+export const getEmpresas = async (): Promise<Empresa[]> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/empresas/`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener empresas");
+
+    const data: { success: boolean; message: string; data: Empresa[] } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getEmpresas:", error);
+    throw error;
+  }
+};
+
+export const getEmpresaById = async (id: number): Promise<Empresa> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/empresas/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener empresa");
+
+    const data: { success: boolean; message: string; data: Empresa } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getEmpresaById:", error);
+    throw error;
+  }
+};
+

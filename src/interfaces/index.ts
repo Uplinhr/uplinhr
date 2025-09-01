@@ -116,13 +116,23 @@ export interface Busqueda {
 
 export interface Empresa {
   id: number | null;
-  nombre: string | null;
-  email: string | null;
-  active: boolean;        
+  nombre: string;
+  nombre_fantasia: string;
+  cuit: string;
+  condicion_iva: string;
+  tipo_societario: string;
+  actividad_principal: string;
+  domicilio_legal_calle_numero: string;
+  domicilio_legal_ciudad: string;
+  domicilio_legal_pais: string;
+  codigo_postal: string;
+  email: string;
+  active: boolean;
   fecha_alta: string | null;
   ultima_mod: string | null;
-  id_usuario: number | null;
+  id_usuario: number;
 }
+
 
 export interface User {
   id: number;
