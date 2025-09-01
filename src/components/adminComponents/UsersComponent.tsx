@@ -324,6 +324,7 @@ export default function UsersComponent() {
                     className="w-full border rounded-md px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white"
                     size={5}
                   >
+                    <option value="">Sin plan</option>
                     {planes.map((plan) => (
                       <option key={plan.id} value={plan.id?.toString()}>
                         {plan.nombre}
