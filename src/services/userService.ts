@@ -6,6 +6,11 @@ export interface ConsultaRequest {
   id_consultoria: number;
 }
 
+export interface BusquedaRequest {
+  info_busqueda: string;
+  id_cred: number;
+}
+
 const getToken = (): string => {
   if (typeof window !== "undefined") {
     try {
@@ -21,7 +26,6 @@ const getToken = (): string => {
   }
   return "";
 };
-
 
 export const createConsulta = async (body: ConsultaRequest) => {
   try {
@@ -46,13 +50,33 @@ export const createConsulta = async (body: ConsultaRequest) => {
   }
 };
 
-export interface EditarClaveRequest {
-  contrasenia: string;
-}
+export const createBusqueda = async (body: BusquedaRequest) => {
+  try {
+    const token = getToken();
+    const response = await fetch(`${API_URL}/api/busquedas`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error en la solicitud de búsqueda");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error en createBusqueda:", error);
+    throw error;
+  }
+};
 
 export interface EditPasswordRequest {
   contrasenia: string;
 }
+
 export const editarClave = async (id: number, body: EditPasswordRequest) => {
   try {
     const token = getToken();
