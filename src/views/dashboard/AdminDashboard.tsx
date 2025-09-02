@@ -6,6 +6,8 @@ import Administradores from "@/components/adminComponents/AdminsComponent";
 import Empresas from "@/components/adminComponents/EmpresaComponent";
 import Planes from "@/components/adminComponents/PlansComponent";
 import Solicitudes from "@/components/adminComponents/SolicitudesComponent";
+import Inicio from "@/components/adminComponents/Inicio";
+import Consultoria from "@/components/adminComponents/ConsultoriaComponent";
 import { useAuthStore } from "@/store/useAuthStore";
 
 const AdminDashboard = () => {
@@ -15,6 +17,8 @@ const AdminDashboard = () => {
 
   const renderComponent = () => {
     switch (selected) {
+      case "Inicio":
+        return <Inicio/>;
       case "Usuarios":
         return <Usuarios/>;
       case "Administradores":
@@ -25,17 +29,21 @@ const AdminDashboard = () => {
         return <Planes />;
       case "Solicitudes":
         return <Solicitudes />;
+      case "Consultoria":
+        return <Consultoria />;
       default:
-        return <Usuarios />;
+        return <Inicio />;
     }
   };
 
   const menuItems = [
+    "Inicio",
     "Usuarios",
     "Administradores",
     "Empresas",
     "Planes",
     "Solicitudes",
+    "Consultoria",
   ];
 
   return (

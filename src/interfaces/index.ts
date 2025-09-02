@@ -93,13 +93,24 @@ export interface Creditos {
   id_usuario: number | null;
 }
 
-export interface Consultorias {
-  id: number | null;
-  fecha_alta?: string | null;
-  horas_totales: number | null;
-  horas_restantes: number | null;
-  vencimiento: string | null;
-  id_usuario?: number | null;
+export interface Consultoria {
+  id: number;
+  fecha_alta: string;       
+  horas_totales: number;
+  horas_restantes: number;
+  vencimiento: string;      
+  id_usuario: number;
+  consultas: Consulta[];
+}
+export interface Consulta {
+  id: number;
+  fecha_alta: string;    
+  ultima_mod: string;       
+  cantidad_horas: number;
+  id_consultoria: number;
+  estado: string;
+  comentarios: string;
+  observaciones: string | null;
 }
 export interface Busqueda {
   id: number;
@@ -145,7 +156,7 @@ export interface User {
   id_plan?: number | null;
   plan?: Plan;
   creditos?: Creditos[];
-  consultorias?: Consultorias;
+  consultorias?: Consultoria;
   empresas?: Empresa;
   num_celular?: string;
 }
@@ -175,4 +186,9 @@ export interface AuthState {
   login: (credentials: LoginRequest) => Promise<void>;
   logout: () => void;
   clearError: () => void;
+}
+
+export interface RenovarPlan {
+  id_plan: number,
+  id_usuario: number
 }

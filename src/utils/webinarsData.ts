@@ -26,7 +26,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     fecha: "Jueves 21 de agosto | 19:00 HORA ARG",
     imagenes: ["/ImgKarry.png"],
     link: "https://app.uplinhr.com/inscripcion-datos-humanidad",
-  },*/
+  },
   {
     id: "4",
     tipo: "en vivo",
@@ -37,7 +37,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     
     link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
     
-  },
+  },*/
   {
     id: "5",
     tipo: "en vivo",
@@ -79,7 +79,7 @@ export const recordedWebinars: Webinar[] = [
     imagenes: ["/ImgKarry.png"],
     link: "https://app.uplinhr.com/registro-charla-gratis-datos-con-humanidad",
   },
-  /*
+  
   {
     id: "4",
     tipo: "grabado",
@@ -87,8 +87,8 @@ export const recordedWebinars: Webinar[] = [
     dirigidoPor: "Sol Y Sandri",
     fecha: "Disponible",
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
-    link: "#",
-  }, */
+    link: "https://app.uplinhr.com/registro-charla-gratis-crea-area-rh",
+  }, 
   /*
   {
     id: "5",
