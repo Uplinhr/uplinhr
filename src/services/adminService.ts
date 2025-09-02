@@ -1,10 +1,12 @@
 import {
   User,
   Creditos,
-  Consultorias,
+  Consultoria,
+  Consulta,
   Busqueda,
   Plan,
   Empresa,
+  RenovarPlan,
 } from "@/interfaces";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -100,27 +102,6 @@ export const editUser = async (
   }
 };
 
-export const getConsultorias = async (): Promise<Consultorias[]> => {
-  try {
-    const token = getToken();
-    const res = await fetch(`${API_URL}/api/consultorias/`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-
-    if (!res.ok) throw new Error("Error al obtener consultorías");
-
-    const data: { success: boolean; message: string; data: Consultorias[] } =
-      await res.json();
-    return data.data;
-  } catch (error) {
-    console.error("Error en getConsultorias:", error);
-    throw error;
-  }
-};
-
 export const getBusquedas = async (): Promise<Busqueda[]> => {
   try {
     const token = getToken();
@@ -142,6 +123,78 @@ export const getBusquedas = async (): Promise<Busqueda[]> => {
   }
 };
 
+export const getBusquedaById = async (id: number): Promise<Busqueda | null> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/busqueda/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener busqueda");
+
+    const data: { success: boolean; message: string; data: Busqueda } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getbusquedaById:", error);
+    throw error;
+  }
+};
+
+export const editBusqueda = async (
+  id: number,
+  body: {
+    info_busqueda: string;
+    creditos_usados: number;
+    observaciones: string;
+    estado: string;
+    id_cred: number;
+  }
+): Promise<Busqueda> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/busquedas/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error("Error al editar la busqueda");
+
+    const data: { success: boolean; message: string; data: Busqueda } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en editBusqueda:", error);
+    throw error;
+  }
+};
+export const deleteBusqueda = async (id: number): Promise<void> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/busquedas/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al eliminar la búsqueda");
+
+    const data: { success: boolean; message: string; data: null } = await res.json();
+    if (!data.success) throw new Error("No se pudo eliminar la búsqueda");
+  } catch (error) {
+    console.error("Error en deleteBusqueda:", error);
+    throw error;
+  }
+};
 export const getCreditos = async (): Promise<Creditos[]> => {
   try {
     const token = getToken();
@@ -351,7 +404,7 @@ export const editPlan = async (
     meses_cred: number;
     horas_cons: number;
     precio: string;
-    active: boolean; 
+    active: boolean;
     custom: boolean;
   }
 ): Promise<Plan> => {
@@ -489,6 +542,143 @@ export const getEmpresaById = async (id: number): Promise<Empresa> => {
     return data.data;
   } catch (error) {
     console.error("Error en getEmpresaById:", error);
+    throw error;
+  }
+};
+
+export const getConsultas = async (): Promise<Consulta[]> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/consultas`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener consultas");
+
+    const data: { success: boolean; message: string; data: Consulta[] } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getConsultas:", error);
+    throw error;
+  }
+};
+export const getConsultaById = async (id: number): Promise<Consulta | null> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/consultas/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener la consulta");
+
+    const data: { success: boolean; message: string; data: Consulta } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getConsultaById:", error);
+    throw error;
+  }
+};
+
+export const editConsulta = async (
+  id: number,
+  body: {
+    cantidad_horas: number;
+    observaciones: string;
+    estado: string;
+    id_consultoria: number;
+  }
+): Promise<Consulta> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/consultas/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error("Error al editar la consulta");
+
+    const data: { success: boolean; message: string; data: Consulta } =
+     await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en editConsulta:", error);
+    throw error;
+  }
+};
+export const deleteConsulta = async (id: number): Promise<void> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/consultas/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al eliminar la consulta");
+
+    const data: { success: boolean; message: string; data: null } = await res.json();
+    if (!data.success) throw new Error("No se pudo eliminar la consulta");
+  } catch (error) {
+    console.error("Error en deleteConsulta:", error);
+    throw error;
+  }
+};
+
+export const getConsultorias = async (): Promise<Consultoria[]> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/consultorias`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener consultorías");
+
+    const data: { success: boolean; message: string; data: Consultoria[] } =
+      await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getConsultorias:", error);
+    throw error;
+  }
+};
+export const renovarPlan = async (body: RenovarPlan) => {
+  try {
+    const token = getToken();
+    const response = await fetch(`${API_URL}/api/planes/renew`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Error en renovar el plane");
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error en renovarPlan:", error);
     throw error;
   }
 };

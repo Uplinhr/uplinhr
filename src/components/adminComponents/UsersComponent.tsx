@@ -1,28 +1,39 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { FaSearch, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaSearch,
+  FaUserCircle,
+  FaBars,
+  FaTimes,
+  FaEyeSlash,
+  FaSyncAlt,
+} from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { useAdminStore } from "@/store/useAdminStore";
 import { toast } from "sonner";
 import { IoEyeSharp } from "react-icons/io5";
-import { FaEyeSlash } from "react-icons/fa";
 
 export default function UsersComponent() {
   const {
     users,
     selectedUser,
     creditos,
+    consultas,
+    busquedas,
     planes,
     fetchUsers,
     fetchCreditos,
     fetchPlanes,
+    fetchConsultas,
+    fetchBusquedas,
     selectUser,
     registerUser,
     resetPassword,
     deleteUser,
     activateUser,
     editUser,
+    renovarPlan,
   } = useAdminStore();
 
   const [search, setSearch] = useState("");
@@ -35,6 +46,7 @@ export default function UsersComponent() {
   const [loading, setLoading] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showRenewModal, setShowRenewModal] = useState(false);
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -59,7 +71,9 @@ export default function UsersComponent() {
     fetchUsers();
     fetchCreditos();
     fetchPlanes();
-  }, [fetchUsers, fetchCreditos, fetchPlanes]);
+    fetchConsultas();
+    fetchBusquedas();
+  }, [fetchUsers, fetchCreditos, fetchPlanes, fetchConsultas, fetchBusquedas]);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -67,12 +81,22 @@ export default function UsersComponent() {
 
   useEffect(() => {
     const anyModal =
-      showEditModal || showRegisterModal || showResetModal || showDeleteModal;
+      showEditModal ||
+      showRegisterModal ||
+      showResetModal ||
+      showDeleteModal ||
+      showRenewModal;
     document.body.style.overflow = anyModal ? "hidden" : "unset";
     return () => {
       document.body.style.overflow = "unset";
     };
-  }, [showEditModal, showRegisterModal, showResetModal, showDeleteModal]);
+  }, [
+    showEditModal,
+    showRegisterModal,
+    showResetModal,
+    showDeleteModal,
+    showRenewModal,
+  ]);
 
   useEffect(() => {
     if (selectedUser && showEditModal) {
@@ -149,7 +173,6 @@ export default function UsersComponent() {
       await activateUser(selectedUser.id);
       await fetchUsers();
       setShowDeleteModal(false);
-      await fetchUsers();
       selectUser(selectedUser.id);
       toast.success("Usuario activado exitosamente");
     } catch (err) {
@@ -217,6 +240,26 @@ export default function UsersComponent() {
     } catch (err) {
       console.error(err);
       toast.error("Error al desactivar usuario");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRenewPlan = async () => {
+    if (!selectedUser?.plan?.id) return;
+    setLoading(true);
+    try {
+      await renovarPlan({
+        id_plan: selectedUser.plan.id,
+        id_usuario: selectedUser.id,
+      });
+      await fetchUsers();
+      selectUser(selectedUser.id);
+      toast.success("Plan renovado exitosamente");
+      setShowRenewModal(false);
+    } catch (err) {
+      console.error(err);
+      toast.error("Error al renovar el plan");
     } finally {
       setLoading(false);
     }
@@ -630,11 +673,57 @@ export default function UsersComponent() {
         </div>
       )}
 
+      {showRenewModal && selectedUser && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 font-poppins">
+          <div
+            className="absolute inset-0 bg-black opacity-40"
+            onClick={() => setShowRenewModal(false)}
+          ></div>
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg">
+            <button
+              onClick={() => setShowRenewModal(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+              disabled={loading}
+            >
+              <FaTimes size={20} />
+            </button>
+            <h3 className="text-xl font-semibold text-[#6d4098] mb-6 text-center">
+              Renovar plan
+            </h3>
+            <p className="text-gray-600 mb-4 text-center">
+              Esta acción renovará el plan al usuario <br />
+              <span className="font-semibold">
+                {selectedUser.nombre} {selectedUser.apellido}
+              </span>
+            </p>
+            <div className="flex justify-center gap-4 pt-4">
+              <button
+                type="button"
+                onClick={() => setShowRenewModal(false)}
+                className="bg-gray-300 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-400 transition cursor-pointer"
+                disabled={loading}
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleRenewPlan}
+                disabled={loading}
+                className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition cursor-pointer flex items-center justify-center gap-2"
+              >
+                {loading && <ImSpinner8 className="animate-spin" />}{" "}
+                {loading ? "Procesando..." : "Aceptar"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="lg:hidden flex justify-between items-center bg-[#6d4098] text-white p-3 rounded-md">
         <span>Lista de usuarios</span>
         <button onClick={() => setShowUserList(!showUserList)}>
           {showUserList ? <FaTimes /> : <FaBars />}
         </button>
+        
       </div>
 
       {(showUserList || !selectedUser) && (
@@ -642,6 +731,12 @@ export default function UsersComponent() {
           <p className="hidden lg:block text-[#6d4098] text-center w-[60%] rounded-md font-semibold py-1 mx-auto px-2 mb-4 text-sm">
             Lista de usuarios
           </p>
+          <button
+            className="mt-2 py-2 border border-[#6d4098] rounded-md text-white bg-[#6d4098] hover:bg-white mb-4 hover:text-[#6d4098] transition cursor-pointer"
+            onClick={handleRegisterClick}
+          >
+            Registrar un nuevo usuario
+          </button>
           <div className="relative mb-4">
             <FaSearch className="absolute left-3 top-3 text-gray-400" />
             <input
@@ -684,12 +779,6 @@ export default function UsersComponent() {
               </p>
             )}
           </div>
-          <button
-            className="mt-2 py-2 border border-[#6d4098] rounded-md text-white bg-[#6d4098] hover:bg-white hover:text-[#6d4098] transition cursor-pointer"
-            onClick={handleRegisterClick}
-          >
-            Registrar un nuevo usuario
-          </button>
         </div>
       )}
 
@@ -741,17 +830,27 @@ export default function UsersComponent() {
             </div>
           </div>
           <div className="w-full lg:w-3/4 lg:pl-6 flex flex-col">
-            <p className="text-sm text-gray-600">
-              {selectedUser.plan?.nombre || "Sin plan"}
-            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-600">
+              <p>{selectedUser.plan?.nombre || "Sin plan"}</p>
+              {selectedUser.plan && (
+                <button
+                  onClick={() => setShowRenewModal(true)}
+                  className="text-[#6d4098] hover:text-[#4a2d6f] cursor-pointer"
+                  title="Renovar plan"
+                >
+                  <FaSyncAlt />
+                </button>
+              )}
+            </div>
             <h2 className="text-xl font-semibold text-[#6d4098] mb-4">
               {selectedUser.empresas?.nombre || "Nombre de la Empresa"}
             </h2>
-            <div className="mb-4 flex-1 flex flex-col">
+            {/* Créditos */}
+            <div className="mb-4">
               <div className="bg-[#6d4098] text-white px-4 py-2 rounded-t-md w-full">
-                <p>Créditos</p>
+                Créditos
               </div>
-              <div className="mt-2 space-y-3 border border-gray-200 rounded-b-md p-3 bg-gray-50">
+              <div className="mt-2 border border-gray-200 rounded-b-md p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
                 {creditos
                   .filter((c) => c.id_usuario === selectedUser.id)
                   .map((credito, index) => (
@@ -779,7 +878,7 @@ export default function UsersComponent() {
                         className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
                         onClick={() => console.log("Ver consumo:", credito)}
                       >
-                        Ver Consumo
+                        Ver más detalle
                       </button>
                     </div>
                   ))}
@@ -791,6 +890,105 @@ export default function UsersComponent() {
                 )}
               </div>
             </div>
+
+            {/* Consultas */}
+            <div className="flex flex-col mb-4">
+              <div className="bg-[#6d4098] text-white px-4 py-2 rounded-t-md w-full">
+                Consultas
+              </div>
+              <div className="mt-2 border border-gray-200 rounded-b-md p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
+                {consultas.map((c, i) => (
+                  <div
+                    key={i}
+                    className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
+                  >
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">FECHA</p>
+                        <p>{c.fecha_alta.split("T")[0]}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          CANTIDAD HORAS
+                        </p>
+                        <p>{c.cantidad_horas} hs</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">ESTADO</p>
+                        <p>{c.estado}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          COMENTARIOS
+                        </p>
+                        <p>{c.comentarios || "—"}</p>
+                      </div>
+                    </div>
+                    <button
+                      className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
+                      onClick={() => console.log("Ver más detalle:", c)}
+                    >
+                      Ver más detalle
+                    </button>
+                  </div>
+                ))}
+                {consultas.length === 0 && (
+                  <div className="text-center text-gray-400 italic py-4">
+                    No hay consultas registradas
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Búsquedas */}
+            <div className="flex flex-col">
+              <div className="bg-[#6d4098] text-white px-4 py-2 rounded-t-md w-full">
+                Búsquedas
+              </div>
+              <div className="mt-2 border border-gray-200 rounded-b-md p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
+                {busquedas.map((b, i) => (
+                  <div
+                    key={i}
+                    className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
+                  >
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">FECHA</p>
+                        <p>{b.fecha_alta ? b.fecha_alta.split("T")[0] : "—"}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          INFORMACIÓN
+                        </p>
+                        <p>{b.info_busqueda || "—"}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          CRÉDITOS USADOS
+                        </p>
+                        <p>{b.creditos_usados ?? 0}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">ESTADO</p>
+                        <p>{b.estado || "—"}</p>
+                      </div>
+                    </div>
+                    <button
+                      className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
+                      onClick={() => console.log("Ver más detalle:", b)}
+                    >
+                      Ver más detalle
+                    </button>
+                  </div>
+                ))}
+                {busquedas.length === 0 && (
+                  <div className="text-center text-gray-400 italic py-4">
+                    No hay búsquedas registradas
+                  </div>
+                )}
+              </div>
+            </div>
+            
           </div>
         </div>
       ) : (

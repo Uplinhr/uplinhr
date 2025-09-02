@@ -39,11 +39,13 @@ export const createConsulta = async (body: ConsultaRequest) => {
       body: JSON.stringify(body),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error("Error en la solicitud de consulta");
+      throw new Error(data.message || "Error en la solicitud de consulta");
     }
 
-    return await response.json();
+    return data;
   } catch (error) {
     console.error("Error en createConsulta:", error);
     throw error;
@@ -62,11 +64,13 @@ export const createBusqueda = async (body: BusquedaRequest) => {
       body: JSON.stringify(body),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error("Error en la solicitud de búsqueda");
+      throw new Error(data.message || "Error en la solicitud de búsqueda");
     }
 
-    return await response.json();
+    return data;
   } catch (error) {
     console.error("Error en createBusqueda:", error);
     throw error;
@@ -89,11 +93,13 @@ export const editarClave = async (id: number, body: EditPasswordRequest) => {
       body: JSON.stringify(body),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error("Error al cambiar la contraseña");
+      throw new Error(data.message || "Error al cambiar la contraseña");
     }
 
-    return await response.json();
+    return data;
   } catch (error) {
     console.error("Error en editarClave:", error);
     throw error;

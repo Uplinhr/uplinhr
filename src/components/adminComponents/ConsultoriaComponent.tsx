@@ -2,23 +2,22 @@
 
 import React, { useEffect, useState } from "react";
 import { useAdminStore } from "@/store/useAdminStore";
-import { Busqueda } from "@/interfaces";
+import { Consulta } from "@/interfaces";
 import { FaTimes, FaTrash } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar } from "react-icons/fi";
 
-export default function SolicitudesComponent() {
-  const { fetchBusquedas, editBusqueda, deleteBusqueda, busquedas } = useAdminStore();
+export default function Consultoria() {
+  const { fetchConsultas, editConsulta, deleteConsulta, consultas } = useAdminStore();
 
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [busquedaData, setBusquedaData] = useState({
-    info_busqueda: "",
-    creditos_usados: 0,
+  const [consultaData, setConsultaData] = useState({
+    cantidad_horas: 0,
     observaciones: "",
     estado: "Pendiente",
-    id_cred: 0,
+    id_consultoria: 0,
   });
   const [loading, setLoading] = useState(false);
 
@@ -26,33 +25,33 @@ export default function SolicitudesComponent() {
   const [filtroEstado, setFiltroEstado] = useState<typeof estados[number]>("Pendiente");
 
   useEffect(() => {
-    fetchBusquedas();
-  }, [fetchBusquedas]);
+    fetchConsultas();
+  }, [fetchConsultas]);
 
-   useEffect(() => {
-      if (showEditModal) {
-        document.body.classList.add("overflow-hidden");
-      } else {
-        document.body.classList.remove("overflow-hidden");
-      }
-      return () => document.body.classList.remove("overflow-hidden");
-    }, [showEditModal]);
-    
-  const toggleExpand = (id: number) => {
+ 
+ useEffect(() => {
+    if (showEditModal) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [showEditModal]);
+  
+   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
   };
-
+  
   const openEditModal = (id: number) => {
-    const busqueda = busquedas.find((b) => b.id === id);
-    if (!busqueda) return;
+    const consulta = consultas.find((c: Consulta) => c.id === id);
+    if (!consulta) return;
 
     setSelectedId(id);
-    setBusquedaData({
-      info_busqueda: busqueda.info_busqueda || "",
-      creditos_usados: busqueda.creditos_usados || 0,
-      observaciones: busqueda.observaciones || "",
-      estado: busqueda.estado || "Pendiente",
-      id_cred: busqueda.id_cred || 0,
+    setConsultaData({
+      cantidad_horas: consulta.cantidad_horas || 0,
+      observaciones: consulta.observaciones || "",
+      estado: consulta.estado || "Pendiente",
+      id_consultoria: consulta.id_consultoria || 0,
     });
 
     setShowEditModal(true);
@@ -64,11 +63,11 @@ export default function SolicitudesComponent() {
 
     setLoading(true);
     try {
-      await editBusqueda(selectedId, busquedaData);
+      await editConsulta(selectedId, consultaData);
       setShowEditModal(false);
-      fetchBusquedas();
+      fetchConsultas();
     } catch (error) {
-      console.error("Error al editar búsqueda:", error);
+      console.error("Error al editar consulta:", error);
     } finally {
       setLoading(false);
     }
@@ -77,21 +76,21 @@ export default function SolicitudesComponent() {
   const handleEliminar = async (id: number) => {
     setLoading(true);
     try {
-      await deleteBusqueda(id);
-      fetchBusquedas();
+      await deleteConsulta(id);
+      fetchConsultas();
     } catch (error) {
-      console.error("Error al eliminar búsqueda:", error);
+      console.error("Error al eliminar consulta:", error);
     } finally {
       setLoading(false);
     }
   };
 
-  const filteredBusquedas = busquedas?.filter((b) => b?.estado === filtroEstado);
+  const filteredConsultas = consultas?.filter((c: Consulta) => c?.estado === filtroEstado);
 
   return (
     <div className="p-6 font-poppins">
       <h1 className="text-xl md:text-2xl text-center font-bold text-white bg-[#6d4098] p-3 md:p-4 rounded-lg mb-4 md:mb-6">
-        Solicitudes de búsqueda
+        Solicitudes de consultoría
       </h1>
 
       <div className="flex justify-center gap-4 mb-6 flex-wrap">
@@ -111,27 +110,27 @@ export default function SolicitudesComponent() {
       </div>
 
       <div className="space-y-4">
-        {filteredBusquedas.length > 0 ? (
-          filteredBusquedas.map((busqueda: Busqueda) => (
+        {filteredConsultas.length > 0 ? (
+          filteredConsultas.map((consulta: Consulta) => (
             <div
-              key={busqueda.id}
+              key={consulta.id}
               className="border border-[#6d4098] rounded-xl shadow-md overflow-hidden"
             >
-              <div className="flex items-center justify-between bg-gray-100 px-4 py-2 cursor-pointer">
+              <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
                 <span className="text-[#6d4098] font-semibold">
-                  Solicitud de búsqueda número: {busqueda.id}
+                  Solicitud de consultoría número: {consulta.id}
                 </span>
                 <div className="flex items-center gap-3">
                   <button className="flex items-center gap-1 bg-[#6d4098] text-white px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-105">
                     <FiCalendar /> Agendar reunión
                   </button>
 
-                  {busqueda.estado !== "Eliminado" && (
+                  {consulta.estado !== "Eliminado" && (
                     <>
-                      {busqueda.estado === "Finalizado" ? (
+                      {consulta.estado === "Finalizado" ? (
                         <button
                           className="flex items-center gap-1 text-red-500 px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-110"
-                          onClick={() => handleEliminar(busqueda.id)}
+                          onClick={() => handleEliminar(consulta.id)}
                         >
                           <FaTrash />
                         </button>
@@ -139,7 +138,7 @@ export default function SolicitudesComponent() {
                         <FiEdit
                           className="cursor-pointer text-gray-700 transition-transform transform hover:scale-110"
                           size={20}
-                          onClick={() => openEditModal(busqueda.id)}
+                          onClick={() => openEditModal(consulta.id)}
                         />
                       )}
                     </>
@@ -148,33 +147,30 @@ export default function SolicitudesComponent() {
                   <FiChevronDown
                     className="cursor-pointer text-gray-700 transition-transform transform hover:scale-110"
                     size={20}
-                    onClick={() => toggleExpand(busqueda.id)}
+                    onClick={() => toggleExpand(consulta.id)}
                   />
                 </div>
               </div>
 
-              {expandedId === busqueda.id && (
+              {expandedId === consulta.id && (
                 <div className="p-4 bg-white space-y-2">
                   <p>
-                    <strong>Info búsqueda:</strong> {busqueda.info_busqueda}
+                    <strong>Cantidad de horas:</strong> {consulta.cantidad_horas}
                   </p>
                   <p>
-                    <strong>Créditos usados:</strong> {busqueda.creditos_usados}
+                    <strong>Observaciones:</strong> {consulta.observaciones}
                   </p>
                   <p>
-                    <strong>Observaciones:</strong> {busqueda.observaciones}
+                    <strong>Estado:</strong> {consulta.estado}
                   </p>
                   <p>
-                    <strong>Estado:</strong> {busqueda.estado}
+                    <strong>ID consultoría:</strong> {consulta.id_consultoria}
                   </p>
                   <p>
-                    <strong>ID crédito:</strong> {busqueda.id_cred}
+                    <strong>Fecha alta:</strong> {consulta.fecha_alta}
                   </p>
                   <p>
-                    <strong>Fecha alta:</strong> {busqueda.fecha_alta}
-                  </p>
-                  <p>
-                    <strong>Última modificación:</strong> {busqueda.ultima_mod}
+                    <strong>Última modificación:</strong> {consulta.ultima_mod}
                   </p>
                 </div>
               )}
@@ -189,9 +185,9 @@ export default function SolicitudesComponent() {
 
       {showEditModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
-          <div className="absolute inset-0 bg-black opacity-40 pointer-events-auto"></div>
+          <div className="absolute inset-0 bg-black opacity-40"></div>
 
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg pointer-events-auto">
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg">
             <button
               onClick={() => setShowEditModal(false)}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform transform hover:scale-110"
@@ -200,42 +196,24 @@ export default function SolicitudesComponent() {
               <FaTimes size={20} />
             </button>
             <h3 className="text-xl font-semibold text-[#6d4098] mb-6 text-center">
-              Editar búsqueda
+              Editar consulta
             </h3>
 
             <form onSubmit={handleEditSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Comentarios
-                </label>
-                <input
-                  type="text"
-                  value={busquedaData.info_busqueda}
-                  onChange={(e) =>
-                    setBusquedaData({
-                      ...busquedaData,
-                      info_busqueda: e.target.value,
-                    })
-                  }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 transition-transform transform hover:scale-105"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Créditos Usados
+                  Cantidad de horas
                 </label>
                 <input
                   type="number"
-                  value={busquedaData.creditos_usados}
+                  value={consultaData.cantidad_horas}
                   onChange={(e) =>
-                    setBusquedaData({
-                      ...busquedaData,
-                      creditos_usados: Number(e.target.value),
+                    setConsultaData({
+                      ...consultaData,
+                      cantidad_horas: Number(e.target.value),
                     })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 transition-transform transform hover:scale-105"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600"
                   required
                 />
               </div>
@@ -246,14 +224,14 @@ export default function SolicitudesComponent() {
                 </label>
                 <input
                   type="text"
-                  value={busquedaData.observaciones}
+                  value={consultaData.observaciones}
                   onChange={(e) =>
-                    setBusquedaData({
-                      ...busquedaData,
+                    setConsultaData({
+                      ...consultaData,
                       observaciones: e.target.value,
                     })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 transition-transform transform hover:scale-105"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600"
                 />
               </div>
 
@@ -262,11 +240,11 @@ export default function SolicitudesComponent() {
                   Estado
                 </label>
                 <select
-                  value={busquedaData.estado}
+                  value={consultaData.estado}
                   onChange={(e) =>
-                    setBusquedaData({ ...busquedaData, estado: e.target.value })
+                    setConsultaData({ ...consultaData, estado: e.target.value })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 transition-transform transform hover:scale-105"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600 cursor-pointer"
                 >
                   {estados.map((estado) => (
                     <option key={estado} value={estado}>
@@ -280,13 +258,13 @@ export default function SolicitudesComponent() {
                 <button
                   type="button"
                   onClick={() => setShowEditModal(false)}
-                  className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition-transform transform hover:scale-105 cursor-pointer"
+                  className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition cursor-pointer"
                   disabled={loading}
                 >
                   Cancelar
                 </button>
                 <button
-                  className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-transform transform hover:scale-105 cursor-pointer flex items-center justify-center gap-2"
+                  className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition cursor-pointer flex items-center justify-center gap-2"
                   type="submit"
                   disabled={loading}
                 >
