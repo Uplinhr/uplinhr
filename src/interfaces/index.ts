@@ -91,6 +91,7 @@ export interface Creditos {
   cantidad: number | null;
   fecha_alta: string | null;
   id_usuario: number | null;
+  busquedas?: Busqueda[];
 }
 
 export interface Consultoria {
@@ -156,7 +157,7 @@ export interface User {
   id_plan?: number | null;
   plan?: Plan;
   creditos?: Creditos[];
-  consultorias?: Consultoria;
+  consultorias?: Consultoria[];
   empresas?: Empresa;
   num_celular?: string;
 }
@@ -191,4 +192,12 @@ export interface AuthState {
 export interface RenovarPlan {
   id_plan: number,
   id_usuario: number
+}
+export interface compraCreditos{
+  medio_pago:string,
+  costo: number,
+  observaciones:string,
+  cantidad:number,
+  vencimiento:string,
+  id_usuario:number
 }

@@ -7,6 +7,7 @@ import {
   Plan,
   Empresa,
   RenovarPlan,
+  compraCreditos,
 } from "@/interfaces";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -683,3 +684,27 @@ export const renovarPlan = async (body: RenovarPlan) => {
   }
 };
 
+export const comprarCreditos = async (body: {
+  medio_pago:string,
+  costo: number,
+  observaciones:string,
+  cantidad:number,
+  vencimiento:string,
+  id_usuario:number
+}): Promise<compraCreditos> => {
+  const token = getToken();
+  const res = await fetch(`${API_URL}/api/compra_creditos`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!res.ok) throw new Error("Error al comprar el crédito");
+
+  const data: { success: boolean; message: string; data: compraCreditos } =
+    await res.json();
+  return data.data;
+};

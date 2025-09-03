@@ -11,14 +11,14 @@ import Consultoria from "@/components/adminComponents/ConsultoriaComponent";
 import { useAuthStore } from "@/store/useAuthStore";
 
 const AdminDashboard = () => {
-  const [selected, setSelected] = useState("Usuarios");
+  const [selected, setSelected] = useState("Inicio");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user } = useAuthStore();
 
   const renderComponent = () => {
     switch (selected) {
       case "Inicio":
-        return <Inicio/>;
+       return <Inicio setSelected={setSelected} setMobileMenuOpen={setMobileMenuOpen} />;
       case "Usuarios":
         return <Usuarios/>;
       case "Administradores":
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
       case "Consultoria":
         return <Consultoria />;
       default:
-        return <Inicio />;
+        return <Inicio setSelected={setSelected} setMobileMenuOpen={setMobileMenuOpen} />;
     }
   };
 
