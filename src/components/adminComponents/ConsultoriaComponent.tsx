@@ -202,7 +202,7 @@ export default function Consultoria() {
             <form onSubmit={handleEditSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Cantidad de horas
+                  Cantidad de horas <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"
@@ -237,7 +237,7 @@ export default function Consultoria() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Estado
+                  Estado <span className="text-red-500">*</span>
                 </label>
                 <select
                   value={consultaData.estado}

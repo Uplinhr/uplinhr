@@ -26,7 +26,6 @@ const formatDate = (dateString?: string) => {
 const UserDashboard = () => {
   const { user } = useAuthStore();
   const { cambiarClave, postConsulta, postBusqueda } = useUserStore();
-
   const [isModalPasswordOpen, setIsModalPasswordOpen] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -69,7 +68,7 @@ const UserDashboard = () => {
       toast.error("Debes ingresar una cantidad de horas válida");
       return;
     }
-    if (!user?.consultorias?.id) {
+    if (!user?.consultorias?.[0]?.id) {
       toast.error("No se encontró la consultoría del usuario");
       return;
     }
@@ -77,7 +76,7 @@ const UserDashboard = () => {
     const body: ConsultaRequest = {
       cantidad_horas: cantidadHoras,
       comentarios,
-      id_consultoria: user.consultorias.id,
+      id_consultoria: user.consultorias?.[0]?.id,
     };
 
     try {
@@ -188,7 +187,7 @@ const UserDashboard = () => {
             
             <p className="text-lg font-semibold">
               
-              {user?.consultorias?.horas_restantes || 0} horas
+              {user?.consultorias?.[0]?.horas_restantes || 0} horas
             </p>
           </div>
         </motion.div>
@@ -250,13 +249,13 @@ const UserDashboard = () => {
             
             <p className="text-lg font-semibold">
               
-              {user?.consultorias?.horas_restantes || 0} horas
+              {user?.consultorias?.[0]?.horas_restantes || 0} horas
             </p>
             <p className="text-sm text-gray-600 mt-1">
               
               Vence: {" "}
-              {user?.consultorias?.vencimiento
-                ? formatDate(user.consultorias.vencimiento)
+              {user?.consultorias?.[0]?.vencimiento
+                ? formatDate(user.consultorias?.[0]?.vencimiento)
                 : "-"}
             </p>
           </div>

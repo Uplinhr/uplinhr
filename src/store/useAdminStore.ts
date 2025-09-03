@@ -8,6 +8,7 @@ import {
   Consulta,
   Consultoria,
   RenovarPlan,
+  compraCreditos,
 } from "@/interfaces";
 import * as adminService from "@/services/adminService";
 
@@ -20,6 +21,7 @@ interface AdminState {
   planes: Plan[];
   empresas: Empresa[];
   consultas: Consulta[];
+  compraCreditos: compraCreditos | null;
   selectedConsulta: Consulta | null;
   consultorias: Consultoria[];
   selectedPlan: Plan | null;
@@ -31,13 +33,13 @@ interface AdminState {
   selectUser: (id: number) => Promise<void>;
   fetchCreditos: () => Promise<void>;
   fetchBusquedas: () => Promise<void>;
-  selectBusqueda:(id:number)=>Promise<void>;
+  selectBusqueda: (id: number) => Promise<void>;
   deleteBusqueda: (id: number) => Promise<void>;
   fetchPlanes: () => Promise<void>;
   selectPlan: (id: number) => Promise<void>;
   selectEmpresa: (id: number) => Promise<void>;
   fetchConsultas: () => Promise<void>;
-  selectConsulta:(id:number)=>Promise<void>;
+  selectConsulta: (id: number) => Promise<void>;
   deleteConsulta: (id: number) => Promise<void>;
   fetchConsultorias: () => Promise<void>;
   createPlan: (body: {
@@ -61,27 +63,27 @@ interface AdminState {
       custom: boolean;
     }
   ) => Promise<void>;
-  
+
   renovarPlan: (body: RenovarPlan) => Promise<void>;
 
   editBusqueda: (
     id: number,
     body: {
-    info_busqueda: string;
-    creditos_usados: number;
-    observaciones: string;
-    estado: string;
-    id_cred: number;
+      info_busqueda: string;
+      creditos_usados: number;
+      observaciones: string;
+      estado: string;
+      id_cred: number;
     }
   ) => Promise<void>;
 
   editConsulta: (
-    id:number,
+    id: number,
     body: {
-    cantidad_horas: number;
-    observaciones: string;
-    estado: string;
-    id_consultoria: number;
+      cantidad_horas: number;
+      observaciones: string;
+      estado: string;
+      id_consultoria: number;
     }
   ) => Promise<void>;
 
@@ -149,6 +151,15 @@ interface AdminState {
       id_plan: number | null;
     }
   ) => Promise<void>;
+  comprarCreditos: (body: {
+    medio_pago: string;
+    costo: number;
+    observaciones: string;
+    cantidad: number;
+    vencimiento: string;
+    id_usuario: number;
+  }) => Promise<void>;
+
   resetPassword: (id: number, contrasenia: string) => Promise<void>;
   activateUser: (id: number) => Promise<void>;
 }
@@ -166,6 +177,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   consultas: [],
   selectedConsulta: null,
   consultorias: [],
+  compraCreditos: null,
   loading: false,
   error: null,
 
@@ -212,7 +224,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al cargar búsquedas", loading: false });
     }
   },
- selectBusqueda: async (id: number) => {
+  selectBusqueda: async (id: number) => {
     set({ loading: true, error: null });
     try {
       const busqueda = await adminService.getBusquedaById(id);
@@ -227,7 +239,9 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       const updatedBusqueda = await adminService.editBusqueda(id, body);
-      const busquedas = get().busquedas.map((p) => (p.id === id ? updatedBusqueda : p));
+      const busquedas = get().busquedas.map((p) =>
+        p.id === id ? updatedBusqueda : p
+      );
       set({ busquedas, loading: false });
     } catch (err) {
       console.error(err);
@@ -236,16 +250,16 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   },
 
   deleteBusqueda: async (id: number) => {
-  set({ loading: true, error: null });
-  try {
-    await adminService.deleteBusqueda(id);
-    const busquedas = get().busquedas.filter((b) => b.id !== id);
-    set({ busquedas, loading: false });
-  } catch (err) {
-    console.error(err);
-    set({ error: "Error al eliminar la búsqueda", loading: false });
-  }
-},
+    set({ loading: true, error: null });
+    try {
+      await adminService.deleteBusqueda(id);
+      const busquedas = get().busquedas.filter((b) => b.id !== id);
+      set({ busquedas, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al eliminar la búsqueda", loading: false });
+    }
+  },
   fetchPlanes: async () => {
     set({ loading: true, error: null });
     try {
@@ -435,7 +449,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al cargar consultas", loading: false });
     }
   },
-   selectConsulta: async (id: number) => {
+  selectConsulta: async (id: number) => {
     set({ loading: true, error: null });
     try {
       const consulta = await adminService.getConsultaById(id);
@@ -450,7 +464,9 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       const updatedConsulta = await adminService.editConsulta(id, body);
-      const consultas = get().consultas.map((p) => (p.id === id ? updatedConsulta : p));
+      const consultas = get().consultas.map((p) =>
+        p.id === id ? updatedConsulta : p
+      );
       set({ consultas, loading: false });
     } catch (err) {
       console.error(err);
@@ -459,16 +475,16 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   },
 
   deleteConsulta: async (id: number) => {
-  set({ loading: true, error: null });
-  try {
-    await adminService.deleteConsulta(id);
-    const consultas = get().consultas.filter((b) => b.id !== id);
-    set({ consultas, loading: false });
-  } catch (err) {
-    console.error(err);
-    set({ error: "Error al eliminar la consulta", loading: false });
-  }
-},
+    set({ loading: true, error: null });
+    try {
+      await adminService.deleteConsulta(id);
+      const consultas = get().consultas.filter((b) => b.id !== id);
+      set({ consultas, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al eliminar la consulta", loading: false });
+    }
+  },
   fetchConsultorias: async () => {
     set({ loading: true, error: null });
     try {
@@ -495,5 +511,15 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al renovar el plan", loading: false });
     }
   },
-}));
 
+  comprarCreditos: async (body) => {
+  set({ loading: true, error: null });
+  try {
+    const compra = await adminService.comprarCreditos(body);
+    set({ compraCreditos: compra, loading: false });
+  } catch (err) {
+    console.error(err);
+    set({ error: "Error al comprar créditos", loading: false });
+  }
+},
+}));

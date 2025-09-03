@@ -224,7 +224,7 @@ export default function SolicitudesComponent() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Créditos Usados
+                  Créditos Usados <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"
@@ -259,7 +259,7 @@ export default function SolicitudesComponent() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Estado
+                  Estado <span className="text-red-500">*</span>
                 </label>
                 <select
                   value={busquedaData.estado}

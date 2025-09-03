@@ -13,20 +13,15 @@ import { ImSpinner8 } from "react-icons/im";
 import { useAdminStore } from "@/store/useAdminStore";
 import { toast } from "sonner";
 import { IoEyeSharp } from "react-icons/io5";
+import { Consulta, Busqueda, Creditos } from "@/interfaces";
 
 export default function UsersComponent() {
   const {
     users,
     selectedUser,
-    creditos,
-    consultas,
-    busquedas,
     planes,
     fetchUsers,
-    fetchCreditos,
     fetchPlanes,
-    fetchConsultas,
-    fetchBusquedas,
     selectUser,
     registerUser,
     resetPassword,
@@ -34,6 +29,7 @@ export default function UsersComponent() {
     activateUser,
     editUser,
     renovarPlan,
+    comprarCreditos,
   } = useAdminStore();
 
   const [search, setSearch] = useState("");
@@ -47,7 +43,9 @@ export default function UsersComponent() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showRenewModal, setShowRenewModal] = useState(false);
-
+  const [selectedCredito, setSelectedCredito] = useState<Creditos | null>(null);
+  const [selectedBusqueda, setSelectedBusqueda] = useState<Busqueda | null>(null);
+  const [selectedConsulta, setSelectedConsulta] = useState<Consulta | null>(null);
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -65,15 +63,51 @@ export default function UsersComponent() {
     num_celular: "",
   });
 
+  const userConsultas: Consulta[] = [];
+  if (selectedUser?.consultorias) {
+    selectedUser.consultorias.forEach((c) => {
+      if (c.consultas) {
+        userConsultas.push(...c.consultas);
+      }
+    });
+  }
+
+  const userBusquedas: Busqueda[] = [];
+  if (selectedUser?.creditos) {
+    selectedUser.creditos.forEach((c) => {
+      if (c.busquedas) {
+        userBusquedas.push(...c.busquedas);
+      }
+    });
+  }
+  const [showCompraModal, setShowCompraModal] = useState(false);
+  const [formCompra, setFormCompra] = useState({
+    medio_pago: "",
+    costo: 0,
+    observaciones: "",
+    cantidad: 0,
+    vencimiento: "",
+  });
+
+  const userCreditos: Creditos[] = selectedUser?.creditos
+    ? [...selectedUser.creditos]
+    : [];
+
   const [password, setPassword] = useState("");
+
+  const openCreditoModal = (c: Creditos) => setSelectedCredito(c);
+  const closeCreditoModal = () => setSelectedCredito(null);
+
+  const openBusquedaModal = (b: Busqueda) => setSelectedBusqueda(b);
+  const closeBusquedaModal = () => setSelectedBusqueda(null);
+
+  const openConsultaModal = (c: Consulta) => setSelectedConsulta(c);
+  const closeConsultaModal = () => setSelectedConsulta(null);
 
   useEffect(() => {
     fetchUsers();
-    fetchCreditos();
     fetchPlanes();
-    fetchConsultas();
-    fetchBusquedas();
-  }, [fetchUsers, fetchCreditos, fetchPlanes, fetchConsultas, fetchBusquedas]);
+  }, [fetchUsers, fetchPlanes]);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -85,7 +119,10 @@ export default function UsersComponent() {
       showRegisterModal ||
       showResetModal ||
       showDeleteModal ||
-      showRenewModal;
+      showRenewModal ||
+      selectedCredito !== null ||
+      selectedBusqueda !== null ||
+      selectedConsulta !== null;
     document.body.style.overflow = anyModal ? "hidden" : "unset";
     return () => {
       document.body.style.overflow = "unset";
@@ -96,6 +133,9 @@ export default function UsersComponent() {
     showResetModal,
     showDeleteModal,
     showRenewModal,
+    selectedCredito,
+    selectedBusqueda,
+    selectedConsulta,
   ]);
 
   useEffect(() => {
@@ -264,6 +304,50 @@ export default function UsersComponent() {
       setLoading(false);
     }
   };
+  const handleCompraClick = () => {
+    if (!selectedUser) return;
+    setShowCompraModal(true);
+  };
+  const handleInputChangeCompraCredito = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+) => {
+  const { name, value } = e.target;
+  setFormCompra({
+    ...formCompra,
+    [name] : name === "costo" || name === "cantidad" ? Number(value) : value,
+  });
+};
+
+
+  const handleCompraSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedUser) return;
+    setLoading(true);
+    try {
+      await comprarCreditos({
+        ...formCompra,
+        id_usuario: selectedUser.id,
+      });
+
+      await selectUser(selectedUser.id);
+
+      toast.success("Créditos comprados exitosamente");
+      setShowCompraModal(false);
+
+      setFormCompra({
+        medio_pago: "",
+        costo: 0,
+        observaciones: "",
+        cantidad: 0,
+        vencimiento: "",
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al comprar créditos");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredUsers = users
     .filter((u) => u.rol === "cliente")
@@ -279,6 +363,7 @@ export default function UsersComponent() {
 
   return (
     <div className="min-h-[90%] flex flex-col lg:flex-row gap-4 mb-8 font-poppins">
+      {/* MODALES. PERDON X TANTO CODIGO :() */}
       {showEditModal && selectedUser && (
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4 font-poppins">
           <div
@@ -700,7 +785,7 @@ export default function UsersComponent() {
               <button
                 type="button"
                 onClick={() => setShowRenewModal(false)}
-                className="bg-gray-300 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-400 transition cursor-pointer"
+                className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition cursor-pointer"
                 disabled={loading}
               >
                 Cancelar
@@ -718,12 +803,258 @@ export default function UsersComponent() {
         </div>
       )}
 
+      {selectedCredito && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 font-poppins">
+          <div
+            className="absolute inset-0 bg-black opacity-40"
+            onClick={closeCreditoModal}
+          ></div>
+
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg">
+            <button
+              onClick={closeCreditoModal}
+              className="absolute top-3 right-3 text-gray-500 hover:text-red-500 cursor-pointer"
+            >
+              <FaTimes size={20} />
+            </button>
+
+            <h3 className="text-xl font-semibold text-[#6d4098] mb-6 text-center">
+              Detalle Crédito {selectedCredito.id}
+            </h3>
+
+            <div className="space-y-2 text-gray-700 text-sm">
+              <p>
+                <strong>Cantidad:</strong> {selectedCredito.cantidad}
+              </p>
+              <p>
+                <strong>Fecha Alta:</strong>{" "}
+                {selectedCredito.fecha_alta?.split(/T| /)[0] ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Fecha Vencimiento:</strong>{" "}
+                {selectedCredito.vencimiento?.split(/T| /)[0] ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Tipo Crédito:</strong> {selectedCredito.tipo_credito}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedBusqueda && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 font-poppins">
+          <div
+            className="absolute inset-0 bg-black opacity-40"
+            onClick={closeBusquedaModal}
+          ></div>
+
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg">
+            <button
+              onClick={closeBusquedaModal}
+              className="absolute top-3 right-3 text-gray-500 hover:text-red-500 cursor-pointer"
+            >
+              <FaTimes size={20} />
+            </button>
+
+            <h3 className="text-xl font-semibold text-[#6d4098] mb-6 text-center">
+              Detalle Búsqueda {selectedBusqueda.id}
+            </h3>
+
+            <div className="space-y-2 text-gray-700 text-sm">
+              <p>
+                <strong>Estado:</strong>{" "}
+                {selectedBusqueda.estado ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Fecha Alta:</strong>{" "}
+                {selectedBusqueda.fecha_alta?.split(/T| /)[0] ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Última Mod:</strong>{" "}
+                {selectedBusqueda.ultima_mod?.split(/T| /)[0] ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Info Búsqueda:</strong>{" "}
+                {selectedBusqueda.info_busqueda ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Observaciones:</strong>{" "}
+                {selectedBusqueda.observaciones ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Créditos Usados:</strong>{" "}
+                {selectedBusqueda.creditos_usados ?? "No hay datos"}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectedConsulta && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 font-poppins">
+          <div
+            className="absolute inset-0 bg-black opacity-40"
+            onClick={closeConsultaModal}
+          ></div>
+
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg">
+            <button
+              onClick={closeConsultaModal}
+              className="absolute top-3 right-3 text-gray-500 hover:text-red-500 cursor-pointer"
+            >
+              <FaTimes size={20} />
+            </button>
+
+            <h3 className="text-xl font-semibold text-[#6d4098] mb-6 text-center">
+              Detalle Consulta {selectedConsulta.id}
+            </h3>
+
+            <div className="space-y-2 text-gray-700 text-sm">
+              <p>
+                <strong>Estado:</strong>{" "}
+                {selectedConsulta.estado ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Fecha Alta:</strong>{" "}
+                {selectedConsulta.fecha_alta?.split(/T| /)[0] ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Última Mod:</strong>{" "}
+                {selectedConsulta.ultima_mod?.split(/T| /)[0] ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Comentarios:</strong>{" "}
+                {selectedConsulta.comentarios ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Observaciones:</strong>{" "}
+                {selectedConsulta.observaciones ?? "No hay datos"}
+              </p>
+              <p>
+                <strong>Cantidad Horas:</strong>{" "}
+                {selectedConsulta.cantidad_horas ?? "No hay datos"}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showCompraModal && selectedUser && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4 font-poppins">
+          <div
+            className="absolute inset-0 bg-black opacity-40"
+            onClick={() => setShowCompraModal(false)}
+          ></div>
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg">
+            <button
+              onClick={() => setShowCompraModal(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+              disabled={loading}
+            >
+              <FaTimes size={20} />
+            </button>
+            <h3 className="text-xl font-semibold text-[#6d4098] mb-6 text-center">
+              Comprar Créditos
+            </h3>
+            <form onSubmit={handleCompraSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Medio de Pago
+                </label>
+                <select
+                  name="medio_pago"
+                  value={formCompra.medio_pago}
+                  onChange={handleInputChangeCompraCredito}
+                  className="w-full border rounded-md px-3 py-2 text-gray-600"
+                  required
+                >
+                  <option value="">Selecciona un medio</option>
+                  <option value="tarjeta">Tarjeta</option>
+                  <option value="mercado pago">Mercado Pago</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Costo
+                </label>
+                <input
+                  type="number"
+                  name="costo"
+                  value={formCompra.costo}
+                  onChange={handleInputChangeCompraCredito}
+                  className="w-full border rounded-md px-3 py-2 text-gray-600"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Cantidad
+                </label>
+                <input
+                  type="number"
+                  name="cantidad"
+                  value={formCompra.cantidad}
+                  onChange={handleInputChangeCompraCredito}
+                  className="w-full border rounded-md px-3 py-2 text-gray-600"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Vencimiento
+                </label>
+                <input
+                  type="date"
+                  name="vencimiento"
+                  value={formCompra.vencimiento}
+                  onChange={handleInputChangeCompraCredito}
+                  className="w-full border rounded-md px-3 py-2 text-gray-600"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Observaciones
+                </label>
+                <textarea
+                  name="observaciones"
+                  value={formCompra.observaciones}
+                  onChange={handleInputChangeCompraCredito}
+                  className="w-full border rounded-md px-3 py-2 text-gray-600"
+                />
+              </div>
+
+              <div className="flex justify-center gap-4 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowCompraModal(false)}
+                  className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition cursor-pointer"
+                  disabled={loading}
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition cursor-pointer flex items-center justify-center gap-2"
+                >
+                  {loading && <ImSpinner8 className="animate-spin" />}
+                  {loading ? "Procesando..." : "Confirmar"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* RESTO DEL CODIGO */}
       <div className="lg:hidden flex justify-between items-center bg-[#6d4098] text-white p-3 rounded-md">
         <span>Lista de usuarios</span>
         <button onClick={() => setShowUserList(!showUserList)}>
           {showUserList ? <FaTimes /> : <FaBars />}
         </button>
-        
       </div>
 
       {(showUserList || !selectedUser) && (
@@ -827,6 +1158,12 @@ export default function UsersComponent() {
                   Activar usuario
                 </button>
               )}
+              <button
+                className="bg-green-100 text-green-700 py-1 rounded-md hover:bg-green-200 cursor-pointer"
+                onClick={handleCompraClick}
+              >
+                Comprar Crédito
+              </button>
             </div>
           </div>
           <div className="w-full lg:w-3/4 lg:pl-6 flex flex-col">
@@ -845,47 +1182,51 @@ export default function UsersComponent() {
             <h2 className="text-xl font-semibold text-[#6d4098] mb-4">
               {selectedUser.empresas?.nombre || "Nombre de la Empresa"}
             </h2>
+
             {/* Créditos */}
-            <div className="mb-4">
+            <div className="flex flex-col mb-4">
               <div className="bg-[#6d4098] text-white px-4 py-2 rounded-t-md w-full">
                 Créditos
               </div>
               <div className="mt-2 border border-gray-200 rounded-b-md p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
-                {creditos
-                  .filter((c) => c.id_usuario === selectedUser.id)
-                  .map((credito, index) => (
-                    <div
-                      key={index}
-                      className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
-                    >
-                      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">TIPO</p>
-                          <p className="font-medium">{credito.tipo_credito}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">CANTIDAD</p>
-                          <p>{credito.cantidad}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">
-                            FECHA DE VENCIMIENTO
-                          </p>
-                          <p>{credito.vencimiento?.split("T")[0]}</p>
-                        </div>
+                {userCreditos.map((c, i) => (
+                  <div
+                    key={i}
+                    className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
+                  >
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">FECHA ALTA</p>
+                        <p>{c.fecha_alta ? c.fecha_alta.split(" ")[0] : "—"}</p>
                       </div>
-                      <button
-                        className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
-                        onClick={() => console.log("Ver consumo:", credito)}
-                      >
-                        Ver más detalle
-                      </button>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          VENCIMIENTO
+                        </p>
+                        <p>
+                          {c.vencimiento ? c.vencimiento.split(" ")[0] : "—"}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">CANTIDAD</p>
+                        <p>{c.cantidad}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">TIPO</p>
+                        <p>{c.tipo_credito}</p>
+                      </div>
                     </div>
-                  ))}
-                {creditos.filter((c) => c.id_usuario === selectedUser.id)
-                  .length === 0 && (
+                    <button
+                      className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
+                      onClick={() => openCreditoModal(c)}
+                    >
+                      Ver más detalle
+                    </button>
+                  </div>
+                ))}
+                {userCreditos.length === 0 && (
                   <div className="text-center text-gray-400 italic py-4">
-                    Este usuario no tiene créditos
+                    No hay créditos registrados
                   </div>
                 )}
               </div>
@@ -897,15 +1238,15 @@ export default function UsersComponent() {
                 Consultas
               </div>
               <div className="mt-2 border border-gray-200 rounded-b-md p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
-                {consultas.map((c, i) => (
+                {userConsultas.map((c: Consulta, i: number) => (
                   <div
                     key={i}
                     className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
                   >
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
                       <div>
                         <p className="text-xs text-gray-500 mb-1">FECHA</p>
-                        <p>{c.fecha_alta.split("T")[0]}</p>
+                        <p>{c.fecha_alta.split(" ")[0]}</p>
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 mb-1">
@@ -917,22 +1258,16 @@ export default function UsersComponent() {
                         <p className="text-xs text-gray-500 mb-1">ESTADO</p>
                         <p>{c.estado}</p>
                       </div>
-                      <div>
-                        <p className="text-xs text-gray-500 mb-1">
-                          COMENTARIOS
-                        </p>
-                        <p>{c.comentarios || "—"}</p>
-                      </div>
                     </div>
                     <button
                       className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
-                      onClick={() => console.log("Ver más detalle:", c)}
+                      onClick={() => openConsultaModal(c)}
                     >
                       Ver más detalle
                     </button>
                   </div>
                 ))}
-                {consultas.length === 0 && (
+                {userConsultas.length === 0 && (
                   <div className="text-center text-gray-400 italic py-4">
                     No hay consultas registradas
                   </div>
@@ -946,49 +1281,44 @@ export default function UsersComponent() {
                 Búsquedas
               </div>
               <div className="mt-2 border border-gray-200 rounded-b-md p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
-                {busquedas.map((b, i) => (
+                {userBusquedas.map((b, i) => (
                   <div
                     key={i}
                     className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
                   >
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
                       <div>
                         <p className="text-xs text-gray-500 mb-1">FECHA</p>
-                        <p>{b.fecha_alta ? b.fecha_alta.split("T")[0] : "—"}</p>
-                      </div>
-                      <div>
-                        <p className="text-xs text-gray-500 mb-1">
-                          INFORMACIÓN
+                        <p>
+                          {b?.fecha_alta ? b?.fecha_alta.split(" ")[0] : "—"}
                         </p>
-                        <p>{b.info_busqueda || "—"}</p>
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 mb-1">
                           CRÉDITOS USADOS
                         </p>
-                        <p>{b.creditos_usados ?? 0}</p>
+                        <p>{b?.creditos_usados ?? 0}</p>
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 mb-1">ESTADO</p>
-                        <p>{b.estado || "—"}</p>
+                        <p>{b?.estado || "—"}</p>
                       </div>
                     </div>
                     <button
                       className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
-                      onClick={() => console.log("Ver más detalle:", b)}
+                      onClick={() => openBusquedaModal(b)}
                     >
                       Ver más detalle
                     </button>
                   </div>
                 ))}
-                {busquedas.length === 0 && (
+                {userBusquedas.length === 0 && (
                   <div className="text-center text-gray-400 italic py-4">
                     No hay búsquedas registradas
                   </div>
                 )}
               </div>
             </div>
-            
           </div>
         </div>
       ) : (
