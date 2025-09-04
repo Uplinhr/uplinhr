@@ -43,5 +43,5 @@ export const cursosCompletos = [
     direccion: "Dirigida por: Ivonne Camacho",
     imgPersona: ["/imgIvonne.png"],
     link: "/cursosCompletos/offboarding",
-  },
-]; */
+  },*/
+]; 
