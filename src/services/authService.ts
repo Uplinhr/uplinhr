@@ -34,3 +34,40 @@ export async function login({ email, contrasenia }: LoginRequest): Promise<Login
     throw new Error("Error desconocido al iniciar sesión");
   }
 }
+
+export async function forgotPassword(email: string) {
+  const response = await fetch(`${API_URL}/api/auth/forgotPassword`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Error al enviar correo");
+  return data;
+}
+
+export async function validateToken(token: string) {
+  const response = await fetch(`${API_URL}/api/auth/validateToken`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Token inválido");
+  return data; 
+}
+
+
+export async function resetPassword(token: string, contrasenia: string) {
+  const response = await fetch(`${API_URL}/api/auth/resetPassword`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ token, contrasenia }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.message || "Error al restablecer contraseña");
+  return data;
+}

@@ -178,6 +178,14 @@ export interface LoginResponse {
   data: LoginData;
 }
 
+export interface ValidateTokenResponse {
+  message: string;
+  statusCode: number;
+}
+export interface ResetPasswordResponse {
+  message: string;
+  statusCode: number;
+}
 export interface AuthState {
   user: User | null;
   token: string | null;
@@ -187,6 +195,10 @@ export interface AuthState {
   login: (credentials: LoginRequest) => Promise<void>;
   logout: () => void;
   clearError: () => void;
+  resetPassword: (token: string, password: string) => Promise<ResetPasswordResponse>;
+  validateToken: (token: string) => Promise<ValidateTokenResponse>;
+  forgotPassword: (email: string) => Promise<void>;
+
 }
 
 export interface RenovarPlan {

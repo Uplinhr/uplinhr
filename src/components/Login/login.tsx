@@ -4,15 +4,19 @@ import { motion } from 'framer-motion';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useRouter } from 'next/navigation';
 import { TbLoader2 } from 'react-icons/tb';
-import { FaEyeSlash } from 'react-icons/fa';
+import { FaEyeSlash, FaCheck } from 'react-icons/fa';
+import { IoMdClose } from 'react-icons/io';
 import { IoEyeSharp } from 'react-icons/io5';
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [forgotModalOpen, setForgotModalOpen] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [forgotLoading, setForgotLoading] = useState(false);
+  const [forgotSuccess, setForgotSuccess] = useState(false);
 
-  const { login, user, isLoading, error, clearError } = useAuthStore();
+  const { login, forgotPassword, user, isLoading, error, clearError } = useAuthStore();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,6 +26,20 @@ const Login = () => {
       await login({ email, contrasenia: password });
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleForgotSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setForgotLoading(true);
+    try {
+      await forgotPassword(forgotEmail);
+      setForgotSuccess(true);
+    } catch (err) {
+      console.error(err);
+      alert(err instanceof Error ? err.message : 'Error desconocido');
+    } finally {
+      setForgotLoading(false);
     }
   };
 
@@ -106,10 +124,59 @@ const Login = () => {
         </form>
 
         <div className="text-center mt-6">
-          <a href="#" className="text-white font-poppins font-normal hover:underline">
+          <button
+            onClick={() => setForgotModalOpen(true)}
+            className="text-white cursor-pointer font-poppins font-normal hover:underline"
+          >
             ¿Olvidaste tu contraseña?
-          </a>
+          </button>
         </div>
+
+        {forgotModalOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+            <div className="bg-white rounded-2xl p-6 w-full max-w-sm relative">
+              <button
+                className="absolute top-3 right-3 text-gray-500 hover:text-red-500 cursor-pointer"
+                onClick={() => { setForgotModalOpen(false); setForgotSuccess(false); setForgotEmail(''); }}
+              >
+                <IoMdClose size={24} />
+              </button>
+
+              {!forgotSuccess ? (
+                <>
+                  <h3 className="text-lg font-bold text-gray-800 mb-4 font-poppins">Escribe tu correo</h3>
+                  <form onSubmit={handleForgotSubmit} className="space-y-4">
+                    <input
+                      type="email"
+                      value={forgotEmail}
+                      onChange={e => setForgotEmail(e.target.value)}
+                      required
+                      placeholder="correo@ejemplo.com"
+                      className="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-[#502b7d]"
+                    />
+                    <div className="flex justify-center">
+                      <button
+                        type="submit"
+                        disabled={forgotLoading}
+                        className="bg-green-500 cursor-pointer hover:bg-green-600 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2"
+                      >
+                        {forgotLoading ? <TbLoader2 className="animate-spin w-5 h-5" /> : 'Cambiar contraseña'}
+                      </button>
+                    </div>
+                  </form>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-4 py-6">
+                  <FaCheck className="text-green-500 w-12 h-12" />
+                  <p className="text-gray-700 text-center">
+                    Revisa tu casilla de mail donde te hemos enviado la información. <br />
+                    Puede que llegue a la carpeta de “No deseado”.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
