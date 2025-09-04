@@ -90,7 +90,7 @@ export const recordedWebinars: Webinar[] = [
     link: "https://app.uplinhr.com/registro-charla-gratis-crea-area-rh",
   }, 
   
-  {
+/*   {
     id: "5",
     tipo: "grabado",
      titulo: "Del ritual vacío al offboarding inteligente",
@@ -100,6 +100,6 @@ export const recordedWebinars: Webinar[] = [
     
     link: "https://app.uplinhr.com/registro-charla-gratis-offboarding-inteligente",
     
-  },
+  }, */
   
 ]
