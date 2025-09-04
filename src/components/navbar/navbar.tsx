@@ -110,6 +110,6 @@ const Navbar = () => {
     </nav>
   );
 };
-/* ULTIMO CAMBIO.. USAR LA DE EL BLOC PARA EL DEPLOY FINAL */
+/* ULTIMO CAMBIO.. USAR LA DE EL BLOC PARA EL DEPLOY FINALL */
 
 export default Navbar;
