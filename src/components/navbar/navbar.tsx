@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
-
+/* ESTA NAVBAR ES PROVISORIA LUEGO PEGAR LO OTRO. ESTE COMMENT ES X DEPLOY */
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
