@@ -44,21 +44,22 @@ export default function UsersComponent() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showRenewModal, setShowRenewModal] = useState(false);
   const [selectedCredito, setSelectedCredito] = useState<Creditos | null>(null);
-  const [selectedBusqueda, setSelectedBusqueda] = useState<Busqueda | null>(
-    null
-  );
-  const [selectedConsulta, setSelectedConsulta] = useState<Consulta | null>(
-    null
-  );
+  const [selectedBusqueda, setSelectedBusqueda] = useState<Busqueda | null>(null);
+  const [selectedConsulta, setSelectedConsulta] = useState<Consulta | null>(null);
   const [password, setPassword] = useState("");
-
   const openCreditoModal = (c: Creditos) => setSelectedCredito(c);
   const closeCreditoModal = () => setSelectedCredito(null);
-
   const openBusquedaModal = (b: Busqueda) => setSelectedBusqueda(b);
   const closeBusquedaModal = () => setSelectedBusqueda(null);
-
   const openConsultaModal = (c: Consulta) => setSelectedConsulta(c);
+  const [showCompraModal, setShowCompraModal] = useState(false);
+  const [formCompra, setFormCompra] = useState({
+    medio_pago: "",
+    costo: 0,
+    observaciones: "",
+    cantidad: 0,
+    vencimiento: "",
+  });
   const closeConsultaModal = () => setSelectedConsulta(null);
   const [formData, setFormData] = useState({
     nombre: "",
@@ -68,14 +69,7 @@ export default function UsersComponent() {
     id_plan: "",
     email: "",
   });
-
-  const [registerData, setRegisterData] = useState({
-    nombre: "",
-    apellido: "",
-    email: "",
-    contrasenia: "",
-    num_celular: "",
-  });
+  const [registerData, setRegisterData] = useState({nombre: "",apellido: "",email: "", contrasenia: "",num_celular: "", });
 
   const userConsultas: Consulta[] = [];
 
@@ -92,14 +86,7 @@ if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
   });
 }
 
-  const [showCompraModal, setShowCompraModal] = useState(false);
-  const [formCompra, setFormCompra] = useState({
-    medio_pago: "",
-    costo: 0,
-    observaciones: "",
-    cantidad: 0,
-    vencimiento: "",
-  });
+
 
  const userCreditos: Creditos[] = selectedUser?.creditos && Array.isArray(selectedUser.creditos)
   ? [...selectedUser.creditos]

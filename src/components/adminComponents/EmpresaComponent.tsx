@@ -1,7 +1,8 @@
 'use client'
 import { useEffect, useState } from "react";
 import { useAdminStore } from "@/store/useAdminStore";
-import { FaSearch, FaEdit, FaFilter, FaTimes, FaBars, FaPlus, FaEye } from "react-icons/fa";
+import { FaSearch, FaEdit, FaFilter, FaTimes, FaBars, FaPlus, FaEye, FaSpinner } from "react-icons/fa";
+import { toast } from "sonner";
 import { Empresa } from "@/interfaces/index";
 
 const EmpresaComponent = () => {
@@ -31,7 +32,6 @@ const EmpresaComponent = () => {
   const [codigoPostal, setCodigoPostal] = useState("");
   const [idUsuario, setIdUsuario] = useState<number | null>(null);
   const [activeEdit, setActiveEdit] = useState(true);
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -44,17 +44,20 @@ const EmpresaComponent = () => {
     return () => { document.body.style.overflow = ""; };
   }, [showModalCrear, showModalEditar, showModalDetalles]);
 
-const filtered = empresas
-  .filter(e => e !== null && e !== undefined)
-  .filter(e => (e.nombre ?? "").toLowerCase().includes(search.toLowerCase()))
-  .filter(e => estado === "Todos" ? true : estado === "Activo" ? e.active : !e.active)
-  .sort((a, b) => {
-    if (a.active !== b.active) return a.active ? -1 : 1;
-    const dateA = a.fecha_alta ? new Date(a.fecha_alta).getTime() : 0;
-    const dateB = b.fecha_alta ? new Date(b.fecha_alta).getTime() : 0;
-    return orden === "asc" ? dateA - dateB : dateB - dateA;
-  });
+  const filtered = empresas
+    .filter(e => e !== null && e !== undefined)
+    .filter(e => (e.nombre ?? "").toLowerCase().includes(search.toLowerCase()))
+    .filter(e => estado === "Todos" ? true : estado === "Activo" ? e.active : !e.active)
+    .sort((a, b) => {
+      if (a.active !== b.active) return a.active ? -1 : 1;
+      const dateA = a.fecha_alta ? new Date(a.fecha_alta).getTime() : 0;
+      const dateB = b.fecha_alta ? new Date(b.fecha_alta).getTime() : 0;
+      return orden === "asc" ? dateA - dateB : dateB - dateA;
+    });
 
+  const usersWithoutCompany = users.filter(user => 
+    user.rol?.toLowerCase() === "cliente" && !empresas.some(emp => emp.id_usuario === user.id)
+  );
 
   const openCreateModal = () => {
     setIdEdit(null);
@@ -97,27 +100,32 @@ const filtered = empresas
   };
 
   const handleSubmitCrear = async () => {
-    if (!idUsuario) return;
+    if (!idUsuario) {
+      toast.error("Debe seleccionar un usuario");
+      return;
+    }
     setLoading(true);
     try {
       await createEmpresa({
-        nombre,
-        email,
-        nombre_fantasia: nombreFantasia,
-        cuit,
+        nombre: nombre.substring(0, 50),
+        email: email.substring(0, 50),
+        nombre_fantasia: nombreFantasia.substring(0, 50),
+        cuit: cuit.substring(0, 50),
         condicion_iva: condicionIva,
         tipo_societario: tipoSocietario,
-        actividad_principal: actividadPrincipal,
-        domicilio_legal_calle_numero: domicilioCalle,
-        domicilio_legal_ciudad: domicilioCiudad,
-        domicilio_legal_pais: domicilioPais,
-        codigo_postal: codigoPostal,
+        actividad_principal: actividadPrincipal.substring(0, 50),
+        domicilio_legal_calle_numero: domicilioCalle.substring(0, 50),
+        domicilio_legal_ciudad: domicilioCiudad.substring(0, 50),
+        domicilio_legal_pais: domicilioPais.substring(0, 50),
+        codigo_postal: codigoPostal.substring(0, 50),
         id_usuario: idUsuario,
       });
+      toast.success("Empresa creada exitosamente");
       setShowModalCrear(false);
       fetchEmpresas();
     } catch (err) {
       console.error(err);
+      toast.error("Error al crear la empresa");
     } finally {
       setLoading(false);
     }
@@ -128,24 +136,26 @@ const filtered = empresas
     setLoading(true);
     try {
       await editEmpresa(idEdit, {
-        nombre,
-        email,
-        nombre_fantasia: nombreFantasia,
-        cuit,
+        nombre: nombre.substring(0, 50),
+        email: email.substring(0, 50),
+        nombre_fantasia: nombreFantasia.substring(0, 50),
+        cuit: cuit.substring(0, 50),
         condicion_iva: condicionIva,
         tipo_societario: tipoSocietario,
-        actividad_principal: actividadPrincipal,
-        domicilio_legal_calle_numero: domicilioCalle,
-        domicilio_legal_ciudad: domicilioCiudad,
-        domicilio_legal_pais: domicilioPais,
-        codigo_postal: codigoPostal,
+        actividad_principal: actividadPrincipal.substring(0, 50),
+        domicilio_legal_calle_numero: domicilioCalle.substring(0, 50),
+        domicilio_legal_ciudad: domicilioCiudad.substring(0, 50),
+        domicilio_legal_pais: domicilioPais.substring(0, 50),
+        codigo_postal: codigoPostal.substring(0, 50),
         active: activeEdit,
         id_usuario: idUsuario,
       });
+      toast.success("Empresa actualizada exitosamente");
       setShowModalEditar(false);
       fetchEmpresas();
     } catch (err) {
       console.error(err);
+      toast.error("Error al actualizar la empresa");
     } finally {
       setLoading(false);
     }
@@ -172,6 +182,7 @@ const filtered = empresas
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg shadow focus:outline-none focus:border-[#6d4098] focus:ring-1 focus:ring-[#6d4098] cursor-pointer"
+            maxLength={50}
           />
         </div>
 
@@ -251,19 +262,19 @@ const filtered = empresas
             <div className="space-y-3 md:space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Nombre Fantasía</label>
-                <input type="text" value={nombreFantasia} onChange={(e) => setNombreFantasia(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={nombreFantasia} onChange={(e) => setNombreFantasia(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">CUIT</label>
-                <input type="text" value={cuit} onChange={(e) => setCuit(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={cuit} onChange={(e) => setCuit(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Condición IVA</label>
@@ -297,38 +308,38 @@ const filtered = empresas
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Actividad Principal</label>
-                <input type="text" value={actividadPrincipal} onChange={(e) => setActividadPrincipal(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={actividadPrincipal} onChange={(e) => setActividadPrincipal(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Calle y número</label>
-                <input type="text" value={domicilioCalle} onChange={(e) => setDomicilioCalle(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={domicilioCalle} onChange={(e) => setDomicilioCalle(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
-                <input type="text" value={domicilioCiudad} onChange={(e) => setDomicilioCiudad(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={domicilioCiudad} onChange={(e) => setDomicilioCiudad(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">País</label>
-                <input type="text" value={domicilioPais} onChange={(e) => setDomicilioPais(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={domicilioPais} onChange={(e) => setDomicilioPais(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Código postal</label>
-                <input type="text" value={codigoPostal} onChange={(e) => setCodigoPostal(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={codigoPostal} onChange={(e) => setCodigoPostal(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
                 <div className="max-h-40 overflow-y-auto border rounded-md">
                   <select value={idUsuario || ""} onChange={(e) => setIdUsuario(Number(e.target.value))} className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer" size={5}>
-                    {users.filter(u => u.rol?.toLowerCase() === "cliente").map(u => (
-                      <option key={u.id} value={u.id}>{u.nombre}</option>
+                    {usersWithoutCompany.map(u => (
+                      <option key={u.id} value={u.id}>{u.nombre} ({u.email})</option>
                     ))}
                   </select>
                 </div>
               </div>
 
               <div className="mt-4 flex justify-end">
-                <button onClick={handleSubmitCrear} disabled={loading} className="bg-[#6d4098] text-white px-4 py-2 rounded-lg hover:bg-[#512e73] cursor-pointer">
-                  {loading ? "Cargando..." : "Crear Empresa"}
+                <button onClick={handleSubmitCrear} disabled={loading} className="bg-[#6d4098] text-white px-4 py-2 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2">
+                  {loading ? <><FaSpinner className="animate-spin" /> Cargando...</> : "Crear Empresa"}
                 </button>
               </div>
             </div>
@@ -346,19 +357,19 @@ const filtered = empresas
             <div className="space-y-3 md:space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Nombre Fantasía</label>
-                <input type="text" value={nombreFantasia} onChange={(e) => setNombreFantasia(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={nombreFantasia} onChange={(e) => setNombreFantasia(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">CUIT</label>
-                <input type="text" value={cuit} onChange={(e) => setCuit(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={cuit} onChange={(e) => setCuit(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Condición IVA</label>
@@ -392,30 +403,30 @@ const filtered = empresas
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Actividad Principal</label>
-                <input type="text" value={actividadPrincipal} onChange={(e) => setActividadPrincipal(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={actividadPrincipal} onChange={(e) => setActividadPrincipal(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Calle y número</label>
-                <input type="text" value={domicilioCalle} onChange={(e) => setDomicilioCalle(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={domicilioCalle} onChange={(e) => setDomicilioCalle(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Ciudad</label>
-                <input type="text" value={domicilioCiudad} onChange={(e) => setDomicilioCiudad(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={domicilioCiudad} onChange={(e) => setDomicilioCiudad(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">País</label>
-                <input type="text" value={domicilioPais} onChange={(e) => setDomicilioPais(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={domicilioPais} onChange={(e) => setDomicilioPais(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Código postal</label>
-                <input type="text" value={codigoPostal} onChange={(e) => setCodigoPostal(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" />
+                <input type="text" value={codigoPostal} onChange={(e) => setCodigoPostal(e.target.value)} className="w-full px-3 py-2 border rounded-lg cursor-pointer" maxLength={50} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Usuario</label>
                 <div className="max-h-40 overflow-y-auto border rounded-md">
                   <select value={idUsuario || ""} onChange={(e) => setIdUsuario(Number(e.target.value))} className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer" size={5}>
                     {users.filter(u => u.rol?.toLowerCase() === "cliente").map(u => (
-                      <option key={u.id} value={u.id}>{u.nombre}</option>
+                      <option key={u.id} value={u.id}>{u.nombre} ({u.email})</option>
                     ))}
                   </select>
                 </div>
@@ -448,8 +459,8 @@ const filtered = empresas
               </div>
 
               <div className="mt-4 flex justify-end">
-                <button onClick={handleSubmitEditar} disabled={loading} className="bg-[#6d4098] text-white px-4 py-2 rounded-lg hover:bg-[#512e73] cursor-pointer">
-                  {loading ? "Cargando..." : "Guardar Cambios"}
+                <button onClick={handleSubmitEditar} disabled={loading} className="bg-[#6d4098] text-white px-4 py-2 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2">
+                  {loading ? <><FaSpinner className="animate-spin" /> Cargando...</> : "Guardar Cambios"}
                 </button>
               </div>
             </div>
