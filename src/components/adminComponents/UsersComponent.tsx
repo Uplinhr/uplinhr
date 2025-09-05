@@ -151,7 +151,6 @@ export default function UsersComponent() {
       });
     }
   }, [selectedUser, showEditModal]);
-
   const handleSelectUser = (id: number) => {
     selectUser(id);
   };
@@ -179,12 +178,6 @@ export default function UsersComponent() {
         rol: formData.rol,
         id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
       });
-
-      await fetchUsers();
-      const updatedUser = users.find((u) => u.id === selectedUser.id);
-      if (updatedUser) {
-        selectUser(updatedUser.id);
-      }
 
       setShowEditModal(false);
       toast.success("Usuario actualizado exitosamente");
