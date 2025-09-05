@@ -155,7 +155,7 @@ if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   if (!selectedUser) return;
   setLoading(true);
@@ -169,6 +169,7 @@ if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
       id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
     });
     await fetchUsers();
+    selectUser(selectedUser.id);
     setShowEditModal(false);
     toast.success("Usuario actualizado exitosamente");
   } catch (error) {

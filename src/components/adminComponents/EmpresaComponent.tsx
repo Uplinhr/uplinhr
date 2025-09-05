@@ -214,18 +214,27 @@ const EmpresaComponent = () => {
           />
         </div>
 
-        <button
-          className="md:hidden flex items-center gap-2 px-3 py-2 bg-gray-200 rounded-lg cursor-pointer"
-          onClick={() => setShowFilters(!showFilters)}
-        >
-          <FaBars />
-          <span>Filtros</span>
-        </button>
+        <div className="flex items-center gap-2 w-full md:w-auto">
+          <button
+            className="md:hidden flex items-center gap-2 px-3 py-2 bg-gray-200 rounded-lg cursor-pointer"
+            onClick={() => setShowFilters(!showFilters)}
+          >
+            <FaBars />
+            <span>Filtros</span>
+          </button>
+
+          <button
+            className="md:hidden bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer ml-auto"
+            onClick={openCreateModal}
+          >
+            <FaPlus /> Agregar
+          </button>
+        </div>
 
         <div
           className={`${
             showFilters ? "flex" : "hidden"
-          } md:flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 mt-2 md:mt-0`}
+          } md:flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4 mt-2 md:mt-0 w-full md:w-auto`}
         >
           <div className="flex items-center gap-2 text-gray-500">
             <FaFilter />
@@ -248,15 +257,15 @@ const EmpresaComponent = () => {
             <option value="asc">Fecha Ascendente</option>
             <option value="desc">Fecha Descendente</option>
           </select>
-          <button
-            className="bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2 cursor-pointer"
-            onClick={openCreateModal}
-          >
-            <FaPlus /> Agregar Empresa
-          </button>
         </div>
-      </div>
 
+        <button
+          className="hidden md:flex bg-green-500 text-white px-4 py-2 rounded-lg items-center gap-2 cursor-pointer ml-auto md:ml-0"
+          onClick={openCreateModal}
+        >
+          <FaPlus /> Agregar Empresa
+        </button>
+      </div>
       <div className="overflow-x-auto bg-white shadow-2xl rounded-lg">
         <table className="w-full text-sm text-left min-w-[600px] md:min-w-full">
           <thead className="bg-[#6d4098] text-white">
