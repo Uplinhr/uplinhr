@@ -723,7 +723,7 @@ const EmpresaComponent = () => {
                   maxLength={50}
                 />
               </div>
-              <div>
+                <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Usuario
                 </label>
@@ -731,18 +731,24 @@ const EmpresaComponent = () => {
                   <select
                     value={idUsuario || ""}
                     onChange={(e) => setIdUsuario(Number(e.target.value))}
-                    className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer"
+                    className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer text-sm"
                     size={5}
                   >
-                    {users
-                      .filter((u) => u.rol?.toLowerCase() === "cliente")
-                      .map((u) => (
-                        <option key={u.id} value={u.id}>
-                          {u.nombre} ({u.email})
-                        </option>
-                      ))}
+                    {usersWithoutCompany.map((u) => (
+                      <option key={u.id} value={u.id} className="text-sm">
+                        {u.nombre}{" "}
+                        <span className="text-xs text-gray-500">
+                          ({u.email})
+                        </span>
+                      </option>
+                    ))}
                   </select>
                 </div>
+                {usersWithoutCompany.length === 0 && (
+                  <p className="text-red-500 text-xs mt-1">
+                    No hay usuarios disponibles sin empresa
+                  </p>
+                )}
               </div>
 
               <div>

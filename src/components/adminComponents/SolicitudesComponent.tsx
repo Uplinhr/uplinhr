@@ -128,7 +128,7 @@ export default function SolicitudesComponent() {
             >
               <div className="flex items-center justify-between bg-gray-100 px-4 py-2 cursor-pointer">
                 <span className="text-[#6d4098] font-semibold">
-                  Solicitud de búsqueda número: {busqueda.id}
+                  {busqueda.usuario?.nombre}: búsqueda número {busqueda.id}
                 </span>
                 <div className="flex items-center gap-3">
                   <button className="flex items-center gap-1 bg-[#6d4098] text-white px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-105">

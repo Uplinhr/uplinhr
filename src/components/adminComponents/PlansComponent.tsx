@@ -110,65 +110,67 @@ export default function PlansComponent() {
   };
 
   return (
-    <div className="font-poppins p-6">
+    <div className="font-poppins p-4 md:p-6">
       <h1 className="text-xl md:text-2xl text-center font-bold text-white bg-[#6d4098] p-3 md:p-4 rounded-lg mb-4 md:mb-6">
         Lista de planes
       </h1>
 
-      <div className="flex justify-center gap-4 mb-8">
-        {(["todos", "principales", "custom"] as const).map((f) => (
-          <button
-            key={f}
-            onClick={() => setFilter(f)}
-            className={`px-4 py-2 rounded-md border border-[#6d4098] cursor-pointer ${
-              filter === f
-                ? "bg-[#6d4098] text-white"
-                : "bg-white text-[#6d4098]"
-            }`}
-          >
-            {f === "todos" && "Todos los planes"}
-            {f === "principales" && "Planes principales"}
-            {f === "custom" && "Planes Custom"}
-          </button>
-        ))}
+      <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mb-6 md:mb-8">
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 w-full md:w-auto">
+          {(["todos", "principales", "custom"] as const).map((f) => (
+            <button
+              key={f}
+              onClick={() => setFilter(f)}
+              className={`px-3 py-1.5 md:px-4 md:py-2 rounded-md border border-[#6d4098] cursor-pointer text-sm md:text-base whitespace-nowrap ${
+                filter === f
+                  ? "bg-[#6d4098] text-white"
+                  : "bg-white text-[#6d4098]"
+              }`}
+            >
+              {f === "todos" && "Todos"}
+              {f === "principales" && "Principales"}
+              {f === "custom" && "Custom"}
+            </button>
+          ))}
+        </div>
         <button
           onClick={() => setShowCreateModal(true)}
-          className="px-4 py-2 rounded-md border border-green-600 bg-green-500 text-white cursor-pointer hover:scale-105 transition-transform"
+          className="px-3 py-1.5 md:px-4 md:py-2 rounded-md border border-green-600 bg-green-500 text-white cursor-pointer hover:scale-105 transition-transform text-sm md:text-base whitespace-nowrap mt-2 md:mt-0"
         >
           Agregar plan
         </button>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {filteredPlanes
           .filter((plan): plan is Plan => plan !== null && plan !== undefined)
           .map((plan) => (
             <div
               key={plan.id}
-              className="border border-[#6d4098] rounded-xl shadow-sm p-4 flex flex-col justify-between"
+              className="border border-[#6d4098] rounded-xl shadow-sm p-3 md:p-4 flex flex-col justify-between"
             >
               <div className="flex gap-2 mb-2">
                 {plan.active ? (
-                  <span className="px-3 py-1 text-sm rounded-md bg-green-500 text-white cursor-pointer">
+                  <span className="px-2 py-0.5 md:px-3 md:py-1 text-xs md:text-sm rounded-md bg-green-500 text-white cursor-pointer">
                     ACTIVO
                   </span>
                 ) : (
-                  <span className="px-3 py-1 text-sm rounded-md bg-red-500 text-white cursor-pointer">
+                  <span className="px-2 py-0.5 md:px-3 md:py-1 text-xs md:text-sm rounded-md bg-red-500 text-white cursor-pointer">
                     INACTIVO
                   </span>
                 )}
               </div>
-              <h2 className="text-xl mb-1">{plan.nombre}</h2>
-              <p className="mb-2">
+              <h2 className="text-lg md:text-xl mb-1">{plan.nombre}</h2>
+              <p className="mb-2 text-sm md:text-base">
                 USD {plan.precio}/mes{" "}
-                <span className="text-sm text-gray-500">+ impuestos</span>
+                <span className="text-xs md:text-sm text-gray-500">+ impuestos</span>
               </p>
-              <p className="italic text-sm text-gray-500 mb-4">
+              <p className="italic text-xs md:text-sm text-gray-500 mb-3 md:mb-4">
                 Última modificación: {formatDate(plan.ultima_mod)}
               </p>
               <button
                 onClick={() => handleEdit(plan)}
-                className="bg-[#6d4098] text-white rounded-lg px-4 py-2 transition-transform hover:scale-105 cursor-pointer"
+                className="bg-[#6d4098] text-white rounded-lg px-3 py-1.5 md:px-4 md:py-2 transition-transform hover:scale-105 cursor-pointer text-sm md:text-base"
               >
                 Editar plan
               </button>
@@ -182,7 +184,7 @@ export default function PlansComponent() {
             className="absolute inset-0 bg-black opacity-40"
             onClick={() => setShowEditModal(false)}
           ></div>
-          <div className="bg-white rounded-xl p-5 w-full max-w-md mx-4 relative z-10 shadow-lg max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-xl p-4 md:p-5 w-full max-w-md mx-4 relative z-10 shadow-lg max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setShowEditModal(false)}
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 cursor-pointer"
@@ -339,7 +341,7 @@ export default function PlansComponent() {
             className="absolute inset-0 bg-black opacity-40"
             onClick={() => setShowCreateModal(false)}
           ></div>
-          <div className="bg-white rounded-xl p-5 w-full max-w-md mx-4 relative z-10 shadow-lg max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-xl p-4 md:p-5 w-full max-w-md mx-4 relative z-10 shadow-lg max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setShowCreateModal(false)}
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 cursor-pointer"

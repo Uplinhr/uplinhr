@@ -126,7 +126,7 @@ export default function Consultoria() {
             >
               <div className="flex items-center justify-between bg-gray-100 px-4 py-2">
                 <span className="text-[#6d4098] font-semibold">
-                  Solicitud de consultoría número: {consulta.id}
+                 {consulta.usuario?.nombre}: consultoría número {consulta.id}
                 </span>
                 <div className="flex items-center gap-3">
                   <button className="flex items-center gap-1 bg-[#6d4098] text-white px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-105">
