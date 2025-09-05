@@ -164,10 +164,10 @@ export default function SolicitudesComponent() {
 
               {expandedId === busqueda.id && (
                 <div className="p-4 bg-white space-y-2">
-                  {busqueda.user && (
+                  {busqueda.usuario && (
                     <p>
-                      <strong>Usuario:</strong> {busqueda.user.nombre} (
-                      {busqueda.user.email})
+                      <strong>Usuario:</strong> {busqueda.usuario.nombre} (
+                      {busqueda.usuario.email})
                     </p>
                   )}
                   <p>

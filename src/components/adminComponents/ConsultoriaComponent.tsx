@@ -161,11 +161,12 @@ export default function Consultoria() {
               </div>
 
               {expandedId === consulta.id && (
+               
                 <div className="p-4 bg-white space-y-2">
-                  {consulta.user && (
+                  {consulta.usuario && (
                     <p>
-                      <strong>Usuario:</strong> {consulta.user.nombre} (
-                      {consulta.user.email})
+                      <strong>Usuario:</strong> {consulta.usuario.nombre} (
+                      {consulta.usuario.email})
                     </p>
                   )}
                   <p>
