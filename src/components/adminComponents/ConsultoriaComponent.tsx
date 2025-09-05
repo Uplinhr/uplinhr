@@ -8,7 +8,8 @@ import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar } from "react-icons/fi";
 
 export default function Consultoria() {
-  const { fetchConsultas, editConsulta, deleteConsulta, consultas } = useAdminStore();
+  const { fetchConsultas, editConsulta, deleteConsulta, consultas } =
+    useAdminStore();
 
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -21,15 +22,20 @@ export default function Consultoria() {
   });
   const [loading, setLoading] = useState(false);
 
-  const estados = ["Pendiente", "En proceso", "Finalizado", "Eliminado"] as const;
-  const [filtroEstado, setFiltroEstado] = useState<typeof estados[number]>("Pendiente");
+  const estados = [
+    "Pendiente",
+    "En proceso",
+    "Finalizado",
+    "Eliminado",
+  ] as const;
+  const [filtroEstado, setFiltroEstado] =
+    useState<(typeof estados)[number]>("Pendiente");
 
   useEffect(() => {
     fetchConsultas();
   }, [fetchConsultas]);
 
- 
- useEffect(() => {
+  useEffect(() => {
     if (showEditModal) {
       document.body.classList.add("overflow-hidden");
     } else {
@@ -37,11 +43,11 @@ export default function Consultoria() {
     }
     return () => document.body.classList.remove("overflow-hidden");
   }, [showEditModal]);
-  
-   const toggleExpand = (id: number) => {
+
+  const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
   };
-  
+
   const openEditModal = (id: number) => {
     const consulta = consultas.find((c: Consulta) => c.id === id);
     if (!consulta) return;
@@ -85,7 +91,9 @@ export default function Consultoria() {
     }
   };
 
-  const filteredConsultas = consultas?.filter((c: Consulta) => c?.estado === filtroEstado);
+  const filteredConsultas = consultas?.filter(
+    (c: Consulta) => c?.estado === filtroEstado
+  );
 
   return (
     <div className="p-6 font-poppins">
@@ -154,8 +162,15 @@ export default function Consultoria() {
 
               {expandedId === consulta.id && (
                 <div className="p-4 bg-white space-y-2">
+                  {consulta.user && (
+                    <p>
+                      <strong>Usuario:</strong> {consulta.user.nombre} (
+                      {consulta.user.email})
+                    </p>
+                  )}
                   <p>
-                    <strong>Cantidad de horas:</strong> {consulta.cantidad_horas}
+                    <strong>Cantidad de horas:</strong>{" "}
+                    {consulta.cantidad_horas}
                   </p>
                   <p>
                     <strong>Observaciones:</strong> {consulta.observaciones}

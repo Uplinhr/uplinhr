@@ -8,7 +8,8 @@ import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar } from "react-icons/fi";
 
 export default function SolicitudesComponent() {
-  const { fetchBusquedas, editBusqueda, deleteBusqueda, busquedas } = useAdminStore();
+  const { fetchBusquedas, editBusqueda, deleteBusqueda, busquedas } =
+    useAdminStore();
 
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -22,22 +23,28 @@ export default function SolicitudesComponent() {
   });
   const [loading, setLoading] = useState(false);
 
-  const estados = ["Pendiente", "En proceso", "Finalizado", "Eliminado"] as const;
-  const [filtroEstado, setFiltroEstado] = useState<typeof estados[number]>("Pendiente");
+  const estados = [
+    "Pendiente",
+    "En proceso",
+    "Finalizado",
+    "Eliminado",
+  ] as const;
+  const [filtroEstado, setFiltroEstado] =
+    useState<(typeof estados)[number]>("Pendiente");
 
   useEffect(() => {
     fetchBusquedas();
   }, [fetchBusquedas]);
 
-   useEffect(() => {
-      if (showEditModal) {
-        document.body.classList.add("overflow-hidden");
-      } else {
-        document.body.classList.remove("overflow-hidden");
-      }
-      return () => document.body.classList.remove("overflow-hidden");
-    }, [showEditModal]);
-    
+  useEffect(() => {
+    if (showEditModal) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => document.body.classList.remove("overflow-hidden");
+  }, [showEditModal]);
+
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
   };
@@ -86,7 +93,9 @@ export default function SolicitudesComponent() {
     }
   };
 
-  const filteredBusquedas = busquedas?.filter((b) => b?.estado === filtroEstado);
+  const filteredBusquedas = busquedas?.filter(
+    (b) => b?.estado === filtroEstado
+  );
 
   return (
     <div className="p-6 font-poppins">
@@ -155,6 +164,12 @@ export default function SolicitudesComponent() {
 
               {expandedId === busqueda.id && (
                 <div className="p-4 bg-white space-y-2">
+                  {busqueda.user && (
+                    <p>
+                      <strong>Usuario:</strong> {busqueda.user.nombre} (
+                      {busqueda.user.email})
+                    </p>
+                  )}
                   <p>
                     <strong>Info búsqueda:</strong> {busqueda.info_busqueda}
                   </p>

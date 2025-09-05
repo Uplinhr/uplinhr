@@ -112,6 +112,7 @@ export interface Consulta {
   estado: string;
   comentarios: string;
   observaciones: string | null;
+  user?: User;
 }
 export interface Busqueda {
   id: number;
@@ -124,6 +125,7 @@ export interface Busqueda {
   id_cred: number | null;
   id_tipo: number | null;
   id_proceso: number | null;
+  user?: User;
 }
 
 export interface Empresa {
