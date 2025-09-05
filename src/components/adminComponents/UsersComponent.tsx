@@ -50,6 +50,16 @@ export default function UsersComponent() {
   const [selectedConsulta, setSelectedConsulta] = useState<Consulta | null>(
     null
   );
+  const [password, setPassword] = useState("");
+
+  const openCreditoModal = (c: Creditos) => setSelectedCredito(c);
+  const closeCreditoModal = () => setSelectedCredito(null);
+
+  const openBusquedaModal = (b: Busqueda) => setSelectedBusqueda(b);
+  const closeBusquedaModal = () => setSelectedBusqueda(null);
+
+  const openConsultaModal = (c: Consulta) => setSelectedConsulta(c);
+  const closeConsultaModal = () => setSelectedConsulta(null);
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -95,16 +105,7 @@ if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
   ? [...selectedUser.creditos]
   : [];
 
-  const [password, setPassword] = useState("");
-
-  const openCreditoModal = (c: Creditos) => setSelectedCredito(c);
-  const closeCreditoModal = () => setSelectedCredito(null);
-
-  const openBusquedaModal = (b: Busqueda) => setSelectedBusqueda(b);
-  const closeBusquedaModal = () => setSelectedBusqueda(null);
-
-  const openConsultaModal = (c: Consulta) => setSelectedConsulta(c);
-  const closeConsultaModal = () => setSelectedConsulta(null);
+  
 
   useEffect(() => {
     fetchUsers();
@@ -152,6 +153,7 @@ if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
       });
     }
   }, [selectedUser, showEditModal]);
+
   const handleSelectUser = (id: number) => {
     selectUser(id);
   };
@@ -167,28 +169,28 @@ if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedUser) return;
-    setLoading(true);
-    try {
-      await editUser(selectedUser.id, {
-        nombre: formData.nombre,
-        apellido: formData.apellido,
-        email: formData.email,
-        active: formData.active,
-        rol: formData.rol,
-        id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
-      });
-
-      setShowEditModal(false);
-      toast.success("Usuario actualizado exitosamente");
-    } catch (error) {
-      console.error(error);
-      toast.error("Error al actualizar usuario");
-    } finally {
-      setLoading(false);
-    }
-  };
+  e.preventDefault();
+  if (!selectedUser) return;
+  setLoading(true);
+  try {
+    await editUser(selectedUser.id, {
+      nombre: formData.nombre,
+      apellido: formData.apellido,
+      email: formData.email,
+      active: formData.active,
+      rol: formData.rol,
+      id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
+    });
+    await fetchUsers();
+    setShowEditModal(false);
+    toast.success("Usuario actualizado exitosamente");
+  } catch (error) {
+    console.error(error);
+    toast.error("Error al actualizar usuario");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleEditClick = () => {
     if (!selectedUser) return;
