@@ -64,13 +64,10 @@ export default function UsersComponent() {
   });
 
   const userConsultas: Consulta[] = [];
-  if (selectedUser?.consultorias) {
-    selectedUser.consultorias.forEach((c) => {
-      if (c.consultas) {
-        userConsultas.push(...c.consultas);
-      }
-    });
-  }
+  
+if (selectedUser?.consultorias?.consultas) {
+  userConsultas.push(...selectedUser.consultorias.consultas);
+}
 
   const userBusquedas: Busqueda[] = [];
   if (selectedUser?.creditos) {

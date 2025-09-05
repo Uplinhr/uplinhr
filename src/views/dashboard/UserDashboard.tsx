@@ -68,7 +68,7 @@ const UserDashboard = () => {
       toast.error("Debes ingresar una cantidad de horas válida");
       return;
     }
-    if (!user?.consultorias?.[0]?.id) {
+    if (!user?.consultorias?.id) {
       toast.error("No se encontró la consultoría del usuario");
       return;
     }
@@ -76,7 +76,7 @@ const UserDashboard = () => {
     const body: ConsultaRequest = {
       cantidad_horas: cantidadHoras,
       comentarios,
-      id_consultoria: user.consultorias?.[0]?.id,
+      id_consultoria: user.consultorias?.id,
     };
 
     try {
@@ -187,7 +187,7 @@ const UserDashboard = () => {
             
             <p className="text-lg font-semibold">
               
-              {user?.consultorias?.[0]?.horas_restantes || 0} horas
+              {user?.consultorias?.horas_restantes || 0} horas
             </p>
           </div>
         </motion.div>
@@ -249,13 +249,13 @@ const UserDashboard = () => {
             
             <p className="text-lg font-semibold">
               
-              {user?.consultorias?.[0]?.horas_restantes || 0} horas
+              {user?.consultorias?.horas_restantes || 0} horas
             </p>
             <p className="text-sm text-gray-600 mt-1">
               
               Vence: {" "}
-              {user?.consultorias?.[0]?.vencimiento
-                ? formatDate(user.consultorias?.[0]?.vencimiento)
+              {user?.consultorias?.vencimiento
+                ? formatDate(user.consultorias?.vencimiento)
                 : "-"}
             </p>
           </div>

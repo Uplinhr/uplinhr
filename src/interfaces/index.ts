@@ -157,7 +157,7 @@ export interface User {
   id_plan?: number | null;
   plan?: Plan;
   creditos?: Creditos[];
-  consultorias?: Consultoria[];
+  consultorias?: Consultoria;
   empresas?: Empresa;
   num_celular?: string;
 }
