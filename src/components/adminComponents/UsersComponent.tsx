@@ -73,14 +73,15 @@ export default function UsersComponent() {
     userConsultas.push(...selectedUser.consultorias.consultas);
   }
 
-  const userBusquedas: Busqueda[] = [];
-  if (selectedUser?.creditos) {
-    selectedUser.creditos.forEach((c) => {
-      if (c.busquedas) {
-        userBusquedas.push(...c.busquedas);
-      }
-    });
-  }
+const userBusquedas: Busqueda[] = [];
+if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
+  selectedUser.creditos.forEach((c) => {
+    if (c.busquedas && Array.isArray(c.busquedas)) {
+      userBusquedas.push(...c.busquedas);
+    }
+  });
+}
+
   const [showCompraModal, setShowCompraModal] = useState(false);
   const [formCompra, setFormCompra] = useState({
     medio_pago: "",
