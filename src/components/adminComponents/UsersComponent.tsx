@@ -44,8 +44,12 @@ export default function UsersComponent() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showRenewModal, setShowRenewModal] = useState(false);
   const [selectedCredito, setSelectedCredito] = useState<Creditos | null>(null);
-  const [selectedBusqueda, setSelectedBusqueda] = useState<Busqueda | null>(null);
-  const [selectedConsulta, setSelectedConsulta] = useState<Consulta | null>(null);
+  const [selectedBusqueda, setSelectedBusqueda] = useState<Busqueda | null>(
+    null
+  );
+  const [selectedConsulta, setSelectedConsulta] = useState<Consulta | null>(
+    null
+  );
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
@@ -64,10 +68,10 @@ export default function UsersComponent() {
   });
 
   const userConsultas: Consulta[] = [];
-  
-if (selectedUser?.consultorias?.consultas) {
-  userConsultas.push(...selectedUser.consultorias.consultas);
-}
+
+  if (selectedUser?.consultorias?.consultas) {
+    userConsultas.push(...selectedUser.consultorias.consultas);
+  }
 
   const userBusquedas: Busqueda[] = [];
   if (selectedUser?.creditos) {
@@ -140,7 +144,7 @@ if (selectedUser?.consultorias?.consultas) {
       setFormData({
         nombre: selectedUser.nombre || "",
         apellido: selectedUser.apellido || "",
-        rol: selectedUser.rol || "cliente",
+        rol: selectedUser.rol || "",
         active: selectedUser.active ?? true,
         id_plan: selectedUser.plan?.id?.toString() || "",
         email: selectedUser.email || "",
@@ -175,8 +179,13 @@ if (selectedUser?.consultorias?.consultas) {
         rol: formData.rol,
         id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
       });
+
       await fetchUsers();
-      selectUser(selectedUser.id);
+      const updatedUser = users.find((u) => u.id === selectedUser.id);
+      if (updatedUser) {
+        selectUser(updatedUser.id);
+      }
+
       setShowEditModal(false);
       toast.success("Usuario actualizado exitosamente");
     } catch (error) {
@@ -306,15 +315,16 @@ if (selectedUser?.consultorias?.consultas) {
     setShowCompraModal(true);
   };
   const handleInputChangeCompraCredito = (
-  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-) => {
-  const { name, value } = e.target;
-  setFormCompra({
-    ...formCompra,
-    [name] : name === "costo" || name === "cantidad" ? Number(value) : value,
-  });
-};
-
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormCompra({
+      ...formCompra,
+      [name]: name === "costo" || name === "cantidad" ? Number(value) : value,
+    });
+  };
 
   const handleCompraSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
