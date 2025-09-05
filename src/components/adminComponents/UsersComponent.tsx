@@ -91,9 +91,9 @@ if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
     vencimiento: "",
   });
 
-  const userCreditos: Creditos[] = selectedUser?.creditos
-    ? [...selectedUser.creditos]
-    : [];
+ const userCreditos: Creditos[] = selectedUser?.creditos && Array.isArray(selectedUser.creditos)
+  ? [...selectedUser.creditos]
+  : [];
 
   const [password, setPassword] = useState("");
 
