@@ -77,20 +77,21 @@ export default function UsersComponent() {
     num_celular: "",
   });
 
-  // CORRECCIÓN: Obtener consultas correctamente
-  const userConsultas: Consulta[] = selectedUser?.consultorias?.consultas || [];
+  const userConsultas: Consulta[] = [];
 
-  // CORRECCIÓN: Obtener búsquedas correctamente
-  const userBusquedas: Busqueda[] = [];
-  if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
-    selectedUser.creditos.forEach((c) => {
-      if (c.busquedas && Array.isArray(c.busquedas)) {
-        userBusquedas.push(...c.busquedas);
-      }
-    });
+  if (selectedUser?.consultorias?.consultas) {
+    userConsultas.push(...selectedUser.consultorias.consultas);
   }
-  console.log("user consultas", userConsultas);
-  console.log("user busquedas", userBusquedas);
+
+const userBusquedas: Busqueda[] = [];
+if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
+  selectedUser.creditos.forEach((c) => {
+    if (c.busquedas && Array.isArray(c.busquedas)) {
+      userBusquedas.push(...c.busquedas);
+    }
+  });
+}
+
   const [showCompraModal, setShowCompraModal] = useState(false);
   const [formCompra, setFormCompra] = useState({
     medio_pago: "",
@@ -100,9 +101,11 @@ export default function UsersComponent() {
     vencimiento: "",
   });
 
-  const userCreditos: Creditos[] = selectedUser?.creditos && Array.isArray(selectedUser.creditos)
-    ? [...selectedUser.creditos]
-    : [];
+ const userCreditos: Creditos[] = selectedUser?.creditos && Array.isArray(selectedUser.creditos)
+  ? [...selectedUser.creditos]
+  : [];
+
+  
 
   useEffect(() => {
     fetchUsers();
@@ -166,28 +169,28 @@ export default function UsersComponent() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedUser) return;
-    setLoading(true);
-    try {
-      await editUser(selectedUser.id, {
-        nombre: formData.nombre,
-        apellido: formData.apellido,
-        email: formData.email,
-        active: formData.active,
-        rol: formData.rol,
-        id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
-      });
-      await fetchUsers();
-      setShowEditModal(false);
-      toast.success("Usuario actualizado exitosamente");
-    } catch (error) {
-      console.error(error);
-      toast.error("Error al actualizar usuario");
-    } finally {
-      setLoading(false);
-    }
-  };
+  e.preventDefault();
+  if (!selectedUser) return;
+  setLoading(true);
+  try {
+    await editUser(selectedUser.id, {
+      nombre: formData.nombre,
+      apellido: formData.apellido,
+      email: formData.email,
+      active: formData.active,
+      rol: formData.rol,
+      id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
+    });
+    await fetchUsers();
+    setShowEditModal(false);
+    toast.success("Usuario actualizado exitosamente");
+  } catch (error) {
+    console.error(error);
+    toast.error("Error al actualizar usuario");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleEditClick = () => {
     if (!selectedUser) return;
@@ -363,7 +366,7 @@ export default function UsersComponent() {
 
   return (
     <div className="min-h-[90%] flex flex-col lg:flex-row gap-4 mb-8 font-poppins">
-      {/* MODALES */}
+      {/* MODALES. PERDON X TANTO CODIGO :() */}
       {showEditModal && selectedUser && (
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4 font-poppins">
           <div
@@ -1232,43 +1235,42 @@ export default function UsersComponent() {
               </div>
             </div>
 
-            {/* Consultas - CORREGIDO */}
+            {/* Consultas */}
             <div className="flex flex-col mb-4">
               <div className="bg-[#6d4098] text-white px-4 py-2 rounded-t-md w-full">
                 Consultas
               </div>
               <div className="mt-2 border border-gray-200 rounded-b-md p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
-                {userConsultas.length > 0 ? (
-                  userConsultas.map((c: Consulta, i: number) => (
-                    <div
-                      key={i}
-                      className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
-                    >
-                      <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">FECHA</p>
-                          <p>{c.fecha_alta?.split(/T| /)[0] || "No hay fecha"}</p>
-                        </div>
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">
-                            CANTIDAD HORAS
-                          </p>
-                          <p>{c.cantidad_horas} hs</p>
-                        </div>
-                        <div>
-                          <p className="text-xs text-gray-500 mb-1">ESTADO</p>
-                          <p>{c.estado || "Sin estado"}</p>
-                        </div>
+                {userConsultas.map((c: Consulta, i: number) => (
+                  <div
+                    key={i}
+                    className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
+                  >
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">FECHA</p>
+                        <p>{c.fecha_alta.split(" ")[0]}</p>
                       </div>
-                      <button
-                        className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
-                        onClick={() => openConsultaModal(c)}
-                      >
-                        Ver más detalle
-                      </button>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">
+                          CANTIDAD HORAS
+                        </p>
+                        <p>{c.cantidad_horas} hs</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-500 mb-1">ESTADO</p>
+                        <p>{c.estado}</p>
+                      </div>
                     </div>
-                  ))
-                ) : (
+                    <button
+                      className="bg-[#6d4098] px-3 py-1 text-xs rounded-md text-white cursor-pointer hover:opacity-90 w-full md:w-auto"
+                      onClick={() => openConsultaModal(c)}
+                    >
+                      Ver más detalle
+                    </button>
+                  </div>
+                ))}
+                {userConsultas.length === 0 && (
                   <div className="text-center text-gray-400 italic py-4">
                     No hay consultas registradas
                   </div>
