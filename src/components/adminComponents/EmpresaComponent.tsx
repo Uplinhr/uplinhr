@@ -32,7 +32,6 @@ const EmpresaComponent = () => {
   const [showModalEditar, setShowModalEditar] = useState(false);
   const [showModalDetalles, setShowModalDetalles] = useState(false);
   const [empresaDetalles, setEmpresaDetalles] = useState<Empresa | null>(null);
-
   const [idEdit, setIdEdit] = useState<number | null>(null);
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
