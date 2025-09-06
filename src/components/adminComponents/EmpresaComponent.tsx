@@ -79,7 +79,7 @@ const EmpresaComponent = () => {
   const usersWithoutCompany = users.filter(
     (user) =>
       user.rol?.toLowerCase() === "cliente" &&
-      !empresas.some((emp) => emp.id_usuario === user.id)
+      !empresas.some((emp) => emp?.id_usuario === user?.id)
   );
 
   const openCreateModal = () => {
