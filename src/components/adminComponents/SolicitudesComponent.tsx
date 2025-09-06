@@ -13,6 +13,7 @@ export default function SolicitudesComponent() {
 
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [busquedaData, setBusquedaData] = useState({
     info_busqueda: "",
@@ -27,21 +28,18 @@ export default function SolicitudesComponent() {
   const [filtroEstado, setFiltroEstado] =
     useState<(typeof estados)[number]>("Pendiente");
 
-  const [showConfirmEstado, setShowConfirmEstado] = useState(false);
-  const [nuevoEstado, setNuevoEstado] = useState<string | null>(null);
-
   useEffect(() => {
     fetchBusquedas();
   }, [fetchBusquedas]);
 
   useEffect(() => {
-    if (showEditModal || showConfirmEstado) {
+    if (showEditModal || showConfirmModal) {
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
     }
     return () => document.body.classList.remove("overflow-hidden");
-  }, [showEditModal, showConfirmEstado]);
+  }, [showEditModal, showConfirmModal]);
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -67,10 +65,17 @@ export default function SolicitudesComponent() {
     e.preventDefault();
     if (selectedId === null) return;
 
+    setShowConfirmModal(true); 
+  };
+
+  const handleConfirm = async () => {
+    if (selectedId === null) return;
+
     setLoading(true);
     try {
       await editBusqueda(selectedId, busquedaData);
       setShowEditModal(false);
+      setShowConfirmModal(false);
       fetchBusquedas();
     } catch (error) {
       console.error("Error al editar búsqueda:", error);
@@ -106,6 +111,7 @@ export default function SolicitudesComponent() {
         Solicitudes de búsqueda
       </h1>
 
+    
       <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-4 md:mb-6">
         {estados.map((estado) => (
           <button
@@ -288,10 +294,9 @@ export default function SolicitudesComponent() {
                 </label>
                 <select
                   value={busquedaData.estado}
-                  onChange={(e) => {
-                    setNuevoEstado(e.target.value);
-                    setShowConfirmEstado(true);
-                  }}
+                  onChange={(e) =>
+                    setBusquedaData({ ...busquedaData, estado: e.target.value })
+                  }
                   className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm cursor-pointer"
                 >
                   {estados.map((estado) => (
@@ -325,7 +330,7 @@ export default function SolicitudesComponent() {
         </div>
       )}
 
-      {showConfirmEstado && (
+      {showConfirmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
           <div className="absolute inset-0 bg-black opacity-40"></div>
 
@@ -340,16 +345,16 @@ export default function SolicitudesComponent() {
 
             <p className="text-gray-700 mb-3">
               ¿Está seguro que quiere pasar esta solicitud a{" "}
-              <span className="font-semibold">{nuevoEstado}</span>?
+              <span className="font-semibold">{busquedaData.estado}</span>?
             </p>
 
-            {nuevoEstado === "Finalizado" && (
+            {busquedaData.estado === "Finalizado" && (
               <p className="text-[#6d4098] italic font-semibold mb-4">
                 Esto consumirá créditos y no podrá revertirse.
               </p>
             )}
 
-            {nuevoEstado === "Eliminado" && (
+            {busquedaData.estado === "Eliminado" && (
               <p className="text-[#6d4098] italic font-semibold mb-4">
                 No se podrá recuperar después.
               </p>
@@ -357,24 +362,18 @@ export default function SolicitudesComponent() {
 
             <div className="flex flex-col xs:flex-row justify-center gap-3 mt-4">
               <button
-                onClick={() => {
-                  setShowConfirmEstado(false);
-                  setNuevoEstado(null);
-                }}
+                onClick={() => setShowConfirmModal(false)}
                 className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition text-sm md:text-base"
+                disabled={loading}
               >
                 Cancelar
               </button>
               <button
-                onClick={() => {
-                  if (nuevoEstado) {
-                    setBusquedaData({ ...busquedaData, estado: nuevoEstado });
-                  }
-                  setShowConfirmEstado(false);
-                }}
+                onClick={handleConfirm}
                 className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition text-sm md:text-base"
+                disabled={loading}
               >
-                Aceptar
+                {loading ? "Procesando..." : "Aceptar"}
               </button>
             </div>
           </div>

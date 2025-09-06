@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { useAdminStore } from "@/store/useAdminStore";
 import { Consulta } from "@/interfaces";
-import { FaTimes, FaTrash, FaExternalLinkAlt, FaExclamationTriangle } from "react-icons/fa";
+import { FaTimes, FaTrash, FaExternalLinkAlt } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
-import { FiEdit, FiChevronDown, FiCalendar } from "react-icons/fi";
+import { FiEdit, FiChevronDown, FiCalendar, FiAlertTriangle } from "react-icons/fi";
 
 export default function Consultoria() {
   const { fetchConsultas, editConsulta, deleteConsulta, consultas } =
@@ -23,14 +23,8 @@ export default function Consultoria() {
   });
   const [loading, setLoading] = useState(false);
 
-  const estados = [
-    "Pendiente",
-    "En proceso",
-    "Finalizado",
-    "Eliminado",
-  ] as const;
-  const [filtroEstado, setFiltroEstado] =
-    useState<(typeof estados)[number]>("Pendiente");
+  const estados = ["Pendiente", "En proceso", "Finalizado", "Eliminado"] as const;
+  const [filtroEstado, setFiltroEstado] = useState<(typeof estados)[number]>("Pendiente");
 
   useEffect(() => {
     fetchConsultas();
@@ -67,8 +61,7 @@ export default function Consultoria() {
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedId === null) return;
-
-    setShowConfirmModal(true); 
+    setShowConfirmModal(true);
   };
 
   const handleConfirm = async () => {
@@ -132,7 +125,6 @@ export default function Consultoria() {
         ))}
       </div>
 
-
       <div className="space-y-3 md:space-y-4">
         {filteredConsultas.length > 0 ? (
           filteredConsultas.map((consulta: Consulta) => (
@@ -191,8 +183,7 @@ export default function Consultoria() {
                     </p>
                   )}
                   <p>
-                    <strong>Cantidad de horas:</strong>{" "}
-                    {consulta.cantidad_horas}
+                    <strong>Cantidad de horas:</strong> {consulta.cantidad_horas}
                   </p>
                   <p className="break-words">
                     <strong>Observaciones:</strong> {consulta.observaciones}
@@ -230,16 +221,16 @@ export default function Consultoria() {
           <div className="bg-white rounded-2xl p-4 md:p-6 w-full max-w-md max-h-[80vh] overflow-y-auto mx-4 relative z-10 shadow-lg">
             <button
               onClick={() => setShowEditModal(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform transform hover:scale-110"
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
               disabled={loading}
             >
               <FaTimes size={20} />
             </button>
-            <h3 className="text-lg md:text-xl font-semibold text-[#6d4098] mb-4 md:mb-6 text-center">
+            <h3 className="text-lg md:text-xl font-semibold text-[#6d4098] mb-4 text-center">
               Editar consulta
             </h3>
 
-            <form onSubmit={handleEditSubmit} className="space-y-3 md:space-y-4">
+            <form onSubmit={handleEditSubmit} className="space-y-3">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Cantidad de horas <span className="text-red-500">*</span>
@@ -253,7 +244,7 @@ export default function Consultoria() {
                       cantidad_horas: Number(e.target.value),
                     })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm md:text-base"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm"
                   required
                 />
               </div>
@@ -271,7 +262,7 @@ export default function Consultoria() {
                       observaciones: e.target.value,
                     })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm md:text-base"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm"
                   rows={3}
                 />
               </div>
@@ -285,7 +276,7 @@ export default function Consultoria() {
                   onChange={(e) =>
                     setConsultaData({ ...consultaData, estado: e.target.value })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 cursor-pointer text-sm md:text-base"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm cursor-pointer"
                 >
                   {estados.map((estado) => (
                     <option key={estado} value={estado}>
@@ -295,17 +286,17 @@ export default function Consultoria() {
                 </select>
               </div>
 
-              <div className="flex flex-col xs:flex-row justify-center gap-3 pt-3 md:pt-4">
+              <div className="flex flex-col xs:flex-row justify-center gap-3 pt-3">
                 <button
                   type="button"
                   onClick={() => setShowEditModal(false)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition cursor-pointer text-sm md:text-base"
+                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition text-sm"
                   disabled={loading}
                 >
                   Cancelar
                 </button>
                 <button
-                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition cursor-pointer flex items-center justify-center gap-2 text-sm md:text-base"
+                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition flex items-center justify-center gap-2 text-sm"
                   type="submit"
                   disabled={loading}
                 >
@@ -322,13 +313,11 @@ export default function Consultoria() {
         <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
           <div className="absolute inset-0 bg-black opacity-40"></div>
 
-          <div className="bg-white rounded-2xl p-6 md:p-8 w-full max-w-md mx-4 relative z-10 shadow-lg text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#6d4098] mb-4">
-              Atención
-            </h2>
+          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg text-center">
+            <h2 className="text-2xl font-bold text-[#6d4098] mb-4">Atención</h2>
 
             <div className="flex justify-center mb-4">
-              <FaExclamationTriangle className="text-[#6d4098] text-4xl" />
+              <FiAlertTriangle className="text-[#6d4098] text-4xl" />
             </div>
 
             <p className="text-gray-700 mb-3">
@@ -351,14 +340,14 @@ export default function Consultoria() {
             <div className="flex flex-col xs:flex-row justify-center gap-3 mt-4">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition cursor-pointer text-sm md:text-base"
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition text-sm"
                 disabled={loading}
               >
                 Cancelar
               </button>
               <button
                 onClick={handleConfirm}
-                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition cursor-pointer text-sm md:text-base"
+                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition text-sm"
                 disabled={loading}
               >
                 {loading ? "Procesando..." : "Aceptar"}
