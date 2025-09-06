@@ -1098,7 +1098,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                       {u.nombre} {u.apellido}
                     </p>
                     <p className="text-gray-500">
-                      {u.empresas?.nombre || "Sin empresa"}
+                      {u.email || "Sin empresa"}
                     </p>
                   </div>
                 </div>
@@ -1120,7 +1120,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               <p className="font-semibold text-lg">{selectedUser.nombre}</p>
               <p className="font-semibold text-lg">{selectedUser.apellido}</p>
               <p className="text-sm text-gray-500 mt-2">
-                {selectedUser.empresas?.nombre || "Sin empresa"}
+                {selectedUser.email || "Sin empresa"}
               </p>
             </div>
             <p className="mt-4 text-xs text-gray-500">
@@ -1179,7 +1179,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               )}
             </div>
             <h2 className="text-xl font-semibold text-[#6d4098] mb-4">
-              {selectedUser.empresas?.nombre || "Nombre de la Empresa"}
+              Empresa: {selectedUser.empresas?.nombre || "Nombre de la Empresa"}
             </h2>
 
             {/* Créditos */}

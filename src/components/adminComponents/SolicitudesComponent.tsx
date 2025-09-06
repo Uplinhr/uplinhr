@@ -132,7 +132,7 @@ export default function SolicitudesComponent() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-100 p-3 md:px-4 md:py-2 gap-2">
                 <span className="text-[#6d4098] font-semibold text-sm md:text-base">
-                  {busqueda.usuario?.nombre}: búsqueda número {busqueda.id}
+                  {busqueda.usuario?.nombre} {busqueda.usuario?.apellido}: búsqueda número {busqueda.id}
                 </span>
                 <div className="flex items-center justify-end sm:justify-start gap-2 md:gap-3">
                   <button 
@@ -176,8 +176,7 @@ export default function SolicitudesComponent() {
                 <div className="p-3 md:p-4 bg-white space-y-2 text-sm md:text-base">
                   {busqueda.usuario && (
                     <p className="break-words">
-                      <strong>Usuario:</strong> {busqueda.usuario.nombre} (
-                      {busqueda.usuario.email})
+                      <strong>Usuario:</strong> {busqueda.usuario.email}
                     </p>
                   )}
                   <p className="break-words">

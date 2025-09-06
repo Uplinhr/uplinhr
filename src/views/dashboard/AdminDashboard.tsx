@@ -27,7 +27,7 @@ const AdminDashboard = () => {
         return <Empresas />;
       case "Planes":
         return <Planes />;
-      case "Solicitudes":
+      case "Búsquedas":
         return <Solicitudes />;
       case "Consultoria":
         return <Consultoria />;
@@ -42,7 +42,7 @@ const AdminDashboard = () => {
     "Administradores",
     "Empresas",
     "Planes",
-    "Solicitudes",
+    "Búsquedas",
     "Consultoria",
   ];
 
