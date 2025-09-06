@@ -563,7 +563,17 @@ const EmpresaComponent = () => {
                   !tipoSocietario ||
                   !idUsuario
                 }
-                className="bg-[#6d4098] text-white px-5 py-2.5 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2 transition-colors"
+                className={`bg-gray-300 text-black px-5 py-2.5 rounded-lg cursor-pointer flex items-center gap-2 ${
+                  !loading &&
+                  !nombre &&
+                  !email &&
+                  !cuit &&
+                  !condicionIva &&
+                  !tipoSocietario &&
+                  !idUsuario
+                    ? ""
+                    : "bg-[#6d4098] text-white"
+                }`}
               >
                 {loading ? (
                   <>
