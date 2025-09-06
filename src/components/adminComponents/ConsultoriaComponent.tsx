@@ -186,6 +186,9 @@ export default function Consultoria() {
                     <strong>Observaciones:</strong> {consulta.observaciones}
                   </p>
                   <p>
+                    <strong>Comentarios:</strong> {consulta.comentarios}
+                  </p>
+                  <p>
                     <strong>Estado:</strong> {consulta.estado}
                   </p>
                   <p>
