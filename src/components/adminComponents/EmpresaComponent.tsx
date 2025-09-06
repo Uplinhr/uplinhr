@@ -103,19 +103,22 @@ const EmpresaComponent = () => {
 
   const openEditModal = (empresa: Empresa) => {
     setIdEdit(empresa?.id);
-    setNombre(empresa?.nombre);
-    setEmail(empresa?.email);
-    setNombreFantasia(empresa?.nombre_fantasia);
-    setCuit(empresa?.cuit);
-    setCondicionIva(empresa?.condicion_iva);
-    setTipoSocietario(empresa?.tipo_societario);
+    setNombre(empresa?.nombre || "");
+    setEmail(empresa?.email || "");
+    setNombreFantasia(empresa?.nombre_fantasia || "");
+    setCuit(empresa?.cuit || "");
+    setCondicionIva(empresa?.condicion_iva || "Responsable inscripto");
+    setTipoSocietario(empresa?.tipo_societario || "SA");
     setActividadPrincipal(empresa?.actividad_principal || "");
-    setDomicilioCalle(empresa?.domicilio_legal_calle_numero);
-    setDomicilioCiudad(empresa?.domicilio_legal_ciudad);
-    setDomicilioPais(empresa?.domicilio_legal_pais);
-    setCodigoPostal(empresa?.codigo_postal);
-    setIdUsuario(empresa?.id_usuario);
-    setActiveEdit(empresa?.active);
+    setDomicilioCalle(empresa?.domicilio_legal_calle_numero || "");
+    setDomicilioCiudad(empresa?.domicilio_legal_ciudad || "");
+    setDomicilioPais(empresa?.domicilio_legal_pais || "");
+    setCodigoPostal(empresa?.codigo_postal || "");
+    setIdUsuario(
+      empresa?.id_usuario ||
+        (usersWithoutCompany.length > 0 ? usersWithoutCompany[0].id : null)
+    );
+    setActiveEdit(empresa?.active || true);
     setShowModalEditar(true);
   };
 
@@ -157,7 +160,10 @@ const EmpresaComponent = () => {
   };
 
   const handleSubmitEditar = async () => {
-    if (!idUsuario || idEdit === null) return;
+    if (!idUsuario || idEdit === null) {
+      toast.error("Debe seleccionar un usuario válido");
+      return;
+    }
     setLoading(true);
     try {
       await editEmpresa(idEdit, {
@@ -545,10 +551,18 @@ const EmpresaComponent = () => {
               </div>
             </div>
 
-            <div className="mt-6 flex justify-end">
+            <div className="mt-6 flex justify-center">
               <button
                 onClick={handleSubmitCrear}
-                disabled={loading}
+                disabled={
+                  loading ||
+                  !nombre ||
+                  !email ||
+                  !cuit ||
+                  !condicionIva ||
+                  !tipoSocietario ||
+                  !idUsuario
+                }
                 className="bg-[#6d4098] text-white px-5 py-2.5 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2 transition-colors"
               >
                 {loading ? (
@@ -816,7 +830,7 @@ const EmpresaComponent = () => {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={handleSubmitEditar}
-                disabled={loading}
+                disabled={loading || !idUsuario}
                 className="bg-[#6d4098] text-white px-5 py-2.5 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2 transition-colors"
               >
                 {loading ? (
