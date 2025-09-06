@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useAdminStore } from "@/store/useAdminStore";
 import { Consulta } from "@/interfaces";
-import { FaTimes, FaTrash, FaExternalLinkAlt } from "react-icons/fa";
+import { FaTimes, FaTrash, FaExternalLinkAlt, FaExclamationTriangle } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar } from "react-icons/fi";
 
@@ -13,6 +13,7 @@ export default function Consultoria() {
 
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [consultaData, setConsultaData] = useState({
     cantidad_horas: 0,
@@ -36,13 +37,13 @@ export default function Consultoria() {
   }, [fetchConsultas]);
 
   useEffect(() => {
-    if (showEditModal) {
+    if (showEditModal || showConfirmModal) {
       document.body.classList.add("overflow-hidden");
     } else {
       document.body.classList.remove("overflow-hidden");
     }
     return () => document.body.classList.remove("overflow-hidden");
-  }, [showEditModal]);
+  }, [showEditModal, showConfirmModal]);
 
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -67,10 +68,17 @@ export default function Consultoria() {
     e.preventDefault();
     if (selectedId === null) return;
 
+    setShowConfirmModal(true); 
+  };
+
+  const handleConfirm = async () => {
+    if (selectedId === null) return;
+
     setLoading(true);
     try {
       await editConsulta(selectedId, consultaData);
       setShowEditModal(false);
+      setShowConfirmModal(false);
       fetchConsultas();
     } catch (error) {
       console.error("Error al editar consulta:", error);
@@ -96,7 +104,10 @@ export default function Consultoria() {
   );
 
   const abrirCalendario = () => {
-    window.open("https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D", "_blank");
+    window.open(
+      "https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D",
+      "_blank"
+    );
   };
 
   return (
@@ -121,6 +132,7 @@ export default function Consultoria() {
         ))}
       </div>
 
+
       <div className="space-y-3 md:space-y-4">
         {filteredConsultas.length > 0 ? (
           filteredConsultas.map((consulta: Consulta) => (
@@ -133,12 +145,12 @@ export default function Consultoria() {
                   {consulta.usuario?.nombre}: consultoría número {consulta.id}
                 </span>
                 <div className="flex items-center justify-end sm:justify-start gap-2 md:gap-3">
-                  <button 
+                  <button
                     className="flex items-center gap-1 bg-[#6d4098] text-white px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-105 text-xs md:text-sm"
                     onClick={abrirCalendario}
                   >
-                    <FiCalendar className="text-xs md:text-base" /> 
-                    <span className="hidden xs:inline">Agendar</span> 
+                    <FiCalendar className="text-xs md:text-base" />
+                    <span className="hidden xs:inline">Agendar</span>
                     <span className="xs:hidden">Reunión</span>
                     <FaExternalLinkAlt className="hidden sm:inline text-xs ml-1" />
                   </button>
@@ -215,7 +227,7 @@ export default function Consultoria() {
         <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
           <div className="absolute inset-0 bg-black opacity-40"></div>
 
-          <div className="bg-white rounded-2xl p-4 md:p-6 w-full max-w-md mx-4 relative z-10 shadow-lg">
+          <div className="bg-white rounded-2xl p-4 md:p-6 w-full max-w-md max-h-[80vh] overflow-y-auto mx-4 relative z-10 shadow-lg">
             <button
               onClick={() => setShowEditModal(false)}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform transform hover:scale-110"
@@ -302,6 +314,56 @@ export default function Consultoria() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {showConfirmModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
+          <div className="absolute inset-0 bg-black opacity-40"></div>
+
+          <div className="bg-white rounded-2xl p-6 md:p-8 w-full max-w-md mx-4 relative z-10 shadow-lg text-center">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#6d4098] mb-4">
+              Atención
+            </h2>
+
+            <div className="flex justify-center mb-4">
+              <FaExclamationTriangle className="text-[#6d4098] text-4xl" />
+            </div>
+
+            <p className="text-gray-700 mb-3">
+              ¿Está seguro que quiere pasar esta solicitud a{" "}
+              <span className="font-semibold">{consultaData.estado}</span>?
+            </p>
+
+            {consultaData.estado === "Finalizado" && (
+              <p className="text-[#6d4098] italic font-semibold mb-4">
+                Esto consumirá créditos y no podrá revertirse.
+              </p>
+            )}
+
+            {consultaData.estado === "Eliminado" && (
+              <p className="text-[#6d4098] italic font-semibold mb-4">
+                No se podrá recuperar después.
+              </p>
+            )}
+
+            <div className="flex flex-col xs:flex-row justify-center gap-3 mt-4">
+              <button
+                onClick={() => setShowConfirmModal(false)}
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition cursor-pointer text-sm md:text-base"
+                disabled={loading}
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleConfirm}
+                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition cursor-pointer text-sm md:text-base"
+                disabled={loading}
+              >
+                {loading ? "Procesando..." : "Aceptar"}
+              </button>
+            </div>
           </div>
         </div>
       )}
