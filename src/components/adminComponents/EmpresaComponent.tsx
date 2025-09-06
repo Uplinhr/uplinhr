@@ -179,7 +179,7 @@ const EmpresaComponent = () => {
         domicilio_legal_pais: domicilioPais.substring(0, 50),
         codigo_postal: codigoPostal.substring(0, 50),
         active: activeEdit,
-        id_usuario: idUsuario ?? null,
+        id_usuario: idUsuario,
       });
       toast.success("Empresa actualizada exitosamente");
       setShowModalEditar(false);
@@ -523,10 +523,9 @@ const EmpresaComponent = () => {
                 />
               </div>
 
-              {/* Usuario opcional */}
               <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Usuario (opcional)
+                  Usuario <span className="text-red-500">*</span>
                 </label>
                 <div className="max-h-40 overflow-y-auto border rounded-lg p-2">
                   {usersWithoutCompany.length > 0 ? (
@@ -545,7 +544,7 @@ const EmpresaComponent = () => {
                       </div>
                     ))
                   ) : (
-                    <p className="text-gray-500 text-sm p-2">
+                    <p className="text-red-500 text-sm p-2">
                       No hay usuarios disponibles sin empresa
                     </p>
                   )}
@@ -562,7 +561,8 @@ const EmpresaComponent = () => {
                   !email ||
                   !cuit ||
                   !condicionIva ||
-                  !tipoSocietario
+                  !tipoSocietario ||
+                  !idUsuario
                 }
                 className={`px-5 py-2.5 rounded-lg flex items-center gap-2 transition-all ${
                   loading ||
@@ -570,7 +570,8 @@ const EmpresaComponent = () => {
                   !email ||
                   !cuit ||
                   !condicionIva ||
-                  !tipoSocietario
+                  !tipoSocietario ||
+                  !idUsuario
                     ? "bg-gray-300 text-black cursor-not-allowed"
                     : "bg-green-600 text-white shadow-md cursor-pointer"
                 }`}
