@@ -290,13 +290,13 @@ export default function Consultoria() {
                 <button
                   type="button"
                   onClick={() => setShowEditModal(false)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition text-sm"
+                  className="bg-red-500 text-white cursor-pointer px-4 py-2 rounded-md hover:bg-red-600 transition text-sm"
                   disabled={loading}
                 >
                   Cancelar
                 </button>
                 <button
-                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition flex items-center justify-center gap-2 text-sm"
+                  className="bg-green-500 text-white cursor-pointer px-4 py-2 rounded-md hover:bg-green-600 transition flex items-center justify-center gap-2 text-sm"
                   type="submit"
                   disabled={loading}
                 >
@@ -340,14 +340,14 @@ export default function Consultoria() {
             <div className="flex flex-col xs:flex-row justify-center gap-3 mt-4">
               <button
                 onClick={() => setShowConfirmModal(false)}
-                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition text-sm"
+                className="bg-red-500 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-red-600 transition text-sm"
                 disabled={loading}
               >
                 Cancelar
               </button>
               <button
                 onClick={handleConfirm}
-                className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition text-sm"
+                className="bg-green-500 text-white px-4 py-2 cursor-pointer rounded-md hover:bg-green-600 transition text-sm"
                 disabled={loading}
               >
                 {loading ? "Procesando..." : "Aceptar"}
