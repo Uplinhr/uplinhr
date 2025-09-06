@@ -1058,15 +1058,15 @@ const handleSubmit = async (e: React.FormEvent) => {
 
       {(showUserList || !selectedUser) && (
         <div className="w-full lg:w-1/4 bg-white shadow-2xl p-4 flex flex-col rounded-md">
-          <p className="hidden lg:block text-[#6d4098] text-center w-[60%] rounded-md font-semibold py-1 mx-auto px-2 mb-4 text-sm">
-            Lista de usuarios
-          </p>
           <button
             className="mt-2 py-2 border border-[#6d4098] rounded-md text-white bg-[#6d4098] hover:bg-white mb-4 hover:text-[#6d4098] transition cursor-pointer"
             onClick={handleRegisterClick}
           >
             Registrar un nuevo usuario
           </button>
+          <p className="hidden lg:block text-[#6d4098] text-center w-[60%] rounded-md font-semibold py-1 mx-auto px-2 mb-4 text-sm">
+            Lista de usuarios
+          </p>
           <div className="relative mb-4">
             <FaSearch className="absolute left-3 top-3 text-gray-400" />
             <input

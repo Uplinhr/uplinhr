@@ -756,25 +756,6 @@ const EmpresaComponent = () => {
                   Usuario Asociado
                 </label>
 
-                {idUsuario && (
-                  <button
-                    type="button"
-                    className="w-full mb-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-                    onClick={() => {
-                      if (
-                        window.confirm(
-                          "¿Estás seguro de que quieres quitar el usuario asociado?"
-                        )
-                      ) {
-                        setIdUsuario(null);
-                      }
-                    }}
-                  >
-                    <FaTimes />
-                    Quitar usuario asociado actual
-                  </button>
-                )}
-
                 <div className="max-h-40 overflow-y-auto border rounded-lg p-2">
                   {usersWithoutCompany.length > 0 ? (
                     usersWithoutCompany.map((u) => (
