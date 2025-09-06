@@ -336,257 +336,257 @@ const EmpresaComponent = () => {
       </div>
 
       {showModalCrear && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4">
-          <div
-            className="absolute inset-0 bg-black opacity-40"
-            onClick={() => !loading && setShowModalCrear(false)}
-          ></div>
-          <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-md mx-auto relative z-10 shadow-xl max-h-[95vh] overflow-y-auto p-4 sm:p-6">
-            <button
-              onClick={() => !loading && setShowModalCrear(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform hover:scale-110"
-              disabled={loading}
+  <div className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4">
+    <div
+      className="absolute inset-0 bg-black opacity-40"
+      onClick={() => !loading && setShowModalCrear(false)}
+    ></div>
+    <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-md mx-auto relative z-10 shadow-xl max-h-[95vh] overflow-y-auto p-4 sm:p-6">
+      <button
+        onClick={() => !loading && setShowModalCrear(false)}
+        className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform hover:scale-110"
+        disabled={loading}
+      >
+        <FaTimes size={20} />
+      </button>
+
+      <h3 className="text-xl font-semibold text-[#6d4098] mb-5 text-center">
+        Crear Empresa
+      </h3>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+        <div className="sm:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Nombre <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+            required
+          />
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Email <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Nombre Fantasía
+          </label>
+          <input
+            type="text"
+            value={nombreFantasia}
+            onChange={(e) => setNombreFantasia(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            CUIT <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={cuit}
+            onChange={(e) => setCuit(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+            required
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Condición IVA <span className="text-red-500">*</span>
+          </label>
+          <div className="max-h-40 overflow-y-auto border rounded-lg">
+            <select
+              value={condicionIva}
+              onChange={(e) => setCondicionIva(e.target.value)}
+              className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer"
+              size={5}
             >
-              <FaTimes size={20} />
-            </button>
-            <h3 className="text-xl font-semibold text-[#6d4098] mb-5 text-center">
-              Crear Empresa
-            </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nombre <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={nombre}
-                  onChange={(e) => setNombre(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                  required
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nombre Fantasía
-                </label>
-                <input
-                  type="text"
-                  value={nombreFantasia}
-                  onChange={(e) => setNombreFantasia(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  CUIT <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={cuit}
-                  onChange={(e) => setCuit(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Condición IVA <span className="text-red-500">*</span>
-                </label>
-                <div className="max-h-40 overflow-y-auto border rounded-lg">
-                  <select
-                    value={condicionIva}
-                    onChange={(e) => setCondicionIva(e.target.value)}
-                    className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer"
-                    size={5}
-                  >
-                    <option value="Responsable inscripto">
-                      Responsable inscripto
-                    </option>
-                    <option value="Monotributista">Monotributista</option>
-                    <option value="Exento">Exento</option>
-                    <option value="No_Alcanzado">No Alcanzado</option>
-                    <option value="Otro">Otro</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Tipo Societario <span className="text-red-500">*</span>
-                </label>
-                <div className="max-h-40 overflow-y-auto border rounded-lg">
-                  <select
-                    value={tipoSocietario}
-                    onChange={(e) => setTipoSocietario(e.target.value)}
-                    className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer"
-                    size={5}
-                  >
-                    <option value="SA">SA</option>
-                    <option value="SAU">SAU</option>
-                    <option value="SRL">SRL</option>
-                    <option value="SAS">SAS</option>
-                    <option value="SCS">SCS</option>
-                    <option value="SCA">SCA</option>
-                    <option value="Cooperativa">Cooperativa</option>
-                    <option value="Asociacion civil">Asociación civil</option>
-                    <option value="Fundacion">Fundación</option>
-                    <option value="Sociedad de hecho">Sociedad de hecho</option>
-                    <option value="Otro">Otro</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Actividad Principal
-                </label>
-                <input
-                  type="text"
-                  value={actividadPrincipal}
-                  onChange={(e) => setActividadPrincipal(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Calle y número
-                </label>
-                <input
-                  type="text"
-                  value={domicilioCalle}
-                  onChange={(e) => setDomicilioCalle(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Ciudad
-                </label>
-                <input
-                  type="text"
-                  value={domicilioCiudad}
-                  onChange={(e) => setDomicilioCiudad(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  País
-                </label>
-                <input
-                  type="text"
-                  value={domicilioPais}
-                  onChange={(e) => setDomicilioPais(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Código postal
-                </label>
-                <input
-                  type="text"
-                  value={codigoPostal}
-                  onChange={(e) => setCodigoPostal(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
-                  maxLength={50}
-                />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Usuario <span className="text-red-500">*</span>
-                </label>
-                <div className="max-h-40 overflow-y-auto border rounded-lg p-2">
-                  {usersWithoutCompany.length > 0 ? (
-                    usersWithoutCompany.map((u) => (
-                      <div
-                        key={u.id}
-                        className={`p-2 mb-1 rounded-md cursor-pointer transition-colors ${
-                          idUsuario === u.id
-                            ? "bg-[#6d4098] text-white"
-                            : "bg-gray-100 hover:bg-gray-200"
-                        }`}
-                        onClick={() => setIdUsuario(u.id)}
-                      >
-                        <div className="font-medium">{u.nombre}</div>
-                        <div className="text-xs opacity-80">{u.email}</div>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-red-500 text-sm p-2">
-                      No hay usuarios disponibles sin empresa
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 flex justify-center">
-              <button
-                onClick={handleSubmitCrear}
-                disabled={
-                  loading ||
-                  !nombre ||
-                  !email ||
-                  !cuit ||
-                  !condicionIva ||
-                  !tipoSocietario ||
-                  !idUsuario
-                }
-                className={`bg-gray-300 text-black px-5 py-2.5 rounded-lg cursor-pointer flex items-center gap-2 ${
-                  !loading &&
-                  !nombre &&
-                  !email &&
-                  !cuit &&
-                  !condicionIva &&
-                  !tipoSocietario &&
-                  !idUsuario
-                    ? ""
-                    : "bg-[#6d4098] text-white"
-                }`}
-              >
-                {loading ? (
-                  <>
-                    <FaSpinner className="animate-spin" /> Cargando...
-                  </>
-                ) : (
-                  "Crear Empresa"
-                )}
-              </button>
-            </div>
+              <option value="Responsable inscripto">Responsable inscripto</option>
+              <option value="Monotributista">Monotributista</option>
+              <option value="Exento">Exento</option>
+              <option value="No_Alcanzado">No Alcanzado</option>
+              <option value="Otro">Otro</option>
+            </select>
           </div>
         </div>
-      )}
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Tipo Societario <span className="text-red-500">*</span>
+          </label>
+          <div className="max-h-40 overflow-y-auto border rounded-lg">
+            <select
+              value={tipoSocietario}
+              onChange={(e) => setTipoSocietario(e.target.value)}
+              className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer"
+              size={5}
+            >
+              <option value="SA">SA</option>
+              <option value="SAU">SAU</option>
+              <option value="SRL">SRL</option>
+              <option value="SAS">SAS</option>
+              <option value="SCS">SCS</option>
+              <option value="SCA">SCA</option>
+              <option value="Cooperativa">Cooperativa</option>
+              <option value="Asociacion civil">Asociación civil</option>
+              <option value="Fundacion">Fundación</option>
+              <option value="Sociedad de hecho">Sociedad de hecho</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Actividad Principal
+          </label>
+          <input
+            type="text"
+            value={actividadPrincipal}
+            onChange={(e) => setActividadPrincipal(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+          />
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Calle y número
+          </label>
+          <input
+            type="text"
+            value={domicilioCalle}
+            onChange={(e) => setDomicilioCalle(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Ciudad
+          </label>
+          <input
+            type="text"
+            value={domicilioCiudad}
+            onChange={(e) => setDomicilioCiudad(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            País
+          </label>
+          <input
+            type="text"
+            value={domicilioPais}
+            onChange={(e) => setDomicilioPais(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+          />
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Código postal
+          </label>
+          <input
+            type="text"
+            value={codigoPostal}
+            onChange={(e) => setCodigoPostal(e.target.value)}
+            className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
+            maxLength={50}
+          />
+        </div>
+
+        <div className="sm:col-span-2">
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Usuario <span className="text-red-500">*</span>
+          </label>
+          <div className="max-h-40 overflow-y-auto border rounded-lg p-2">
+            {usersWithoutCompany.length > 0 ? (
+              usersWithoutCompany.map((u) => (
+                <div
+                  key={u.id}
+                  className={`p-2 mb-1 rounded-md cursor-pointer transition-colors ${
+                    idUsuario === u.id
+                      ? "bg-[#6d4098] text-white"
+                      : "bg-gray-100 hover:bg-gray-200"
+                  }`}
+                  onClick={() => setIdUsuario(u.id)}
+                >
+                  <div className="font-medium">{u.nombre}</div>
+                  <div className="text-xs opacity-80">{u.email}</div>
+                </div>
+              ))
+            ) : (
+              <p className="text-red-500 text-sm p-2">
+                No hay usuarios disponibles sin empresa
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 flex justify-center">
+        <button
+          onClick={handleSubmitCrear}
+          disabled={
+            loading ||
+            !nombre ||
+            !email ||
+            !cuit ||
+            !condicionIva ||
+            !tipoSocietario ||
+            !idUsuario
+          }
+          className={`px-5 py-2.5 rounded-lg flex items-center gap-2 transition-all ${
+            loading ||
+            !nombre ||
+            !email ||
+            !cuit ||
+            !condicionIva ||
+            !tipoSocietario ||
+            !idUsuario
+              ? "bg-gray-300 text-black cursor-not-allowed"
+              : "bg-green-600 text-white shadow-md cursor-pointer"
+          }`}
+        >
+          {loading ? (
+            <>
+              <FaSpinner className="animate-spin" /> Cargando...
+            </>
+          ) : (
+            "Crear Empresa"
+          )}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
 
       {showModalEditar && (
         <div className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4">
