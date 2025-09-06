@@ -217,7 +217,8 @@ const UserDashboard = () => {
         <motion.a
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          href="#"
+          href="https://app.uplinhr.com/adquirir-servicios-adicionales"
+          target="_blank"
           className="bg-[#72bf58] border-4 border-[#72bf58] py-2 px-5 rounded-lg text-white font-semibold text-center cursor-pointer"
         >
           Adquirir Servicios Adicionales
@@ -269,6 +270,7 @@ const UserDashboard = () => {
                 Comentarios
               </label>
               <textarea
+                maxLength={150}
                 id="comentarios"
                 value={comentarios}
                 onChange={(e) => setComentarios(e.target.value)}
@@ -326,6 +328,7 @@ const UserDashboard = () => {
               </label>
               <textarea
                 id="infoBusqueda"
+                maxLength={150}
                 value={infoBusqueda}
                 onChange={(e) => setInfoBusqueda(e.target.value)}
                 className="w-full px-4 py-3 rounded-xl bg-white border border-[#6D4098] text-black focus:outline-none focus:ring-2 focus:ring-[#502b7d]"

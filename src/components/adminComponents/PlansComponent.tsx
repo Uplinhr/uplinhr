@@ -163,7 +163,9 @@ export default function PlansComponent() {
               <h2 className="text-lg md:text-xl mb-1">{plan.nombre}</h2>
               <p className="mb-2 text-sm md:text-base">
                 USD {plan.precio}/mes{" "}
-                <span className="text-xs md:text-sm text-gray-500">+ impuestos</span>
+                <span className="text-xs md:text-sm text-gray-500">
+                  + impuestos
+                </span>
               </p>
               <p className="italic text-xs md:text-sm text-gray-500 mb-3 md:mb-4">
                 Última modificación: {formatDate(plan.ultima_mod)}
@@ -201,6 +203,7 @@ export default function PlansComponent() {
                   Nombre
                 </label>
                 <input
+                  maxLength={50}
                   type="text"
                   name="nombre"
                   value={formData.nombre || ""}
@@ -358,6 +361,7 @@ export default function PlansComponent() {
                   Nombre
                 </label>
                 <input
+                  maxLength={50}
                   type="text"
                   name="nombre"
                   value={formData.nombre || ""}

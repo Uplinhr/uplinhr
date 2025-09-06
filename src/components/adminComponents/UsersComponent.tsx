@@ -385,6 +385,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     onChange={handleInputChange}
                     className="w-full border rounded-md px-3 py-2 text-gray-600"
                     required
+                    maxLength={50}
                   />
                 </div>
                 <div>
@@ -392,6 +393,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     Apellido
                   </label>
                   <input
+                  maxLength={50}
                     type="text"
                     name="apellido"
                     value={formData.apellido}
@@ -458,6 +460,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   Email
                 </label>
                 <input
+                maxLength={50}
                   type="email"
                   name="email"
                   value={formData.email}
@@ -508,6 +511,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             </h3>
             <form onSubmit={handleRegister} className="space-y-4">
               <input
+              maxLength={50}
                 type="text"
                 placeholder="Nombre"
                 value={registerData.nombre}
@@ -528,6 +532,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 required
               />
               <input
+              maxLength={50}
                 type="email"
                 placeholder="Email"
                 value={registerData.email}
@@ -568,6 +573,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               <div className="relative">
                 <input
                   type={showConfirmPassword ? "text" : "password"}
+                  maxLength={50}
                   placeholder="Repetir contraseña"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -597,6 +603,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               <input
                 type="text"
                 placeholder="Número de celular (opcional)"
+                maxLength={50}
                 value={registerData.num_celular}
                 onChange={(e) =>
                   setRegisterData({
@@ -653,6 +660,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             <form onSubmit={handleResetPassword} className="space-y-4">
               <div className="relative">
                 <input
+                maxLength={50}
                   type={showPassword ? "text" : "password"}
                   placeholder="Nueva contraseña"
                   value={password}

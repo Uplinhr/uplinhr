@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useAdminStore } from "@/store/useAdminStore";
 import { Busqueda } from "@/interfaces";
-import { FaTimes, FaTrash } from "react-icons/fa";
+import { FaTimes, FaTrash, FaExternalLinkAlt } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar } from "react-icons/fi";
 
@@ -93,22 +93,26 @@ export default function SolicitudesComponent() {
     }
   };
 
+  const abrirCalendario = () => {
+    window.open("https://calendar.google.com/calendar/u/0/r/eventedit?state=%5Bnull%2Cnull%2Cnull%2Cnull%2C%5B13%5D%5D", "_blank");
+  };
+
   const filteredBusquedas = busquedas?.filter(
     (b) => b?.estado === filtroEstado
   );
 
   return (
-    <div className="p-6 font-poppins">
-      <h1 className="text-xl md:text-2xl text-center font-bold text-white bg-[#6d4098] p-3 md:p-4 rounded-lg mb-4 md:mb-6">
+    <div className="p-4 md:p-6 font-poppins">
+      <h1 className="text-lg md:text-2xl text-center font-bold text-white bg-[#6d4098] p-3 md:p-4 rounded-lg mb-4 md:mb-6">
         Solicitudes de búsqueda
       </h1>
 
-      <div className="flex justify-center gap-4 mb-6 flex-wrap">
+      <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-4 md:mb-6">
         {estados.map((estado) => (
           <button
             key={estado}
             onClick={() => setFiltroEstado(estado)}
-            className={`px-4 py-2 rounded-md border border-[#6d4098] cursor-pointer transition-transform transform hover:scale-105 ${
+            className={`px-3 py-1 md:px-4 md:py-2 rounded-md border border-[#6d4098] cursor-pointer transition-transform transform hover:scale-105 text-sm md:text-base ${
               filtroEstado === estado
                 ? "bg-[#6d4098] text-white"
                 : "bg-white text-[#6d4098]"
@@ -119,20 +123,26 @@ export default function SolicitudesComponent() {
         ))}
       </div>
 
-      <div className="space-y-4">
+      <div className="space-y-3 md:space-y-4">
         {filteredBusquedas.length > 0 ? (
           filteredBusquedas.map((busqueda: Busqueda) => (
             <div
               key={busqueda.id}
               className="border border-[#6d4098] rounded-xl shadow-md overflow-hidden"
             >
-              <div className="flex items-center justify-between bg-gray-100 px-4 py-2 cursor-pointer">
-                <span className="text-[#6d4098] font-semibold">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-100 p-3 md:px-4 md:py-2 gap-2">
+                <span className="text-[#6d4098] font-semibold text-sm md:text-base">
                   {busqueda.usuario?.nombre}: búsqueda número {busqueda.id}
                 </span>
-                <div className="flex items-center gap-3">
-                  <button className="flex items-center gap-1 bg-[#6d4098] text-white px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-105">
-                    <FiCalendar /> Agendar reunión
+                <div className="flex items-center justify-end sm:justify-start gap-2 md:gap-3">
+                  <button 
+                    className="flex items-center gap-1 bg-[#6d4098] text-white px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-105 text-xs md:text-sm"
+                    onClick={abrirCalendario}
+                  >
+                    <FiCalendar className="text-xs md:text-base" /> 
+                    <span className="hidden xs:inline">Agendar</span> 
+                    <span className="xs:hidden">Reunión</span>
+                    <FaExternalLinkAlt className="hidden sm:inline text-xs ml-1" />
                   </button>
 
                   {busqueda.estado !== "Eliminado" && (
@@ -142,12 +152,12 @@ export default function SolicitudesComponent() {
                           className="flex items-center gap-1 text-red-500 px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-110"
                           onClick={() => handleEliminar(busqueda.id)}
                         >
-                          <FaTrash />
+                          <FaTrash className="text-sm md:text-base" />
                         </button>
                       ) : (
                         <FiEdit
                           className="cursor-pointer text-gray-700 transition-transform transform hover:scale-110"
-                          size={20}
+                          size={18}
                           onClick={() => openEditModal(busqueda.id)}
                         />
                       )}
@@ -156,27 +166,27 @@ export default function SolicitudesComponent() {
 
                   <FiChevronDown
                     className="cursor-pointer text-gray-700 transition-transform transform hover:scale-110"
-                    size={20}
+                    size={18}
                     onClick={() => toggleExpand(busqueda.id)}
                   />
                 </div>
               </div>
 
               {expandedId === busqueda.id && (
-                <div className="p-4 bg-white space-y-2">
+                <div className="p-3 md:p-4 bg-white space-y-2 text-sm md:text-base">
                   {busqueda.usuario && (
-                    <p>
+                    <p className="break-words">
                       <strong>Usuario:</strong> {busqueda.usuario.nombre} (
                       {busqueda.usuario.email})
                     </p>
                   )}
-                  <p>
+                  <p className="break-words">
                     <strong>Info búsqueda:</strong> {busqueda.info_busqueda}
                   </p>
                   <p>
                     <strong>Créditos usados:</strong> {busqueda.creditos_usados}
                   </p>
-                  <p>
+                  <p className="break-words">
                     <strong>Observaciones:</strong> {busqueda.observaciones}
                   </p>
                   <p>
@@ -196,7 +206,7 @@ export default function SolicitudesComponent() {
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-400">
+          <p className="text-center text-gray-400 text-sm md:text-base">
             No hay solicitudes disponibles en este estado.
           </p>
         )}
@@ -206,7 +216,7 @@ export default function SolicitudesComponent() {
         <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
           <div className="absolute inset-0 bg-black opacity-40 pointer-events-auto"></div>
 
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md mx-4 relative z-10 shadow-lg pointer-events-auto">
+          <div className="bg-white rounded-2xl p-4 md:p-6 w-full max-w-md mx-4 relative z-10 shadow-lg pointer-events-auto">
             <button
               onClick={() => setShowEditModal(false)}
               className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform transform hover:scale-110"
@@ -214,25 +224,26 @@ export default function SolicitudesComponent() {
             >
               <FaTimes size={20} />
             </button>
-            <h3 className="text-xl font-semibold text-[#6d4098] mb-6 text-center">
+            <h3 className="text-lg md:text-xl font-semibold text-[#6d4098] mb-4 md:mb-6 text-center">
               Editar búsqueda
             </h3>
 
-            <form onSubmit={handleEditSubmit} className="space-y-4">
+            <form onSubmit={handleEditSubmit} className="space-y-3 md:space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Comentarios
                 </label>
-                <input
-                  type="text"
+                <textarea
                   value={busquedaData.info_busqueda}
+                  maxLength={150}
                   onChange={(e) =>
                     setBusquedaData({
                       ...busquedaData,
                       info_busqueda: e.target.value,
                     })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 transition-transform transform hover:scale-105"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm md:text-base"
+                  rows={3}
                   required
                 />
               </div>
@@ -250,7 +261,7 @@ export default function SolicitudesComponent() {
                       creditos_usados: Number(e.target.value),
                     })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 transition-transform transform hover:scale-105"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm md:text-base"
                   required
                 />
               </div>
@@ -259,8 +270,8 @@ export default function SolicitudesComponent() {
                 <label className="block text-sm font-medium text-gray-700">
                   Observaciones
                 </label>
-                <input
-                  type="text"
+                <textarea
+                  maxLength={150}
                   value={busquedaData.observaciones}
                   onChange={(e) =>
                     setBusquedaData({
@@ -268,7 +279,8 @@ export default function SolicitudesComponent() {
                       observaciones: e.target.value,
                     })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 transition-transform transform hover:scale-105"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm md:text-base"
+                  rows={3}
                 />
               </div>
 
@@ -281,7 +293,7 @@ export default function SolicitudesComponent() {
                   onChange={(e) =>
                     setBusquedaData({ ...busquedaData, estado: e.target.value })
                   }
-                  className="w-full border rounded-md px-3 py-2 text-gray-600 transition-transform transform hover:scale-105"
+                  className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm md:text-base cursor-pointer"
                 >
                   {estados.map((estado) => (
                     <option key={estado} value={estado}>
@@ -291,17 +303,17 @@ export default function SolicitudesComponent() {
                 </select>
               </div>
 
-              <div className="flex justify-center gap-4 pt-4">
+              <div className="flex flex-col xs:flex-row justify-center gap-3 pt-3 md:pt-4">
                 <button
                   type="button"
                   onClick={() => setShowEditModal(false)}
-                  className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition-transform transform hover:scale-105 cursor-pointer"
+                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition cursor-pointer text-sm md:text-base"
                   disabled={loading}
                 >
                   Cancelar
                 </button>
                 <button
-                  className="bg-green-500 text-white px-6 py-2 rounded-md hover:bg-green-600 transition-transform transform hover:scale-105 cursor-pointer flex items-center justify-center gap-2"
+                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition cursor-pointer flex items-center justify-center gap-2 text-sm md:text-base"
                   type="submit"
                   disabled={loading}
                 >

@@ -330,48 +330,52 @@ const EmpresaComponent = () => {
       </div>
 
       {showModalCrear && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4">
           <div
             className="absolute inset-0 bg-black opacity-40"
             onClick={() => !loading && setShowModalCrear(false)}
           ></div>
-          <div className="bg-white rounded-2xl w-full max-w-md mx-4 relative z-10 shadow-lg max-h-[90vh] overflow-y-auto p-4 md:p-6">
+          <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-md mx-auto relative z-10 shadow-xl max-h-[95vh] overflow-y-auto p-4 sm:p-6">
             <button
               onClick={() => !loading && setShowModalCrear(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform hover:scale-110"
               disabled={loading}
             >
-              <FaTimes />
+              <FaTimes size={20} />
             </button>
-            <h3 className="text-lg md:text-xl font-semibold text-[#6d4098] mb-4 md:mb-6 text-center">
+            <h3 className="text-xl font-semibold text-[#6d4098] mb-5 text-center">
               Crear Empresa
             </h3>
 
-            <div className="space-y-3 md:space-y-4">
-              <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nombre
+                  Nombre <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
+                  required
                 />
               </div>
-              <div>
+
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
+                  required
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre Fantasía
@@ -380,27 +384,30 @@ const EmpresaComponent = () => {
                   type="text"
                   value={nombreFantasia}
                   onChange={(e) => setNombreFantasia(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  CUIT
+                  CUIT <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={cuit}
                   onChange={(e) => setCuit(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
+                  required
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Condición IVA
+                  Condición IVA <span className="text-red-500">*</span>
                 </label>
-                <div className="max-h-40 overflow-y-auto border rounded-md">
+                <div className="max-h-40 overflow-y-auto border rounded-lg">
                   <select
                     value={condicionIva}
                     onChange={(e) => setCondicionIva(e.target.value)}
@@ -417,11 +424,12 @@ const EmpresaComponent = () => {
                   </select>
                 </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Tipo Societario
+                  Tipo Societario <span className="text-red-500">*</span>
                 </label>
-                <div className="max-h-40 overflow-y-auto border rounded-md">
+                <div className="max-h-40 overflow-y-auto border rounded-lg">
                   <select
                     value={tipoSocietario}
                     onChange={(e) => setTipoSocietario(e.target.value)}
@@ -442,7 +450,8 @@ const EmpresaComponent = () => {
                   </select>
                 </div>
               </div>
-              <div>
+
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Actividad Principal
                 </label>
@@ -450,11 +459,12 @@ const EmpresaComponent = () => {
                   type="text"
                   value={actividadPrincipal}
                   onChange={(e) => setActividadPrincipal(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
-              <div>
+
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Calle y número
                 </label>
@@ -462,10 +472,11 @@ const EmpresaComponent = () => {
                   type="text"
                   value={domicilioCalle}
                   onChange={(e) => setDomicilioCalle(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Ciudad
@@ -474,10 +485,11 @@ const EmpresaComponent = () => {
                   type="text"
                   value={domicilioCiudad}
                   onChange={(e) => setDomicilioCiudad(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   País
@@ -486,11 +498,12 @@ const EmpresaComponent = () => {
                   type="text"
                   value={domicilioPais}
                   onChange={(e) => setDomicilioPais(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
-              <div>
+
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Código postal
                 </label>
@@ -498,101 +511,106 @@ const EmpresaComponent = () => {
                   type="text"
                   value={codigoPostal}
                   onChange={(e) => setCodigoPostal(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Usuario
-                </label>
-                <div className="max-h-40 overflow-y-auto border rounded-md">
-                  <select
-                    value={idUsuario || ""}
-                    onChange={(e) => setIdUsuario(Number(e.target.value))}
-                    className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer text-sm"
-                    size={5}
-                  >
-                    {usersWithoutCompany.map((u) => (
-                      <option key={u.id} value={u.id} className="text-sm">
-                        {u.nombre}{" "}
-                        <span className="text-xs text-gray-500">
-                          ({u.email})
-                        </span>
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {usersWithoutCompany.length === 0 && (
-                  <p className="text-red-500 text-xs mt-1">
-                    No hay usuarios disponibles sin empresa
-                  </p>
-                )}
-              </div>
 
-              <div className="mt-4 flex justify-end">
-                <button
-                  onClick={handleSubmitCrear}
-                  disabled={loading}
-                  className="bg-[#6d4098] text-white px-4 py-2 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2"
-                >
-                  {loading ? (
-                    <>
-                      <FaSpinner className="animate-spin" /> Cargando...
-                    </>
+              <div className="sm:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Usuario <span className="text-red-500">*</span>
+                </label>
+                <div className="max-h-40 overflow-y-auto border rounded-lg p-2">
+                  {usersWithoutCompany.length > 0 ? (
+                    usersWithoutCompany.map((u) => (
+                      <div
+                        key={u.id}
+                        className={`p-2 mb-1 rounded-md cursor-pointer transition-colors ${
+                          idUsuario === u.id
+                            ? "bg-[#6d4098] text-white"
+                            : "bg-gray-100 hover:bg-gray-200"
+                        }`}
+                        onClick={() => setIdUsuario(u.id)}
+                      >
+                        <div className="font-medium">{u.nombre}</div>
+                        <div className="text-xs opacity-80">{u.email}</div>
+                      </div>
+                    ))
                   ) : (
-                    "Crear Empresa"
+                    <p className="text-red-500 text-sm p-2">
+                      No hay usuarios disponibles sin empresa
+                    </p>
                   )}
-                </button>
+                </div>
               </div>
+            </div>
+
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={handleSubmitCrear}
+                disabled={loading}
+                className="bg-[#6d4098] text-white px-5 py-2.5 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2 transition-colors"
+              >
+                {loading ? (
+                  <>
+                    <FaSpinner className="animate-spin" /> Cargando...
+                  </>
+                ) : (
+                  "Crear Empresa"
+                )}
+              </button>
             </div>
           </div>
         </div>
       )}
 
       {showModalEditar && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4">
           <div
             className="absolute inset-0 bg-black opacity-40"
             onClick={() => !loading && setShowModalEditar(false)}
           ></div>
-          <div className="bg-white rounded-2xl w-full max-w-md mx-4 relative z-10 shadow-lg max-h-[90vh] overflow-y-auto p-4 md:p-6">
+          <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-md mx-auto relative z-10 shadow-xl max-h-[95vh] overflow-y-auto p-4 sm:p-6">
             <button
               onClick={() => !loading && setShowModalEditar(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform hover:scale-110"
               disabled={loading}
             >
-              <FaTimes />
+              <FaTimes size={20} />
             </button>
-            <h3 className="text-lg md:text-xl font-semibold text-[#6d4098] mb-4 md:mb-6 text-center">
+            <h3 className="text-xl font-semibold text-[#6d4098] mb-5 text-center">
               Editar Empresa
             </h3>
 
-            <div className="space-y-3 md:space-y-4">
-              <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Nombre
+                  Nombre <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={nombre}
                   onChange={(e) => setNombre(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
+                  required
                 />
               </div>
-              <div>
+
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Email
+                  Email <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
+                  required
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre Fantasía
@@ -601,27 +619,30 @@ const EmpresaComponent = () => {
                   type="text"
                   value={nombreFantasia}
                   onChange={(e) => setNombreFantasia(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  CUIT
+                  CUIT <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={cuit}
                   onChange={(e) => setCuit(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
+                  required
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Condición IVA
+                  Condición IVA <span className="text-red-500">*</span>
                 </label>
-                <div className="max-h-40 overflow-y-auto border rounded-md">
+                <div className="max-h-40 overflow-y-auto border rounded-lg">
                   <select
                     value={condicionIva}
                     onChange={(e) => setCondicionIva(e.target.value)}
@@ -638,11 +659,12 @@ const EmpresaComponent = () => {
                   </select>
                 </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Tipo Societario
+                  Tipo Societario <span className="text-red-500">*</span>
                 </label>
-                <div className="max-h-40 overflow-y-auto border rounded-md">
+                <div className="max-h-40 overflow-y-auto border rounded-lg">
                   <select
                     value={tipoSocietario}
                     onChange={(e) => setTipoSocietario(e.target.value)}
@@ -663,7 +685,8 @@ const EmpresaComponent = () => {
                   </select>
                 </div>
               </div>
-              <div>
+
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Actividad Principal
                 </label>
@@ -671,11 +694,12 @@ const EmpresaComponent = () => {
                   type="text"
                   value={actividadPrincipal}
                   onChange={(e) => setActividadPrincipal(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
-              <div>
+
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Calle y número
                 </label>
@@ -683,10 +707,11 @@ const EmpresaComponent = () => {
                   type="text"
                   value={domicilioCalle}
                   onChange={(e) => setDomicilioCalle(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Ciudad
@@ -695,10 +720,11 @@ const EmpresaComponent = () => {
                   type="text"
                   value={domicilioCiudad}
                   onChange={(e) => setDomicilioCiudad(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   País
@@ -707,11 +733,12 @@ const EmpresaComponent = () => {
                   type="text"
                   value={domicilioPais}
                   onChange={(e) => setDomicilioPais(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
-              <div>
+
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Código postal
                 </label>
@@ -719,49 +746,70 @@ const EmpresaComponent = () => {
                   type="text"
                   value={codigoPostal}
                   onChange={(e) => setCodigoPostal(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg cursor-pointer"
+                  className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-[#6d4098] focus:border-transparent"
                   maxLength={50}
                 />
               </div>
-                <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Usuario
-                </label>
-                <div className="max-h-40 overflow-y-auto border rounded-md">
-                  <select
-                    value={idUsuario || ""}
-                    onChange={(e) => setIdUsuario(Number(e.target.value))}
-                    className="w-full px-3 py-2 text-[#6d4098] focus:outline-none focus:ring-2 focus:ring-[#6d4098] bg-white cursor-pointer text-sm"
-                    size={5}
-                  >
-                    {usersWithoutCompany.map((u) => (
-                      <option key={u.id} value={u.id} className="text-sm">
-                        {u.nombre}{" "}
-                        <span className="text-xs text-gray-500">
-                          ({u.email})
-                        </span>
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {usersWithoutCompany.length === 0 && (
-                  <p className="text-red-500 text-xs mt-1">
-                    No hay usuarios disponibles sin empresa
-                  </p>
-                )}
-              </div>
 
-              <div>
+              <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Estado
+                  Usuario Asociado
                 </label>
-                <div className="flex space-x-2 md:space-x-4">
+
+                {idUsuario && (
                   <button
                     type="button"
-                    className={`px-4 py-2 md:px-6 md:py-2 rounded-full text-xs md:text-sm font-medium cursor-pointer ${
+                    className="w-full mb-3 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          "¿Estás seguro de que quieres quitar el usuario asociado?"
+                        )
+                      ) {
+                        setIdUsuario(null);
+                      }
+                    }}
+                  >
+                    <FaTimes />
+                    Quitar usuario asociado actual
+                  </button>
+                )}
+
+                <div className="max-h-40 overflow-y-auto border rounded-lg p-2">
+                  {usersWithoutCompany.length > 0 ? (
+                    usersWithoutCompany.map((u) => (
+                      <div
+                        key={u.id}
+                        className={`p-2 mb-1 rounded-md cursor-pointer transition-colors ${
+                          idUsuario === u.id
+                            ? "bg-[#6d4098] text-white"
+                            : "bg-gray-100 hover:bg-gray-200"
+                        }`}
+                        onClick={() => setIdUsuario(u.id)}
+                      >
+                        <div className="font-medium">{u.nombre}</div>
+                        <div className="text-xs opacity-80">{u.email}</div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-red-500 text-sm p-2">
+                      No hay usuarios disponibles sin empresa
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Estado <span className="text-red-500">*</span>
+                </label>
+                <div className="flex space-x-3">
+                  <button
+                    type="button"
+                    className={`flex-1 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-colors ${
                       activeEdit
-                        ? "bg-green-600 text-white"
-                        : "bg-gray-200 text-gray-700"
+                        ? "bg-green-600 text-white shadow-md"
+                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     }`}
                     onClick={() => setActiveEdit(true)}
                     disabled={loading}
@@ -770,10 +818,10 @@ const EmpresaComponent = () => {
                   </button>
                   <button
                     type="button"
-                    className={`px-4 py-2 md:px-6 md:py-2 rounded-full text-xs md:text-sm font-medium cursor-pointer ${
+                    className={`flex-1 py-2.5 rounded-lg text-sm font-medium cursor-pointer transition-colors ${
                       !activeEdit
-                        ? "bg-red-600 text-white"
-                        : "bg-gray-200 text-gray-700"
+                        ? "bg-red-600 text-white shadow-md"
+                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     }`}
                     onClick={() => setActiveEdit(false)}
                     disabled={loading}
@@ -782,167 +830,180 @@ const EmpresaComponent = () => {
                   </button>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-4 flex justify-end">
-                <button
-                  onClick={handleSubmitEditar}
-                  disabled={loading}
-                  className="bg-[#6d4098] text-white px-4 py-2 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2"
-                >
-                  {loading ? (
-                    <>
-                      <FaSpinner className="animate-spin" /> Cargando...
-                    </>
-                  ) : (
-                    "Guardar Cambios"
-                  )}
-                </button>
-              </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={handleSubmitEditar}
+                disabled={loading}
+                className="bg-[#6d4098] text-white px-5 py-2.5 rounded-lg hover:bg-[#512e73] cursor-pointer flex items-center gap-2 transition-colors"
+              >
+                {loading ? (
+                  <>
+                    <FaSpinner className="animate-spin" /> Cargando...
+                  </>
+                ) : (
+                  "Guardar Cambios"
+                )}
+              </button>
             </div>
           </div>
         </div>
       )}
 
       {showModalDetalles && empresaDetalles && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-3 sm:p-4">
           <div
             className="absolute inset-0 bg-black opacity-40"
             onClick={() => setShowModalDetalles(false)}
           ></div>
-          <div className="bg-white rounded-2xl w-full max-w-2xl mx-4 relative z-10 shadow-lg max-h-[90vh] overflow-y-auto p-4 md:p-6">
+          <div className="bg-white rounded-xl sm:rounded-2xl w-full max-w-2xl mx-auto relative z-10 shadow-xl max-h-[95vh] overflow-y-auto p-4 sm:p-6">
             <button
               onClick={() => setShowModalDetalles(false)}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer transition-transform hover:scale-110"
             >
-              <FaTimes />
+              <FaTimes size={20} />
             </button>
-            <h3 className="text-lg md:text-xl font-semibold text-[#6d4098] mb-4 md:mb-6 text-center">
+            <h3 className="text-xl font-semibold text-[#6d4098] mb-5 text-center">
               Detalles Completos de la Empresa
             </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre
                 </label>
-                <p className="px-3 py-2 rounded-lg bg-opacity-10 text-[#6d4098] font-semibold">
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
                   {empresaDetalles.nombre}
-                </p>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email
                 </label>
-                <p className="px-3 py-2 rounded-lg bg-opacity-10 text-[#6d4098] font-semibold">
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
                   {empresaDetalles.email}
-                </p>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Nombre Fantasía
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
-                  {empresaDetalles.nombre_fantasia}
-                </p>
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
+                  {empresaDetalles.nombre_fantasia || "N/A"}
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   CUIT
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
                   {empresaDetalles.cuit}
-                </p>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Condición IVA
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
                   {empresaDetalles.condicion_iva}
-                </p>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Tipo Societario
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
                   {empresaDetalles.tipo_societario}
-                </p>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Actividad Principal
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
                   {empresaDetalles.actividad_principal || "N/A"}
-                </p>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Domicilio
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
-                  {empresaDetalles.domicilio_legal_calle_numero}
-                </p>
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
+                  {empresaDetalles.domicilio_legal_calle_numero || "N/A"}
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Ciudad
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
-                  {empresaDetalles.domicilio_legal_ciudad}
-                </p>
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
+                  {empresaDetalles.domicilio_legal_ciudad || "N/A"}
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   País
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
-                  {empresaDetalles.domicilio_legal_pais}
-                </p>
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
+                  {empresaDetalles.domicilio_legal_pais || "N/A"}
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Código Postal
                 </label>
-                <p className="px-3 py-2 rounded-lg  bg-opacity-10 text-[#6d4098] font-semibold">
-                  {empresaDetalles.codigo_postal}
-                </p>
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
+                  {empresaDetalles.codigo_postal || "N/A"}
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Estado
                 </label>
-                <p
-                  className={`px-3 py-2 rounded-lg text-white text-center font-semibold ${
+                <div
+                  className={`px-3 py-2 rounded-lg text-white text-center font-medium ${
                     empresaDetalles.active ? "bg-green-500" : "bg-red-500"
                   }`}
                 >
                   {empresaDetalles.active ? "ACTIVO" : "INACTIVO"}
-                </p>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Fecha de Alta
                 </label>
-                <p className="px-3 py-2 rounded-lg bg-opacity-10 text-[#6d4098] font-semibold">
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
                   {formatDate(empresaDetalles.fecha_alta ?? undefined)}
-                </p>
+                </div>
               </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Última Modificación
                 </label>
-                <p className="px-3 py-2 rounded-lg bg-opacity-10 text-[#6d4098] font-semibold">
+                <div className="px-3 py-2 rounded-lg bg-gray-50 border border-gray-200">
                   {formatDate(empresaDetalles.ultima_mod ?? undefined)}
-                </p>
+                </div>
               </div>
             </div>
 
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setShowModalDetalles(false)}
-                className="bg-[#6d4098] text-white px-4 py-2 rounded-lg hover:bg-[#512e73] cursor-pointer"
+                className="bg-[#6d4098] text-white px-5 py-2.5 rounded-lg hover:bg-[#512e73] cursor-pointer transition-colors"
               >
                 Cerrar
               </button>
