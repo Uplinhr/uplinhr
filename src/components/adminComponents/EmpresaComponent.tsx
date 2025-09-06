@@ -179,7 +179,7 @@ const EmpresaComponent = () => {
         domicilio_legal_pais: domicilioPais.substring(0, 50),
         codigo_postal: codigoPostal.substring(0, 50),
         active: activeEdit,
-        id_usuario: idUsuario,
+        id_usuario: idUsuario ?? null,
       });
       toast.success("Empresa actualizada exitosamente");
       setShowModalEditar(false);
