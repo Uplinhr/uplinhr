@@ -44,8 +44,12 @@ export default function UsersComponent() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showRenewModal, setShowRenewModal] = useState(false);
   const [selectedCredito, setSelectedCredito] = useState<Creditos | null>(null);
-  const [selectedBusqueda, setSelectedBusqueda] = useState<Busqueda | null>(null);
-  const [selectedConsulta, setSelectedConsulta] = useState<Consulta | null>(null);
+  const [selectedBusqueda, setSelectedBusqueda] = useState<Busqueda | null>(
+    null
+  );
+  const [selectedConsulta, setSelectedConsulta] = useState<Consulta | null>(
+    null
+  );
   const [password, setPassword] = useState("");
   const openCreditoModal = (c: Creditos) => setSelectedCredito(c);
   const closeCreditoModal = () => setSelectedCredito(null);
@@ -69,7 +73,13 @@ export default function UsersComponent() {
     id_plan: "",
     email: "",
   });
-  const [registerData, setRegisterData] = useState({nombre: "",apellido: "",email: "", contrasenia: "",num_celular: "", });
+  const [registerData, setRegisterData] = useState({
+    nombre: "",
+    apellido: "",
+    email: "",
+    contrasenia: "",
+    num_celular: "",
+  });
 
   const userConsultas: Consulta[] = [];
 
@@ -77,22 +87,19 @@ export default function UsersComponent() {
     userConsultas.push(...selectedUser.consultorias.consultas);
   }
 
-const userBusquedas: Busqueda[] = [];
-if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
-  selectedUser.creditos.forEach((c) => {
-    if (c.busquedas && Array.isArray(c.busquedas)) {
-      userBusquedas.push(...c.busquedas);
-    }
-  });
-}
+  const userBusquedas: Busqueda[] = [];
+  if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
+    selectedUser.creditos.forEach((c) => {
+      if (c.busquedas && Array.isArray(c.busquedas)) {
+        userBusquedas.push(...c.busquedas);
+      }
+    });
+  }
 
-
-
- const userCreditos: Creditos[] = selectedUser?.creditos && Array.isArray(selectedUser.creditos)
-  ? [...selectedUser.creditos]
-  : [];
-
-  
+  const userCreditos: Creditos[] =
+    selectedUser?.creditos && Array.isArray(selectedUser.creditos)
+      ? [...selectedUser.creditos]
+      : [];
 
   useEffect(() => {
     fetchUsers();
@@ -155,30 +162,30 @@ if (selectedUser?.creditos && Array.isArray(selectedUser.creditos)) {
     }));
   };
 
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  if (!selectedUser) return;
-  setLoading(true);
-  try {
-    await editUser(selectedUser.id, {
-      nombre: formData.nombre,
-      apellido: formData.apellido,
-      email: formData.email,
-      active: formData.active,
-      rol: formData.rol,
-      id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
-    });
-    await fetchUsers();
-    selectUser(selectedUser.id);
-    setShowEditModal(false);
-    toast.success("Usuario actualizado exitosamente");
-  } catch (error) {
-    console.error(error);
-    toast.error("Error al actualizar usuario");
-  } finally {
-    setLoading(false);
-  }
-};
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!selectedUser) return;
+    setLoading(true);
+    try {
+      await editUser(selectedUser.id, {
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        email: formData.email,
+        active: formData.active,
+        rol: formData.rol,
+        id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
+      });
+      await fetchUsers();
+      selectUser(selectedUser.id);
+      setShowEditModal(false);
+      toast.success("Usuario actualizado exitosamente");
+    } catch (error) {
+      console.error(error);
+      toast.error("Error al actualizar usuario");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleEditClick = () => {
     if (!selectedUser) return;
@@ -393,7 +400,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     Apellido
                   </label>
                   <input
-                  maxLength={50}
+                    maxLength={50}
                     type="text"
                     name="apellido"
                     value={formData.apellido}
@@ -460,7 +467,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   Email
                 </label>
                 <input
-                maxLength={50}
+                  maxLength={50}
                   type="email"
                   name="email"
                   value={formData.email}
@@ -511,7 +518,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             </h3>
             <form onSubmit={handleRegister} className="space-y-4">
               <input
-              maxLength={50}
+                maxLength={50}
                 type="text"
                 placeholder="Nombre"
                 value={registerData.nombre}
@@ -532,7 +539,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 required
               />
               <input
-              maxLength={50}
+                maxLength={50}
                 type="email"
                 placeholder="Email"
                 value={registerData.email}
@@ -660,7 +667,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             <form onSubmit={handleResetPassword} className="space-y-4">
               <div className="relative">
                 <input
-                maxLength={50}
+                  maxLength={50}
                   type={showPassword ? "text" : "password"}
                   placeholder="Nueva contraseña"
                   value={password}
@@ -985,6 +992,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                   onChange={handleInputChangeCompraCredito}
                   className="w-full border rounded-md px-3 py-2 text-gray-600"
                   required
+                  min="0"
+                  step="0.01"
                 />
               </div>
               <div>
@@ -998,6 +1007,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   onChange={handleInputChangeCompraCredito}
                   className="w-full border rounded-md px-3 py-2 text-gray-600"
                   required
+                  min="1"
                 />
               </div>
               <div>
@@ -1011,6 +1021,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   onChange={handleInputChangeCompraCredito}
                   className="w-full border rounded-md px-3 py-2 text-gray-600"
                   required
+                  min={new Date().toISOString().split("T")[0]}
                 />
               </div>
               <div>
@@ -1098,9 +1109,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     <p className="font-medium">
                       {u.nombre} {u.apellido}
                     </p>
-                    <p className="text-gray-500">
-                      {u.email || "Sin empresa"}
-                    </p>
+                    <p className="text-gray-500">{u.email || "Sin empresa"}</p>
                   </div>
                 </div>
               ))

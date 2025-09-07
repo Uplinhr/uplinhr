@@ -41,7 +41,6 @@ const UserDashboard = () => {
     
     if (creditosValidos.length === 0) return null;
     
-    // Encontrar el crédito con la fecha más próxima
     let creditoMasProximo = creditosValidos[0];
     for (let i = 1; i < creditosValidos.length; i++) {
       const fechaActual = new Date(creditoMasProximo.vencimiento!);
