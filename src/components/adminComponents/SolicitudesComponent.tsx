@@ -6,7 +6,7 @@ import { Busqueda } from "@/interfaces";
 import { FaTimes, FaTrash, FaExternalLinkAlt } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar, FiAlertTriangle } from "react-icons/fi";
-
+import {toast} from "sonner";
 export default function SolicitudesComponent() {
   const { fetchBusquedas, editBusqueda, deleteBusqueda, busquedas } = useAdminStore();
 
@@ -62,6 +62,10 @@ export default function SolicitudesComponent() {
   const handleEditSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedId === null) return;
+     if (busquedaData.estado === "Finalizado" && busquedaData.creditos_usados <= 0) {
+    toast.error("Para finalizar la búsqueda, los créditos usados deben ser mayores a 0.");
+    return;
+  }
     setShowConfirmModal(true);
   };
 
@@ -103,13 +107,17 @@ export default function SolicitudesComponent() {
     );
   };
 
- function formatFechaArg(fecha?: string | null) {
+function formatFechaArg(fecha?: string | null) {
   if (!fecha) return "-";
   const date = new Date(fecha);
-  return date.toLocaleDateString("es-AR", {
+  return date.toLocaleString("es-AR", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "America/Argentina/Buenos_Aires",
   });
 }
   const filteredBusquedas = busquedas?.filter((b) => b?.estado === filtroEstado);

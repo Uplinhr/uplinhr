@@ -6,7 +6,7 @@ import { Consulta } from "@/interfaces";
 import { FaTimes, FaTrash, FaExternalLinkAlt } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar, FiAlertTriangle } from "react-icons/fi";
-
+import {toast} from "sonner";
 export default function Consultoria() {
   const { fetchConsultas, editConsulta, deleteConsulta, consultas } = useAdminStore();
 
@@ -60,6 +60,10 @@ export default function Consultoria() {
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedId === null) return;
+      if (consultaData.estado === "Finalizado" && consultaData.cantidad_horas <= 0) {
+    toast.error("Para finalizar la consultoría, la cantidad de horas debe ser mayor a 0.");
+    return;
+  }
     setShowConfirmModal(true);
   };
 
@@ -92,15 +96,19 @@ export default function Consultoria() {
     }
   };
 
-  const formatFechaArg = (fecha?: string | null) => {
-  if (!fecha) return "";
-  const fechaObj = new Date(fecha);
-  return fechaObj.toLocaleDateString("es-AR", {
+function formatFechaArg(fecha?: string | null) {
+  if (!fecha) return "-";
+  const date = new Date(fecha);
+  return date.toLocaleString("es-AR", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "America/Argentina/Buenos_Aires",
   });
-};
+}
 
 
   const filteredConsultas = consultas?.filter(
