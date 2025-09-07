@@ -836,10 +836,13 @@ export default function UsersComponent() {
                 <strong>Fecha Alta:</strong>{" "}
                 {selectedCredito.fecha_alta?.split(/T| /)[0] ?? "No hay datos"}
               </p>
-              <p>
-                <strong>Fecha Vencimiento:</strong>{" "}
-                {selectedCredito.vencimiento?.split(/T| /)[0] ?? "No hay datos"}
-              </p>
+              {selectedCredito.tipo_credito !== "adicional" && (
+                <p>
+                  <strong>Fecha Vencimiento:</strong>{" "}
+                  {selectedCredito.vencimiento?.split(/T| /)[0] ??
+                    "No hay datos"}
+                </p>
+              )}
               <p>
                 <strong>Tipo Crédito:</strong> {selectedCredito.tipo_credito}
               </p>
@@ -1008,20 +1011,6 @@ export default function UsersComponent() {
                   className="w-full border rounded-md px-3 py-2 text-gray-600"
                   required
                   min="1"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Vencimiento
-                </label>
-                <input
-                  type="date"
-                  name="vencimiento"
-                  value={formCompra.vencimiento}
-                  onChange={handleInputChangeCompraCredito}
-                  className="w-full border rounded-md px-3 py-2 text-gray-600"
-                  required
-                  min={new Date().toISOString().split("T")[0]}
                 />
               </div>
               <div>
@@ -1212,9 +1201,18 @@ export default function UsersComponent() {
                         <p className="text-xs text-gray-500 mb-1">
                           VENCIMIENTO
                         </p>
-                        <p>
-                          {c.vencimiento ? c.vencimiento.split(" ")[0] : "—"}
-                        </p>
+                        {c.tipo_credito !== "adicional" && (
+                          <div>
+                            <p className="text-xs text-gray-500 mb-1">
+                              VENCIMIENTO
+                            </p>
+                            <p>
+                              {c.vencimiento
+                                ? c.vencimiento.split(" ")[0]
+                                : "—"}
+                            </p>
+                          </div>
+                        )}
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 mb-1">CANTIDAD</p>

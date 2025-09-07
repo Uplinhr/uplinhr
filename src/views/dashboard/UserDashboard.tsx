@@ -31,27 +31,19 @@ const UserDashboard = () => {
   const [infoBusqueda, setInfoBusqueda] = useState("");
 
   
-  const getProximoCreditoAVencer = () => {
+ const getProximoCreditoAVencer = () => {
     if (!user?.creditos || user.creditos.length === 0) return null;
-    
+
     const hoy = new Date();
-    const creditosValidos = user.creditos.filter(
-      credito => credito.vencimiento && new Date(credito.vencimiento) > hoy
+
+    const creditoPlan = user.creditos.find(
+      (credito) =>
+        credito.tipo_credito === "plan" &&
+        credito.vencimiento &&
+        new Date(credito.vencimiento) > hoy
     );
-    
-    if (creditosValidos.length === 0) return null;
-    
-    let creditoMasProximo = creditosValidos[0];
-    for (let i = 1; i < creditosValidos.length; i++) {
-      const fechaActual = new Date(creditoMasProximo.vencimiento!);
-      const fechaComparar = new Date(creditosValidos[i].vencimiento!);
-      
-      if (fechaComparar < fechaActual) {
-        creditoMasProximo = creditosValidos[i];
-      }
-    }
-    
-    return creditoMasProximo;
+
+    return creditoPlan || null;
   };
 
   const proximoCreditoAVencer = getProximoCreditoAVencer();
@@ -195,9 +187,6 @@ const UserDashboard = () => {
                 </p>
                 <p className="text-sm text-gray-600 mt-1">
                   Vence: {formatDate(proximoCreditoAVencer.vencimiento)}
-                </p>
-                <p className="text-xs text-gray-500 mt-1">
-                  (Crédito {proximoCreditoAVencer.tipo_credito || "Sin tipo"})
                 </p>
               </>
             ) : (
