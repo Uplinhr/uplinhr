@@ -1198,9 +1198,6 @@ export default function UsersComponent() {
                         <p>{c.fecha_alta ? c.fecha_alta.split(" ")[0] : "—"}</p>
                       </div>
                       <div>
-                        <p className="text-xs text-gray-500 mb-1">
-                          VENCIMIENTO
-                        </p>
                         {c.tipo_credito !== "adicional" && (
                           <div>
                             <p className="text-xs text-gray-500 mb-1">
