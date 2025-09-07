@@ -1,16 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import {
-  login as loginService,
-  forgotPassword,
-  validateToken,
-  resetPassword,
-} from "@/services/authService";
+import { login as loginService, forgotPassword, validateToken, resetPassword } from "@/services/authService";
 import { AuthState, LoginRequest, LoginResponse } from "@/interfaces";
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       user: null,
       token: null,
       isAuthenticated: false,
@@ -29,10 +24,7 @@ export const useAuthStore = create<AuthState>()(
             throw new Error(response.message || "Error al iniciar sesión");
           }
         } catch (error) {
-          set({
-            isLoading: false,
-            error: error instanceof Error ? error.message : "Error desconocido al iniciar sesión",
-          });
+          set({ isLoading: false, error: error instanceof Error ? error.message : "Error desconocido al iniciar sesión" });
           throw error;
         }
       },
@@ -73,21 +65,6 @@ export const useAuthStore = create<AuthState>()(
         } catch (error) {
           set({ isLoading: false, error: error instanceof Error ? error.message : "Error desconocido" });
           throw error;
-        }
-      },
-        recargarUsuario: async () => {
-        const token = get().token;
-        if (!token) return;
-        set({ isLoading: true, error: null });
-        try {
-          const response = await validateToken(token); 
-          if (response.success) {
-            set({ user: response.data.user, isLoading: false });
-          } else {
-            set({ isLoading: false });
-          }
-        } catch (error) {
-          set({ isLoading: false, error: error instanceof Error ? error.message : "Error desconocido" });
         }
       },
     }),
