@@ -238,6 +238,7 @@ export default function Consultoria() {
                   Cantidad de horas <span className="text-red-500">*</span>
                 </label>
                 <input
+                  min={1}
                   type="number"
                   value={consultaData.cantidad_horas}
                   onChange={(e) =>

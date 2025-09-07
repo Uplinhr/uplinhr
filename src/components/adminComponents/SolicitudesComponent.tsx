@@ -258,6 +258,7 @@ export default function SolicitudesComponent() {
                   Créditos Usados <span className="text-red-500">*</span>
                 </label>
                 <input
+                  min={1}
                   type="number"
                   value={busquedaData.creditos_usados}
                   onChange={(e) =>
