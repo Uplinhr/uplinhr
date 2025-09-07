@@ -280,7 +280,6 @@ function formatFechaArg(fecha?: string | null) {
                   }
                   className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm"
                   required
-                  min={1}
                 />
               </div>
               <div>
