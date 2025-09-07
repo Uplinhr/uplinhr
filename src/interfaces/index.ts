@@ -200,6 +200,7 @@ export interface AuthState {
   resetPassword: (token: string, password: string) => Promise<ResetPasswordResponse>;
   validateToken: (token: string) => Promise<ValidateTokenResponse>;
   forgotPassword: (email: string) => Promise<void>;
+  recargarUsuario: () => Promise<void>;
 }
 
 export interface RenovarPlan {
