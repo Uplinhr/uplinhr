@@ -200,7 +200,7 @@ export interface AuthState {
   resetPassword: (token: string, password: string) => Promise<ResetPasswordResponse>;
   validateToken: (token: string) => Promise<ValidateTokenResponse>;
   forgotPassword: (email: string) => Promise<void>;
-
+  setUser: (user: User | null) => void;
 }
 
 export interface RenovarPlan {

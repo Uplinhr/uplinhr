@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useUserStore } from "@/store/useUserStore";
 import { motion } from "framer-motion";
-import { IoMdClose } from "react-icons/io";
+import { IoMdClose, IoMdRefresh } from "react-icons/io";
 import { toast } from "sonner";
 import {
   ConsultaRequest,
@@ -21,7 +21,7 @@ const formatDate = (dateString?: string) => {
 };
 
 const UserDashboard = () => {
-  const { user } = useAuthStore();
+  const { user, setUser } = useAuthStore();
   const { postConsulta, postBusqueda } = useUserStore();
 
   const [isModalConsultaOpen, setIsModalConsultaOpen] = useState(false);
@@ -29,6 +29,11 @@ const UserDashboard = () => {
   const [comentarios, setComentarios] = useState("");
   const [isModalBusquedaOpen, setIsModalBusquedaOpen] = useState(false);
   const [infoBusqueda, setInfoBusqueda] = useState("");
+
+  const handleRefreshUser = () => {
+    if (user) setUser({ ...user });
+    toast.success("Datos actualizados");
+  };
 
   const handleSubmitConsulta = async () => {
     if (cantidadHoras <= 0) {
@@ -88,15 +93,23 @@ const UserDashboard = () => {
 
   return (
     <div className="p-6 bg-white font-poppins min-h-screen flex flex-col items-center">
-      <div className="text-center mb-6 max-w-[900px] w-full">
+      <div className="text-center mb-6 max-w-[900px] w-full flex items-center justify-center gap-2">
         <h1 className="text-3xl md:text-4xl font-bold italic text-[#6D4098] mb-2">
           Hola, {user?.nombre || ""}
         </h1>
-        <h3 className="text-md md:text-lg text-[#6D4098]">
-          Nos alegra verte aquí. En Uplin podrás gestionar tus créditos,
-          adquirir cursos y mucho más.
-        </h3>
+        <button
+          onClick={handleRefreshUser}
+          className="text-[#6D4098] hover:text-[#502b7d] transition-colors"
+        >
+          <IoMdRefresh size={28} />
+        </button>
       </div>
+
+      <h3 className="text-md md:text-lg text-[#6D4098] mb-6 text-center max-w-[900px]">
+        Nos alegra verte aquí. En Uplin podrás gestionar tus créditos,
+        adquirir cursos y mucho más.
+      </h3>
+
       <div className="flex flex-wrap justify-center gap-6 mb-8 w-full max-w-[1000px] mx-auto">
         <motion.div
           whileHover={{ y: -4 }}
@@ -111,6 +124,7 @@ const UserDashboard = () => {
             </p>
           </div>
         </motion.div>
+
         <motion.div
           whileHover={{ y: -4 }}
           className="rounded-[12px] shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden w-full sm:w-[45%] md:w-[30%] max-w-[340px] min-h-[140px] flex flex-col"
@@ -128,6 +142,7 @@ const UserDashboard = () => {
             </p>
           </div>
         </motion.div>
+
         <motion.div
           whileHover={{ y: -4 }}
           className="rounded-[12px] shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden w-full sm:w-[45%] md:w-[30%] max-w-[340px] min-h-[140px] flex flex-col"
@@ -141,6 +156,7 @@ const UserDashboard = () => {
             </p>
           </div>
         </motion.div>
+
         <motion.div
           whileHover={{ y: -4 }}
           className="rounded-[12px] shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden w-full sm:w-[45%] md:w-[30%] max-w-[340px] min-h-[140px] flex flex-col"
@@ -154,9 +170,10 @@ const UserDashboard = () => {
             </p>
           </div>
         </motion.div>
+
         <motion.div
           whileHover={{ y: -4 }}
-          className="rounded-[12px] not-last:shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden w-full sm:w-[45%] md:w-[30%] max-w-[340px] min-h-[140px] flex flex-col"
+          className="rounded-[12px] shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden w-full sm:w-[45%] md:w-[30%] max-w-[340px] min-h-[140px] flex flex-col"
         >
           <div className="bg-[#6D4098] text-white p-3 text-center text-sm font-semibold rounded-t-[12px]">
             Créditos por vencerse
@@ -177,6 +194,7 @@ const UserDashboard = () => {
             </p>
           </div>
         </motion.div>
+
         <motion.div
           whileHover={{ y: -4 }}
           className="rounded-[12px] shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden w-full sm:w-[45%] md:w-[30%] max-w-[340px] min-h-[140px] flex flex-col"
@@ -197,6 +215,7 @@ const UserDashboard = () => {
           </div>
         </motion.div>
       </div>
+
       <div className="flex flex-col md:flex-row justify-center gap-3 mb-4 w-full">
         <motion.button
           whileHover={{ scale: 1.05 }}
@@ -224,7 +243,6 @@ const UserDashboard = () => {
           Adquirir Servicios Adicionales
         </motion.a>
       </div>
-      <div className="text-center w-full max-w-[900px]"></div>
 
       {isModalConsultaOpen && (
         <div className="fixed inset-0 z-50 flex justify-center items-center">
@@ -239,11 +257,9 @@ const UserDashboard = () => {
             >
               <IoMdClose size={24} />
             </button>
-
             <h2 className="text-xl font-semibold text-[#6D4098] mb-4 text-center">
               Solicitud de Consultoría
             </h2>
-
             <div className="mb-4">
               <label
                 htmlFor="cantidadHoras"
@@ -261,7 +277,6 @@ const UserDashboard = () => {
                 placeholder="Ingresa cantidad de horas"
               />
             </div>
-
             <div className="mb-4">
               <label
                 htmlFor="comentarios"
@@ -278,7 +293,6 @@ const UserDashboard = () => {
                 placeholder="Agrega tus comentarios"
               />
             </div>
-
             <div className="flex justify-between gap-3">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -314,11 +328,9 @@ const UserDashboard = () => {
             >
               <IoMdClose size={24} />
             </button>
-
             <h2 className="text-xl font-semibold text-[#6D4098] mb-4 text-center">
               Solicitud de Búsqueda
             </h2>
-
             <div className="mb-4">
               <label
                 htmlFor="infoBusqueda"
@@ -335,7 +347,6 @@ const UserDashboard = () => {
                 placeholder="Describe la información que deseas buscar"
               />
             </div>
-
             <div className="flex justify-between gap-3">
               <motion.button
                 whileHover={{ scale: 1.05 }}
