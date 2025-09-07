@@ -64,29 +64,32 @@ export default function Consultoria() {
     setShowConfirmModal(true);
   };
 
+  const handleEliminarClick = (id: number) => {
+    setSelectedId(id);
+    setConsultaData({
+      cantidad_horas: 0,
+      observaciones: "",
+      estado: "Eliminado",
+      id_consultoria: 0,
+    });
+    setShowConfirmModal(true);
+  };
+
   const handleConfirm = async () => {
     if (selectedId === null) return;
 
     setLoading(true);
     try {
-      await editConsulta(selectedId, consultaData);
+      if (consultaData.estado === "Eliminado") {
+        await deleteConsulta(selectedId);
+      } else {
+        await editConsulta(selectedId, consultaData);
+      }
       setShowEditModal(false);
       setShowConfirmModal(false);
       fetchConsultas();
     } catch (error) {
-      console.error("Error al editar consulta:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleEliminar = async (id: number) => {
-    setLoading(true);
-    try {
-      await deleteConsulta(id);
-      fetchConsultas();
-    } catch (error) {
-      console.error("Error al eliminar consulta:", error);
+      console.error("Error al confirmar acción:", error);
     } finally {
       setLoading(false);
     }
@@ -134,7 +137,7 @@ export default function Consultoria() {
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-100 p-3 md:px-4 md:py-2 gap-2">
                 <span className="text-[#6d4098] font-semibold text-sm md:text-base">
-                  {consulta.usuario?.nombre}: consultoría número {consulta.id}
+                  {consulta.usuario?.nombre} {consulta.usuario?.apellido}: consultoría número {consulta.id}
                 </span>
                 <div className="flex items-center justify-end sm:justify-start gap-2 md:gap-3">
                   <button
@@ -152,7 +155,7 @@ export default function Consultoria() {
                       {consulta.estado === "Finalizado" ? (
                         <button
                           className="flex items-center gap-1 text-red-500 px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-110"
-                          onClick={() => handleEliminar(consulta.id)}
+                          onClick={() => handleEliminarClick(consulta.id)}
                         >
                           <FaTrash className="text-sm md:text-base" />
                         </button>
@@ -178,8 +181,7 @@ export default function Consultoria() {
                 <div className="p-3 md:p-4 bg-white space-y-2 text-sm md:text-base">
                   {consulta.usuario && (
                     <p className="break-words">
-                      <strong>Usuario:</strong> {consulta.usuario.nombre} (
-                      {consulta.usuario.email})
+                      <strong>Usuario:</strong> {consulta.usuario.email}
                     </p>
                   )}
                   <p>

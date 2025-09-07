@@ -61,36 +61,38 @@ export default function SolicitudesComponent() {
     setShowEditModal(true);
   };
 
-  const handleEditSubmit = async (e: React.FormEvent) => {
+  const handleEditSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedId === null) return;
+    setShowConfirmModal(true);
+  };
 
-    setShowConfirmModal(true); 
+  const handleEliminarClick = (id: number) => {
+    setSelectedId(id);
+    setBusquedaData({
+      info_busqueda: "",
+      creditos_usados: 0,
+      observaciones: "",
+      estado: "Eliminado",
+      id_cred: 0,
+    });
+    setShowConfirmModal(true);
   };
 
   const handleConfirm = async () => {
     if (selectedId === null) return;
-
     setLoading(true);
     try {
-      await editBusqueda(selectedId, busquedaData);
+      if (busquedaData.estado === "Eliminado") {
+        await deleteBusqueda(selectedId);
+      } else {
+        await editBusqueda(selectedId, busquedaData);
+      }
       setShowEditModal(false);
       setShowConfirmModal(false);
       fetchBusquedas();
     } catch (error) {
-      console.error("Error al editar búsqueda:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleEliminar = async (id: number) => {
-    setLoading(true);
-    try {
-      await deleteBusqueda(id);
-      fetchBusquedas();
-    } catch (error) {
-      console.error("Error al eliminar búsqueda:", error);
+      console.error("Error al confirmar acción:", error);
     } finally {
       setLoading(false);
     }
@@ -111,7 +113,6 @@ export default function SolicitudesComponent() {
         Solicitudes de búsqueda
       </h1>
 
-    
       <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-4 md:mb-6">
         {estados.map((estado) => (
           <button
@@ -155,7 +156,7 @@ export default function SolicitudesComponent() {
                       {busqueda.estado === "Finalizado" ? (
                         <button
                           className="flex items-center gap-1 text-red-500 px-2 py-1 rounded cursor-pointer transition-transform transform hover:scale-110"
-                          onClick={() => handleEliminar(busqueda.id)}
+                          onClick={() => handleEliminarClick(busqueda.id)}
                         >
                           <FaTrash className="text-sm md:text-base" />
                         </button>

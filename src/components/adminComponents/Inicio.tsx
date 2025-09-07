@@ -140,7 +140,7 @@ export default function Inicio({
         <div className="flex flex-col md:flex-row gap-6">
           <button
             onClick={() => {
-              setSelected("Solicitudes");
+              setSelected("Búsquedas");
               setMobileMenuOpen(false);
             }}
             className="bg-[#6D4098] hover:bg-[#553076] transition text-white cursor-pointer px-6 py-3 rounded-md shadow-md w-full md:w-1/2"
