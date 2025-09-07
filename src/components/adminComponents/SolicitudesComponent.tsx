@@ -8,8 +8,7 @@ import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar, FiAlertTriangle } from "react-icons/fi";
 
 export default function SolicitudesComponent() {
-  const { fetchBusquedas, editBusqueda, deleteBusqueda, busquedas } =
-    useAdminStore();
+  const { fetchBusquedas, editBusqueda, deleteBusqueda, busquedas } = useAdminStore();
 
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -25,8 +24,7 @@ export default function SolicitudesComponent() {
   const [loading, setLoading] = useState(false);
 
   const estados = ["Pendiente", "En proceso", "Finalizado", "Eliminado"] as const;
-  const [filtroEstado, setFiltroEstado] =
-    useState<(typeof estados)[number]>("Pendiente");
+  const [filtroEstado, setFiltroEstado] = useState<(typeof estados)[number]>("Pendiente");
 
   useEffect(() => {
     fetchBusquedas();
@@ -92,7 +90,7 @@ export default function SolicitudesComponent() {
       setShowConfirmModal(false);
       fetchBusquedas();
     } catch (error) {
-      console.error("Error al confirmar acción:", error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -105,6 +103,15 @@ export default function SolicitudesComponent() {
     );
   };
 
+ function formatFechaArg(fecha?: string | null) {
+  if (!fecha) return "-";
+  const date = new Date(fecha);
+  return date.toLocaleDateString("es-AR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
   const filteredBusquedas = busquedas?.filter((b) => b?.estado === filtroEstado);
 
   return (
@@ -201,10 +208,10 @@ export default function SolicitudesComponent() {
                     <strong>ID crédito:</strong> {busqueda.id_cred}
                   </p>
                   <p>
-                    <strong>Fecha alta:</strong> {busqueda.fecha_alta}
+                    <strong>Fecha alta:</strong> {formatFechaArg(busqueda.fecha_alta)}
                   </p>
                   <p>
-                    <strong>Última modificación:</strong> {busqueda.ultima_mod}
+                    <strong>Última modificación:</strong> {formatFechaArg(busqueda.ultima_mod)}
                   </p>
                 </div>
               )}
@@ -220,7 +227,6 @@ export default function SolicitudesComponent() {
       {showEditModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
           <div className="absolute inset-0 bg-black opacity-40"></div>
-
           <div className="bg-white rounded-2xl p-4 md:p-6 w-full max-w-md max-h-[80vh] overflow-y-auto mx-4 relative z-10 shadow-lg">
             <button
               onClick={() => setShowEditModal(false)}
@@ -232,7 +238,6 @@ export default function SolicitudesComponent() {
             <h3 className="text-lg md:text-xl font-semibold text-[#6d4098] mb-4 text-center">
               Editar búsqueda
             </h3>
-
             <form onSubmit={handleEditSubmit} className="space-y-3">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
@@ -252,13 +257,11 @@ export default function SolicitudesComponent() {
                   required
                 />
               </div>
-
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Créditos Usados <span className="text-red-500">*</span>
                 </label>
                 <input
-                  min={1}
                   type="number"
                   value={busquedaData.creditos_usados}
                   onChange={(e) =>
@@ -269,9 +272,9 @@ export default function SolicitudesComponent() {
                   }
                   className="w-full border rounded-md px-3 py-2 text-gray-600 text-sm"
                   required
+                  min={1}
                 />
               </div>
-
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Observaciones
@@ -289,7 +292,6 @@ export default function SolicitudesComponent() {
                   rows={3}
                 />
               </div>
-
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Estado <span className="text-red-500">*</span>
@@ -308,7 +310,6 @@ export default function SolicitudesComponent() {
                   ))}
                 </select>
               </div>
-
               <div className="flex flex-col xs:flex-row justify-center gap-3 pt-3">
                 <button
                   type="button"
@@ -335,33 +336,27 @@ export default function SolicitudesComponent() {
       {showConfirmModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center font-poppins">
           <div className="absolute inset-0 bg-black opacity-40"></div>
-
           <div className="bg-white rounded-2xl p-6 md:p-8 w-full max-w-md mx-4 relative z-10 shadow-lg text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-[#6d4098] mb-4">
               Atención
             </h2>
-
             <div className="flex justify-center mb-4">
               <FiAlertTriangle className="text-[#6d4098] text-4xl" />
             </div>
-
             <p className="text-gray-700 mb-3">
               ¿Está seguro que quiere pasar esta solicitud a{" "}
               <span className="font-semibold">{busquedaData.estado}</span>?
             </p>
-
             {busquedaData.estado === "Finalizado" && (
               <p className="text-[#6d4098] italic font-semibold mb-4">
                 Esto consumirá créditos y no podrá revertirse.
               </p>
             )}
-
             {busquedaData.estado === "Eliminado" && (
               <p className="text-[#6d4098] italic font-semibold mb-4">
                 No se podrá recuperar después.
               </p>
             )}
-
             <div className="flex flex-col xs:flex-row justify-center gap-3 mt-4">
               <button
                 onClick={() => setShowConfirmModal(false)}

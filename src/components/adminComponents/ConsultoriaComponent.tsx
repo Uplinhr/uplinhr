@@ -8,8 +8,7 @@ import { ImSpinner8 } from "react-icons/im";
 import { FiEdit, FiChevronDown, FiCalendar, FiAlertTriangle } from "react-icons/fi";
 
 export default function Consultoria() {
-  const { fetchConsultas, editConsulta, deleteConsulta, consultas } =
-    useAdminStore();
+  const { fetchConsultas, editConsulta, deleteConsulta, consultas } = useAdminStore();
 
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -88,12 +87,21 @@ export default function Consultoria() {
       setShowEditModal(false);
       setShowConfirmModal(false);
       fetchConsultas();
-    } catch (error) {
-      console.error("Error al confirmar acción:", error);
     } finally {
       setLoading(false);
     }
   };
+
+  const formatFechaArg = (fecha?: string | null) => {
+  if (!fecha) return "";
+  const fechaObj = new Date(fecha);
+  return fechaObj.toLocaleDateString("es-AR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+};
+
 
   const filteredConsultas = consultas?.filter(
     (c: Consulta) => c?.estado === filtroEstado
@@ -200,10 +208,10 @@ export default function Consultoria() {
                     <strong>ID consultoría:</strong> {consulta.id_consultoria}
                   </p>
                   <p>
-                    <strong>Fecha alta:</strong> {consulta.fecha_alta}
+                    <strong>Fecha alta:</strong> {formatFechaArg(consulta.fecha_alta)}
                   </p>
                   <p>
-                    <strong>Última modificación:</strong> {consulta.ultima_mod}
+                    <strong>Última modificación:</strong> {formatFechaArg(consulta.ultima_mod)}
                   </p>
                 </div>
               )}
@@ -238,7 +246,6 @@ export default function Consultoria() {
                   Cantidad de horas <span className="text-red-500">*</span>
                 </label>
                 <input
-                  min={1}
                   type="number"
                   value={consultaData.cantidad_horas}
                   onChange={(e) =>

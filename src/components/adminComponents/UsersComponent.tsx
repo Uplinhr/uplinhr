@@ -976,7 +976,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Costo
+                  Costo (USD)
                 </label>
                 <input
                   type="number"
