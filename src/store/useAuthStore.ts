@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { login as loginService, forgotPassword, validateToken, resetPassword } from "@/services/authService";
-import { AuthState, LoginRequest, LoginResponse, User, ResetPasswordResponse, ValidateTokenResponse } from "@/interfaces";
+import { AuthState, LoginRequest, LoginResponse } from "@/interfaces";
 
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -11,8 +11,6 @@ export const useAuthStore = create<AuthState>()(
       isAuthenticated: false,
       isLoading: false,
       error: null,
-
-      setUser: (user: User | null) => set({ user }),
 
       login: async (credentials: LoginRequest) => {
         set({ isLoading: true, error: null });
@@ -37,8 +35,9 @@ export const useAuthStore = create<AuthState>()(
       forgotPassword: async (email: string) => {
         set({ isLoading: true, error: null });
         try {
-          await forgotPassword(email);
+          const data = await forgotPassword(email);
           set({ isLoading: false });
+          return data;
         } catch (error) {
           set({ isLoading: false, error: error instanceof Error ? error.message : "Error desconocido" });
           throw error;
@@ -48,7 +47,7 @@ export const useAuthStore = create<AuthState>()(
       validateToken: async (token: string) => {
         set({ isLoading: true, error: null });
         try {
-          const data: ValidateTokenResponse = await validateToken(token);
+          const data = await validateToken(token);
           set({ isLoading: false });
           return data;
         } catch (error) {
@@ -57,10 +56,10 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      resetPassword: async (token: string, password: string) => {
+      resetPassword: async (token: string, contrasenia: string) => {
         set({ isLoading: true, error: null });
         try {
-          const data: ResetPasswordResponse = await resetPassword(token, password);
+          const data = await resetPassword(token, contrasenia);
           set({ isLoading: false });
           return data;
         } catch (error) {
