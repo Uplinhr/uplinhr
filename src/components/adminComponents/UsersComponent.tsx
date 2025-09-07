@@ -1022,6 +1022,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                   value={formCompra.observaciones}
                   onChange={handleInputChangeCompraCredito}
                   className="w-full border rounded-md px-3 py-2 text-gray-600"
+                  required
                 />
               </div>
 

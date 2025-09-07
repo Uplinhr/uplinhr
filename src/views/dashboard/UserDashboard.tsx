@@ -10,7 +10,7 @@ import {
   BusquedaRequest,
 } from "@/services/userService";
 
-const formatDate = (dateString?: string) => {
+const formatDate = (dateString?: string | null) => {
   if (!dateString) return "";
   const date = new Date(dateString);
   return new Intl.DateTimeFormat("es-AR", {
@@ -29,6 +29,33 @@ const UserDashboard = () => {
   const [comentarios, setComentarios] = useState("");
   const [isModalBusquedaOpen, setIsModalBusquedaOpen] = useState(false);
   const [infoBusqueda, setInfoBusqueda] = useState("");
+
+  
+  const getProximoCreditoAVencer = () => {
+    if (!user?.creditos || user.creditos.length === 0) return null;
+    
+    const hoy = new Date();
+    const creditosValidos = user.creditos.filter(
+      credito => credito.vencimiento && new Date(credito.vencimiento) > hoy
+    );
+    
+    if (creditosValidos.length === 0) return null;
+    
+    // Encontrar el crédito con la fecha más próxima
+    let creditoMasProximo = creditosValidos[0];
+    for (let i = 1; i < creditosValidos.length; i++) {
+      const fechaActual = new Date(creditoMasProximo.vencimiento!);
+      const fechaComparar = new Date(creditosValidos[i].vencimiento!);
+      
+      if (fechaComparar < fechaActual) {
+        creditoMasProximo = creditosValidos[i];
+      }
+    }
+    
+    return creditoMasProximo;
+  };
+
+  const proximoCreditoAVencer = getProximoCreditoAVencer();
 
   const handleSubmitConsulta = async () => {
     if (cantidadHoras <= 0) {
@@ -159,22 +186,27 @@ const UserDashboard = () => {
           className="rounded-[12px] not-last:shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden w-full sm:w-[45%] md:w-[30%] max-w-[340px] min-h-[140px] flex flex-col"
         >
           <div className="bg-[#6D4098] text-white p-3 text-center text-sm font-semibold rounded-t-[12px]">
-            Créditos por vencerse
+            Próximos créditos por vencerse
           </div>
           <div className="bg-white text-[#6D4098] p-6 text-center flex-1 flex flex-col items-center justify-center">
-            <p className="text-lg font-semibold">
-              {user?.creditos?.reduce(
-                (total, c) => total + (c.cantidad || 0),
-                0
-              ) || 0}{" "}
-              créditos
-            </p>
-            <p className="text-sm text-gray-600 mt-1">
-              Vence:{" "}
-              {user?.creditos?.[0]?.vencimiento
-                ? formatDate(user.creditos[0].vencimiento)
-                : "-"}
-            </p>
+            {proximoCreditoAVencer ? (
+              <>
+                <p className="text-lg font-semibold">
+                  {proximoCreditoAVencer.cantidad || 0} créditos
+                </p>
+                <p className="text-sm text-gray-600 mt-1">
+                  Vence: {formatDate(proximoCreditoAVencer.vencimiento)}
+                </p>
+                <p className="text-xs text-gray-500 mt-1">
+                  (Crédito {proximoCreditoAVencer.tipo_credito || "Sin tipo"})
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-lg font-semibold">0 créditos</p>
+                <p className="text-sm text-gray-600 mt-1">Vence: -</p>
+              </>
+            )}
           </div>
         </motion.div>
         <motion.div
