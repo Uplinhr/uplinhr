@@ -203,7 +203,6 @@ const EmpresaComponent = () => {
       await unlinkUserFromEmpresa(idEdit);
       toast.success("Usuario desvinculado exitosamente");
       setIdUsuario(null);
-      setShowModalEditar(false);
       fetchEmpresas();
     } catch (err) {
       console.error(err);
