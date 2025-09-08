@@ -115,10 +115,7 @@ const EmpresaComponent = () => {
     setDomicilioCiudad(empresa?.domicilio_legal_ciudad || "");
     setDomicilioPais(empresa?.domicilio_legal_pais || "");
     setCodigoPostal(empresa?.codigo_postal || "");
-    setIdUsuario(
-      empresa?.id_usuario ||
-        (usersWithoutCompany.length > 0 ? usersWithoutCompany[0].id : null)
-    );
+    setIdUsuario(empresa?.id_usuario || null);
     setActiveEdit(empresa?.active || true);
     setShowModalEditar(true);
   };
