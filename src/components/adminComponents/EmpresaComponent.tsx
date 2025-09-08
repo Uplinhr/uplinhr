@@ -193,12 +193,19 @@ const EmpresaComponent = () => {
     }
   };
 
-  const handleUnlinkUser = async (id: number) => {
+  const handleUnlinkUser = async () => {
+    if (!idEdit) {
+      toast.error(
+        "No se puede desvincular usuario: ID de empresa no disponible"
+      );
+      return;
+    }
+
     setLoading(true);
     try {
-      await unlinkUserFromEmpresa(id);
+      await unlinkUserFromEmpresa(idEdit);
       toast.success("Usuario desvinculado exitosamente");
-      setShowModalEditar(false);
+      setIdUsuario(null);
       fetchEmpresas();
     } catch (err) {
       console.error(err);
@@ -807,7 +814,7 @@ const EmpresaComponent = () => {
                       </div>
                     </div>
                     <button
-                      onClick={() => handleUnlinkUser(idUsuario)}
+                      onClick={handleUnlinkUser}
                       disabled={loading}
                       className={`px-3 py-2 rounded-lg flex items-center gap-2 transition-all ${
                         loading

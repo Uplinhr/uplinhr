@@ -435,6 +435,8 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       await adminService.unlinkUserFromEmpresa(id);
+      await get().fetchEmpresas();
+      set({ loading: false });
     } catch (err) {
       console.error(err);
       set({ error: "Error al desvincular usuario de la empresa", loading: false });
