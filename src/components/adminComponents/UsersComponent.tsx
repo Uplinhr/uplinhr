@@ -1178,7 +1178,7 @@ export default function UsersComponent() {
               )}
             </div>
             <h2 className="text-xl font-semibold text-[#6d4098] mb-4">
-              Empresa: {selectedUser.empresas?.nombre || "Nombre de la Empresa"}
+              Empresa: {selectedUser.empresas?.nombre || " "}
             </h2>
 
             {/* Créditos */}
