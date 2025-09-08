@@ -166,11 +166,14 @@ export const editBusqueda = async (
       body: JSON.stringify(body),
     });
 
-    if (!res.ok) throw new Error("Error al editar la busqueda");
-
-    const data: { success: boolean; message: string; data: Busqueda } =
+    const data: { success: boolean; message: string; data?: Busqueda } =
       await res.json();
-    return data.data;
+
+    if (!res.ok || !data.success) {
+      throw new Error(data.message || "Error al editar la búsqueda");
+    }
+
+    return data.data as Busqueda;
   } catch (error) {
     console.error("Error en editBusqueda:", error);
     throw error;
@@ -189,7 +192,8 @@ export const deleteBusqueda = async (id: number): Promise<void> => {
 
     if (!res.ok) throw new Error("Error al eliminar la búsqueda");
 
-    const data: { success: boolean; message: string; data: null } = await res.json();
+    const data: { success: boolean; message: string; data: null } =
+      await res.json();
     if (!data.success) throw new Error("No se pudo eliminar la búsqueda");
   } catch (error) {
     console.error("Error en deleteBusqueda:", error);
@@ -611,7 +615,7 @@ export const editConsulta = async (
     if (!res.ok) throw new Error("Error al editar la consulta");
 
     const data: { success: boolean; message: string; data: Consulta } =
-     await res.json();
+      await res.json();
     return data.data;
   } catch (error) {
     console.error("Error en editConsulta:", error);
@@ -631,7 +635,8 @@ export const deleteConsulta = async (id: number): Promise<void> => {
 
     if (!res.ok) throw new Error("Error al eliminar la consulta");
 
-    const data: { success: boolean; message: string; data: null } = await res.json();
+    const data: { success: boolean; message: string; data: null } =
+      await res.json();
     if (!data.success) throw new Error("No se pudo eliminar la consulta");
   } catch (error) {
     console.error("Error en deleteConsulta:", error);
@@ -685,12 +690,12 @@ export const renovarPlan = async (body: RenovarPlan) => {
 };
 
 export const comprarCreditos = async (body: {
-  medio_pago:string,
-  costo: number,
-  observaciones:string,
-  cantidad:number,
-  vencimiento:string,
-  id_usuario:number
+  medio_pago: string;
+  costo: number;
+  observaciones: string;
+  cantidad: number;
+  vencimiento: string;
+  id_usuario: number;
 }): Promise<compraCreditos> => {
   const token = getToken();
   const res = await fetch(`${API_URL}/api/compra_creditos`, {

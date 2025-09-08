@@ -11,6 +11,7 @@ import {
   compraCreditos,
 } from "@/interfaces";
 import * as adminService from "@/services/adminService";
+import {toast} from "sonner";
 
 interface AdminState {
   users: User[];
@@ -247,9 +248,13 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       );
       set({ busquedas, loading: false });
     } catch (err) {
-      console.error(err);
-      set({ error: "Error al editar la busqueda", loading: false });
+    let errorMessage = "Error al editar la búsqueda";
+    if (err instanceof Error) {
+      errorMessage = err.message; 
     }
+    toast.error(errorMessage);
+    set({ error: errorMessage, loading: false });
+  }
   },
 
   deleteBusqueda: async (id: number) => {
