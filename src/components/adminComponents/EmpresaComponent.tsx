@@ -22,6 +22,7 @@ const EmpresaComponent = () => {
     fetchUsers,
     createEmpresa,
     editEmpresa,
+    unlinkUserFromEmpresa,
   } = useAdminStore();
 
   const [search, setSearch] = useState("");
@@ -187,6 +188,21 @@ const EmpresaComponent = () => {
     } catch (err) {
       console.error(err);
       toast.error("Error al actualizar la empresa");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUnlinkUser = async (id: number) => {
+    setLoading(true);
+    try {
+      await unlinkUserFromEmpresa(id);
+      toast.success("Usuario desvinculado exitosamente");
+      setShowModalEditar(false);
+      fetchEmpresas();
+    } catch (err) {
+      console.error(err);
+      toast.error("Error al desvincular usuario");
     } finally {
       setLoading(false);
     }
@@ -778,31 +794,60 @@ const EmpresaComponent = () => {
 
               <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Cambiar usuario Asociado
+                  Usuario Asociado
                 </label>
-
-                <div className="max-h-40 overflow-y-auto border rounded-lg p-2">
-                  {usersWithoutCompany.length > 0 ? (
-                    usersWithoutCompany.map((u) => (
-                      <div
-                        key={u.id}
-                        className={`p-2 mb-1 rounded-md cursor-pointer transition-colors ${
-                          idUsuario === u.id
-                            ? "bg-[#6d4098] text-white"
-                            : "bg-gray-100 hover:bg-gray-200"
-                        }`}
-                        onClick={() => setIdUsuario(u.id)}
-                      >
-                        <div className="font-medium">{u.nombre}</div>
-                        <div className="text-xs opacity-80">{u.email}</div>
+                {idUsuario ? (
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="p-2 rounded-md bg-gray-100">
+                      <div className="font-medium">
+                        {users.find((u) => u.id === idUsuario)?.nombre || "N/A"}
                       </div>
-                    ))
-                  ) : (
-                    <p className="text-red-500 text-sm p-2">
-                      No hay usuarios disponibles sin empresa
-                    </p>
-                  )}
-                </div>
+                      <div className="text-xs opacity-80">
+                        {users.find((u) => u.id === idUsuario)?.email || "N/A"}
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => handleUnlinkUser(idUsuario)}
+                      disabled={loading}
+                      className={`px-3 py-2 rounded-lg flex items-center gap-2 transition-all ${
+                        loading
+                          ? "bg-gray-300 text-black cursor-not-allowed"
+                          : "bg-red-600 text-white shadow-md cursor-pointer hover:bg-red-700"
+                      }`}
+                    >
+                      {loading ? (
+                        <>
+                          <FaSpinner className="animate-spin" /> Cargando...
+                        </>
+                      ) : (
+                        "Desvincular usuario"
+                      )}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="max-h-40 overflow-y-auto border rounded-lg p-2">
+                    {usersWithoutCompany.length > 0 ? (
+                      usersWithoutCompany.map((u) => (
+                        <div
+                          key={u.id}
+                          className={`p-2 mb-1 rounded-md cursor-pointer transition-colors ${
+                            idUsuario === u.id
+                              ? "bg-[#6d4098] text-white"
+                              : "bg-gray-100 hover:bg-gray-200"
+                          }`}
+                          onClick={() => setIdUsuario(u.id)}
+                        >
+                          <div className="font-medium">{u.nombre}</div>
+                          <div className="text-xs opacity-80">{u.email}</div>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-red-500 text-sm p-2">
+                        No hay usuarios disponibles sin empresa
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className="sm:col-span-2">

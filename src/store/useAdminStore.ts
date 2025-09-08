@@ -122,6 +122,8 @@ interface AdminState {
     }
   ) => Promise<void>;
 
+  unlinkUserFromEmpresa: (id: number) => Promise<void>;
+
   registerUser: (body: {
     nombre: string;
     apellido: string;
@@ -224,6 +226,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al cargar búsquedas", loading: false });
     }
   },
+
   selectBusqueda: async (id: number) => {
     set({ loading: true, error: null });
     try {
@@ -260,6 +263,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al eliminar la búsqueda", loading: false });
     }
   },
+
   fetchPlanes: async () => {
     set({ loading: true, error: null });
     try {
@@ -390,20 +394,8 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al cargar empresas", loading: false });
     }
   },
-  createEmpresa: async (body: {
-    nombre: string;
-    email: string;
-    nombre_fantasia: string;
-    cuit: string;
-    condicion_iva: string;
-    tipo_societario: string;
-    actividad_principal: string;
-    domicilio_legal_calle_numero: string;
-    domicilio_legal_ciudad: string;
-    domicilio_legal_pais: string;
-    codigo_postal: string;
-    id_usuario: number;
-  }) => {
+
+  createEmpresa: async (body) => {
     set({ loading: true, error: null });
     try {
       const newEmpresa = await adminService.crearEmpresa(body);
@@ -439,6 +431,16 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
+  unlinkUserFromEmpresa: async (id: number) => {
+    set({ loading: true, error: null });
+    try {
+      await adminService.unlinkUserFromEmpresa(id);
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al desvincular usuario de la empresa", loading: false });
+    }
+  },
+
   fetchConsultas: async () => {
     set({ loading: true, error: null });
     try {
@@ -449,6 +451,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al cargar consultas", loading: false });
     }
   },
+
   selectConsulta: async (id: number) => {
     set({ loading: true, error: null });
     try {
@@ -485,6 +488,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
       set({ error: "Error al eliminar la consulta", loading: false });
     }
   },
+
   fetchConsultorias: async () => {
     set({ loading: true, error: null });
     try {
@@ -513,13 +517,13 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   },
 
   comprarCreditos: async (body) => {
-  set({ loading: true, error: null });
-  try {
-    const compra = await adminService.comprarCreditos(body);
-    set({ compraCreditos: compra, loading: false });
-  } catch (err) {
-    console.error(err);
-    set({ error: "Error al comprar créditos", loading: false });
-  }
-},
+    set({ loading: true, error: null });
+    try {
+      const compra = await adminService.comprarCreditos(body);
+      set({ compraCreditos: compra, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al comprar créditos", loading: false });
+    }
+  },
 }));

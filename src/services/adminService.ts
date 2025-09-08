@@ -708,3 +708,24 @@ export const comprarCreditos = async (body: {
     await res.json();
   return data.data;
 };
+
+export const unlinkUserFromEmpresa = async (id: number): Promise<void> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/empresas/unlinkUser/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al desvincular usuario de empresa");
+
+    const data: { success: boolean; message: string } = await res.json();
+    if (!data.success) throw new Error("No se pudo desvincular usuario");
+  } catch (error) {
+    console.error("Error en unlinkUserFromEmpresa:", error);
+    throw error;
+  }
+};

@@ -1192,25 +1192,12 @@ export default function UsersComponent() {
                     key={i}
                     className="bg-white p-3 rounded-md shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-3"
                   >
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4 text-sm text-gray-700">
+                    <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
                       <div>
                         <p className="text-xs text-gray-500 mb-1">FECHA ALTA</p>
                         <p>{c.fecha_alta ? c.fecha_alta.split(" ")[0] : "—"}</p>
                       </div>
-                      <div>
-                        {c.tipo_credito !== "adicional" && (
-                          <div>
-                            <p className="text-xs text-gray-500 mb-1">
-                              VENCIMIENTO
-                            </p>
-                            <p>
-                              {c.vencimiento
-                                ? c.vencimiento.split(" ")[0]
-                                : "—"}
-                            </p>
-                          </div>
-                        )}
-                      </div>
+                     
                       <div>
                         <p className="text-xs text-gray-500 mb-1">CANTIDAD</p>
                         <p>{c.cantidad}</p>
