@@ -35,13 +35,5 @@ export const cursosCompletos = [
     imgPersona: ["/ImgMSol.png", "/imgSandra.png"],
     link: "/cursosCompletos/crearAreaRRHH",
   },
-/*   {
-    bannerImg: "/imgCursoIvone.jpg",
-    titulo: "Certificación en Offboarding Humano y Estratégico",
-    descripcion:
-      "Aprenderás a minimizar los riesgos, proteger la marca empleadora y fortalecer la moral del equipo.",
-    direccion: "Dirigida por: Ivonne Camacho",
-    imgPersona: ["/imgIvonne.png"],
-    link: "/cursosCompletos/offboarding",
-  },*/
+
 ]; 
