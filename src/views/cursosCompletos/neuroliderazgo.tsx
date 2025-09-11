@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { QaCursosCompletos } from "@/components/cursosCompletos/QaCursosCompletos";
-import { FAQMATERNIDADYLIDERAZGO } from "@/utils/cursosCompletos/faqMaternidadYLiderazgo";
 import { CiMonitor, CiMoneyBill } from "react-icons/ci";
 import { IoTimeOutline } from "react-icons/io5";
 import { FAQNEUROLIDERAZGO } from "@/utils/cursosCompletos/faqNeuroliderazgo";
@@ -54,7 +53,7 @@ const Neuroliderazgo = () => {
               </p>
               <p className="text-[14px] font-normal leading-[25px] text-center md:text-justify lg:text-justify">
                 El liderazgo tradicional no es suficiente. Para liderar con impacto en el mundo actual,
-                necesitas entender el 'manual de instrucciones' más importante: el cerebro. Esta certificación
+                necesitas entender el manual de instrucciones más importante: el cerebro. Esta certificación
                 te dará las herramientas neurocientíficas para ir más allá de la intuición y liderar de forma
                 consciente y sostenible.
 
@@ -133,12 +132,12 @@ const Neuroliderazgo = () => {
       </section>
 
       <section className="w-full font-poppins bg-white flex flex-col items-center my-8">
-        <div className="w-[80%] mx-auto rounded-[25px] bg-gradient-to-r from-[#A482BB] to-[#502B7D] p-0 shadow-lg min-h-[300px] flex items-end transform hover:scale-105 ease-in-out duration-300">
+        <div className="w-[80%] mx-auto rounded-[25px] bg-gradient-to-l from-[#FFD296] to-[#F89A1C] p-0 shadow-lg min-h-[300px] flex items-end transform hover:scale-105 ease-in-out duration-300">
           <div className="flex flex-col md:flex-row w-full gap-x-10">
             <div className="relative w-[240px] h-[260px] md:w-[260px] md:h-[280px] flex-shrink-0 self-center md:self-end ml-0">
               <Image
-                src="/imgKellyCurso.png"
-                alt="Kelly Gómez"
+                src="/carolina-sabatini1.png"
+                alt="Carolina Sabatini"
                 fill
                 className="object-cover"
                 quality={100}
@@ -146,7 +145,7 @@ const Neuroliderazgo = () => {
                 style={{ objectPosition: "top" }}
               />
             </div>
-            <div className="text-white flex-1 flex flex-col justify-start px-4 py-4 ml-0 md:justify-center md:px-6 md:py-8 md:ml-10">
+            <div className="text-black flex-1 flex flex-col justify-start px-4 py-4 ml-0 md:justify-center md:px-6 md:py-8 md:ml-10">
               <h3 className="font-medium text-[18px] md:text-[20px] mb-2 md:mb-3">
                 Facilitadora: Carolina Sabatini
               </h3>
