@@ -453,11 +453,13 @@ export default function UsersComponent() {
                     size={5}
                   >
                     <option value="">Sin plan</option>
-                    {planes.map((plan) => (
-                      <option key={plan.id} value={plan.id?.toString()}>
-                        {plan.nombre}
-                      </option>
-                    ))}
+                    {planes
+                      .filter((plan) => plan.active)
+                      .map((plan) => (
+                        <option key={plan.id} value={plan.id?.toString()}>
+                          {plan.nombre}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
@@ -1197,7 +1199,7 @@ export default function UsersComponent() {
                         <p className="text-xs text-gray-500 mb-1">FECHA ALTA</p>
                         <p>{c.fecha_alta ? c.fecha_alta.split(" ")[0] : "—"}</p>
                       </div>
-                     
+
                       <div>
                         <p className="text-xs text-gray-500 mb-1">CANTIDAD</p>
                         <p>{c.cantidad}</p>
