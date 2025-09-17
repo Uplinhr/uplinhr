@@ -35,15 +35,13 @@ export const cursosCompletos = [
     imgPersona: ["/ImgMSol.png", "/imgSandra.png"],
     link: "/cursosCompletos/crearAreaRRHH",
   },
-  /** 
   {
     bannerImg: "/imgCursoCarolinaSabatini.jpg",
-    titulo: "Certificación: Liderazgo internacional: Neurohabilidades de alto impacto",
+    titulo: "Certificación: Liderazgo intencional: Neurohabilidades de alto impacto",
     descripcion:
       "Aprenderás a potenciar la diversidad de tu equipo con empatía estratégica, fomentar una mentalidad de crecimiento para el cambio continuo y mucho más",
     direccion: "Dirigida por: Carolina Sabatini",
     imgPersona: ["/carolina-sabatini1.png"],
     link: "/cursosCompletos/neuroliderazgo",
   },
-  */
 ]; 
