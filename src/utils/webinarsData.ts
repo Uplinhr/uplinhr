@@ -38,7 +38,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     link: "https://app.uplinhr.com/inscripcion-fundar-area-rrhh",
     
   },
-  */
+  
   {
     id: "5",
     tipo: "en vivo",
@@ -50,7 +50,7 @@ export const upcomingWebinars: Webinar[] =  [/* {
     link: "https://app.uplinhr.com/inscripcion-charla-neurohabilidades",
     
   },
-
+  */
 ]
 
 export const recordedWebinars: Webinar[] = [
@@ -90,18 +90,16 @@ export const recordedWebinars: Webinar[] = [
     fecha: "Disponible",
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
     link: "https://app.uplinhr.com/registro-charla-gratis-crea-area-rh",
-  }, 
-  /** 
+  },  
   {
     id: "5",
     tipo: "grabado",
-    titulo: "Liderazgo internacional: Neurohabilidades de alto impacto",
+    titulo: "Liderazgo intencional: Neurohabilidades de alto impacto",
     dirigidoPor: "Carolina Sabatini",
     fecha: "Disponible",
     imagenes: ["/carolina-sabatini1.png"],
-    
-    link: "#",
+    link: "https://app.uplinhr.com/registro-charla-gratis-neurohabilidades",
     
   },
-  */
+
 ]
