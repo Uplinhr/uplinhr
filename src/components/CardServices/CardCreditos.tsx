@@ -7,7 +7,7 @@ type Props = {
 
 export function CardCreditos({ paquetes }: Props) {
   return (
-    <div className="flex flex-col h-full rounded-lg shadow-md p-6">
+    <div className="flex flex-col h-full rounded-lg shadow-md shadow-[#6C4099] p-6">
       {/* Discount Badge */}
       {paquetes.discount && (
         <span className="text-xs font-bold bg-[#F89A1C] text-white px-2 py-1 rounded self-center mb-2">

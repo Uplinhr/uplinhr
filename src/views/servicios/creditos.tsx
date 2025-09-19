@@ -2,6 +2,8 @@ import Button from "@/components/Button/Button";
 import Image from "next/image";
 import { data } from "@/utils/paquetes";
 import { CardCreditos } from "@/components/CardServices/CardCreditos";
+import CardBeneficiosCreditos from "@/components/CardServices/CardBeneficiosCreditos";
+import { Banner2 } from "@/components/banner/banner";
 
 export default function Creditos() {
   return (
@@ -65,11 +67,40 @@ export default function Creditos() {
       </section>
 
       <section className="py-16 px-4 bg-gray-50">
+        <h1 className="font-poppins text-[28px] text-black font-semibold text-center mb-8 mt-8">
+          Encontrá el paquete perfecto para tu empresa
+        </h1>
         <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
           {data.map((paquete) => (
             <CardCreditos key={paquete.id} paquetes={paquete} />
           ))}
         </div>
+      </section>
+
+      <section>
+        <div className="bg-[#6C4099] rounded-lg p-6 mb-6 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white">
+          <h2>
+            Si tu paquete no se adapta a tus necesidades, comprá créditos
+            individuales
+          </h2>
+          <Button
+            link="https://outlook.office365.com/book/ConectconUplin1@uplinhr.com/?ismsaljsauthenabled=true"
+            tag="Aquirir aquí"
+            mode={2}
+            height={50}
+            width={250}
+          />
+        </div>
+      </section>
+
+      <section>
+        <h2 className="text-2xl font-bold mt-12 text-center">
+          <span className="text-[#502B7D]">Beneficios</span>{" "}
+          <span className="text-[#70C157]">+</span>
+        </h2>
+        <CardBeneficiosCreditos />
+
+        <Banner2 />
       </section>
     </main>
   );
