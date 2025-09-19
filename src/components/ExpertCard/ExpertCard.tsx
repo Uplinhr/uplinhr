@@ -20,7 +20,7 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
       {/* Foto con fondo morado */}
       <div className="relative shrink-0 w-28 h-28 md:w-40 md:h-40 rounded-xl overflow-hidden">
         <div className="absolute inset-0 bg-[#5C2D91]" />
-        <Image src={imageUrl} alt={name} fill className="object-contain p-3" />
+        <Image src={imageUrl} alt={name} fill className="object-contain " />
       </div>
 
       <div className="flex-1 min-w-0">
