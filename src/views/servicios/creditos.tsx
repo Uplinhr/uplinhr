@@ -67,9 +67,13 @@ export default function Creditos() {
       </section>
 
       <section className="py-16 px-4 bg-gray-50">
-        <h1 className="font-poppins text-[28px] text-black font-semibold text-center mb-8 mt-8">
-          Encontrá el paquete perfecto para tu empresa
-        </h1>
+        
+        <h2 className="font-poppins text-[28px] font-semibold text-center mb-8 mt-8">
+          <span className="text-black">Encontrá el</span>{" "}
+          <span className="text-[#502B7D]">paquete perfecto</span>{" "}
+          <span className="text-black">para tu empresa</span>
+        </h2>
+        
         <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
           {data.map((paquete) => (
             <CardCreditos key={paquete.id} paquetes={paquete} />
@@ -94,7 +98,7 @@ export default function Creditos() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-bold mt-12 text-center">
+        <h2 className="font-poppins text-[28px] font-semibold text-center mt-8">
           <span className="text-[#502B7D]">Beneficios</span>{" "}
           <span className="text-[#70C157]">+</span>
         </h2>
