@@ -143,7 +143,7 @@ const Navbar = () => {
                   Consultorías
                 </a>
                 <a
-                  href="/servcios/membresias"
+                  href="/servicios/membresias"
                   className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
                   onClick={closeAllMenus}
                 >
