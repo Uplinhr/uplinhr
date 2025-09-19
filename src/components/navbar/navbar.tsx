@@ -77,7 +77,7 @@ const Navbar = () => {
             Quienes Somos
           </a>
           <a href="/planes" className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer">
-            Planes
+            Servicios
           </a>
           <a href="/academy" className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer">
             Uplin Academy
