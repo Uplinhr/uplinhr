@@ -4,6 +4,7 @@ import { data } from "@/utils/paquetes";
 import { CardCreditos } from "@/components/CardServices/CardCreditos";
 import CardBeneficiosCreditos from "@/components/CardServices/CardBeneficiosCreditos";
 import { Banner2 } from "@/components/banner/banner";
+import CreditSimulatorModal from "@/components/simulador/CreditSimulatorModal";
 
 export default function Creditos() {
   return (
@@ -53,14 +54,15 @@ export default function Creditos() {
               </div>
 
               <div className="pt-2">
+                <CreditSimulatorModal>
                 <Button
-                  link="/planes"
-                  tag="Quiero conocer los servicios"
+                  tag="Simulá tu paquete"
                   mode={2}
                   height={46}
                   width={300}
                 />
-              </div>
+                </CreditSimulatorModal>             
+                </div>
             </div>
           </div>
         </div>

@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 interface ButtonProps {
-  link: string;
+  link?: string; // opcional ahora
+  onClick?: () => void; // nuevo
   tag: string;
   mode: 0 | 1 | 2 | 3;
   height: number;
@@ -10,14 +11,8 @@ interface ButtonProps {
 
 /**
  * Componente button personalizado
- * @param {string} link - URL del botón
- * @param {string} tag - Etiqueta del botón
- * @param {0 | 1 | 2 | 3} mode - Estilo visual del botón
- * @param {number} height - Altura del botón
- * @param {number} width - Ancho del botón
- * @returns {JSX.Element} Botón estilizado
  */
-const Button = ({ link, tag, mode, height, width }: ButtonProps) => {
+const Button = ({ link, onClick, tag, mode, height, width }: ButtonProps) => {
   const colorConfig = {
     0: {
       base: {
@@ -71,37 +66,51 @@ const Button = ({ link, tag, mode, height, width }: ButtonProps) => {
 
   const { base, hover } = colorConfig[mode];
 
+  const classNames = `
+    font-poppins 
+    text-[16px] 
+    rounded-[6px] 
+    px-4 py-2 
+    cursor-pointer 
+    transition-colors duration-300 ease-in-out
+    ${base.border}
+    ${base.bg} 
+    ${base.text} 
+    ${base.fontWeight}
+    ${hover.bg} 
+    ${hover.text}
+  `;
+
+  const style = {
+    height: `${height}px`,
+    width: `${width}px`,
+    minWidth: "fit-content",
+    fontStyle: "normal",
+    textAlign: "center" as const,
+  };
+
+  if (link) {
+    // Caso con link
+    return (
+      <div className="flex justify-center">
+        <Link href={link} target="_blank" rel="noopener noreferrer">
+          <button className={classNames} style={style}>
+            {tag}
+          </button>
+        </Link>
+      </div>
+    );
+  }
+
+  // Caso solo botón
   return (
     <div className="flex justify-center">
-      <Link href={link} target="_blank" rel="noopener noreferrer">
-        <button
-          className={`
-            font-poppins 
-            text-[16px] 
-            rounded-[6px] 
-            px-4 py-2 
-            cursor-pointer 
-            transition-colors duration-300 ease-in-out
-            ${base.border}
-            ${base.bg} 
-            ${base.text} 
-            ${base.fontWeight}
-            ${hover.bg} 
-            ${hover.text}
-          `}
-          style={{
-            height: `${height}px`,
-            width: `${width}px`,
-            minWidth: "fit-content",
-            fontStyle: "normal",
-            textAlign: "center",
-          }}
-        >
-          {tag}
-        </button>
-      </Link>
+      <button className={classNames} style={style} onClick={onClick}>
+        {tag}
+      </button>
     </div>
   );
 };
 
 export default Button;
+
