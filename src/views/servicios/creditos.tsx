@@ -90,7 +90,7 @@ export default function Creditos() {
             individuales
           </h2>
           <Button
-            link="https://outlook.office365.com/book/ConectconUplin1@uplinhr.com/?ismsaljsauthenabled=true"
+            link="/servicios/creditos/elegir-pais"
             tag="Aquirir aquí"
             mode={2}
             height={50}
