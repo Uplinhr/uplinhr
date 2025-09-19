@@ -1,7 +1,5 @@
-function ConsultoriasPage() {
-  return (
-    <div>ConsultoriasPage</div>
-  )
-}
+import ConsultoriasPage from "@/views/servicios/consultorias";
 
-export default ConsultoriasPage
+export default function Page() {
+  return <ConsultoriasPage />;
+}

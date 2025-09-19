@@ -9,7 +9,7 @@ export function Banner() {
         {/* Imagen */}
         <div className="w-12 h-12 relative rounded-full overflow-hidden flex-shrink-0">
           <Image
-            src="/S-ppstaffing.jpeg" 
+            src="/llamada.jpg" 
             alt="Asesor especialista"
             fill
             className="object-cover"
@@ -50,7 +50,7 @@ export function Banner2() {
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 relative rounded-full overflow-hidden flex-shrink-0">
             <Image
-              src="/S-ppstaffing.jpeg" 
+              src="/llamada.jpg" 
               alt="Asesor especialista"
               fill
               className="object-cover"
