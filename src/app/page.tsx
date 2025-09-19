@@ -40,7 +40,7 @@ export default function TestTailwind() {
         icon={<CiSearch className="w-4 h-4 text-[#6C4099]" />}
         title="Búsqueda de talentos"
         description="Accedé a paquetes de créditos diseñados según tus necesidades. Podés simular tu plan y crear un modelo flexible y a medida para tu proceso de reclutamiento."
-        linkHref="https://www.google.com/"
+        linkHref="/servicios/creditos"
         imageSrc="/S-busqueda.jpeg"
         imageAlt="Busqueda de talentos"
       />
@@ -48,7 +48,7 @@ export default function TestTailwind() {
         icon={<PiUsersThreeLight className="w-4 h-4 text-[#6C4099]" />}
         title="People Partner Staffing"
         description="Nos convertimos en tu socio estratégico de talento. Te acompañamos en la contratación, integración y gestión de tu equipo con un enfoque humano y cercano."
-        linkHref="https://www.google.com/"
+        linkHref="/servicios/ppStaffing"
         imageSrc="/S-ppstaffing.jpeg"
         imageAlt="Peple Partner Staffing"
       />
@@ -56,7 +56,7 @@ export default function TestTailwind() {
         icon={<SlBriefcase className="w-4 h-4 text-[#6C4099]" />}
         title="Consultorías"
         description="Asesoría especializada en recursos humanos para impulsar tu negocio. Te damos claridad y soluciones prácticas para enfrentar tus retos de gestión de personas."
-        linkHref="https://www.google.com/"
+        linkHref="/servicios/consultorias"
         imageSrc="/S-consultorias.jpeg"
         imageAlt="Consultorias"
       />
@@ -64,7 +64,7 @@ export default function TestTailwind() {
         icon={<MdOutlineCardMembership className="w-4 h-4 text-[#6C4099]" />}
         title="Membresías"
         description="Un plan flexible para acceder a beneficios y soporte continuo en RRHH. Acompañamos a tu organización con soluciones adaptadas a cada etapa de crecimiento."
-        linkHref="https://www.google.com/"
+        linkHref="/servicios/membresias"
         imageSrc="/S-membresias.jpeg"
         imageAlt="Membresías"
       />

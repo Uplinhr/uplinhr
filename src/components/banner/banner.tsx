@@ -87,3 +87,29 @@ export function Banner2() {
     </div>
   );
 }
+
+export function Banner3() {
+  return (
+    <div className="bg-gradient-to-r from-[#BB9ECA] to-[#f4e4ff] rounded-lg p-6 mb-6 flex flex-col max-w-6xl mx-auto text-white space-y-6">
+      <h2 className="text-center text-[20px] font-semibold text-[#502B7D]">El futuro del trabajo es flexible</h2>
+      <h1 className="font-poppins text-[28px] font-semibold text-center">
+          <span className="text-[#ffffff]">Lidera con agilidad.</span>
+          <br />
+          <span className="text-[#ffffff]">Gestiona con</span>{" "}
+          <span className="text-[#502B7D]">UPLIN</span>
+      </h1>
+      <p className="text-base text-center md:text-sm font-regular">No dejes que la rigidez de los modelos tradicionales detenga tu crecimiento. Conecta con el talento que necesitas, cuando lo necesitas.</p>
+      <h2 className="text-lg text-center text-[#502B7D] font-medium">
+              ¿Necesitás ayuda antes de iniciar?
+            </h2>
+      {/* Botón */}
+        <Button
+          link="https://outlook.office365.com/book/ConectconUplin1@uplinhr.com/?ismsaljsauthenabled=true"
+          tag="Agendá una llamada"
+          mode={3}
+          height={50}
+          width={250}
+        />
+    </div>
+  );
+}
