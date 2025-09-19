@@ -1,11 +1,7 @@
-import React from 'react'
 
-const page = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+import PpStaffingView from "@/views/servicios/ppStaffing/PpStaffingView";
+
+export default function Page() {
+
+    return <PpStaffingView />;
 }
-
-export default page
