@@ -3,7 +3,7 @@ import Button from "../Button/Button"
 
 export function Banner() {
   return (
-    <div className="bg-gradient-to-r from-[#BB9ECA] to-[#f4e4ff] rounded-lg p-6 mb-6 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white">
+    <div className="bg-gradient-to-r from-[#8F68AC] to-[#CDBADA] rounded-lg p-6 mb-6 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white">
       {/* Text Section */}
       <div className="flex items-center gap-4">
         {/* Imagen */}
@@ -42,7 +42,7 @@ export function Banner() {
 
 export function Banner2() {
   return (
-    <div className="bg-gradient-to-r from-[#BB9ECA] to-[#f4e4ff] rounded-lg p-6 mb-6 flex flex-col max-w-6xl mx-auto text-white space-y-6">
+    <div className="bg-gradient-to-r from-[#8F68AC] to-[#CDBADA] rounded-lg p-6 mb-6 flex flex-col max-w-6xl mx-auto text-white space-y-6">
       
       {/* Fila con imagen, textos y botón */}
       <div className="flex flex-col md:flex-row items-center justify-between w-full gap-4">
@@ -90,7 +90,7 @@ export function Banner2() {
 
 export function Banner3() {
   return (
-    <div className="bg-gradient-to-r from-[#BB9ECA] to-[#f4e4ff] rounded-lg p-6 mb-6 flex flex-col max-w-6xl mx-auto text-white space-y-6">
+    <div className="bg-gradient-to-r from-[#8F68AC] to-[#CDBADA] rounded-lg p-6 mb-6 flex flex-col max-w-6xl mx-auto text-white space-y-6">
       <h2 className="text-center text-[20px] font-semibold text-[#502B7D]">El futuro del trabajo es flexible</h2>
       <h1 className="font-poppins text-[28px] font-semibold text-center">
           <span className="text-[#ffffff]">Lidera con agilidad.</span>

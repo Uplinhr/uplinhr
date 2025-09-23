@@ -59,7 +59,7 @@ export const PLANS_DATA = [
   {
     plan: "Custom",
     description:
-      "Armamos tu plan con los servicios que necesitás para proyectos específicos, desafíos puntuales o procesos estratégicos, disponible por la duración del proyecto o el tiempo que requieras.",
+      "Armamos tu plan con los servicios que necesitás para proyectos específicos, desafíos puntuales o procesos estratégicos.",
     price: "A convenir",
     includes: [
       "Créditos de búsqueda de talento a medida",
