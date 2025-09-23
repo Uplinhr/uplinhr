@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+// ⬇️ (opcional) si quieres el chevron; si no, bórralo y deja solo el texto
+import { FaChevronDown } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
@@ -15,6 +17,10 @@ import { EditPasswordRequest } from "@/services/userService";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+
+  // ⬇️ NUEVO: estado para el dropdown de Servicios
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const toggleServices = () => setServicesOpen((s) => !s);
 
   const { user, logout } = useAuthStore();
   const { cambiarClave } = useUserStore();
@@ -59,6 +65,13 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  // helper para cerrar todos los overlays
+  const closeAllMenus = () => {
+    setIsOpen(false);
+    setUserMenuOpen(false);
+    setServicesOpen(false);
+  };
+
   return (
     <nav className="font-[Poppins] bg-white shadow-gray-300 shadow-md relative">
       <div className="container mx-auto px-10 py-3 flex justify-between items-center">
@@ -72,17 +85,82 @@ const Navbar = () => {
           />
         </Link>
 
+        {/* DESKTOP */}
         <div className="hidden lg:flex gap-12 items-center">
-          <a href="/quienes-somos" className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer">
+          <a
+            href="/quienes-somos"
+            className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
+          >
             Quienes Somos
           </a>
-          <a href="/planes" className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer">
-            Planes
-          </a>
-          <a href="/academy" className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer">
+
+          <div className="relative">
+            <button
+              type="button"
+              onClick={toggleServices}
+              aria-expanded={servicesOpen}
+              className={`flex items-center gap-2 rounded-xl px-4 py-2 transition-colors
+      ${
+        servicesOpen
+          ? "bg-[#502B7D] text-white"
+          : "text-[#502B7D] hover:bg-[#502B7D] hover:text-white"
+      }`}
+            >
+              <span>Servicios</span>
+              <FaChevronDown
+                className={`transition-transform hover:text-white ${
+                  servicesOpen ? "rotate-180 text-white" : "text-[#502B7D]"
+                }`}
+              />
+            </button>
+
+            {servicesOpen && (
+              <div
+                className="absolute left-0 mt-3 w-[320px] bg-white rounded-2xl shadow-lg py-4 z-30"
+                onMouseLeave={() => setServicesOpen(false)}
+              >
+                <a
+                  href="/servicios/creditos"
+                  className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
+                  onClick={closeAllMenus}
+                >
+                  Búsqueda de Talento
+                </a>
+                <a
+                  href="/servicios/ppStaffing"
+                  className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
+                  onClick={closeAllMenus}
+                >
+                  People Partner Staffing
+                </a>
+                <a
+                  href="/servicios/consultorias"
+                  className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
+                  onClick={closeAllMenus}
+                >
+                  Consultorías
+                </a>
+                <a
+                  href="/servicios/membresias"
+                  className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
+                  onClick={closeAllMenus}
+                >
+                  Membresías
+                </a>
+              </div>
+            )}
+          </div>
+
+          <a
+            href="/academy"
+            className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
+          >
             Uplin Academy
           </a>
-          <a href="/careers" className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer">
+          <a
+            href="/careers"
+            className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
+          >
             Uplin Careers
           </a>
           <a
@@ -92,6 +170,7 @@ const Navbar = () => {
             Contacto
           </a>
 
+          {/* User menu (igual que lo tenías) */}
           <div className="relative">
             <button
               onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -133,6 +212,7 @@ const Navbar = () => {
           </div>
         </div>
 
+        {/* HAMBURGER */}
         <button
           className="lg:hidden text-[#502B7D] focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
@@ -141,40 +221,85 @@ const Navbar = () => {
         </button>
       </div>
 
+      {/* MOBILE */}
       {isOpen && (
         <div className="lg:hidden mt-4 pb-4 space-y-3">
           <a
             href="/quienes-somos"
             className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded cursor-pointer"
-            onClick={() => setIsOpen(false)}
+            onClick={closeAllMenus}
           >
             Quienes Somos
           </a>
-          <a
-            href="/planes"
-            className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded cursor-pointer"
-            onClick={() => setIsOpen(false)}
+
+          {/* ⬇️ Servicios con submenú en mobile */}
+          <button
+            type="button"
+            onClick={() => setServicesOpen((s) => !s)}
+            aria-expanded={servicesOpen}
+            className={`flex items-center gap-2 rounded-lg px-3 py-2 cursor-pointer transition-colors
+            ${servicesOpen ? "bg-[#502B7D] text-white" : "text-[#502B7D]"}
+            hover:bg-[#502B7D] hover:text-white`}
           >
-            Planes
-          </a>
+            <span>Servicios</span>
+            <FaChevronDown
+              className={`transition-transform ${
+                servicesOpen ? "rotate-180 text-white" : "text-[#502B7D]"
+              }`}
+            />
+          </button>
+
+          {servicesOpen && (
+            <div className="ml-4 space-y-1">
+              <a
+                href="/servicios/creditos"
+                className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
+                onClick={closeAllMenus}
+              >
+                Búsqueda de Talento
+              </a>
+              <a
+                href="/servicios/ppStaffing"
+                className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
+                onClick={closeAllMenus}
+              >
+                People Partner Staffing
+              </a>
+              <a
+                href="/servicios/consultorias"
+                className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
+                onClick={closeAllMenus}
+              >
+                Consultorías
+              </a>
+              <a
+                href="/servicios/membresias"
+                className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
+                onClick={closeAllMenus}
+              >
+                Membresías
+              </a>
+            </div>
+          )}
+
           <a
             href="/academy"
             className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded cursor-pointer"
-            onClick={() => setIsOpen(false)}
+            onClick={closeAllMenus}
           >
             Uplin Academy
           </a>
           <a
             href="/careers"
             className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded cursor-pointer"
-            onClick={() => setIsOpen(false)}
+            onClick={closeAllMenus}
           >
             Uplin Careers
           </a>
           <a
             href="https://app.uplinhr.com/contacto"
             className="inline-block border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white mt-2 cursor-pointer"
-            onClick={() => setIsOpen(false)}
+            onClick={closeAllMenus}
           >
             Contacto
           </a>
@@ -183,10 +308,7 @@ const Navbar = () => {
             <Link
               href="/login"
               className="block text-[#502B7D] px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-              onClick={() => {
-                setIsOpen(false);
-                setUserMenuOpen(false);
-              }}
+              onClick={closeAllMenus}
             >
               Iniciar sesión
             </Link>
@@ -276,7 +398,11 @@ const Navbar = () => {
                 className="absolute right-3 bottom-3 text-gray-500 hover:text-gray-700 cursor-pointer"
                 onClick={() => setShowConfirm(!showConfirm)}
               >
-                {showConfirm ? <IoEyeSharp size={20} /> : <FaEyeSlash size={20} />}
+                {showConfirm ? (
+                  <IoEyeSharp size={20} />
+                ) : (
+                  <FaEyeSlash size={20} />
+                )}
               </button>
             </div>
 

@@ -12,8 +12,8 @@ const Presentation = () => {
             PARA TU EMPRESA
           </p>
           <h1 className="font-poppins text-[32px] sm:text-[36px] md:text-[40px] text-white font-bold text-left md:text-left mb-2 leading-tight md:leading-11 mt-3">
-            La Primera Membresía <br className="hidden md:block" />
-            Flexible en Latam
+            La primera plataforma de  <br className="hidden md:block" />
+            servicios RRHH flexible en Latam
           </h1>
           <p className="font-poppins text-[18px] md:text-[20px] text-white font-normal text-left md:text-left mb-6">
             Accedé a soluciones de talento y gestión de personal{" "}
@@ -22,8 +22,8 @@ const Presentation = () => {
           </p>
           <div className="flex justify-center md:justify-start">
             <Button
-              link="/planes"
-              tag="Quiero conocer los planes"
+              link="/servicios/membresias"
+              tag="Quiero conocer las membresías"
               mode={2}
               height={46}
               width={300}
@@ -34,11 +34,11 @@ const Presentation = () => {
        
         <div className="order-1 md:order-2 w-full md:w-1/2 min-w-[300px] max-w-[750px] mx-auto md:mx-0">
           <Image
-            alt="Logo Membresia flexible"
-            src="/imgReunionUplin.png"
+            alt="servicios RRHH flexible"
+            src="/home-landing.png"
             width={750}
             height={450}
-            className="w-full h-auto drop-shadow-[-14px_14px_0_#502B7D]"
+            className="w-full h-auto"
           />
         </div>
       </div>

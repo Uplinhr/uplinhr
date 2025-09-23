@@ -13,7 +13,7 @@ const Footer = () => {
             height={50}
           />
           <p className="text-xs tracking-wide font-medium">
-            La Primera Membresía de HR flexible en Latinoamérica
+            La primera plataforma flexible de servicios RRHH en Latam
           </p>
         </div>
         <div>
@@ -76,7 +76,7 @@ const Footer = () => {
       </div>
       <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-white">
         <p className="text-center text-xs font-semibold">
-          © 2025 Uplin. Todos los derechos reservados
+          © 2025 Uplin. Todos los derechos reservados. Hecho con  💜
         </p>
       </div>
     </footer>
