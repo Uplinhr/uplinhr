@@ -8,7 +8,7 @@ const countriesMaterLider = [
   { name: "Ecuador", code: "ec", href: "https://app.uplinhr.com/adquiere-creditos-busqueda" },
   { name: "España", code: "es", href: "https://app.uplinhr.com/adquiere-creditos-busqueda" },
   { name: "Estados Unidos", code: "us", href: "https://app.uplinhr.com/adquiere-creditos-busqueda" },
-  { name: "México", code: "mx", href: "https://app.uplinhr.com/certificacion-herramientas-area-recursos-humanos" },
+  { name: "México", code: "mx", href: "https://app.uplinhr.com/adquirir-creditos-busqueda" },
 ];
 
 const otherCountriesMaterLider = {
