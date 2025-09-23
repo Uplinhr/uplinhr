@@ -255,7 +255,7 @@ export default function CreditSimulatorModal({
                   {/* opción compra exacta (comparación) */}
                   {totalCredits > 0 && (
                     <div className="mt-4 text-[18px] text-[#5C2D91]">
-                      {totalCredits} créditos + {totalVacancies} vacante
+                      {totalCredits} créditos  (USD $6 c/u) + {totalVacancies} vacante
                       {totalVacancies !== 1 ? "s" : ""} (USD $100 c/u) por{" "}
                       <strong className="text-[20px]">
                         USD ${exactPurchaseTotal.toLocaleString()}
