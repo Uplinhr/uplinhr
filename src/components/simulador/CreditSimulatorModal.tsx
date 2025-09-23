@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { X } from "lucide-react";
+import Button from "../Button/Button";
 
 type Level = { name: string; credits: number };
-type Pkg = { name: string; credits: number; price: number; features: string[] };
+type Pkg = { name: string; credits: number; price: number; features: string[]; link: string };
 
 const LEVELS: Level[] = [
   { name: "Entry / Principiante", credits: 10 },
@@ -15,29 +16,68 @@ const LEVELS: Level[] = [
 ];
 
 const PACKAGES: Pkg[] = [
-  { name: "Single Hire", credits: 120, price: 720, features: [
-      "120 créditos incluidos", "Vacantes posibles: 1 (Entry o Junior)",
-      "Proceso básico de selección", "Soporte y acompañamiento",
-      "Sin vencimiento", "Pago único"
-  ]},
-  { name: "Pro", credits: 660, price: 3960, features: [
-      "660 créditos incluidos", "Vacantes posibles: hasta 5 Juniors",
-      "Proceso básico de selección", "Soporte y acompañamiento",
-      "Onboarding asistido", "Garantía de 3 meses",
-      "Sin vencimiento", "Pago único"
-  ]},
-  { name: "Premium", credits: 990, price: 5940, features: [
-      "990 créditos incluidos", "Vacantes posibles: hasta 8 Juniors",
-      "Proceso básico de selección", "Soporte y acompañamiento",
-      "Onboarding asistido", "Garantía de 3 meses",
-      "Sin vencimiento", "Pago único"
-  ]},
-  { name: "Platinum", credits: 1320, price: 7920, features: [
-      "1320 créditos incluidos", "Vacantes posibles: hasta 11 Juniors",
-      "Proceso básico de selección", "Soporte y acompañamiento",
-      "Onboarding asistido", "Garantía de 3 meses",
-      "Sin vencimiento", "Pago único"
-  ]},
+  {
+    name: "Single Hire",
+    credits: 120,
+    price: 720,
+    features: [
+      "120 créditos incluidos",
+      "Vacantes posibles: 1 (Entry o Junior)",
+      "Proceso básico de selección",
+      "Soporte y acompañamiento",
+      "Sin vencimiento",
+      "Pago único",
+    ],
+    link: "https://app.uplinhr.com/adquiere-single-hire",
+  },
+  {
+    name: "Pro",
+    credits: 660,
+    price: 3960,
+    features: [
+      "660 créditos incluidos",
+      "Vacantes posibles: hasta 5 Juniors",
+      "Proceso básico de selección",
+      "Soporte y acompañamiento",
+      "Onboarding asistido",
+      "Garantía de 3 meses",
+      "Sin vencimiento",
+      "Pago único",
+    ],
+    link: "https://app.uplinhr.com/adquiere-pack-pro",
+  },
+  {
+    name: "Premium",
+    credits: 990,
+    price: 5940,
+    features: [
+      "990 créditos incluidos",
+      "Vacantes posibles: hasta 8 Juniors",
+      "Proceso básico de selección",
+      "Soporte y acompañamiento",
+      "Onboarding asistido",
+      "Garantía de 3 meses",
+      "Sin vencimiento",
+      "Pago único",
+    ],
+    link: "https://app.uplinhr.com/adquiere-pack-premium",
+  },
+  {
+    name: "Platinum",
+    credits: 1320,
+    price: 7920,
+    features: [
+      "1320 créditos incluidos",
+      "Vacantes posibles: hasta 11 Juniors",
+      "Proceso básico de selección",
+      "Soporte y acompañamiento",
+      "Onboarding asistido",
+      "Garantía de 3 meses",
+      "Sin vencimiento",
+      "Pago único",
+    ],
+    link: "https://app.uplinhr.com/adquiere-pack-platinum",
+  },
 ];
 
 const PRICE_PER_INDIVIDUAL_CREDIT = 6; // USD
@@ -57,6 +97,15 @@ export default function CreditSimulatorModal({
     [qty]
   );
 
+  const totalVacancies = useMemo(
+    () => qty.reduce((acc, n) => acc + (Number(n) || 0), 0),
+    [qty]
+  );
+
+  const baseFee = totalVacancies * 100; // USD $100 por vacante
+  const exactPurchaseTotal =
+    totalCredits * PRICE_PER_INDIVIDUAL_CREDIT + baseFee;
+
   const recommended = useMemo(() => {
     if (totalCredits <= 0) return null;
     const suitable = PACKAGES.find((p) => p.credits >= totalCredits);
@@ -72,7 +121,9 @@ export default function CreditSimulatorModal({
     } else {
       document.body.style.overflow = "";
     }
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [open]);
 
   // ESC para cerrar
@@ -88,7 +139,9 @@ export default function CreditSimulatorModal({
 
   return (
     <>
-      <span onClick={() => setOpen(true)} className="inline-block">{children}</span>
+      <span onClick={() => setOpen(true)} className="inline-block">
+        {children}
+      </span>
 
       {open && (
         <div
@@ -123,6 +176,12 @@ export default function CreditSimulatorModal({
             >
               Simulador de créditos
             </h2>
+            <p className="text-black text-lg text-center lg:text-base leading-relaxed mt-1 mb-8">
+              Cada vacante tiene un costo base de USD $100 + la cantidad de
+              créditos requeridos según el perfil.
+              <br />
+              Cada crédito equivale a USD $6.
+            </p>
 
             {/* CONTENIDO */}
             <div className="space-y-6">
@@ -134,7 +193,9 @@ export default function CreditSimulatorModal({
                     className="flex items-center justify-between gap-3 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] rounded-2xl px-4 py-3"
                   >
                     <div className="min-w-0">
-                      <p className="font-semibold text-[#3b2b57]">{level.name}</p>
+                      <p className="font-semibold text-[#3b2b57]">
+                        {level.name}
+                      </p>
                       <p className="text-xs text-gray-500">
                         {level.credits} créditos / vacante
                       </p>
@@ -171,7 +232,7 @@ export default function CreditSimulatorModal({
                 </span>
               </div>
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-end">
                 <button
                   onClick={reset}
                   className="text-sm text-gray-600 underline decoration-gray-400 hover:text-gray-800"
@@ -183,14 +244,24 @@ export default function CreditSimulatorModal({
               {/* compra directa */}
               <div className="flex items-center justify-between rounded-2xl bg-[#f6f5fb] shadow-[0_2px_10px_rgba(0,0,0,0.05)] px-5 py-4">
                 <span className="font-semibold text-[#3b2b57]">
-                  Comprá créditos de forma directa
+                  {/* opción compra exacta (comparación) */}
+                  {totalCredits > 0 && (
+                    <div className="mt-4 text-[18px] text-[#5C2D91]">
+                      {totalCredits} créditos +{" "}
+                      {totalVacancies} vacante{totalVacancies !== 1 ? "s" : ""}{" "}
+                      (USD $100 c/u) por{" "}
+                      <strong className="text-[20px]">
+                        USD ${exactPurchaseTotal.toLocaleString()}
+                      </strong>
+                    </div>
+                  )}
                 </span>
-                <a
-                  href="creditos/elegir-pais"
-                  className="rounded-lg bg-emerald-500 px-4 py-1.5 text-white text-sm hover:bg-emerald-600"
-                >
-                  Click aquí
-                </a>
+                <Button
+                  tag="Comprá créditos"
+                  mode={2}
+                  height={46}
+                  width={180}
+                />
               </div>
 
               {/* recomendación */}
@@ -214,7 +285,9 @@ export default function CreditSimulatorModal({
                     </div>
 
                     <div>
-                      <p className="text-sm text-[#6f61a8]">Créditos incluidos:</p>
+                      <p className="text-sm text-[#6f61a8]">
+                        Créditos incluidos:
+                      </p>
                       <p className="text-2xl font-extrabold text-[#5C2D91]">
                         {recommended ? `${recommended.credits} créditos` : "—"}
                       </p>
@@ -233,30 +306,21 @@ export default function CreditSimulatorModal({
 
                   <div className="mt-6 flex items-center justify-between">
                     <a
-                      href="#"
+                      href={recommended?.link ?? "/servicios/creditos"}
                       className="rounded-xl bg-[#5C2D91] px-5 py-2 text-white font-semibold hover:opacity-90"
                     >
-                      {recommended ? `Comprar ${recommended.name}` : "Ver planes"}
+                      {recommended
+                        ? `Comprar ${recommended.name}`
+                        : "Ver planes"}
                     </a>
                     <a
-                      href="#"
+                      href="/servicios/creditos"
                       className="text-[#5C2D91] underline underline-offset-4"
                     >
-                      Ver todos los planes
+                      Ver todos los paquetes
                     </a>
                   </div>
                 </div>
-
-                {/* opción compra exacta (comparación) */}
-                {totalCredits > 0 && (
-                  <div className="mt-4 text-sm text-[#3b2b57]">
-                    O compra exacta de {totalCredits} créditos por{" "}
-                    <strong>
-                      USD ${(totalCredits * PRICE_PER_INDIVIDUAL_CREDIT).toLocaleString()}
-                    </strong>
-                    .
-                  </div>
-                )}
               </div>
             </div>
           </div>
