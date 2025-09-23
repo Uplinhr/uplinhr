@@ -22,8 +22,8 @@ const Presentation = () => {
           </p>
           <div className="flex justify-center md:justify-start">
             <Button
-              link="/planes"
-              tag="Quiero conocer los servicios"
+              link="/servicios/membresias"
+              tag="Quiero conocer las membresías"
               mode={2}
               height={46}
               width={300}
