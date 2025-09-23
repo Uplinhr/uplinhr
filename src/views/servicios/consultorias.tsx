@@ -2,6 +2,7 @@
 import Image from "next/image";
 import ExpertCard from "@/components/ExpertCard/ExpertCard";
 import { experts } from "@/utils/experts";
+import { Banner } from "@/components/banner/banner";
 
 export const metadata = {
   title: "Membresías | Uplin",
@@ -45,6 +46,10 @@ export default function ConsultoriasPage() {
         {experts.map((e) => (
           <ExpertCard key={e.id} expert={e} />
         ))}
+      </section>
+
+      <section>
+        <Banner />
       </section>
     </main>
   );

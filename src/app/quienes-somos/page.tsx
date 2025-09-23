@@ -151,8 +151,8 @@ const AboutUs = () => {
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6">
             <Button
-              link="/planes"
-              tag="Descubrí nuestros planes"
+              link="/servicios/membresias"
+              tag="Descubrí nuestras membresías"
               mode={3}
               height={50}
               width={180}
