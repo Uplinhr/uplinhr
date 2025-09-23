@@ -33,7 +33,7 @@ export function CardCreditos({ paquetes }: Props) {
         </div>
 
         <a
-          href="#"
+          href={paquetes.buttonLink}
           className="bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded mb-6 text-center"
         >
           {paquetes.buttonText}

@@ -1,4 +1,3 @@
-// app/planes/membresias/page.tsx
 import Image from "next/image";
 import ExpertCard from "@/components/ExpertCard/ExpertCard";
 import { experts } from "@/utils/experts";

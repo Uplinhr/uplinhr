@@ -55,31 +55,32 @@ export default function Creditos() {
 
               <div className="pt-2">
                 <CreditSimulatorModal>
-                <Button
-                  tag="Simulá tu paquete"
-                  mode={2}
-                  height={46}
-                  width={300}
-                />
-                </CreditSimulatorModal>             
-                </div>
+                  <Button
+                    tag="Simulá tu paquete"
+                    mode={2}
+                    height={46}
+                    width={300}
+                  />
+                </CreditSimulatorModal>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       <section className="py-16 px-4 bg-gray-50">
-        
         <h2 className="font-poppins text-[28px] font-semibold text-center mb-8 mt-8">
           <span className="text-black">Encontrá el</span>{" "}
           <span className="text-[#502B7D]">paquete perfecto</span>{" "}
           <span className="text-black">para tu empresa</span>
         </h2>
-        
+
         <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-          {data.map((paquete) => (
-            <CardCreditos key={paquete.id} paquetes={paquete} />
-          ))}
+          {data.map(
+            (paquete) => (
+              (<CardCreditos key={paquete.id} paquetes={paquete} />)
+            )
+          )}
         </div>
       </section>
 
