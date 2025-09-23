@@ -4,7 +4,13 @@ import { X } from "lucide-react";
 import Button from "../Button/Button";
 
 type Level = { name: string; credits: number };
-type Pkg = { name: string; credits: number; price: number; features: string[]; link: string };
+type Pkg = {
+  name: string;
+  credits: number;
+  price: number;
+  features: string[];
+  link: string;
+};
 
 const LEVELS: Level[] = [
   { name: "Entry / Principiante", credits: 10 },
@@ -205,6 +211,8 @@ export default function CreditSimulatorModal({
                       <input
                         type="number"
                         min={0}
+                        step={1}
+                        inputMode="numeric"
                         className="w-24 md:w-28 rounded-xl border-2 border-[#6D4098] bg-white px-3 py-2 text-center font-semibold text-[#3b2b57] focus:outline-none focus:ring-2 focus:ring-[#6D4098]"
                         value={qty[i]}
                         onChange={(e) => {
@@ -247,9 +255,8 @@ export default function CreditSimulatorModal({
                   {/* opción compra exacta (comparación) */}
                   {totalCredits > 0 && (
                     <div className="mt-4 text-[18px] text-[#5C2D91]">
-                      {totalCredits} créditos +{" "}
-                      {totalVacancies} vacante{totalVacancies !== 1 ? "s" : ""}{" "}
-                      (USD $100 c/u) por{" "}
+                      {totalCredits} créditos + {totalVacancies} vacante
+                      {totalVacancies !== 1 ? "s" : ""} (USD $100 c/u) por{" "}
                       <strong className="text-[20px]">
                         USD ${exactPurchaseTotal.toLocaleString()}
                       </strong>
@@ -257,6 +264,7 @@ export default function CreditSimulatorModal({
                   )}
                 </span>
                 <Button
+                  link="/servicios/creditos/elegir-pais"
                   tag="Comprá créditos"
                   mode={2}
                   height={46}
@@ -311,7 +319,7 @@ export default function CreditSimulatorModal({
                     >
                       {recommended
                         ? `Comprar ${recommended.name}`
-                        : "Ver planes"}
+                        : "Ver paquetes"}
                     </a>
                     <a
                       href="/servicios/creditos"
