@@ -43,7 +43,7 @@ export const experts: Expert[] = [
     role: "Transformación Organizacional y Tecnológica",
     tags: ["Contrataciones internacionales", "Performance", "Coaching", "Liderazgo de equipos", "Legales"],
     bio: "Profesional dinámica que impulsa transformaciones tecnológicas y organizacionales con foco en lo que mueve el negocio con un enfoque pragmático y centrado en el cliente.",
-    imageUrl: "/images/experts/cecilia.png",
+    imageUrl: "/con-ceci.png",
     linkedinUrl: "https://www.linkedin.com/in/ceciliaprado/",
   },
   {
@@ -52,7 +52,7 @@ export const experts: Expert[] = [
     role: "Formación y Desarrollo de Talento",
     tags: ["Coaching", "Formación y desarrollo", "Talent Acquisition", "Liderazgo de equipos", "People Analytics"],
     bio: "Más de 12 años de experiencia acelerando el crecimiento de startups, maximizando la retención de clientes y escalando equipos.",
-    imageUrl: "/images/experts/adriana.png",
+    imageUrl: "/con-adri.png",
     linkedinUrl: "https://www.linkedin.com/in/adrianalopezgalvis/",
   },
 ];

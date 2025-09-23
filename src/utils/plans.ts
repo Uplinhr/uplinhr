@@ -1,90 +1,78 @@
 export const PLANS_DATA = [
   {
     plan: "Start",
-    description: "Para quienes están dando sus primeros pasos y necesitan herramientas clave para comenzar a construir una gestión de personas efectiva.",
+    description:
+      "Para quienes están dando sus primeros pasos y necesitan herramientas clave para comenzar a construir una gestión de personas efectiva.",
     price: "USD 149/mes",
     includes: [
-      "Prueba gratis 7 días",
-      "Acceso a plataforma, cursos pregrabados y descargables",
-      "Soporte por email",
-      "2 horas de Consultoría mensual",
-      "Compra de créditos adicionales",
-      "1 asesoría Employer Branding Básico semestral",
-      "1 crédito de búsqueda de talento mensual"
+      "110 créditos de búsqueda de talento (1 vacante entry level/mes)",
+      "2 horas de consultoría mensual",
+      "1 mentoría grupal + 1 curso mensual en Uplin Academy",
+      "Charlas ilimitadas en Uplin Academy",
+      "Soporte por email y WhatsApp",
+      "Acceso a comunidad exclusiva Uplin",
+      "HR Advisor dedicado",
     ],
-    excludes: [
-      "Workshops",
-      "Créditos de búsqueda de talento acumulables",
-      "Auditoría del área de talento",
-      "Proyectos especiales o desafíos puntuales"
-    ],
+    excludes: ["Créditos acumulables", "Auditoría de talento"],
     showTaxes: true,
-    link: "https://app.uplinhr.com/conditions-start-membership"
+    link: "https://app.uplinhr.com/conditions-start-membership",
   },
   {
     plan: "Growth",
-    description: "Pensado para líderes que quieren fortalecer sus procesos de talento y optimizar resultados en equipos en expansión.",
+    description:
+      "Pensado para líderes que quieren fortalecer sus procesos de talento y optimizar resultados en equipos en expansión.",
     price: "USD 499/mes",
     includes: [
-      "Prueba gratis 7 días",
-      "Acceso a plataforma, cursos pregrabados y descargables",
-      "Soporte por email",
-      "4 horas de Consultoría mensual",
-      "Compra de créditos adicionales",
-      "1 asesoría Employer Branding Optimizado semestral",
-      "2 créditos de búsqueda de talento mensual",
-      "Workshops",
-      "Créditos de búsqueda de talento acumulables hasta 3 meses"
+      "120 créditos de búsqueda de talento (1 vacante junior/mes)",
+      "Créditos acumulables hasta 3 meses",
+      "4 horas de consultoría mensual",
+      "1 mentoría grupal + 1 curso mensual en Uplin Academy",
+      "Charlas ilimitadas en Uplin Academy",
+      "Soporte por email y WhatsApp",
+      "Acceso a comunidad exclusiva Uplin",
+      "HR Advisor dedicado",
     ],
-    excludes: [
-      "Auditoría del área de talento",
-      "Proyectos especiales o desafíos puntuales"
-    ],
+    excludes: ["Auditoría de talento"],
     showTaxes: true,
-    link: "https://app.uplinhr.com/conditions-growth-membership"
+    link: "https://app.uplinhr.com/conditions-growth-membership",
   },
   {
     plan: "Premium",
-    description: "Ideal para organizaciones que buscan crecer con estrategia, profesionalizar sus procesos y maximizar su impacto.",
+    description:
+      "Ideal para organizaciones que buscan crecer con estrategia, profesionalizar sus procesos y maximizar su impacto.",
     price: "USD 1399/mes",
     includes: [
-      "Prueba gratis 7 días",
-      "Acceso a plataforma, cursos pregrabados y descargables",
-      "Soporte por email",
-      "8 horas de Consultoría mensual",
-      "Compra de créditos adicionales",
-      "1 asesoría Employer Branding Estratégico semestral",
-      "4 créditos de búsqueda de talento mensual",
-      "Workshops",
-      "Créditos de búsqueda de talento acumulables hasta 4 meses",
-      "Auditoría del área de talento"
+      "300 créditos de búsqueda de talento (1 vacante C-level/mes o combinación de perfiles)",
+      "Créditos acumulables hasta 3 meses",
+      "8 horas de consultoría mensual",
+      "1 mentoría grupal + 1 curso mensual en Uplin Academy",
+      "Charlas ilimitadas en Uplin Academy",
+      "Soporte por email y WhatsApp",
+      "Acceso a comunidad exclusiva Uplin",
+      "HR Advisor dedicado",
+      "Auditoría de talento",
     ],
-    excludes: [
-      "Proyectos especiales o desafíos puntuales"
-    ],
-    showTaxes: true, 
-    link: "https://app.uplinhr.com/conditions-premium-membership"
+    excludes: [],
+    showTaxes: true,
+    link: "https://app.uplinhr.com/conditions-premium-membership",
   },
   {
     plan: "Custom",
-    description: "Ideal para proyectos específicos de estructura, cultura, liderazgo, procesos o clima organizacional.",
+    description:
+      "Armamos tu plan con los servicios que necesitás para proyectos específicos, desafíos puntuales o procesos estratégicos, disponible por la duración del proyecto o el tiempo que requieras.",
     price: "A convenir",
     includes: [
-      "Prueba gratis 7 días",
-      "Acceso a plataforma, cursos pregrabados y descargables",
-      "Soporte por email",
-      "Horas de Consultoría mensual",
-      "Compra de créditos adicionales",
-      "1 asesoría Employer Branding semestral",
-      "Créditos de búsqueda de talento mensual",
-      "Workshops",
-      "Créditos de búsqueda de talento acumulables",
+      "Créditos de búsqueda de talento a medida",
+      "Horas de consultoría personalizadas",
+      "Membresía a Uplin Academy (1 mentoría grupal mensual + 1 curso mensual + charlas ilimitadas)",
+      "Soporte por email y WhatsApp",
+      "Acceso a comunidad exclusiva Uplin",
+      "HR Advisor dedicado",
       "Auditoría del área de talento",
-      "Proyectos especiales o desafíos puntuales"
     ],
     excludes: [],
     showTaxes: false,
-    isCustom: true,  
-    link: "https://app.uplinhr.com/contacto"
-  }
+    isCustom: true,
+    link: "https://app.uplinhr.com/contacto",
+  },
 ];

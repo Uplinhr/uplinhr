@@ -1,8 +1,9 @@
-import React from 'react'
+import Membresias from '@/views/servicios/membresias'
+
 
 function MembresiasPage() {
   return (
-    <div>MembresiasPage en construccion :)</div>
+    <Membresias />
   )
 }
 
