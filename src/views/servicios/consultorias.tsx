@@ -5,7 +5,7 @@ import { Banner } from "@/components/banner/banner";
 export const metadata = {
   title: "Membresías | Uplin",
   description:
-    "Descubre a las expertas de Uplin y elige una membresía para impulsar tu negocio.",
+    "Descubre a las personas expertas de Uplin y elige una membresía para impulsar tu negocio.",
 };
 export default function ConsultoriasPage() {
   return (
@@ -30,14 +30,11 @@ export default function ConsultoriasPage() {
             {" "}
             <h1 className="text-center text-3xl md:text-4xl font-extrabold text-[#5C2D91] drop-shadow-sm">
               {" "}
-              Descubre a las expertas que impulsarán tu negocio{" "}
+              Descubre a las personas expertas que impulsarán tu negocio{" "}
             </h1>{" "}
             <p className="max-w-3xl mx-auto mt-5 text-center text-gray-700 leading-relaxed">
               {" "}
-              En Uplin, creemos que el talento es la clave para el crecimiento.
-              Hemos reunido a un equipo de consultoras excepcionales, listas
-              para ofrecer soluciones estratégicas y personalizadas. Conecta
-              directamente con la experta que tu empresa necesita.{" "}
+              En Uplin, creemos que el talento es la clave para el crecimiento. Hemos reunido a un staff excepcional  para ofrecer soluciones estratégicas y personalizadas. Conecta directamente con la persona que tu empresa necesita.
             </p>{" "}
           </div>{" "}
         </div>{" "}
