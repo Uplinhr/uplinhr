@@ -5,6 +5,7 @@ import { CardCreditos } from "@/components/CardServices/CardCreditos";
 import CardBeneficiosCreditos from "@/components/CardServices/CardBeneficiosCreditos";
 import { Banner2 } from "@/components/banner/banner";
 import CreditSimulatorModal from "@/components/simulador/CreditSimulatorModal";
+import { QAView } from "../qaView";
 
 export default function Creditos() {
   return (
@@ -106,6 +107,8 @@ export default function Creditos() {
           <span className="text-[#70C157]">+</span>
         </h2>
         <CardBeneficiosCreditos />
+
+        <QAView />
 
         <Banner2 />
       </section>

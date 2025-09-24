@@ -109,9 +109,7 @@ const Navbar = () => {
               <span>Servicios</span>
               <FaChevronDown
                 className={`transition-transform hover:text-white ${
-                  servicesOpen
-                    ? "rotate-180 text-white" 
-                    : "text-[#502B7D]" 
+                  servicesOpen ? "rotate-180 text-white" : "text-[#502B7D]"
                 }`}
               />
             </button>
@@ -240,8 +238,8 @@ const Navbar = () => {
             onClick={() => setServicesOpen((s) => !s)}
             aria-expanded={servicesOpen}
             className={`flex items-center gap-2 rounded-lg px-3 py-2 cursor-pointer transition-colors
-    ${servicesOpen ? "bg-[#502B7D] text-white" : "text-[#502B7D]"}
-    hover:bg-[#502B7D] hover:text-white`}
+            ${servicesOpen ? "bg-[#502B7D] text-white" : "text-[#502B7D]"}
+            hover:bg-[#502B7D] hover:text-white`}
           >
             <span>Servicios</span>
             <FaChevronDown
@@ -254,28 +252,28 @@ const Navbar = () => {
           {servicesOpen && (
             <div className="ml-4 space-y-1">
               <a
-                href="/planes#busqueda-de-talento"
+                href="/servicios/creditos"
                 className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
                 onClick={closeAllMenus}
               >
                 Búsqueda de Talento
               </a>
               <a
-                href="/planes#people-partner-staffing"
+                href="/servicios/ppStaffing"
                 className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
                 onClick={closeAllMenus}
               >
                 People Partner Staffing
               </a>
               <a
-                href="/planes#consultorias"
+                href="/servicios/consultorias"
                 className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
                 onClick={closeAllMenus}
               >
                 Consultorías
               </a>
               <a
-                href="/planes#membresias"
+                href="/servicios/membresias"
                 className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
                 onClick={closeAllMenus}
               >
