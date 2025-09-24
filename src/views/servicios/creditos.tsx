@@ -49,7 +49,7 @@ export default function Creditos() {
                     a medida.
                   </p>
                   <p className="text-sm lg:text-base leading-relaxed">
-                    Sin vencimiento flexible y con la garantía de 10%.
+                    Sin vencimiento flexible y con la garantía de Uplin.
                   </p>
                 </div>
               </div>
