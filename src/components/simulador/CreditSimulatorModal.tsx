@@ -13,12 +13,12 @@ type Pkg = {
 };
 
 const LEVELS: Level[] = [
-  { name: "Entry / Principiante", credits: 10 },
-  { name: "Junior", credits: 20 },
-  { name: "Semi-Senior", credits: 30 },
-  { name: "Senior", credits: 120 },
-  { name: "Director", credits: 160 },
-  { name: "C Level", credits: 200 },
+  { name: "Entry / Principiante", credits: 110 },
+  { name: "Junior", credits: 120 },
+  { name: "Semi-Senior", credits: 130 },
+  { name: "Senior", credits: 220 },
+  { name: "Director", credits: 260 },
+  { name: "C Level", credits: 300 },
 ];
 
 const PACKAGES: Pkg[] = [
@@ -108,9 +108,8 @@ export default function CreditSimulatorModal({
     [qty]
   );
 
-  const baseFee = totalVacancies * 100; // USD $100 por vacante
   const exactPurchaseTotal =
-    totalCredits * PRICE_PER_INDIVIDUAL_CREDIT + baseFee;
+    totalCredits * PRICE_PER_INDIVIDUAL_CREDIT;
 
   const recommended = useMemo(() => {
     if (totalCredits <= 0) return null;
@@ -183,9 +182,6 @@ export default function CreditSimulatorModal({
               Simulador de créditos
             </h2>
             <p className="text-black text-lg text-center lg:text-base leading-relaxed mt-1 mb-8">
-              Cada vacante tiene un costo base de USD $100 + la cantidad de
-              créditos requeridos según el perfil.
-              <br />
               Cada crédito equivale a USD $6.
             </p>
 
@@ -255,8 +251,7 @@ export default function CreditSimulatorModal({
                   {/* opción compra exacta (comparación) */}
                   {totalCredits > 0 && (
                     <div className="mt-4 text-[18px] text-[#5C2D91]">
-                      {totalCredits} créditos  (USD $6 c/u) + {totalVacancies} vacante
-                      {totalVacancies !== 1 ? "s" : ""} (USD $100 c/u) por{" "}
+                      {totalCredits} créditos  (USD $6 c/u) = {" "}
                       <strong className="text-[20px]">
                         USD ${exactPurchaseTotal.toLocaleString()}
                       </strong>
