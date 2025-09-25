@@ -182,9 +182,6 @@ export default function CreditSimulatorModal({
               Simulador de créditos
             </h2>
             <p className="text-black text-lg text-center lg:text-base leading-relaxed mt-1 mb-8">
-              Cada vacante tiene un costo base de USD $100 + la cantidad de
-              créditos requeridos según el perfil.
-              <br />
               Cada crédito equivale a USD $6.
             </p>
 
