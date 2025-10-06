@@ -3,8 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
-import Chatbot from "@/components/chatBot/chatBot";
 import {Toaster} from 'sonner'
+import LandbotChat from "@/components/LandbotChatbot/LandbotChatbot";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"], 
@@ -30,10 +30,10 @@ export default function RootLayout({
   return (
     <html lang="es" className={poppins.variable}>
       <body className="antialiased">
+        <LandbotChat />
         <Navbar />
         {children}
         <Footer />
-         <Chatbot/>
          <Toaster position="top-right" />
       </body>
     </html>
