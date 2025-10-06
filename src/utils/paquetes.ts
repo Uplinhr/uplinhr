@@ -18,7 +18,7 @@ export const data: Paquetes[] = [
       "Ideal para quienes quieren sumar talento puntual mientras comienzan a armar su equipo.",
     price: 720,
     buttonText: "Comprar Single Hire",
-    buttonLink: "https://app.uplinhr.com/adquiere-single-hire",
+    buttonLink: "https://u030x.share.hsforms.com/2MdBclWfdRSq5x_BbXUzjzA",
     features: [
       "120 créditos incluidos",
       "Vacantes posibles: 1 (junior y unique)",
@@ -39,7 +39,7 @@ export const data: Paquetes[] = [
     oldPrice: 3960,
     discount: "5% OFF",
     buttonText: "Comprar Pro",
-    buttonLink: "https://app.uplinhr.com/adquiere-pack-pro",
+    buttonLink: "https://u030x.share.hsforms.com/2W0JUlQ23TuSpMpoGCAGitA",
     features: [
       "600 créditos incluidos",
       "Vacantes posibles: hasta 5 juniors (combinables según nivel)",
@@ -60,7 +60,7 @@ export const data: Paquetes[] = [
     oldPrice: 5940,
     discount: "10% OFF",
     buttonText: "Comprar Premium",
-    buttonLink: "https://app.uplinhr.com/adquiere-pack-premium",
+    buttonLink: "https://u030x.share.hsforms.com/2iOmWDCM_QGiaXaTlrxbjLA",
     features: [
       "960 créditos incluidos",
       "Vacantes posibles: hasta 8 juniors (combinables según nivel)",
@@ -81,7 +81,7 @@ export const data: Paquetes[] = [
     oldPrice: 7920,
     discount: "15% OFF",
     buttonText: "Comprar Platinum",
-    buttonLink: "https://app.uplinhr.com/adquiere-pack-platinum",
+    buttonLink: "https://u030x.share.hsforms.com/22L5jpd-mRhOomjDh4k7xfQ",
     features: [
       "1200 créditos incluidos",
       "Vacantes posibles: hasta 10 juniors (combinables según nivel)",
