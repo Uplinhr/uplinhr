@@ -164,7 +164,7 @@ const Navbar = () => {
             Uplin Careers
           </a>
           <a
-            href="https://app.uplinhr.com/contacto"
+            href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
             className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white cursor-pointer"
           >
             Contacto
@@ -297,7 +297,7 @@ const Navbar = () => {
             Uplin Careers
           </a>
           <a
-            href="https://app.uplinhr.com/contacto"
+            href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
             className="inline-block border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white mt-2 cursor-pointer"
             onClick={closeAllMenus}
           >

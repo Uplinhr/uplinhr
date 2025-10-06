@@ -15,7 +15,7 @@ export const PLANS_DATA = [
     ],
     excludes: ["Créditos acumulables", "Auditoría de talento"],
     showTaxes: true,
-    link: "https://app.uplinhr.com/conditions-start-membership",
+    link: "https://u030x.share.hsforms.com/286X_JYW8RMe3xqoRYdv0BQ",
   },
   {
     plan: "Growth",
@@ -34,7 +34,7 @@ export const PLANS_DATA = [
     ],
     excludes: ["Auditoría de talento"],
     showTaxes: true,
-    link: "https://app.uplinhr.com/conditions-growth-membership",
+    link: "https://u030x.share.hsforms.com/2YbIGCcG1QKeQfvlPkDXaAg",
   },
   {
     plan: "Premium",
@@ -54,7 +54,7 @@ export const PLANS_DATA = [
     ],
     excludes: [],
     showTaxes: true,
-    link: "https://app.uplinhr.com/conditions-premium-membership",
+    link: "https://u030x.share.hsforms.com/2RzcQoh4pRnKgh-FbBmKt2Q",
   },
   {
     plan: "Custom",
@@ -73,6 +73,6 @@ export const PLANS_DATA = [
     excludes: [],
     showTaxes: false,
     isCustom: true,
-    link: "https://app.uplinhr.com/contacto",
+    link: "https://u030x.share.hsforms.com/2C4ee9yIoQr6AXMTrRwS8QQ",
   },
 ];
