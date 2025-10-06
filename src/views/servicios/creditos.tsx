@@ -92,7 +92,7 @@ export default function Creditos() {
             individuales
           </h2>
           <Button
-            link="/servicios/creditos/elegir-pais"
+            link="https://u030x.share.hsforms.com/2dXErlXkESgeW2hE4_Xmnaw"
             tag="Aquirir aquí"
             mode={2}
             height={50}
