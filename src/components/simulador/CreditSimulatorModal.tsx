@@ -259,7 +259,7 @@ export default function CreditSimulatorModal({
                   )}
                 </span>
                 <Button
-                  link="/servicios/creditos/elegir-pais"
+                  link="https://u030x.share.hsforms.com/2dXErlXkESgeW2hE4_Xmnaw"
                   tag="Comprá créditos"
                   mode={2}
                   height={46}
