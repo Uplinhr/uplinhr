@@ -32,17 +32,27 @@ const Neuroliderazgo = () => {
           <div className="flex-1 border border-[#F89A1C] bg-white rounded-[25px] p-6 text-[#000] font-[Poppins] text-[16px] leading-[25px] flex justify-center items-center text-justify transform hover:scale-105 ease-in-out duration-300">
             <div>
               <p className="text-[16px] font-normal leading-[25px]">
-                
                 <span className="font-semibold">Aprenderás a: </span>
               </p>
-              
-                <ul className="text-[14px] font-normal leading-[25px]">
-                    <li>• Desactivar el piloto automático y gestionar tus emociones bajo presión.</li>
-                    <li>• Hackear los sesgos que limitan tu toma de decisiones y tu percepción.</li>
-                    <li>• Potenciar la diversidad de tu equipo con empatía estratégica.</li>
-                    <li>• Fomentar una mentalidad de crecimiento para el cambio continuo.</li>
-                </ul> 
-              
+
+              <ul className="text-[14px] font-normal leading-[25px]">
+                <li>
+                  • Desactivar el piloto automático y gestionar tus emociones
+                  bajo presión.
+                </li>
+                <li>
+                  • Hackear los sesgos que limitan tu toma de decisiones y tu
+                  percepción.
+                </li>
+                <li>
+                  • Potenciar la diversidad de tu equipo con empatía
+                  estratégica.
+                </li>
+                <li>
+                  • Fomentar una mentalidad de crecimiento para el cambio
+                  continuo.
+                </li>
+              </ul>
             </div>
           </div>
 
@@ -52,11 +62,11 @@ const Neuroliderazgo = () => {
                 <span>¿Por qué hacer esta certificación?</span>
               </p>
               <p className="text-[14px] font-normal leading-[25px] text-center md:text-justify lg:text-justify">
-                El liderazgo tradicional no es suficiente. Para liderar con impacto en el mundo actual,
-                necesitas entender el manual de instrucciones más importante: el cerebro. Esta certificación
-                te dará las herramientas neurocientíficas para ir más allá de la intuición y liderar de forma
-                consciente y sostenible.
-
+                El liderazgo tradicional no es suficiente. Para liderar con
+                impacto en el mundo actual, necesitas entender el manual de
+                instrucciones más importante: el cerebro. Esta certificación te
+                dará las herramientas neurocientíficas para ir más allá de la
+                intuición y liderar de forma consciente y sostenible.
               </p>
             </div>
           </div>
@@ -68,7 +78,8 @@ const Neuroliderazgo = () => {
           <div className="w-full rounded-[25px] border-2 border-[#A482BB] bg-white overflow-hidden shadow-lg">
             <div className="w-full bg-[#CDBADA] py-3 md:py-2 border-b border-[#A482BB]">
               <p className="text-black px-6 font-poppins text-[16px] font-medium">
-                   Un programa práctico de 4 módulos, diseñado para transformar tu liderazgo desde la neurociencia:
+                Un programa práctico de 4 módulos, diseñado para transformar tu
+                liderazgo desde la neurociencia:
               </p>
             </div>
             <div className="w-full">
@@ -90,7 +101,9 @@ const Neuroliderazgo = () => {
               <p className="text-[#502B7D] font-poppins text-[16px] font-semibold mt-2 md:mt-1">
                 Formato
               </p>
-              <p className="font-poppins text-[14px] font-light mt-1 md:mt-0.5">Online</p>
+              <p className="font-poppins text-[14px] font-light mt-1 md:mt-0.5">
+                Online
+              </p>
             </div>
 
             <div className="min-h-[120px] rounded-[25px] bg-white shadow-[0_3px_7px_0_rgba(0,0,0,0.25)] p-4 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform ease-in-out duration-300">
@@ -118,13 +131,16 @@ const Neuroliderazgo = () => {
               </div>
             </div> */}
 
-            <div className="min-h-[120px] rounded-[25px] bg-white shadow-[0_3px_7px_0_rgba(0,0,0,0.25)] p-4 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform ease-in-out duration-300">
+            <div className="min-h-[120px] rounded-[25px] bg-white shadow-[0_3px_7px_0_rgba(0,0,0,0.25)] p-3 flex flex-col items-center justify-center text-center hover:scale-105 transition-transform ease-in-out duration-300">
               <CiMoneyBill className="text-[#502B7D]" size={24} />
               <p className="text-[#502B7D] font-poppins text-[16px] font-semibold mt-2 md:mt-1">
                 Inversión
               </p>
-              <p className="font-poppins text-[14px] font-light mt-1 md:mt-0.5">
-                Precio general: USD 90 / 120.000 ARS
+              <p className="font-poppins text-[14px] font-light line-through text-gray-500">
+                USD 90
+              </p>
+              <p className="font-poppins text-[14px] font-light mt-0.5">
+                Precio: USD 45
               </p>
             </div>
           </div>
@@ -151,13 +167,17 @@ const Neuroliderazgo = () => {
               </h3>
               <div className="space-y-2 md:space-y-3 text-[15px] md:text-[16px] leading-snug">
                 <p>
-                  Es una profesional con amplia experiencia en transformación cultural, liderazgo y neurociencias.
+                  Es una profesional con amplia experiencia en transformación
+                  cultural, liderazgo y neurociencias.
                 </p>
                 <p>
-                  Desde su historia personal, como mujer neurodivergente, aporta una perspectiva única y humana al liderazgo.
+                  Desde su historia personal, como mujer neurodivergente, aporta
+                  una perspectiva única y humana al liderazgo.
                 </p>
                 <p>
-                  Su enfoque es simple: traducir la ciencia en rutinas concretas que te ayuden a liderar con más conciencia, ternura y un poco de magia.
+                  Su enfoque es simple: traducir la ciencia en rutinas concretas
+                  que te ayuden a liderar con más conciencia, ternura y un poco
+                  de magia.
                 </p>
               </div>
             </div>
@@ -199,7 +219,7 @@ const Neuroliderazgo = () => {
                 "Líder o profesional de RR.HH. que busca potenciar su impacto con bases científicas.",
                 "Coach que quiere incorporar herramientas de neurociencia para sus sesiones.",
                 "Fundador/a de startup o de área que necesita liderar con adaptabilidad y conciencia.",
-                "Alguien que busca autoconocimiento para transformar su liderazgo desde un lugar más humano."
+                "Alguien que busca autoconocimiento para transformar su liderazgo desde un lugar más humano.",
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2 min-h-[38px]">
                   <span className="text-[#502B7D] text-[14px]">
