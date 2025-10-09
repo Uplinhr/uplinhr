@@ -35,7 +35,7 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a className="hover:underline" href="https://app.uplinhr.com/contacto">
+              <a className="hover:underline" href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw">
                 Contacto
               </a>
             </li>
