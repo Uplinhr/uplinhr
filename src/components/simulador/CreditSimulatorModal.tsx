@@ -300,19 +300,6 @@ export default function CreditSimulatorModal({
                       </div>
                     )}
                   </div>
-
-                  <div className="flex items-center justify-between rounded-2xl bg-[#f6f5fb] shadow-[0_2px_10px_rgba(0,0,0,0.05)] px-5 py-4">
-                    <span className="font-semibold text-[#3b2b57]">
-                      Comprar servicios adicionales por separado
-                    </span>
-                    <Button
-                      link="/servicios/creditos/servicios-adicionales"
-                      tag="Comprar servicios"
-                      mode={2}
-                      height={46}
-                      width={200}
-                    />
-                  </div>
                 </div>
               </details>
             </section>
@@ -329,7 +316,7 @@ export default function CreditSimulatorModal({
                 </div>
                 <div className="rounded-2xl border-2 border-[#5C2D91] px-4 py-3">
                   <p className="text-sm text-gray-600">
-                    Créditos por servicios
+                    Créditos por servicios adicionales
                   </p>
                   <p className="text-xl font-extrabold text-[#5C2D91]">
                     {totalCreditsServices}

@@ -29,7 +29,7 @@ export const PACKAGES: Pkg[] = [
       "Sin vencimiento",
       "Pago único",
     ],
-    link: "https://app.uplinhr.com/adquiere-single-hire",
+    link: "https://u030x.share.hsforms.com/2MdBclWfdRSq5x_BbXUzjzA",
   },
   {
     name: "Pro",
@@ -45,7 +45,7 @@ export const PACKAGES: Pkg[] = [
       "Sin vencimiento",
       "Pago único",
     ],
-    link: "https://app.uplinhr.com/adquiere-pack-pro",
+    link: "https://u030x.share.hsforms.com/2W0JUlQ23TuSpMpoGCAGitA",
   },
   {
     name: "Premium",
@@ -61,7 +61,7 @@ export const PACKAGES: Pkg[] = [
       "Sin vencimiento",
       "Pago único",
     ],
-    link: "https://app.uplinhr.com/adquiere-pack-premium",
+    link: "https://u030x.share.hsforms.com/2iOmWDCM_QGiaXaTlrxbjLA",
   },
   {
     name: "Platinum",
@@ -77,7 +77,7 @@ export const PACKAGES: Pkg[] = [
       "Sin vencimiento",
       "Pago único",
     ],
-    link: "https://app.uplinhr.com/adquiere-pack-platinum",
+    link: "https://u030x.share.hsforms.com/22L5jpd-mRhOomjDh4k7xfQ",
   },
 ];
 
