@@ -34,7 +34,7 @@ export const PACKAGES: Pkg[] = [
   {
     name: "Pro",
     credits: 660,
-    price: 3960,
+    price: 3762,
     features: [
       "660 créditos incluidos",
       "Vacantes posibles: hasta 5 Juniors",
@@ -50,7 +50,7 @@ export const PACKAGES: Pkg[] = [
   {
     name: "Premium",
     credits: 990,
-    price: 5940,
+    price: 5346,
     features: [
       "990 créditos incluidos",
       "Vacantes posibles: hasta 8 Juniors",
@@ -66,7 +66,7 @@ export const PACKAGES: Pkg[] = [
   {
     name: "Platinum",
     credits: 1320,
-    price: 7920,
+    price: 6732,
     features: [
       "1320 créditos incluidos",
       "Vacantes posibles: hasta 11 Juniors",
@@ -88,13 +88,7 @@ export const ADDITIONAL_SERVICES = [
   { name: "Publicación en 1 portal especializado", creditsPerUnit: 20 },
   { name: "Pauta en LinkedIn", creditsPerUnit: 20 },
   { name: "Aplicación de tests psicotécnicos o personalidad", creditsPerUnit: 10 },
-  { name: "Coding Interview (algoritmos, estructuras de datos)", creditsPerUnit: 10 },
-  { name: "Technical Screening (test online o entrevista rápida)", creditsPerUnit: 10 },
-  { name: "System Design Interview (arquitectura, escalabilidad)", creditsPerUnit: 10 },
-  { name: "Pair Programming Interview (colaboración y estilo de trabajo)", creditsPerUnit: 10 },
-  { name: "Live Coding Interview (codificación en tiempo real)", creditsPerUnit: 10 },
-  { name: "Take-Home Assignment (proyecto técnico con entrega)", creditsPerUnit: 10 },
-  { name: "Technical Deep Dive (profundización en tecnología/stack)", creditsPerUnit: 10 },
+  { name: "Prueba técnica (varios)", creditsPerUnit: 10 },
   { name: "Entrevista 100% en inglés", creditsPerUnit: 20 },
   { name: "Garantía 6 meses", creditsPerUnit: 20 },
 ];
