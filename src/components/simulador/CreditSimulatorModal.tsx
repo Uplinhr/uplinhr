@@ -424,7 +424,7 @@ export default function CreditSimulatorModal({
                   tag="Agendá una llamada"
                   mode={2}
                   height={46}
-                  width={200}
+                  width={220}
                 />
               </div>
             </div>
