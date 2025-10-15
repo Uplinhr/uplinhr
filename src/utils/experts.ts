@@ -19,15 +19,7 @@ export const experts: Expert[] = [
     imageUrl: "/con-melisa.png",
     linkedinUrl: "https://www.linkedin.com/in/melisarestrepomesa/",
   },
-  {
-    id: "kelly",
-    name: "Kelly Gómez",
-    role: "Estrategia de Recursos Humanos",
-    tags: ["Coaching", "Liderazgo de equipos", "Talent Acquisition", "Performance", "People Analytics", "Payroll"],
-    bio: "Kelly es una líder en RR. HH. con profunda experiencia en gestión de talento, compensaciones y cumplimiento de la ley laboral. Su enfoque se centra en construir equipos de alto rendimiento y fomentar culturas de trabajo inclusivas y basadas en datos para impulsar la escalabilidad.",
-    imageUrl: "/con-kelly.png",
-    linkedinUrl: "https://www.linkedin.com/in/kelly-g%C3%B3mez-a13973148/",
-  },
+
   {
     id: "karry",
     name: "Karry Marmolejo",
