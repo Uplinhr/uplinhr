@@ -24,7 +24,7 @@ const HeroSection = () => {
           </p>
           <div className="mt-6">
             <Button
-              link="https://outlook.office365.com/book/ConectconUplin1@uplinhr.com/?ismsaljsauthenabled=true"
+              link="https://meetings.hubspot.com/llopez-ramirez"
               tag="Agendá una llamada"
               mode={3}
               height={50}
