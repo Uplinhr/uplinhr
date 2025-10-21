@@ -24,7 +24,7 @@ const HeroSection = () => {
           </p>
           <div className="mt-6">
             <Button
-              link="https://u030x.share.hsforms.com/2HbIBhrEqQiaS606OkuLSdQ"
+              link="https://meetings.hubspot.com/llopez-ramirez"
               tag="Agendá una llamada"
               mode={3}
               height={50}
