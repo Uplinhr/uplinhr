@@ -102,14 +102,16 @@ const VacantesView = () => {
       </section>
 
       <section className="w-full flex flex-wrap justify-center gap-4 py-4 px-5 mt-6">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
-        >
-          <FiArrowLeft />
-          <Link href="/careers">Atrás</Link>
-        </motion.div>
+        <Link href="/careers">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
+          >
+            <FiArrowLeft />
+            Atrás
+          </motion.div>
+        </Link>
 
         <motion.div
           whileHover={{ scale: 1.05 }}
