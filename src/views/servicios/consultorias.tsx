@@ -30,11 +30,11 @@ export default function ConsultoriasPage() {
             {" "}
             <h1 className="text-center text-3xl md:text-4xl font-extrabold text-[#5C2D91] drop-shadow-sm">
               {" "}
-              Descubre a las personas expertas que impulsarán tu negocio{" "}
+              Descubre a las Expertas que Impulsarán tu Negocio{" "}
             </h1>{" "}
             <p className="max-w-3xl mx-auto mt-5 text-center text-gray-700 leading-relaxed">
               {" "}
-              En Uplin, creemos que el talento es la clave para el crecimiento. Hemos reunido a un staff excepcional  para ofrecer soluciones estratégicas y personalizadas. Conecta directamente con la persona que tu empresa necesita.
+              En Uplin, creemos que el talento es la clave para el crecimiento. Por eso, hemos reunido a un equipo de consultoras excepcionales, líderes en sus campos, listas para ofrecerte soluciones estratégicas y personalizadas. Conoce a las mentes detrás de nuestras soluciones y conecta directamente con la experta que tu empresa necesita.
             </p>{" "}
           </div>{" "}
         </div>{" "}
