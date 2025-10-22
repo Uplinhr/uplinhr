@@ -151,7 +151,7 @@ const AboutUs = () => {
 
             <div className="w-full sm:w-auto">
               <Button
-                link="https://meetings.hubspot.com/llopez-ramirez?uuid=393706ba-2064-4b9f-be55-3f59a2c8771e"
+                link="https://meetings.hubspot.com/llopez-ramirez"
                 tag="Agenda una llamada inicial"
                 mode={0}
               />
