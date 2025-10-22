@@ -1,19 +1,15 @@
-import Image from "next/image";
 import Link from "next/link";
-import { FaLinkedin } from "react-icons/fa";
-
 export type Expert = {
   id: string;
   name: string;
-  role: string;
   tags: string[];
   bio: string;
-  imageUrl: string;
-  linkedinUrl?: string;
+  imageUrl?: string;
+  CTAUrl?: string;
 };
 
 export default function ExpertCard({ expert }: { expert: Expert }) {
-  const { name, role, tags, bio, imageUrl, linkedinUrl } = expert;
+  const { name, tags, bio, CTAUrl } = expert;
 
   return (
     <article
@@ -25,7 +21,7 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
         gap-4 md:gap-6
       "
     >
-      {/* Foto con fondo morado */}
+      {/* Foto con fondo morado 
       <div
         className="
           relative shrink-0
@@ -36,7 +32,8 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
       >
         <div className="absolute inset-0 bg-[#5C2D91]" />
         <Image src={imageUrl} alt={name} fill className="object-contain" />
-      </div>
+              
+      </div> */}
 
       {/* Contenido */}
       <div className="flex-1 min-w-0 w-full text-center md:text-left">
@@ -45,21 +42,9 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
             <h3 className="text-2xl md:text-2xl font-semibold text-[#4B2C7C]">
               {name}
             </h3>
-            <p className="mt-1 text-[#6D4098] font-medium">{role}</p>
           </div>
 
-          {/* LinkedIn (desktop en header) */}
-          {linkedinUrl && (
-            <Link
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:inline-flex items-center justify-center w-10 h-10 rounded-full border border-[#5C2D91] text-[#5C2D91] hover:bg-[#5C2D91] hover:text-white transition-colors"
-              aria-label={`Ver LinkedIn de ${name}`}
-            >
-              <FaLinkedin className="w-5 h-5" />
-            </Link>
-          )}
+          
         </header>
 
         {/* Tags */}
@@ -76,25 +61,22 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
 
         {/* Bio */}
         <p className="mt-3 text-gray-700 leading-relaxed">{bio}</p>
+      </div>
 
-        {/* LinkedIn (mobile abajo a la derecha) */}
-        {linkedinUrl && (
-          <div className="mt-4 flex justify-end md:hidden">
+      {/* LinkedIn (desktop en header) */}
+          {CTAUrl && (
             <Link
-              href={linkedinUrl}
+              href={CTAUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-[#5C2D91] text-[#5C2D91] hover:bg-[#5C2D91] hover:text-white transition-colors"
-              aria-label={`Ver LinkedIn de ${name}`}
+              className="inline-flex items-center justify-center 
+                   px-4 py-2 rounded-lg 
+                   border border-[#5C2D91] text-[#5C2D91] 
+                   hover:bg-[#5C2D91] hover:text-white transition-colors"
             >
-              <FaLinkedin className="w-5 h-5" />
+              Quiero esta consultoría
             </Link>
-          </div>
-        )}
-      </div>
+          )}
     </article>
   );
 }
-
-
-
