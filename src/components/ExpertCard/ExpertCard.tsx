@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 export type Expert = {
   id: string;
   name: string;
@@ -9,7 +9,7 @@ export type Expert = {
 };
 
 export default function ExpertCard({ expert }: { expert: Expert }) {
-  const { name, tags, bio, CTAUrl } = expert;
+  const { name, tags, bio } = expert;
 
   return (
     <article
@@ -62,21 +62,6 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
         {/* Bio */}
         <p className="mt-3 text-gray-700 leading-relaxed">{bio}</p>
       </div>
-
-      {/* LinkedIn (desktop en header) */}
-          {CTAUrl && (
-            <Link
-              href={CTAUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center 
-                   px-4 py-2 rounded-lg 
-                   border border-[#5C2D91] text-[#5C2D91] 
-                   hover:bg-[#5C2D91] hover:text-white transition-colors"
-            >
-              Quiero esta consultoría
-            </Link>
-          )}
     </article>
   );
 }
