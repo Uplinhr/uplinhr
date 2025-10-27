@@ -1,4 +1,5 @@
 export const cursosCompletos = [
+  /*
   {
     bannerImg: "/imgCursoKelly.jpg",
     titulo: "Certificación en Maternidad y Liderazgo",
@@ -16,7 +17,7 @@ export const cursosCompletos = [
     direccion: "Dirigida por: Melisa Restrepo",
     imgPersona: ["/ImgMelissa.png"],
     link: "/cursosCompletos/liderazgoDeEquipos",
-  },
+  }, */
   {
     bannerImg: "/imgBannerKarry.jpg",
     titulo: "  Certificación en People Analytics.",
@@ -26,6 +27,7 @@ export const cursosCompletos = [
     imgPersona: ["/imgKarry2.png"],
     link: "/cursosCompletos/datosConHumanidad",
   },
+  /*
   {
     bannerImg: "/imgCursoSolSandra.jpg",
     titulo: "Certificación en Herramientas para crear tu área de RRHH en startups",
@@ -34,7 +36,7 @@ export const cursosCompletos = [
     direccion: "Dirigida por: Sandra Benitez y Marisol López",
     imgPersona: ["/ImgMSol.png", "/imgSandra.png"],
     link: "/cursosCompletos/crearAreaRRHH",
-  },
+  }, */
   {
     bannerImg: "/imgCursoCarolinaSabatini.jpg",
     titulo: "Certificación: Liderazgo intencional: Neurohabilidades de alto impacto",
