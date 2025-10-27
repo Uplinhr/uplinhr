@@ -151,7 +151,7 @@ const AboutUs = () => {
 
             <div className="w-full sm:w-auto">
               <Button
-                link="https://outlook.office.com/book/ConectconUplin1@uplinhr.com/?ismsaljsauthenabled"
+                link="https://meetings.hubspot.com/llopez-ramirez"
                 tag="Agenda una llamada inicial"
                 mode={0}
               />

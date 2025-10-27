@@ -61,7 +61,7 @@ export const recordedWebinars: Webinar[] = [
     dirigidoPor: "Kelly Gomez",
     fecha: "Disponible",
     imagenes: ["/imgKelly.png"],
-    link: "https://app.uplinhr.com/registro-charla-gratis-madres-lideres",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSdQDYfYNcNoPXEVLFvMLNhJCzHX6XJW2zxsbKbECC6CwPDLYA/viewform?usp=publish-editor",
   },
   {
     id: "2",
@@ -70,7 +70,7 @@ export const recordedWebinars: Webinar[] = [
     dirigidoPor: "Melisa Restrepo",
     fecha: "Disponible",
     imagenes: ["/ImgMelissa.png"],
-    link: "https://app.uplinhr.com/registro-charla-gratis-sindrome-impostor",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSc2RwSmDr3l_E_8C0xCAVEZ2t-WVOgaV_X4PfQD_SPtnwDMsA/viewform?usp=publish-editor",
   },
    {
     id: "3",
@@ -79,7 +79,7 @@ export const recordedWebinars: Webinar[] = [
     dirigidoPor: "Karry Marmolejo",
     fecha: "Disponible",
     imagenes: ["/ImgKarry.png"],
-    link: "https://app.uplinhr.com/registro-charla-gratis-datos-con-humanidad",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSf3tCqMOwubvJqJlYRcLbnaa0ksxDy3Kg-D2SibekUZzO2Xfw/viewform?usp=publish-editor",
   },
   
   {
@@ -89,7 +89,7 @@ export const recordedWebinars: Webinar[] = [
     dirigidoPor: "Sol Y Sandri",
     fecha: "Disponible",
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
-    link: "https://app.uplinhr.com/registro-charla-gratis-crea-area-rh",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSfgVeQLuDlJg_KOIe2yBqtGYzSoQPRRV9DAW9QCTUCL8uUZQQ/viewform?usp=publish-editor",
   },  
   {
     id: "5",
@@ -98,7 +98,7 @@ export const recordedWebinars: Webinar[] = [
     dirigidoPor: "Carolina Sabatini",
     fecha: "Disponible",
     imagenes: ["/carolina-sabatini1.png"],
-    link: "https://app.uplinhr.com/registro-charla-gratis-neurohabilidades",
+    link: "https://docs.google.com/forms/d/e/1FAIpQLSe6KFMg-jTpE8y--PctYRTzbHl9ATSpUG6HSnIzWnHsSRy09w/viewform?usp=publish-editor",
     
   },
 
