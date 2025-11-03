@@ -6,6 +6,7 @@ import { CiSearch } from "react-icons/ci";
 import { PiUsersThreeLight } from "react-icons/pi";
 import { SlBriefcase } from "react-icons/sl";
 import { MdOutlineCardMembership } from "react-icons/md";
+import { StrategicAlliances } from "@/components/strategicAlliances/StrategicAlliances";
 
 export default function TestTailwind() {
   return (
@@ -70,6 +71,7 @@ export default function TestTailwind() {
       />
 
       <Solutions />
+      <StrategicAlliances />
       <Banner />
     </div>
   );
