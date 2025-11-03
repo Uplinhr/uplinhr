@@ -49,26 +49,17 @@ export default function Creditos() {
                     a medida.
                   </p>
                   <p className="text-sm lg:text-base leading-relaxed">
-                    Sin vencimiento flexible y con la garantía de Uplin.
+                    Sin vencimiento, flexible y con la garantía de Uplin.
                   </p>
                 </div>
               </div>
-
-              <div className="pt-2">
-                <CreditSimulatorModal>
-                  <Button
-                    tag="Simulá tu paquete"
-                    mode={2}
-                    height={46}
-                    width={300}
-                  />
-                </CreditSimulatorModal>
-              </div>
+              {/* 🔹 Se quitó el botón del header */}
             </div>
           </div>
         </div>
       </section>
 
+      {/* PAQUETES */}
       <section className="py-16 px-4 bg-gray-50">
         <h2 className="font-poppins text-[28px] font-semibold text-center mb-8 mt-8">
           <span className="text-black">Encontrá el</span>{" "}
@@ -77,14 +68,20 @@ export default function Creditos() {
         </h2>
 
         <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-          {data.map(
-            (paquete) => (
-              (<CardCreditos key={paquete.id} paquetes={paquete} />)
-            )
-          )}
+          {data.map((paquete) => (
+            <CardCreditos key={paquete.id} paquetes={paquete} />
+          ))}
+        </div>
+
+        {/* 🔹 Botón del simulador movido debajo de los paquetes */}
+        <div className="flex justify-center mt-12">
+          <CreditSimulatorModal>
+            <Button tag="Simulá tu paquete" mode={2} height={46} width={300} />
+          </CreditSimulatorModal>
         </div>
       </section>
 
+      {/* CRÉDITOS INDIVIDUALES */}
       <section>
         <div className="bg-[#6C4099] rounded-lg p-6 mb-6 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white">
           <h2>
@@ -93,7 +90,7 @@ export default function Creditos() {
           </h2>
           <Button
             link="https://u030x.share.hsforms.com/2dXErlXkESgeW2hE4_Xmnaw"
-            tag="Aquirir aquí"
+            tag="Adquirir aquí"
             mode={2}
             height={50}
             width={250}
@@ -101,6 +98,7 @@ export default function Creditos() {
         </div>
       </section>
 
+      {/* BENEFICIOS + QA + BANNER */}
       <section>
         <h2 className="font-poppins text-[28px] font-semibold text-center mt-8">
           <span className="text-[#502B7D]">Beneficios</span>{" "}

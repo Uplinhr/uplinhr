@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
-// ⬇️ (opcional) si quieres el chevron; si no, bórralo y deja solo el texto
 import { FaChevronDown } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
@@ -18,7 +17,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 
-  // ⬇️ NUEVO: estado para el dropdown de Servicios
+  // Dropdown de Servicios
   const [servicesOpen, setServicesOpen] = useState(false);
   const toggleServices = () => setServicesOpen((s) => !s);
 
@@ -119,30 +118,31 @@ const Navbar = () => {
                 className="absolute left-0 mt-3 w-[320px] bg-white rounded-2xl shadow-lg py-4 z-30"
                 onMouseLeave={() => setServicesOpen(false)}
               >
+                {/* ▼▼▼ AJUSTE: hover sutil sin subrayado ▼▼▼ */}
                 <a
                   href="/servicios/creditos"
-                  className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
+                  className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                   onClick={closeAllMenus}
                 >
                   Búsqueda de Talento
                 </a>
                 <a
                   href="/servicios/ppStaffing"
-                  className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
+                  className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                   onClick={closeAllMenus}
                 >
                   People Partner Staffing
                 </a>
                 <a
                   href="/servicios/consultorias"
-                  className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
+                  className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                   onClick={closeAllMenus}
                 >
                   Consultorías
                 </a>
                 <a
                   href="/servicios/membresias"
-                  className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-4 decoration-[#502B7D]"
+                  className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                   onClick={closeAllMenus}
                 >
                   Membresías
@@ -170,7 +170,7 @@ const Navbar = () => {
             Contacto
           </a>
 
-          {/* User menu (igual que lo tenías) */}
+          {/* User menu */}
           <div className="relative">
             <button
               onClick={() => setUserMenuOpen(!userMenuOpen)}
@@ -232,7 +232,7 @@ const Navbar = () => {
             Quienes Somos
           </a>
 
-          {/* ⬇️ Servicios con submenú en mobile */}
+          {/* Servicios con submenú en mobile */}
           <button
             type="button"
             onClick={() => setServicesOpen((s) => !s)}
@@ -251,30 +251,31 @@ const Navbar = () => {
 
           {servicesOpen && (
             <div className="ml-4 space-y-1">
+              {/* ▼▼▼ AJUSTE: hover sutil sin subrayado ▼▼▼ */}
               <a
                 href="/servicios/creditos"
-                className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
+                className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                 onClick={closeAllMenus}
               >
                 Búsqueda de Talento
               </a>
               <a
                 href="/servicios/ppStaffing"
-                className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
+                className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                 onClick={closeAllMenus}
               >
                 People Partner Staffing
               </a>
               <a
                 href="/servicios/consultorias"
-                className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
+                className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                 onClick={closeAllMenus}
               >
                 Consultorías
               </a>
               <a
                 href="/servicios/membresias"
-                className="block px-6 py-3 text-[#502B7D] hover:underline underline-offset-2 decoration-[#502B7D]"
+                className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                 onClick={closeAllMenus}
               >
                 Membresías
@@ -429,3 +430,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
