@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const StrategicAlliances = () => {
   return (
-    <section className="bg-[#F9F8FF] py-12 md:py-20 px-4">
+    <section className="bg-white py-12 md:py-20 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         {/* Columna izquierda: título, texto y botón */}
         <div className="text-left">
