@@ -65,7 +65,7 @@ const PlanCard = ({
     className={`w-full mt-4 hover:cursor-pointer rounded-[6px] border border-[#502B7D] text-center font-[400] text-[16px] leading-[48px] transform transition-transform duration-200 hover:scale-[1.03]
       ${isGrowth ? "bg-[#502B7D] text-white" : "bg-transparent text-[#502B7D]"}`}
   >
-    {isCustom ? "Contactar" : `Adquirir ${plan}`}
+    {`Adquirir ${plan}`}
   </button>
 </Link>
           </div>
