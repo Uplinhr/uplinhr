@@ -23,7 +23,7 @@ const serviceData = [
 
 const ServiceCards = () => {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl lg:text-4xl font-bold">
          Tu solución: <span className="text-[#502B7D]">People Partner Staffing </span>de Uplin

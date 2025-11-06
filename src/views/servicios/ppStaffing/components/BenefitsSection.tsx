@@ -1,6 +1,6 @@
 const BenefitsSection = () => {
   return (
-    <section className="py-20 bg-gray-100">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-800">
           Beneficios <span className="text-[#502B7D]">claves</span>
@@ -34,6 +34,12 @@ const BenefitsSection = () => {
           </ul>
         </div>
       </div>
+       {/* <h2 className="font-poppins text-[28px] font-semibold text-center">
+          <span className="text-[#502B7D]">Lidera con agilidad.</span>
+          <br />
+          <span className="text-[#502B7D]">Gestiona con</span>{" "}
+          <span className="text-[#502B7D]">UPLIN</span>
+      </h2> */}
     </section>
   );
 };
