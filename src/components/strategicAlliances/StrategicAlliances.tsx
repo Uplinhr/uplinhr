@@ -69,7 +69,7 @@ export const StrategicAlliances = () => {
 
       {/* Logos de empresas colaboradoras */}
       <div className="mt-12 md:mt-20 text-center px-4">
-        <p className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6">Las empresas que ya colaboraron con nosotros</p>
+        <p className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6">Nuestros partners</p>
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
           <Image src="/teamtailor-logo.png" alt="Teamtailor" width={250} height={100} className="w-40 md:w-48 lg:w-52 h-auto" />
           <Image src="/buk-logo.png" alt="Buk" width={140} height={50} className="w-28 md:w-36 h-auto" />
