@@ -24,12 +24,29 @@ const ScrollToTop = () => {
     };
   }, []);
 
-  // Función para hacer scroll hacia arriba
+  // Función para hacer scroll hacia arriba con animación mejorada
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    const startPosition = window.scrollY;
+    const duration = 800; // Duración en milisegundos
+    const startTime = performance.now();
+
+    const easeInOutCubic = (t: number): number => {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    };
+
+    const animateScroll = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easing = easeInOutCubic(progress);
+
+      window.scrollTo(0, startPosition - startPosition * easing);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
   };
 
   return (
