@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import {Toaster} from 'sonner'
 import LandbotChat from "@/components/LandbotChatbot/LandbotChatbot";
+import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"], 
@@ -34,7 +35,8 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
-         <Toaster position="top-right" />
+        <ScrollToTop />
+        <Toaster position="top-right" />
       </body>
     </html>
   );
