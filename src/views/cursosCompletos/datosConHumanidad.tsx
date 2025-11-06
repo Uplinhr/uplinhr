@@ -221,7 +221,7 @@ const DatosConHumanidad = () => {
             👉 ¡Inscribite ahora y empezá a liderar con todo lo que sos! 👈
           </p>
           <a
-            href="https://u030x.share.hsforms.com/2l1Atx63QRvKL3MVc-h12EQ"
+            href="/cursosCompletos/datosConHumanidad/elegir-pais"
             className="inline-block rounded-[15px] bg-[#CDBADA] px-8 py-3 text-black font-medium font-poppins text-[14px] transform hover:scale-105 ease-in-out duration-300"
           >
             Inscribirme ahora

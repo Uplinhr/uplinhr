@@ -78,7 +78,7 @@ function AcademyView() {
       <section className="px-6 py-10 flex flex-col items-center mb-12">
         <div className="text-center mb-8">
           <motion.a
-          href="https://app.uplinhr.com/unete-uplin-community"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSe-1u1lciI4qkzyE2NPhCUGueDteFfS6KVnBYhMC0srdsDMnA/viewform?usp=publish-editor"
           target="_blank"
           className="bg-[#6C4099] border b-4 border-[#6C4099] text-white rounded-full px-4 py-2 md:px-6 md:py-3 no-underline font-bold
              hover:bg-white hover:text-[#6C4099] transition-colors duration-300"
