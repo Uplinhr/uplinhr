@@ -2,7 +2,7 @@ import StepCard from './StepCard';
 
 const HowItWorks = () => {
   return (
-    <section className="py-20 bg-gray-100">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl lg:text-4xl font-bold text-center text-gray-800 mb-2">
           ¿Cómo <span className="text-[#502B7D]">funciona</span>?
