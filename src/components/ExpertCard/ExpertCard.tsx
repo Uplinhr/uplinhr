@@ -1,15 +1,16 @@
+import Image from "next/image";
+
 
 export type Expert = {
   id: string;
   name: string;
   tags: string[];
   bio: string;
-  imageUrl?: string;
-  CTAUrl?: string;
+  imageUrl: string;
 };
 
 export default function ExpertCard({ expert }: { expert: Expert }) {
-  const { name, tags, bio } = expert;
+  const { name, tags, bio, imageUrl} = expert;
 
   return (
     <article
@@ -21,7 +22,7 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
         gap-4 md:gap-6
       "
     >
-      {/* Foto con fondo morado 
+      {/* Foto con fondo morado */}
       <div
         className="
           relative shrink-0
@@ -32,8 +33,7 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
       >
         <div className="absolute inset-0 bg-[#5C2D91]" />
         <Image src={imageUrl} alt={name} fill className="object-contain" />
-              
-      </div> */}
+      </div>
 
       {/* Contenido */}
       <div className="flex-1 min-w-0 w-full text-center md:text-left">
@@ -44,7 +44,6 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
             </h3>
           </div>
 
-          
         </header>
 
         {/* Tags */}
@@ -61,7 +60,10 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
 
         {/* Bio */}
         <p className="mt-3 text-gray-700 leading-relaxed">{bio}</p>
+
       </div>
     </article>
   );
 }
+
+

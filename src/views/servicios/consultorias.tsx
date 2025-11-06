@@ -2,7 +2,6 @@ import Image from "next/image";
 import ExpertCard from "@/components/ExpertCard/ExpertCard";
 import { experts } from "@/utils/experts";
 import { Banner } from "@/components/banner/banner";
-import Link from "next/link";
 
 export const metadata = {
   title: "Membresías | Uplin",
@@ -41,24 +40,10 @@ export default function ConsultoriasPage() {
       </section>
 
       {/* Grid de Cards */}
-      <section className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      <section className="container mx-auto p-10 px-4 sm:px-6 lg:px-8 space-y-6">
         {experts.map((e) => (
           <ExpertCard key={e.id} expert={e} />
         ))}
-      </section>
-      <section className="flex justify-center p-10">
-        <Link
-          href="https://meetings.hubspot.com/llopez-ramirez?uuid=87181c91-1ae5-4ea8-bc0c-5e2ec80b9c36"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center
-               px-6 py-3 rounded-lg
-               border border-[#5C2D91] text-[#5C2D91]
-               hover:bg-[#5C2D91] hover:text-white
-               transition-colors"
-        >
-          Quiero esta consultoría
-        </Link>
       </section>
       <Banner />
     </main>
