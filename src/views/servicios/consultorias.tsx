@@ -25,15 +25,12 @@ export default function ConsultoriasPage() {
           </div>
           <div className="px-6 md:px-10 pt-8 pb-10">
             <h1 className="text-center text-3xl md:text-4xl font-extrabold text-[#5C2D91] drop-shadow-sm">
-              Descubre a las Expertas que Impulsarán tu Negocio
+              Las Áreas que Transforman Equipos y Potencian Organizaciones
             </h1>
             <p className="max-w-3xl mx-auto mt-5 text-center text-gray-700 leading-relaxed">
-              En Uplin, creemos que el talento es la clave para el crecimiento.
-              Por eso, hemos reunido a un equipo de consultoras excepcionales,
-              líderes en sus campos, listas para ofrecerte soluciones
-              estratégicas y personalizadas. Conoce a las mentes detrás de
-              nuestras soluciones y conecta directamente con la experta que tu
-              empresa necesita.
+              Cada empresa enfrenta retos únicos. Por eso, en Uplin agrupamos nuestras soluciones de consultoría en temáticas clave que abordan todo el ciclo de talento: atracción, desarrollo, cultura, tecnología y cumplimiento.
+              <br />
+Explorá cada área para conocer cómo podemos acompañarte en la evolución de tu equipo y en el fortalecimiento de tu organización.
             </p>
           </div>
         </div>
