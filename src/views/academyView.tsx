@@ -89,10 +89,10 @@ function AcademyView() {
           Únete a la comunidad UPLIN
         </motion.a>
           <h1 className=" mt-8 text-2xl md:text-3xl font-bold font-[Poppins]">
-            Ciclo de Charlas Uplin Academy
+            Ciclo de charlas Uplin Academy
           </h1>
           <h3 className="text-base md:text-lg font-[Poppins] mt-2 text-gray-700">
-            Eleva tu Talento y tu Liderazgo
+            Eleva tu talento y tu liderazgo
           </h3>
         </div>
 
@@ -105,8 +105,8 @@ function AcademyView() {
               <span className="font-semibold">
                 ciclo de charlas gratuitas de agosto
               </span>
-              , diseñado para líderes, emprendedores y profesionales de Recursos
-              Humanos que buscan innovar.
+              , diseñado para líderes, emprendedores y profesionales de recursos
+              humanos que buscan innovar.
               <br />
               <br />
               <span className="font-semibold">

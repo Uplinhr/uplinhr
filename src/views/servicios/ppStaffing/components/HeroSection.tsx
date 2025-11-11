@@ -7,9 +7,9 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 lg:flex items-center">
         <div className="lg:w-1/2 mb-8 lg:mb-0">
           <h1 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-[#AF93CC]">People Partner</span>
+            <span className="text-[#AF93CC]">People partner</span>
             <br />
-            <span className="text-gray-800">Staffing</span>
+            <span className="text-gray-800">staffing</span>
           </h1>
           <p className="mt-4 text-gray-600 max-w-lg">
             ¿Necesitas un experto para tu equipo de People pero no quieres sumar

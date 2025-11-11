@@ -25,7 +25,7 @@ export default function ConsultoriasPage() {
           </div>
           <div className="px-6 md:px-10 pt-8 pb-10">
             <h1 className="text-center text-3xl md:text-4xl font-extrabold text-[#5C2D91] drop-shadow-sm">
-              Las Áreas que Transforman Equipos y Potencian Organizaciones
+              Las áreas que transforman equipos y potencian organizaciones
             </h1>
             <p className="max-w-3xl mx-auto mt-5 text-center text-gray-700 leading-relaxed">
               Cada empresa enfrenta retos únicos. Por eso, en Uplin agrupamos nuestras soluciones de consultoría en temáticas clave que abordan todo el ciclo de talento: atracción, desarrollo, cultura, tecnología y cumplimiento.
