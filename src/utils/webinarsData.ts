@@ -66,7 +66,7 @@ export const recordedWebinars: Webinar[] = [
   {
     id: "2",
     tipo: "grabado",
-    titulo: "Síndrome del Impostor: transformar desde nuestra historia",
+    titulo: "Síndrome del impostor: transformar desde nuestra historia",
     dirigidoPor: "Melisa Restrepo",
     fecha: "Disponible",
     imagenes: ["/ImgMelissa.png"],
@@ -86,7 +86,7 @@ export const recordedWebinars: Webinar[] = [
     id: "4",
     tipo: "grabado",
     titulo: "Cómo fundar tu área de RRHH: desde la visión del founder",
-    dirigidoPor: "Sol Y Sandri",
+    dirigidoPor: "Sol y Sandri",
     fecha: "Disponible",
     imagenes: ["/ImgMSol.png", "/ImgSandri.png"],
     link: "https://docs.google.com/forms/d/e/1FAIpQLSfgVeQLuDlJg_KOIe2yBqtGYzSoQPRRV9DAW9QCTUCL8uUZQQ/viewform?usp=publish-editor",
