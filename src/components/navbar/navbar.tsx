@@ -90,7 +90,7 @@ const Navbar = () => {
             href="/quienes-somos"
             className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
           >
-            Quienes Somos
+            Quienes somos
           </a>
 
           <div className="relative">
@@ -124,14 +124,14 @@ const Navbar = () => {
                   className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                   onClick={closeAllMenus}
                 >
-                  Búsqueda de Talento
+                  Búsqueda de talento
                 </a>
                 <a
                   href="/servicios/ppStaffing"
                   className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                   onClick={closeAllMenus}
                 >
-                  People Partner Staffing
+                  People partner staffing
                 </a>
                 <a
                   href="/servicios/consultorias"
@@ -161,7 +161,7 @@ const Navbar = () => {
             href="/careers"
             className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
           >
-            Uplin Careers
+            Uplin careers
           </a>
           <a
             href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
@@ -257,14 +257,14 @@ const Navbar = () => {
                 className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                 onClick={closeAllMenus}
               >
-                Búsqueda de Talento
+                Búsqueda de talento
               </a>
               <a
                 href="/servicios/ppStaffing"
                 className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                 onClick={closeAllMenus}
               >
-                People Partner Staffing
+                People partner staffing
               </a>
               <a
                 href="/servicios/consultorias"
@@ -350,7 +350,7 @@ const Navbar = () => {
             </button>
 
             <h2 className="text-xl font-semibold text-[#6D4098] mb-4 text-center">
-              Cambiar Contraseña
+              Cambiar contraseña
             </h2>
 
             <div className="relative mb-4">
