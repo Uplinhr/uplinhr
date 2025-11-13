@@ -90,7 +90,7 @@ const Navbar = () => {
             href="/quienes-somos"
             className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
           >
-            Quienes somos
+            Quiénes somos
           </a>
 
           <div className="relative">
@@ -131,7 +131,7 @@ const Navbar = () => {
                   className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                   onClick={closeAllMenus}
                 >
-                  People partner staffing
+                  People Partner Staffing
                 </a>
                 <a
                   href="/servicios/consultorias"
@@ -161,7 +161,7 @@ const Navbar = () => {
             href="/careers"
             className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
           >
-            Uplin careers
+            Uplin Careers
           </a>
           <a
             href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
@@ -229,7 +229,7 @@ const Navbar = () => {
             className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded cursor-pointer"
             onClick={closeAllMenus}
           >
-            Quienes Somos
+            Quiénes Somos
           </a>
 
           {/* Servicios con submenú en mobile */}
@@ -264,7 +264,7 @@ const Navbar = () => {
                 className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
                 onClick={closeAllMenus}
               >
-                People partner staffing
+                People Partner Staffing
               </a>
               <a
                 href="/servicios/consultorias"
