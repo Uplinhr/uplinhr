@@ -8,7 +8,7 @@ export const StrategicAlliances = () => {
         <div className="text-left">
           <h2 className="text-2xl md:text-[32px] leading-tight md:leading-[40px] font-semibold font-poppins text-black mb-6">
             Programa de<br />
-            <span className="text-[#6C4099]">Alianzas</span> Estratégicas
+            <span className="text-[#6C4099]">alianzas</span> estratégicas
           </h2>
           <p className="text-base text-[#333] mb-4 max-w-md">
             En Uplin creemos en el poder de la colaboración. Nuestro programa de alianzas estratégicas
@@ -23,7 +23,7 @@ export const StrategicAlliances = () => {
             href="https://docs.google.com/forms/d/e/1FAIpQLSc1uYUAIh7E867j83LHlaKAV4ynZFdlZvmHo81JzRodVqExXw/viewform?usp=publish-editor"
             className="bg-[#6C4099] text-white font-semibold py-3 px-6 rounded-lg inline-block hover:bg-[#5a3480] transition-colors"
           >
-            Únete como Partner
+            Únete como partner
           </a>
         </div>
 
