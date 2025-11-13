@@ -23,12 +23,12 @@ const BenefitsSection = () => {
             </li>
             <li>
               <h3 className="text-lg font-semibold text-[#502B7D]">
-                + Expertise Inmediata: <span className="text-gray-600 font-normal">accede al conocimiento especializado de profesionales de alto nivel, listos para empezar desde el primer día.</span>
+                + Expertise inmediata: <span className="text-gray-600 font-normal">accede al conocimiento especializado de profesionales de alto nivel, listos para empezar desde el primer día.</span>
               </h3>
             </li>
             <li>
               <h3 className="text-lg font-semibold text-[#502B7D]">
-                + Enfoque Estratégico: <span className="text-gray-600 font-normal">dedica tu tiempo a lo importante, mientras un experto se encarga de los proyectos de People Ops que requieren atención.</span>
+                + Enfoque estratégico: <span className="text-gray-600 font-normal">dedica tu tiempo a lo importante, mientras un experto se encarga de los proyectos de People Ops que requieren atención.</span>
               </h3>
             </li>
           </ul>
