@@ -74,7 +74,7 @@ export default function WebinarsSection() {
           {filter === "todos" && (
             <>
               <section>
-                <h2 className="text-2xl font-bold">Webinars en Vivo</h2>
+                <h2 className="text-2xl font-bold">Webinars en vivo</h2>
                 <p className="mt-2 text-sm">
                   Conoce las charlas que comienzan pronto e inscríbete gratis
                   para interactuar en vivo con los speakers.
@@ -85,7 +85,7 @@ export default function WebinarsSection() {
               </section>
 
               <section className="mt-8">
-                <h2 className="text-2xl font-bold">Webinars Grabados</h2>
+                <h2 className="text-2xl font-bold">Webinars grabados</h2>
                 <p className="mt-2 text-sm">
                   Si no pudiste asistir a alguno de nuestros webinars
                   anteriores, aquí puedes ver las grabaciones gratis.

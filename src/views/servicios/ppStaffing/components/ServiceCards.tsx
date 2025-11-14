@@ -3,19 +3,19 @@ import ServiceCard from './ServiceCard';
 const serviceData = [
   {
     iconSrc: "/PPS-optimizacion.png", 
-    title: "Optimización de Procesos",
+    title: "Optimización de procesos",
     description: "Mejoramos tus procesos de onboarding, gestión del desempeño y experiencia del empleado.",
     altText: "Icono de optimización"
   },
   {
     iconSrc: "/PPS-gestion.png",
-    title: "Gestión de Alto Volumen",
+    title: "Gestión de alto volumen",
     description: "Manejamos picos altos de vacantes activas y procesos de selección masivos.",
     altText: "Icono de gestión de alto volumen"
   },
   {
     iconSrc: "/PPS-proyectos.png",
-    title: "Proyectos Estratégicos",
+    title: "Proyectos estratégicos",
     description: "Implementamos sistemas de gestión, políticas de RR.HH. y transformación cultural.",
     altText: "Icono de proyectos estratégicos"
   }

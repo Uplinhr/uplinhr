@@ -13,8 +13,8 @@ const HeroSection = () => {
           </h1>
           <p className="mt-4 text-gray-600 max-w-lg">
             ¿Necesitas un experto para tu equipo de People pero no quieres sumar
-            a alguien a nómina? Imagina tener a un profesional de Recursos
-            Humanos 100% dedicado a tu equipo, con el conocimiento y la
+            a alguien a nómina? Imagina tener a un profesional de recursos
+            humanos 100% dedicado a tu equipo, con el conocimiento y la
             experiencia para impulsar tus proyectos estratégicos. Todo esto, sin
             el compromiso ni los costos de una contratación a largo plazo. El
             desafío de muchas empresas hoy no es solo encontrar talento, sino

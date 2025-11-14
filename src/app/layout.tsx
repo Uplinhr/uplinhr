@@ -3,24 +3,21 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
-import {Toaster} from 'sonner'
-import LandbotChat from "@/components/LandbotChatbot/LandbotChatbot";
+import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
+import Script from "next/script"; // 👈 importante
+import BotPenguin from "@/components/botPenguin/botPenguin";
 
 const poppins = Poppins({
-  weight: ["400", "500", "600", "700"], 
-  subsets: ["latin"], 
-  display: "swap", 
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  display: "swap",
   variable: "--font-poppins",
 });
 
 export const metadata: Metadata = {
   title: "Uplin",
   description: "RRHH Flexible para tu Empresa",
-  icons: {
-    icon: "/logoUplin.svg",
-    apple: "/logoUplin.svg",
-  },
 };
 
 export default function RootLayout({
@@ -31,13 +28,16 @@ export default function RootLayout({
   return (
     <html lang="es" className={poppins.variable}>
       <body className="antialiased">
-        <LandbotChat />
+        {/* <LandbotChat /> */}
         <Navbar />
         {children}
         <Footer />
         <ScrollToTop />
         <Toaster position="top-right" />
+        <BotPenguin />
+
       </body>
     </html>
   );
 }
+
