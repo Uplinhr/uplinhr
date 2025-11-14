@@ -4,8 +4,9 @@ import "./globals.css";
 import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import { Toaster } from "sonner";
-import LandbotChat from "@/components/LandbotChatbot/LandbotChatbot";
 import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
+import Script from "next/script"; // 👈 importante
+import BotPenguin from "@/components/botPenguin/botPenguin";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -17,7 +18,6 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "Uplin",
   description: "RRHH Flexible para tu Empresa",
-  // 👇 Ya no incluimos `icons`
 };
 
 export default function RootLayout({
@@ -28,13 +28,16 @@ export default function RootLayout({
   return (
     <html lang="es" className={poppins.variable}>
       <body className="antialiased">
-        <LandbotChat />
+        {/* <LandbotChat /> */}
         <Navbar />
         {children}
         <Footer />
         <ScrollToTop />
         <Toaster position="top-right" />
+        <BotPenguin />
+
       </body>
     </html>
   );
 }
+
