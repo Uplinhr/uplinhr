@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { IoRocket, IoNotifications } from "react-icons/io5";
 import { SlEnvolopeLetter } from "react-icons/sl";
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
 
 const CareersView = () => {
   const buttonAnimations = {
@@ -15,18 +17,56 @@ const CareersView = () => {
     },
   };
 
+  // Función TTS para el header
+  const handleHeaderTTS = () => {
+    const text = "Uplin Careers. Conecta con oportunidades que te impulsen a crecer.";
+    speakText(text);
+  };
+
+  // Función TTS para la descripción
+  const handleDescriptionTTS = () => {
+    const text = "Te conectamos con las mejores startups y empresas de tecnología de Latam. Culturas que ponen a las personas en el centro, proyectos que inspiran y retos que impulsan tu desarrollo.";
+    speakText(text);
+  };
+
+  // Función TTS para base de talentos
+  const handleTalentPoolTTS = () => {
+    const text = "¿No encontraste una vacante para ti hoy? Déjanos tu CV y únete a nuestra base de talentos. Te consideraremos para futuras oportunidades. Recibí novedades y vacantes relacionadas a tu perfil. Accede a invitaciones de eventos exclusivos de Uplin.";
+    speakText(text);
+  };
+
   return (
     <>
-      <section className="font-poppins text-white bg-[radial-gradient(50%_50%_at_50%_50%,#8F68AC_0%,#6C4099_100%)] text-center h-auto min-h-[30vh] md:min-h-[60vh] w-full flex flex-col justify-center items-center p-5 box-border">
-        <h1 className="text-3xl md:text-4xl font-normal text-center mb-3 md:mb-4">
+      <section className="font-poppins text-white bg-[radial-gradient(50%_50%_at_50%_50%,#8F68AC_0%,#6C4099_100%)] text-center h-auto min-h-[30vh] md:min-h-[60vh] w-full flex flex-col justify-center items-center p-5 box-border relative">
+        <button
+          onClick={handleHeaderTTS}
+          className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+          aria-label="Escuchar Uplin Careers"
+          title="Escuchar texto"
+          type="button"
+          style={{ pointerEvents: 'auto' }}
+        >
+          <PlayCircle size={24} className="text-white" />
+        </button>
+        <h1 className="text-3xl md:text-4xl font-normal text-center mb-3 md:mb-4 relative z-0">
           Uplin Careers
         </h1>
-        <h3 className="text-base md:text-lg font-normal">
+        <h3 className="text-base md:text-lg font-normal relative z-0">
           Conecta con oportunidades que te impulsen a crecer
         </h3>
       </section>
 
-      <section className="font-poppins text-[#502B7D] bg-white text-center md:text-left h-auto min-h-[30vh] md:min-h-[60vh] w-full flex items-center p-5 box-border">
+      <section className="font-poppins text-[#502B7D] bg-white text-center md:text-left h-auto min-h-[30vh] md:min-h-[60vh] w-full flex items-center p-5 box-border relative">
+        <button
+          onClick={handleDescriptionTTS}
+          className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+          aria-label="Escuchar descripción de Careers"
+          title="Escuchar texto"
+          type="button"
+          style={{ pointerEvents: 'auto' }}
+        >
+          <PlayCircle size={24} className="text-[#502B7D]" />
+        </button>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full max-w-6xl mx-auto">
           <div className="flex justify-center md:justify-center order-1 md:order-2">
             <Image
@@ -58,7 +98,17 @@ const CareersView = () => {
         </div>
       </section>
 
-      <section className="font-poppins text-[#502B7D] bg-white text-center h-auto min-h-[60vh] md:min-h-[50vh] w-full flex flex-col justify-center items-center p-5 box-border mt-10 mb-16">
+      <section className="font-poppins text-[#502B7D] bg-white text-center h-auto min-h-[60vh] md:min-h-[50vh] w-full flex flex-col justify-center items-center p-5 box-border mt-10 mb-16 relative">
+        <button
+          onClick={handleTalentPoolTTS}
+          className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+          aria-label="Escuchar base de talentos"
+          title="Escuchar texto"
+          type="button"
+          style={{ pointerEvents: 'auto' }}
+        >
+          <PlayCircle size={24} className="text-[#502B7D]" />
+        </button>
         <h3 className="text-base md:text-lg mb-6 font-bold">
           ¿No encontraste una vacante para ti hoy?
         </h3>

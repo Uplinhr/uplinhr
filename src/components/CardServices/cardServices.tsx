@@ -1,5 +1,8 @@
+"use client"
 import { ReactNode } from "react"
 import Image from "next/image"
+import { PlayCircle } from "lucide-react"
+import { speakText } from "@/utils/textToSpeech"
 
 type CardServicesProps = {
   icon: ReactNode
@@ -18,6 +21,12 @@ export function CardServices({
   imageSrc,
   imageAlt,
 }: CardServicesProps) {
+  // Función para el TTS de CardServices
+  const handleCardServicesTTS = () => {
+    const text = `${title}. ${description}`;
+    speakText(text);
+  };
+
   return (
     <div className="bg-gray-50 rounded-lg p-6 flex flex-col md:flex-row items-center gap-8 max-w-4xl mx-auto mb-6">
       {/* Content Section */}
@@ -26,7 +35,15 @@ export function CardServices({
           <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
             {icon}
           </div>
-          <h2 className="text-xl font-semibold text-[#6C4099]">{title}</h2>
+          <h2 className="text-xl font-semibold text-[#6C4099] flex-1">{title}</h2>
+          <button
+            onClick={handleCardServicesTTS}
+            className="p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200"
+            aria-label={`Escuchar ${title}`}
+            title="Escuchar texto"
+          >
+            <PlayCircle size={24} className="text-[#6C4099]" />
+          </button>
         </div>
 
         <div className="w-full h-40 relative rounded-lg overflow-hidden mb-4 order-2 md:hidden">
