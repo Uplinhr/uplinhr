@@ -2,6 +2,9 @@
 import Image from "next/image";
 import WebinarsSection from "@/components/webinars/WebinarsSection";
 import { motion } from "framer-motion";
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
+
 function AcademyView() {
   const buttonAnimations = {
     hover: {
@@ -12,15 +15,38 @@ function AcademyView() {
       scale: 0.95,
     },
   };
+
+  // Función TTS para el header de Academy
+  const handleAcademyHeaderTTS = () => {
+    const text = "Empezá tu recorrido en UPLIN ACADEMY. El espacio donde la estrategia en gestión de personas se transforma en acción.";
+    speakText(text);
+  };
+
+  // Función TTS para la descripción del ciclo
+  const handleCycleTTS = () => {
+    const text = "En Uplin Academy, estamos convencidos de que el crecimiento de tu negocio empieza con el desarrollo de tu equipo. Por eso, te invitamos a nuestro ciclo de charlas gratuitas de agosto, diseñado para líderes, emprendedores y profesionales de recursos humanos que buscan innovar. ¡Prepárate para transformar tu gestión de personas!";
+    speakText(text);
+  };
+
   return (
     <>
       <section className="w-full mt-4 py-8 md:py-10 px-4 sm:px-6 flex justify-center items-center">
-        <div className="w-full md:w-[80%] lg:w-[80%] bg-[#6C4099] rounded-2xl p-6 md:p-8 text-center transition-transform duration-300 hover:scale-[1.02]">
-          <h1 className="text-white font-poppins text-3xl md:text-4xl font-normal text-center mb-3 md:mb-4">
+        <div className="w-full md:w-[80%] lg:w-[80%] bg-[#6C4099] rounded-2xl p-6 md:p-8 text-center transition-transform duration-300 hover:scale-[1.02] relative">
+          <button
+            onClick={handleAcademyHeaderTTS}
+            className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+            aria-label="Escuchar presentación de Uplin Academy"
+            title="Escuchar texto"
+            type="button"
+            style={{ pointerEvents: 'auto' }}
+          >
+            <PlayCircle size={24} className="text-white" />
+          </button>
+          <h1 className="text-white font-poppins text-3xl md:text-4xl font-normal text-center mb-3 md:mb-4 relative z-0">
             🚀 Empezá tu recorrido en <br />
             <span className="font-semibold">UPLIN ACADEMY</span>
           </h1>
-          <p className="text-white font-poppins text-base md:text-lg font-normal text-center">
+          <p className="text-white font-poppins text-base md:text-lg font-normal text-center relative z-0">
             El espacio donde la estrategia en gestión de personas se transforma
             en acción
           </p>
@@ -96,7 +122,16 @@ function AcademyView() {
           </h3>
         </div>
 
-        <div className="bg-[#FDEBD3] rounded-[25px] w-full md:w-[80%] lg:w-[80%] p-6 md:p-10 flex flex-col md:flex-row items-center gap-6">
+        <div className="bg-[#FDEBD3] rounded-[25px] w-full md:w-[80%] lg:w-[80%] p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 relative">
+          <button
+            onClick={handleCycleTTS}
+            className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-10"
+            aria-label="Escuchar descripción del ciclo de charlas"
+            title="Escuchar texto"
+            type="button"
+          >
+            <PlayCircle size={24} className="text-[#6C4099]" />
+          </button>
           <div className="md:w-1/2 order-2 md:order-1 px-0 md:pl-6 lg:pl-10">
             <p className="text-[#000000] font-poppins text-[15px] font-normal leading-[25px]">
               En Uplin Academy, estamos convencidos de que el crecimiento de tu

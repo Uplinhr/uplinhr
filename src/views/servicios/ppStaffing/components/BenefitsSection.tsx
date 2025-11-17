@@ -1,6 +1,25 @@
+"use client"
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
+
 const BenefitsSection = () => {
+  const handleBenefitsTTS = () => {
+    const text = "Beneficios claves. Descubre por qué las empresas eligen People Partner Staffing para sus necesidades de RR.HH. Flexibilidad: escala tu equipo de RR.HH. según la demanda, sin contratos a largo plazo. Ahorro de costos: olvídate de los gastos de nómina, beneficios y procesos de contratación. Expertise inmediata: accede al conocimiento especializado de profesionales de alto nivel, listos para empezar desde el primer día. Enfoque estratégico: dedica tu tiempo a lo importante, mientras un experto se encarga de los proyectos de People Ops que requieren atención.";
+    speakText(text);
+  };
+
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white relative">
+      <button
+        onClick={handleBenefitsTTS}
+        className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+        aria-label="Escuchar beneficios"
+        title="Escuchar texto"
+        type="button"
+        style={{ pointerEvents: 'auto' }}
+      >
+        <PlayCircle size={24} className="text-[#502B7D]" />
+      </button>
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl lg:text-4xl font-bold text-gray-800">
           Beneficios <span className="text-[#502B7D]">claves</span>

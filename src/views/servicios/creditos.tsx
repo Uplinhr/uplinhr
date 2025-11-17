@@ -1,3 +1,4 @@
+"use client"
 import Button from "@/components/Button/Button";
 import Image from "next/image";
 import { data } from "@/utils/paquetes";
@@ -6,12 +7,29 @@ import CardBeneficiosCreditos from "@/components/CardServices/CardBeneficiosCred
 import { Banner2 } from "@/components/banner/banner";
 import CreditSimulatorModal from "@/components/simulador/CreditSimulatorModal";
 import { QAView } from "../qaView";
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
 
 export default function Creditos() {
+  const handleHeaderTTS = () => {
+    const text = "Créditos de talento para Startups y Pymes. Un modelo inteligente para optimizar tu reclutamiento. Compra créditos de búsquedas de talento y diseña tu proceso a medida. Sin vencimiento, flexible y con la garantía de Uplin.";
+    speakText(text);
+  };
+
   return (
     <main className="min-h-screen">
       {/* HEADER */}
-      <section className="bg-[#502B7D] text-white py-16 px-4">
+      <section className="bg-[#502B7D] text-white py-16 px-4 relative">
+        <button
+          onClick={handleHeaderTTS}
+          className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+          aria-label="Escuchar Créditos de talento"
+          title="Escuchar texto"
+          type="button"
+          style={{ pointerEvents: 'auto' }}
+        >
+          <PlayCircle size={24} className="text-white" />
+        </button>
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left side - Image */}
