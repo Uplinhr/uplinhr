@@ -41,7 +41,7 @@ export const data: Paquetes[] = [
     buttonText: "Comprar Pro",
     buttonLink: "https://u030x.share.hsforms.com/2W0JUlQ23TuSpMpoGCAGitA",
     features: [
-      "600 créditos incluidos",
+      "660 créditos incluidos",
       "Vacantes posibles: hasta 5 juniors (combinables según nivel)",
       "Proceso básico de selección",
       "Soporte y acompañamiento",
@@ -62,7 +62,7 @@ export const data: Paquetes[] = [
     buttonText: "Comprar Premium",
     buttonLink: "https://u030x.share.hsforms.com/2iOmWDCM_QGiaXaTlrxbjLA",
     features: [
-      "960 créditos incluidos",
+      "990 créditos incluidos",
       "Vacantes posibles: hasta 8 juniors (combinables según nivel)",
       "Proceso básico de selección",
       "Soporte y acompañamiento",
@@ -83,7 +83,7 @@ export const data: Paquetes[] = [
     buttonText: "Comprar Platinum",
     buttonLink: "https://u030x.share.hsforms.com/22L5jpd-mRhOomjDh4k7xfQ",
     features: [
-      "1200 créditos incluidos",
+      "1320 créditos incluidos",
       "Vacantes posibles: hasta 10 juniors (combinables según nivel)",
       "Proceso básico de selección",
       "Soporte y acompañamiento",

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Volume2 } from "lucide-react";
 
 interface ButtonProps {
   link?: string;
@@ -7,7 +8,9 @@ interface ButtonProps {
   mode: 0 | 1 | 2 | 3;
   height?: number;
   width?: number;
-  className?: string; // nuevo
+  className?: string;
+  ariaLabel?: string;
+  enableTTS?: boolean; // Habilita el ícono de speaker para TTS
 }
 
 const Button = ({
@@ -18,6 +21,8 @@ const Button = ({
   height,
   width,
   className = "",
+  ariaLabel,
+  enableTTS = false,
 }: ButtonProps) => {
   const colorConfig = {
     0: {
@@ -39,6 +44,23 @@ const Button = ({
   };
 
   const { base, hover } = colorConfig[mode];
+
+  // Función para manejar text-to-speech
+  const handleTTS = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Evita que se active el onClick del botón
+    if ('speechSynthesis' in window) {
+      // Cancela cualquier speech en curso
+      window.speechSynthesis.cancel();
+
+      const utterance = new SpeechSynthesisUtterance(tag);
+      utterance.lang = 'es-ES'; // Español
+      utterance.rate = 1; // Velocidad normal
+      utterance.pitch = 1; // Tono normal
+      window.speechSynthesis.speak(utterance);
+    } else {
+      console.warn('Text-to-speech no está disponible en este navegador');
+    }
+  };
 
   // Si NO pasas width/height -> ocupa w-full en mobile y auto en sm:
   const responsiveWidth = width ? "" : "w-full sm:w-auto";
@@ -70,15 +92,36 @@ const Button = ({
         style={style}
         target={isExternal ? "_blank" : undefined}
         rel={isExternal ? "noopener noreferrer" : undefined}
+        aria-label={ariaLabel || tag}
       >
-        {tag}
+        <span className="flex items-center gap-2">
+          {tag}
+          {enableTTS && (
+            <Volume2
+              size={18}
+              className="cursor-pointer hover:opacity-70 transition-opacity"
+              onClick={handleTTS}
+              aria-label="Escuchar texto"
+            />
+          )}
+        </span>
       </Link>
     );
   }
 
   return (
-    <button className={classNames} style={style} onClick={onClick}>
-      {tag}
+    <button className={classNames} style={style} onClick={onClick} aria-label={ariaLabel || tag}>
+      <span className="flex items-center gap-2">
+        {tag}
+        {enableTTS && (
+          <Volume2
+            size={18}
+            className="cursor-pointer hover:opacity-70 transition-opacity"
+            onClick={handleTTS}
+            aria-label="Escuchar texto"
+          />
+        )}
+      </span>
     </button>
   );
 };

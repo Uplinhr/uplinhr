@@ -1,7 +1,10 @@
+"use client"
 import Button from "@/components/Button/Button";
 import Needs from "@/views/Needs";
 import Image from "next/image";
 import { FaLinkedin } from "react-icons/fa";
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
 
 const AboutUs = () => {
   const teamMembers = [
@@ -20,10 +23,30 @@ const AboutUs = () => {
     },
   ];
 
+  const handleHeroTTS = () => {
+    const text = "Cuidá a las personas de tu equipo y ellos van a cuidar de tu negocio. La empatía, la escucha activa y la adaptabilidad son claves para una gestión de personas real y con impacto. En Uplin, las ponemos en el centro.";
+    speakText(text);
+  };
+
+  const handleDescriptionTTS = () => {
+    const text = "Uplin es una consejera que acompaña en la toma de decisiones, mostrando las mejores opciones con sus ventajas y desventajas. Sabe que todo proceso requiere tomar decisiones, todas las decisiones requieren tiempo y toda vivencia genera experiencia y nos hace crecer. Nosotras también hemos pasado por procesos que nos enseñaron y nos hicieron crecer y florecer como profesionales. Hoy nuestra experiencia y conocimiento nos permite poder acompañar a otros/as junto a emprendedores, ya que Uplin siempre apunta a que sus clientes nunca se sientan solos.";
+    speakText(text);
+  };
+
   return (
     <div className="font-[Poppins]">
       <div className="px-4 sm:px-6 lg:px-10 mx-auto max-w-7xl">
-        <section className="bg-[#502B7D] rounded-2xl p-6 sm:p-8 md:p-12 my-6 sm:my-8">
+        <section className="bg-[#502B7D] rounded-2xl p-6 sm:p-8 md:p-12 my-6 sm:my-8 relative">
+          <button
+            onClick={handleHeroTTS}
+            className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+            aria-label="Escuchar Quiénes somos"
+            title="Escuchar texto"
+            type="button"
+            style={{ pointerEvents: 'auto' }}
+          >
+            <PlayCircle size={24} className="text-white" />
+          </button>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
               <h1 className="text-white text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight">
@@ -50,7 +73,17 @@ const AboutUs = () => {
         </section>
       </div>
 
-      <section className="py-5 px-4 sm:px-6 lg:px-10 mx-auto max-w-7xl">
+      <section className="py-5 px-4 sm:px-6 lg:px-10 mx-auto max-w-7xl relative">
+        <button
+          onClick={handleDescriptionTTS}
+          className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+          aria-label="Escuchar descripción de Uplin"
+          title="Escuchar texto"
+          type="button"
+          style={{ pointerEvents: 'auto' }}
+        >
+          <PlayCircle size={24} className="text-[#502B7D]" />
+        </button>
         <div className="grid md:grid-cols-2 items-center gap-8">
           <div className="relative flex justify-center order-2 md:order-1 px-0 md:pl-10 lg:pl-20">
             <Image

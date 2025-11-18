@@ -1,9 +1,28 @@
+"use client"
 import CardsPlan from "@/views/cardsPlan";
 import Button from "@/components/Button/Button";
 import ComparativeCard from "@/views/comparativeCard";
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
+
 const Planes = () => {
+  const handleHeaderTTS = () => {
+    const text = "Potenciá tu gestión de talento con los planes flexibles de Uplin. La diferencia está en el nivel de profundidad, en la cantidad de asesorías, nivel de acompañamiento y búsquedas de talento que tenés a disposición.";
+    speakText(text);
+  };
+
   return (
-    <section className="bg-white h-auto">
+    <section className="bg-white h-auto relative">
+      <button
+        onClick={handleHeaderTTS}
+        className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+        aria-label="Escuchar Planes"
+        title="Escuchar texto"
+        type="button"
+        style={{ pointerEvents: 'auto' }}
+      >
+        <PlayCircle size={24} className="text-[#502B7D]" />
+      </button>
       <div className="pt-16 mb-14 font-poppins">
         <h1 className="mb-[30px] text-center font-semibold text-[28px]">
           Potenciá tu gestión de talento con los planes flexibles de Uplin
