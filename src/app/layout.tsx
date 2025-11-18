@@ -34,7 +34,7 @@ export default function RootLayout({
         <Footer />
         <ScrollToTop />
         <Toaster position="top-right" />
-        <BotPenguin />
+        {/* <BotPenguin /> */}
 
       </body>
     </html>
