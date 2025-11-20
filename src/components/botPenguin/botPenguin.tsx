@@ -1,17 +1,23 @@
 "use client";
-import { useEffect } from "react";
 
 export default function BotPenguin() {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.id = "messenger-widget-b";
-    script.src = "https://cdn.botpenguin.com/website-bot.js";
-    script.defer = true;
-    script.innerHTML =
-      "69168f84b1cc7221bc302bec,69168daf25ef5190d5330071,agent";
-    document.body.appendChild(script);
-  }, []);
-
-  return null; // no renderiza nada visible, solo inyecta el script
+  return (
+    <iframe
+      src="https://page.botpenguin.com/691d3cc5d8410c919e36233e/69189d9625ef5190d5561c72/agent"
+      style={{
+        position: "fixed",
+        bottom: "20px",
+        right: "20px",
+        width: "400px",
+        height: "600px",
+        border: "none",
+        zIndex: 1000,
+      }}
+      title="BotPenguin Chat"
+    ></iframe>
+  );
 }
+
+
+
 
