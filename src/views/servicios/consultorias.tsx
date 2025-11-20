@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
-import ExpertCard from "@/components/ExpertCard/ExpertCard";
-import { experts } from "@/utils/experts";
+import ConsultoriasCard from "@/components/ConsultoriasCard/ConsultoriasCard";
+import { consultorias } from "@/utils/consultorias";
 import { Banner } from "@/components/banner/banner";
 import { PlayCircle } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
@@ -51,8 +51,8 @@ Explorá cada área para conocer cómo podemos acompañarte en la evolución de 
 
       {/* Grid de Cards */}
       <section className="container mx-auto p-10 px-4 sm:px-6 lg:px-8 space-y-6">
-        {experts.map((e) => (
-          <ExpertCard key={e.id} expert={e} />
+        {consultorias.map((e) => (
+          <ConsultoriasCard key={e.id} consultorias={e} />
         ))}
       </section>
       <Banner />

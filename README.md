@@ -8,7 +8,8 @@ El desarrollo se encuentra organizado por ramas para facilitar el trabajo en equ
 - TailwindCSS (para estilos)  
 - Framer Motion (para animaciones)  
 - React Icons (para íconos)  
-- Vercel (para deploy)  
+- Vercel (para deploy)
+- BotPenguin (Chatbot)
 
 ## ⚙️ Instalación y ejecución
 Clonar el repositorio:  
@@ -50,36 +51,77 @@ Cada integrante del equipo trabajará en su rama individual. Se recomienda:
 ## 📂 Estructura del Proyecto
 ```
 uplinhr/
-├── public/                 # Imágenes y contenido necesario para la web
-├── src/                    # Código fuente del frontend
-│   ├── app/                # Páginas y redirecciones (Next.js App Router, NO son client components)
-│   │   ├── academy/        # Submódulo academy
-│   │   ├── careers/        # Careers y vacantes
-│   │   ├── cursosCompletos/# Páginas de cursos completos
-│   │   └── dashboard/      # Dashboard de user y admin
+├── public/                            # Imágenes y contenido necesario para la web
+├── src/                               # Código fuente del frontend
+│   ├── app/                           # Páginas y redirecciones (Next.js App Router, NO son client components)
+│   │   ├── academy/                   # Submódulo academy
+│   │   ├── careers/                   # Careers y vacantes
+│   │   ├── cursosCompletos/           # Páginas de cursos completos
+│   │   ├── dashboard/                 # Dashboard de user y admin
+│   │   ├── login/                     # Formulario de inicio de sesión
+│   │   ├── planes/                    # Descripción de planes de membresías
+│   │   ├── politicas-privacidad       # Politicas de privacidad
+│   │   ├── preguntas-frecuentes       # Sección desplegable de preguntas y respuestas
+│   │   ├── quienes-somos              # Información sobre la misión de la empresa
+│   │   ├── restablecer-clave          # Formulario para reestablecer contraseñas
+│   │   ├── servicios                  
+│   │   │   ├── consultorias           # Servicios de consultorías
+│   │   │   ├── creditos               # Créditos para la búsqueda de talentos + simulador
+│   │   │   ├── membresias             # Planes de membresias para empresas
+│   │   │   ├── ppstaffing             # Servicio de conexión de talentos
+│   │   └── terminos-condiciones       # Términos y condiciones de la empresa
+│   │
 │   ├── components/         # Componentes reutilizables
-│   │   ├── navbar/
+│   │   ├── admincomponents/        # Pestañas del dashboard admin
+│   │   ├── banner/                 # Banners de contacto
+│   │   ├── botPenguin/             # Chatbot
+│   │   ├── button/
+│   │   ├── CardServices/           # Componente de tarjetas reutilizables
+│   │   ├── CardSolution/           # Tarjetas de la landing de home
+│   │   ├── careers/
+│   │   ├── ConsultoriasCard/
+│   │   ├── cursosCompletos/
 │   │   ├── footer/
-│   │   ├── login/
-│   │   ├── webinars/
-│   │   ├── admincomponents/ # Pestañas del dashboard admin
-│   │   └── ProtectedRoute.tsx # Protección de rutas de UPLIN Management
-│   ├── interfaces/         # Tipos e interfaces TypeScript (centralizadas en index.ts)
-│   ├── services/           # Conexión con el backend usando fetch + try/catch
-│   │   ├── adminService.ts   # Servicios relacionados al dashboard admin
-│   │   ├── authService.ts    # Inicio de sesión
-│   │   └── userService.ts    # Servicios de usuario
-│   ├── store/              # Estados globales con Zustand
+│   │   ├── Login/
+│   │   ├── navbar/
+│   │   ├── planCard/               # Tarjetas de las membresías
+│   │   ├── qaCard/                 # Tarjetas reutilizables de preguntas y respuestas
+│   │   ├── resetPassword/
+│   │   ├── ScrollToTop/            # Botón para volver a arriba
+│   │   ├── Simulador/
+│   │   ├── StrategicAlliances/     # Sección de programa de alianzas
+│   │   ├── webinars/               # cursos en vivos
+│   │   └── ProtectedRoute.tsx      # Protección de rutas de UPLIN Management
+│   │ 
+│   ├── interfaces/                 # Tipos e interfaces TypeScript (centralizadas en index.ts)
+│   ├── services/                   # Conexión con el backend usando fetch + try/catch
+│   │   ├── adminService.ts         # Servicios relacionados al dashboard admin
+│   │   ├── authService.ts          # Inicio de sesión
+│   │   └── userService.ts          # Servicios de usuario
+│   ├── store/                      # Estados globales con Zustand
 │   │   ├── useAdminStore.ts
 │   │   ├── useAuthStore.ts
 │   │   └── useUserStore.ts
-│   ├── utils/              # Funciones utilitarias y datos estáticos
-│   │   ├── webinarsData.ts   # Texto para generar cards automáticamente
+│   ├── utils/                      # Funciones utilitarias y datos estáticos
 │   │   ├── cursosCompletos/
-│   │   ├── cardDetails.ts
-│   │   └── faqs.ts           # Módulos de cada curso (genera las cards)
-│   └── views/              # Vistas client-side
-│       ├── careers/          # Pages de careers y vacantes
-│       ├── cursosCompletos/  # Pages de cada curso completo
-│       └── dashboard/        # Pages de dashboard user y admin
+│   │   │   ├── cardDetails.ts
+│   │   │   └── faqs.ts             # Módulos de cada curso (genera las cards)
+│   │   │
+│   │   ├── consultorias.ts
+│   │   ├── infoCreditos.ts
+│   │   ├── paquetes.ts
+│   │   ├── plans.ts
+│   │   ├── qa.ts
+│   │   ├── textToSpeach.ts
+│   │   └── webinarsData.ts         # Texto para generar cards automáticamente
+│   │
+│   └── views/                      # Vistas client-side
+│       ├── careers/                # Pages de careers y vacantes
+│       ├── cursosCompletos/        # Pages de cada curso completo
+│       ├── dashboard/              # Pages de dashboard user y admin
+│       └── servicios/              # Pages de todos los servicios
+│           ├── ppStaffing.tsx
+│           ├── consultorias.tsx
+│           ├── creditos.tsx
+│           └── membresias.tsx
 ```
