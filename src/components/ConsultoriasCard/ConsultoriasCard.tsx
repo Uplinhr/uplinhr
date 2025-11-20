@@ -1,16 +1,8 @@
 import Image from "next/image";
+import { Consultorias } from "@/utils/consultorias";
 
-
-export type Expert = {
-  id: string;
-  name: string;
-  tags: string[];
-  bio: string;
-  imageUrl: string;
-};
-
-export default function ExpertCard({ expert }: { expert: Expert }) {
-  const { name, tags, bio, imageUrl} = expert;
+export default function ConsultoriasCard({ consultorias }: { consultorias: Consultorias }) {
+  const { name, tags, description, imageUrl} = consultorias;
 
   return (
     <article
@@ -59,7 +51,7 @@ export default function ExpertCard({ expert }: { expert: Expert }) {
         </div>
 
         {/* Bio */}
-        <p className="mt-3 text-gray-700 leading-relaxed">{bio}</p>
+        <p className="mt-3 text-gray-700 leading-relaxed">{description}</p>
 
       </div>
     </article>
