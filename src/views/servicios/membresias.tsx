@@ -56,7 +56,7 @@ export default function Membresias() {
       </section>
 
       <section className="w-ful flex justify-center px-4">
-        <div className="relative w-full max-w-5xl flex justify-items-center-safe">
+        <div className="relative w-full max-w-5xl flex justify-items-">
           {/* Caja morada */}
           <div
             className="
