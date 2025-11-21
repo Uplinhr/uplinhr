@@ -5,7 +5,6 @@ import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer/footer";
 import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
-import Script from "next/script"; // 👈 importante
 import BotPenguin from "@/components/botPenguin/botPenguin";
 
 const poppins = Poppins({
@@ -34,7 +33,7 @@ export default function RootLayout({
         <Footer />
         <ScrollToTop />
         <Toaster position="top-right" />
-        <BotPenguin />
+        {/*<BotPenguin />*/}
 
       </body>
     </html>
