@@ -58,6 +58,12 @@ const AdminDashboard = () => {
             <p className="font-semibold">Administrador</p>
             <p>{user?.email}</p>
           </div>
+          <a
+            href="/dashboard/admin/account"
+            className="ml-auto bg-white text-[#6D4098] px-3 py-2 rounded-md cursor-pointer text-sm hover:opacity-90"
+          >
+            Mi cuenta
+          </a>
         </div>
       </div>
 

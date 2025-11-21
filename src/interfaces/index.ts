@@ -162,6 +162,7 @@ export interface User {
   consultorias?: Consultoria;
   empresas?: Empresa;
   num_celular?: string;
+  pictureUrl?: string | null;
 }
 
 export interface LoginRequest {

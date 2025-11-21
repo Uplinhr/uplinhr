@@ -22,6 +22,9 @@ const Navbar = () => {
   const toggleServices = () => setServicesOpen((s) => !s);
 
   const { user, logout } = useAuthStore();
+  const dashboardPath = (user && (String((user as any).role || (user as any).rol).toUpperCase() === 'ADMIN'))
+    ? '/dashboard/admin'
+    : '/dashboard/user';
   const { cambiarClave } = useUserStore();
 
   const [isModalPasswordOpen, setIsModalPasswordOpen] = useState(false);
@@ -181,29 +184,36 @@ const Navbar = () => {
             {userMenuOpen && (
               <div className="absolute text-[#502B7D] right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-20">
                 {!user ? (
-                  <Link
-                    href="/login"
-                    className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    onClick={() => setUserMenuOpen(false)}
-                  >
-                    Iniciar sesión
-                  </Link>
+                  <>
+                    <Link
+                      href="/login"
+                      className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Iniciar sesión
+                    </Link>
+                    <Link
+                      href="/register"
+                      className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Registrarse
+                    </Link>
+                  </>
                 ) : (
                   <>
+                    <Link
+                      href={dashboardPath}
+                      className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Mi cuenta
+                    </Link>
                     <button
                       onClick={handleLogout}
                       className="block text-[#502B7D] w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                     >
                       Cerrar sesión
-                    </button>
-                    <button
-                      onClick={() => {
-                        setIsModalPasswordOpen(true);
-                        setUserMenuOpen(false);
-                      }}
-                      className="block text-[#502B7D] w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      Cambiar contraseña
                     </button>
                   </>
                 )}
@@ -306,29 +316,36 @@ const Navbar = () => {
           </a>
 
           {!user ? (
-            <Link
-              href="/login"
-              className="block text-[#502B7D] px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-              onClick={closeAllMenus}
-            >
-              Iniciar sesión
-            </Link>
+            <>
+              <Link
+                href="/login"
+                className="block text-[#502B7D] px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                onClick={closeAllMenus}
+              >
+                Iniciar sesión
+              </Link>
+              <Link
+                href="/register"
+                className="block text-[#502B7D] px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                onClick={closeAllMenus}
+              >
+                Registrarse
+              </Link>
+            </>
           ) : (
             <>
+              <Link
+                href={dashboardPath}
+                className="block w-full text-[#502B7D] text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                onClick={() => setIsOpen(false)}
+              >
+                Mi cuenta
+              </Link>
               <button
                 onClick={handleLogout}
                 className="block w-full text-[#502B7D] text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
               >
                 Cerrar sesión
-              </button>
-              <button
-                onClick={() => {
-                  setIsModalPasswordOpen(true);
-                  setIsOpen(false);
-                }}
-                className="block w-full text-[#502B7D] text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-              >
-                Cambiar contraseña
               </button>
             </>
           )}

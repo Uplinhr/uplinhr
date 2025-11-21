@@ -30,16 +30,17 @@ const UserDashboard = () => {
   const [isModalBusquedaOpen, setIsModalBusquedaOpen] = useState(false);
   const [infoBusqueda, setInfoBusqueda] = useState("");
 
-  
- const getProximoCreditoAVencer = () => {
-    if (!user?.creditos || user.creditos.length === 0) return null;
+   const creditos = Array.isArray(user?.creditos) ? user!.creditos : [] as any[];
+
+  const getProximoCreditoAVencer = () => {
+    if (creditos.length === 0) return null;
 
     const hoy = new Date();
 
-    const creditoPlan = user.creditos.find(
+    const creditoPlan = creditos.find(
       (credito) =>
-        credito.tipo_credito === "plan" &&
-        credito.vencimiento &&
+        credito?.tipo_credito === "plan" &&
+        credito?.vencimiento &&
         new Date(credito.vencimiento) > hoy
     );
 
@@ -82,14 +83,14 @@ const UserDashboard = () => {
       toast.error("Debes ingresar la información de búsqueda");
       return;
     }
-    if (!user?.creditos?.[0]?.id) {
+    if (!creditos[0]?.id) {
       toast.error("No se encontró el crédito del usuario");
       return;
     }
 
     const body: BusquedaRequest = {
       info_busqueda: infoBusqueda,
-      id_cred: user.creditos[0].id,
+      id_cred: creditos[0].id,
     };
 
     try {
@@ -138,7 +139,7 @@ const UserDashboard = () => {
           </div>
           <div className="bg-white text-[#6D4098] p-6 text-center flex-1 flex flex-col items-center justify-center">
             <p className="text-lg font-semibold">
-              {user?.creditos?.reduce(
+              {creditos.reduce(
                 (total, c) => total + (c.cantidad || 0),
                 0
               ) || 0}{" "}

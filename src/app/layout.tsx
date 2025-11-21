@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 import ScrollToTop from "@/components/ScrollToTop/ScrollToTop";
 import Script from "next/script"; // 👈 importante
 import BotPenguin from "@/components/botPenguin/botPenguin";
+import { Auth0ProviderWithNavigate } from "@/providers/auth0-provider";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -28,14 +29,16 @@ export default function RootLayout({
   return (
     <html lang="es" className={poppins.variable}>
       <body className="antialiased">
-        {/* <LandbotChat /> */}
-        <Navbar />
-        {children}
-        <Footer />
-        <ScrollToTop />
-        <Toaster position="top-right" />
-        {/* <BotPenguin /> */}
-
+        {/* App Providers */}
+        <Auth0ProviderWithNavigate>
+          {/* <LandbotChat /> */}
+          <Navbar />
+          {children}
+          <Footer />
+          <ScrollToTop />
+          <Toaster position="top-right" />
+          {/* <BotPenguin /> */}
+        </Auth0ProviderWithNavigate>
       </body>
     </html>
   );
