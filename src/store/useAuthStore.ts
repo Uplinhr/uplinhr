@@ -18,6 +18,15 @@ export const useAuthStore = create<AuthState>()(
           const response: LoginResponse = await loginService(credentials);
           if (response.success) {
             const { user, token } = response.data;
+            // Persistimos también el token en localStorage para usos auxiliares (avatar, etc.)
+            if (typeof window !== 'undefined' && token) {
+              try {
+                localStorage.setItem('authToken', token);
+              } catch (e) {
+                console.error('No se pudo guardar authToken en localStorage:', e);
+              }
+            }
+
             set({ user, token, isAuthenticated: true, isLoading: false, error: null });
           } else {
             set({ isLoading: false, error: response.message || "Error al iniciar sesión" });
@@ -29,7 +38,17 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      logout: () => set({ user: null, token: null, isAuthenticated: false, error: null }),
+      logout: () => {
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('auth0Token');
+          } catch (e) {
+            console.error('No se pudieron limpiar los tokens de localStorage:', e);
+          }
+        }
+        set({ user: null, token: null, isAuthenticated: false, error: null });
+      },
       clearError: () => set({ error: null }),
 
       forgotPassword: async (email: string) => {

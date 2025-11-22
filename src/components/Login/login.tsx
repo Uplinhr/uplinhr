@@ -199,6 +199,15 @@ const Login = () => {
               className="w-full px-4 py-3 rounded-xl bg-white text-black focus:outline-none focus:ring-2 focus:ring-[#502b7d]"
               required
               placeholder="ejemplo@correo.com"
+              onInvalid={(e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.validity.valueMissing) {
+                  target.setCustomValidity('Por favor, completa este campo');
+                } else if (target.validity.typeMismatch) {
+                  target.setCustomValidity('Por favor, introduce una dirección de correo válida');
+                }
+              }}
+              onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
             />
           </div>
 
@@ -214,6 +223,8 @@ const Login = () => {
               className="w-full px-4 py-3 rounded-xl bg-white text-black focus:outline-none focus:ring-2 focus:ring-[#502b7d] pr-12"
               required
               placeholder="Ingresa tu contraseña"
+              onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('Por favor, completa este campo')}
+              onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
             />
             <button
               type="button"

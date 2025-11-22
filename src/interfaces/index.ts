@@ -72,7 +72,7 @@ export interface Vacante {
   area: string
 }
 export interface Plan {
-  id?: number;
+  id?: string;
   nombre: string;
   creditos_mes: number;
   meses_cred: number;
@@ -80,56 +80,57 @@ export interface Plan {
   precio: string;
   custom: boolean;
   active?: boolean;
+  features?: any;
   fecha_alta?: string;
   ultima_mod?: string;
 }
 
 export interface Creditos {
-  id: number | null;
+  id: string | null;
   vencimiento: string | null;
   tipo_credito: string | null;
   cantidad: number | null;
   fecha_alta: string | null;
-  id_usuario: number | null;
+  id_usuario: string | null;
   busquedas?: Busqueda[];
 }
 
 export interface Consultoria {
-  id: number;
+  id: string;
   fecha_alta: string;       
   horas_totales: number;
   horas_restantes: number;
   vencimiento: string;      
-  id_usuario: number;
+  id_usuario: string;
   consultas: Consulta[];
 }
 export interface Consulta {
-  id: number;
+  id: string;
   fecha_alta: string;    
   ultima_mod: string;       
   cantidad_horas: number;
-  id_consultoria: number;
+  id_consultoria: string;
   estado: string;
   comentarios: string;
   observaciones: string | null;
   usuario?: User;
 }
 export interface Busqueda {
-  id: number;
+  id: string;
   fecha_alta: string | null;
   ultima_mod: string | null;
   info_busqueda: string | null;
   creditos_usados: number | null;
   observaciones: string | null;
   estado: string | null;
-  id_cred: number | null;
-  id_tipo: number | null;
-  id_proceso: number | null;
+  id_cred: string | null;
+  id_tipo: string | null;
+  id_proceso: string | null;
   usuario?: User;
 }
 
 export interface Empresa {
-  id: number | null;
+  id: string | null;
   nombre: string;
   nombre_fantasia: string;
   cuit: string;
@@ -144,19 +145,19 @@ export interface Empresa {
   active: boolean;
   fecha_alta: string | null;
   ultima_mod: string | null;
-  id_usuario: number;
+  id_usuario: string;
 }
 
 
 export interface User {
-  id: number;
+  id: string;
   nombre: string;
   apellido: string;
   email: string;
   rol: string;
   active?: boolean;
   fecha_alta?: string;
-  id_plan?: number | null;
+  id_plan?: string | null;
   plan?: Plan;
   creditos?: Creditos[];
   consultorias?: Consultoria;
@@ -204,8 +205,8 @@ export interface AuthState {
 }
 
 export interface RenovarPlan {
-  id_plan: number,
-  id_usuario: number
+  id_plan: string,
+  id_usuario: string
 }
 export interface compraCreditos{
   medio_pago:string,
@@ -213,5 +214,21 @@ export interface compraCreditos{
   observaciones:string,
   cantidad:number,
   vencimiento:string,
-  id_usuario:number
+  id_usuario:string
+}
+
+export interface MembershipPlan {
+  id: string;
+  code: string;
+  name: string;
+  priceMonthly: number;
+  currency: string;
+  creditsPerMonth: number;
+  rolloverMonths: number;
+  benefits: any;
+  isActive: boolean;
+  mpProductId?: string;
+  paypalPlanId?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

@@ -1,10 +1,50 @@
+"use client";
+import { useState, useEffect } from "react";
 import PlanCard from "@/components/planCard/PlanCard";
 import { PLANS_DATA } from "@/utils/plans";
 /* import Image from "next/image";
 import Link from "next/link"; */
 
 const CardsPlanLanding = () => {
-  const nonCustomPlans = PLANS_DATA.filter((plan) => !plan.isCustom);
+  const [plans, setPlans] = useState(PLANS_DATA);
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+        const res = await fetch(`${API_URL}/api/memberships-public/plans`);
+        if (!res.ok) throw new Error("Failed to fetch plans");
+        
+        const data = await res.json();
+        const membershipPlans = data.data || [];
+
+        // Map backend data to frontend format
+        const mappedPlans = membershipPlans
+          .filter((p: any) => p.isActive)
+          .map((p: any) => ({
+            plan: p.name,
+            description: `${p.creditsPerMonth} créditos por mes con rollover de ${p.rolloverMonths} meses`,
+            price: `${p.currency} ${p.priceMonthly}/mes`,
+            includes: Array.isArray(p.benefits) ? p.benefits : [],
+            excludes: [],
+            showTaxes: true,
+            link: `https://u030x.share.hsforms.com/2${p.code}`,
+            isCustom: p.code === 'CUSTOM'
+          }));
+
+        if (mappedPlans.length > 0) {
+          setPlans(mappedPlans);
+        }
+      } catch (error) {
+        console.error("Error fetching membership plans:", error);
+        // Keep using PLANS_DATA as fallback
+      }
+    };
+
+    fetchPlans();
+  }, []);
+
+  const nonCustomPlans = plans.filter((plan) => !plan.isCustom);
 
   return (
     <div>

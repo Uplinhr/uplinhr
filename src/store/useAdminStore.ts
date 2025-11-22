@@ -9,6 +9,7 @@ import {
   Consultoria,
   RenovarPlan,
   compraCreditos,
+  MembershipPlan,
 } from "@/interfaces";
 import * as adminService from "@/services/adminService";
 import {toast} from "sonner";
@@ -21,27 +22,35 @@ interface AdminState {
   selectedBusqueda: Busqueda | null;
   planes: Plan[];
   empresas: Empresa[];
+  selectedEmpresa: Empresa | null;
   consultas: Consulta[];
   compraCreditos: compraCreditos | null;
   selectedConsulta: Consulta | null;
   consultorias: Consultoria[];
   selectedPlan: Plan | null;
-  selectedEmpresa: Empresa | null;
+
+
+  membershipPlans: MembershipPlan[];
+  talentSearchServices: any[];
   loading: boolean;
   error: string | null;
 
+  fetchTalentSearchServices: () => Promise<void>;
+  upsertTalentSearchService: (body: any) => Promise<void>;
+  deleteTalentSearchService: (id: string) => Promise<void>;
+
   fetchUsers: () => Promise<void>;
-  selectUser: (id: number) => Promise<void>;
+  selectUser: (id: string) => Promise<void>;
   fetchCreditos: () => Promise<void>;
   fetchBusquedas: () => Promise<void>;
-  selectBusqueda: (id: number) => Promise<void>;
-  deleteBusqueda: (id: number) => Promise<void>;
+  selectBusqueda: (id: string) => Promise<void>;
+  deleteBusqueda: (id: string) => Promise<void>;
   fetchPlanes: () => Promise<void>;
-  selectPlan: (id: number) => Promise<void>;
-  selectEmpresa: (id: number) => Promise<void>;
+  selectPlan: (id: string) => Promise<void>;
+  selectEmpresa: (id: string) => Promise<void>;
   fetchConsultas: () => Promise<void>;
-  selectConsulta: (id: number) => Promise<void>;
-  deleteConsulta: (id: number) => Promise<void>;
+  selectConsulta: (id: string) => Promise<void>;
+  deleteConsulta: (id: string) => Promise<void>;
   fetchConsultorias: () => Promise<void>;
   createPlan: (body: {
     nombre: string;
@@ -53,7 +62,7 @@ interface AdminState {
   }) => Promise<void>;
 
   editPlan: (
-    id: number,
+    id: string,
     body: {
       nombre: string;
       creditos_mes: number;
@@ -62,29 +71,35 @@ interface AdminState {
       precio: string;
       active: boolean;
       custom: boolean;
+      features?: any;
     }
   ) => Promise<void>;
+
+
+
+  fetchMembershipPlans: () => Promise<void>;
+  upsertMembershipPlan: (body: Partial<MembershipPlan>) => Promise<void>;
 
   renovarPlan: (body: RenovarPlan) => Promise<void>;
 
   editBusqueda: (
-    id: number,
+    id: string,
     body: {
       info_busqueda: string;
       creditos_usados: number;
       observaciones: string;
       estado: string;
-      id_cred: number;
+      id_cred: string;
     }
   ) => Promise<void>;
 
   editConsulta: (
-    id: number,
+    id: string,
     body: {
       cantidad_horas: number;
       observaciones: string;
       estado: string;
-      id_consultoria: number;
+      id_consultoria: string;
     }
   ) => Promise<void>;
 
@@ -101,11 +116,11 @@ interface AdminState {
     domicilio_legal_ciudad: string;
     domicilio_legal_pais: string;
     codigo_postal: string;
-    id_usuario: number;
+    id_usuario: string;
   }) => Promise<void>;
 
   editEmpresa: (
-    id: number,
+    id: string,
     body: {
       nombre: string;
       email: string;
@@ -119,11 +134,11 @@ interface AdminState {
       domicilio_legal_pais: string;
       codigo_postal: string;
       active: boolean;
-      id_usuario: number;
+      id_usuario: string;
     }
   ) => Promise<void>;
 
-  unlinkUserFromEmpresa: (id: number) => Promise<void>;
+  unlinkUserFromEmpresa: (id: string) => Promise<void>;
 
   registerUser: (body: {
     nombre: string;
@@ -134,7 +149,7 @@ interface AdminState {
   }) => Promise<void>;
 
   deleteUser: (
-    id: number,
+    id: string,
     body: {
       nombre: string;
       apellido: string;
@@ -144,14 +159,14 @@ interface AdminState {
     }
   ) => Promise<void>;
   editUser: (
-    id: number,
+    id: string,
     body: {
       nombre: string;
       apellido: string;
       email: string;
       active: boolean;
       rol: string;
-      id_plan: number | null;
+      id_plan: string | null;
     }
   ) => Promise<void>;
   comprarCreditos: (body: {
@@ -160,11 +175,11 @@ interface AdminState {
     observaciones: string;
     cantidad: number;
     vencimiento: string;
-    id_usuario: number;
+    id_usuario: string;
   }) => Promise<void>;
 
-  resetPassword: (id: number, contrasenia: string) => Promise<void>;
-  activateUser: (id: number) => Promise<void>;
+  resetPassword: (id: string, contrasenia: string) => Promise<void>;
+  activateUser: (id: string) => Promise<void>;
 }
 
 export const useAdminStore = create<AdminState>((set, get) => ({
@@ -181,6 +196,9 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   selectedConsulta: null,
   consultorias: [],
   compraCreditos: null,
+
+  membershipPlans: [],
+  talentSearchServices: [],
   loading: false,
   error: null,
 
@@ -195,7 +213,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  selectUser: async (id: number) => {
+  selectUser: async (id: string) => {
     set({ loading: true, error: null });
     try {
       const user = await adminService.getUserById(id);
@@ -228,7 +246,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  selectBusqueda: async (id: number) => {
+  selectBusqueda: async (id: string) => {
     set({ loading: true, error: null });
     try {
       const busqueda = await adminService.getBusquedaById(id);
@@ -244,7 +262,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     try {
       const updatedBusqueda = await adminService.editBusqueda(id, body);
       const busquedas = get().busquedas.map((p) =>
-        p.id === id ? updatedBusqueda : p
+        p.id === id && updatedBusqueda ? updatedBusqueda : p
       );
       set({ busquedas, loading: false });
     } catch (err) {
@@ -257,7 +275,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   }
   },
 
-  deleteBusqueda: async (id: number) => {
+  deleteBusqueda: async (id: string) => {
     set({ loading: true, error: null });
     try {
       await adminService.deleteBusqueda(id);
@@ -280,7 +298,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  selectPlan: async (id: number) => {
+  selectPlan: async (id: string) => {
     set({ loading: true, error: null });
     try {
       const plan = await adminService.getPlanById(id);
@@ -306,7 +324,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       const updatedPlan = await adminService.editPlan(id, body);
-      const planes = get().planes.map((p) => (p.id === id ? updatedPlan : p));
+      const planes = get().planes.map((p) => (p.id === id && updatedPlan ? updatedPlan : p));
       set({ planes, loading: false });
     } catch (err) {
       console.error(err);
@@ -329,7 +347,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       const updatedUser = await adminService.deleteUser(id, body);
-      const users = get().users.map((u) => (u.id === id ? updatedUser : u));
+      const users = get().users.map((u) => (u.id === id && updatedUser ? updatedUser : u));
       set({ users, loading: false });
     } catch (err) {
       console.error(err);
@@ -341,7 +359,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       const updatedUser = await adminService.resetPassword(id, contrasenia);
-      const users = get().users.map((u) => (u.id === id ? updatedUser : u));
+      const users = get().users.map((u) => (u.id === id && updatedUser ? updatedUser : u));
       set({ users, loading: false });
     } catch (err) {
       console.error(err);
@@ -349,11 +367,11 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  activateUser: async (id: number) => {
+  activateUser: async (id: string) => {
     set({ loading: true, error: null });
     try {
       const updatedUser = await adminService.activateUser(id);
-      const users = get().users.map((u) => (u.id === id ? updatedUser : u));
+      const users = get().users.map((u) => (u.id === id && updatedUser ? updatedUser : u));
       set({ users, loading: false });
     } catch (err) {
       console.error(err);
@@ -362,14 +380,14 @@ export const useAdminStore = create<AdminState>((set, get) => ({
   },
 
   editUser: async (
-    id: number,
+    id: string,
     body: {
       nombre: string;
       apellido: string;
       email: string;
       active: boolean;
       rol: string;
-      id_plan: number | null;
+      id_plan: string | null;
     }
   ) => {
     set({ loading: true, error: null });
@@ -411,7 +429,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  selectEmpresa: async (id: number) => {
+  selectEmpresa: async (id: string) => {
     set({ loading: true, error: null });
     try {
       const empresa = await adminService.getEmpresaById(id);
@@ -427,7 +445,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     try {
       const empresaActualizada = await adminService.editEmpresa(id, body);
       const empresas = get().empresas.map((e) =>
-        e.id === id ? empresaActualizada : e
+        e.id === id && empresaActualizada ? empresaActualizada : e
       );
       set({ empresas, loading: false });
     } catch (err) {
@@ -436,7 +454,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  unlinkUserFromEmpresa: async (id: number) => {
+  unlinkUserFromEmpresa: async (id: string) => {
     set({ loading: true, error: null });
     try {
       await adminService.unlinkUserFromEmpresa(id);
@@ -459,7 +477,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  selectConsulta: async (id: number) => {
+  selectConsulta: async (id: string) => {
     set({ loading: true, error: null });
     try {
       const consulta = await adminService.getConsultaById(id);
@@ -475,7 +493,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     try {
       const updatedConsulta = await adminService.editConsulta(id, body);
       const consultas = get().consultas.map((p) =>
-        p.id === id ? updatedConsulta : p
+        p.id === id && updatedConsulta ? updatedConsulta : p
       );
       set({ consultas, loading: false });
     } catch (err) {
@@ -484,7 +502,7 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     }
   },
 
-  deleteConsulta: async (id: number) => {
+  deleteConsulta: async (id: string) => {
     set({ loading: true, error: null });
     try {
       await adminService.deleteConsulta(id);
@@ -531,6 +549,87 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     } catch (err) {
       console.error(err);
       set({ error: "Error al comprar créditos", loading: false });
+    }
+  },
+
+
+  fetchMembershipPlans: async () => {
+    set({ loading: true, error: null });
+    try {
+      const membershipPlans = await adminService.getMembershipPlans();
+      set({ membershipPlans, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al cargar planes de membresía", loading: false });
+    }
+  },
+
+  upsertMembershipPlan: async (body) => {
+    set({ loading: true, error: null });
+    try {
+      const plan = await adminService.upsertMembershipPlan(body);
+      // Update list if exists, else add
+      const current = get().membershipPlans;
+      const index = current.findIndex(p => p.code === plan.code);
+      if (index >= 0) {
+        const newPlans = [...current];
+        newPlans[index] = plan;
+        set({ membershipPlans: newPlans, loading: false });
+      } else {
+        set({ membershipPlans: [...current, plan], loading: false });
+      }
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al guardar plan de membresía", loading: false });
+    }
+  },
+
+  fetchTalentSearchServices: async () => {
+    set({ loading: true, error: null });
+    try {
+      const services = await adminService.getTalentSearchServices();
+      set({ talentSearchServices: services, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al cargar servicios de búsqueda", loading: false });
+    }
+  },
+
+  upsertTalentSearchService: async (body) => {
+    set({ loading: true, error: null });
+    try {
+      let service;
+      if (body.id) {
+        service = await adminService.updateTalentSearchService(body.id, body);
+      } else {
+        service = await adminService.createTalentSearchService(body);
+      }
+      
+      const current = get().talentSearchServices;
+      const index = current.findIndex(s => s.id === service.id);
+      
+      if (index >= 0) {
+        const newServices = [...current];
+        newServices[index] = service;
+        set({ talentSearchServices: newServices, loading: false });
+      } else {
+        set({ talentSearchServices: [...current, service], loading: false });
+      }
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al guardar servicio de búsqueda", loading: false });
+    }
+  },
+
+  deleteTalentSearchService: async (id) => {
+    set({ loading: true, error: null });
+    try {
+      await adminService.deleteTalentSearchService(id);
+      const services = get().talentSearchServices.filter(s => s.id !== id);
+      set({ talentSearchServices: services, loading: false });
+    } catch (err) {
+      console.error(err);
+      set({ error: "Error al eliminar servicio de búsqueda", loading: false });
     }
   },
 }));

@@ -25,6 +25,7 @@ const Navbar = () => {
   const dashboardPath = (user && (String((user as any).role || (user as any).rol).toUpperCase() === 'ADMIN'))
     ? '/dashboard/admin'
     : '/dashboard/user';
+  const avatarUrl = (user as any)?.pictureUrl as string | undefined;
   const { cambiarClave } = useUserStore();
 
   const [isModalPasswordOpen, setIsModalPasswordOpen] = useState(false);
@@ -179,7 +180,17 @@ const Navbar = () => {
               onClick={() => setUserMenuOpen(!userMenuOpen)}
               className="text-[#502B7D] p-2 rounded-full cursor-pointer hover:opacity-80"
             >
-              <FaUserCircle size={28} />
+              {avatarUrl ? (
+                <Image
+                  src={avatarUrl}
+                  alt="Foto de perfil"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 rounded-full object-cover border border-[#502B7D]"
+                />
+              ) : (
+                <FaUserCircle size={28} />
+              )}
             </button>
             {userMenuOpen && (
               <div className="absolute text-[#502B7D] right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-20">

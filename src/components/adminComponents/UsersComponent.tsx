@@ -43,6 +43,7 @@ export default function UsersComponent() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showRenewModal, setShowRenewModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [selectedCredito, setSelectedCredito] = useState<Creditos | null>(null);
   const [selectedBusqueda, setSelectedBusqueda] = useState<Busqueda | null>(
     null
@@ -148,7 +149,7 @@ export default function UsersComponent() {
     }
   }, [selectedUser, showEditModal]);
 
-  const handleSelectUser = (id: number) => {
+  const handleSelectUser = (id: string) => {
     selectUser(id);
   };
 
@@ -173,7 +174,7 @@ export default function UsersComponent() {
         email: formData.email,
         active: formData.active,
         rol: formData.rol,
-        id_plan: formData.id_plan ? parseInt(formData.id_plan) : null,
+        id_plan: formData.id_plan ? formData.id_plan : null,
       });
       await fetchUsers();
       selectUser(selectedUser.id);
@@ -204,19 +205,20 @@ export default function UsersComponent() {
     setShowRegisterModal(true);
   };
   const handleActivateUser = async () => {
-    if (!selectedUser) return;
-    setLoading(true);
-    try {
-      await activateUser(selectedUser.id);
-      await fetchUsers();
-      setShowDeleteModal(false);
-      selectUser(selectedUser.id);
-      toast.success("Usuario activado exitosamente");
-    } catch (err) {
-      console.error(err);
-      toast.error("Error al activar usuario");
-    } finally {
-      setLoading(false);
+    if (selectedUser && selectedUser.id) {
+      setLoading(true);
+      try {
+        await activateUser(selectedUser.id);
+        await fetchUsers();
+        setShowDeleteModal(false);
+        selectUser(selectedUser.id);
+        toast.success("Usuario activado exitosamente");
+      } catch (err) {
+        console.error(err);
+        toast.error("Error al activar usuario");
+      } finally {
+        setLoading(false);
+      }
     }
   };
   const handleRegister = async (e: React.FormEvent) => {
@@ -283,22 +285,23 @@ export default function UsersComponent() {
   };
 
   const handleRenewPlan = async () => {
-    if (!selectedUser?.plan?.id) return;
-    setLoading(true);
-    try {
-      await renovarPlan({
-        id_plan: selectedUser.plan.id,
-        id_usuario: selectedUser.id,
-      });
-      await fetchUsers();
-      selectUser(selectedUser.id);
-      toast.success("Plan renovado exitosamente");
-      setShowRenewModal(false);
-    } catch (err) {
-      console.error(err);
-      toast.error("Error al renovar el plan");
-    } finally {
-      setLoading(false);
+    if (selectedUser && selectedUser.id && selectedUser.plan?.id) {
+      setLoading(true);
+      try {
+        await renovarPlan({
+          id_usuario: selectedUser.id,
+          id_plan: selectedUser.plan.id,
+        });
+        await fetchUsers();
+        selectUser(selectedUser.id);
+        toast.success("Plan renovado exitosamente");
+        setShowRenewModal(false);
+      } catch (err) {
+        console.error(err);
+        toast.error("Error al renovar el plan");
+      } finally {
+        setLoading(false);
+      }
     }
   };
   const handleCompraClick = () => {
@@ -319,31 +322,29 @@ export default function UsersComponent() {
 
   const handleCompraSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedUser) return;
-    setLoading(true);
-    try {
-      await comprarCreditos({
-        ...formCompra,
-        id_usuario: selectedUser.id,
-      });
-
-      await selectUser(selectedUser.id);
-
-      toast.success("Créditos comprados exitosamente");
-      setShowCompraModal(false);
-
-      setFormCompra({
-        medio_pago: "",
-        costo: 0,
-        observaciones: "",
-        cantidad: 0,
-        vencimiento: "",
-      });
-    } catch (error) {
-      console.error(error);
-      toast.error("Error al comprar créditos");
-    } finally {
-      setLoading(false);
+    if (selectedUser && selectedUser.id) {
+      setLoading(true);
+      try {
+        await comprarCreditos({
+          ...formCompra,
+          id_usuario: selectedUser.id,
+        });
+        await selectUser(selectedUser.id);
+        toast.success("Créditos comprados exitosamente");
+        setShowCompraModal(false);
+        setFormCompra({
+          medio_pago: "",
+          costo: 0,
+          observaciones: "",
+          cantidad: 0,
+          vencimiento: "",
+        });
+      } catch (error) {
+        console.error(error);
+        toast.error("Error al comprar créditos");
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -1087,7 +1088,9 @@ export default function UsersComponent() {
                   key={u.id}
                   className="flex items-center gap-3 bg-white shadow-md p-2 rounded-md transform transition-transform hover:scale-105 cursor-pointer"
                   onClick={() => {
-                    handleSelectUser(u.id);
+                    if (u.id) {
+                      handleSelectUser(u.id);
+                    }
                     if (window.innerWidth < 1024) setShowUserList(false);
                   }}
                 >

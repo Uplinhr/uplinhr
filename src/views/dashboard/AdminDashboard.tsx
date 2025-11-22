@@ -8,6 +8,8 @@ import Planes from "@/components/adminComponents/PlansComponent";
 import Solicitudes from "@/components/adminComponents/SolicitudesComponent";
 import Inicio from "@/components/adminComponents/Inicio";
 import Consultoria from "@/components/adminComponents/ConsultoriaComponent";
+import Memberships from "@/components/adminComponents/MembershipsComponent";
+import Simulator from "@/components/adminComponents/SimulatorComponent";
 import { useAuthStore } from "@/store/useAuthStore";
 
 const AdminDashboard = () => {
@@ -27,6 +29,10 @@ const AdminDashboard = () => {
         return <Empresas />;
       case "Planes":
         return <Planes />;
+      case "Membresías":
+        return <Memberships />;
+      case "Simulador":
+        return <Simulator />;
       case "Búsquedas":
         return <Solicitudes />;
       case "Consultoria":
@@ -42,6 +48,8 @@ const AdminDashboard = () => {
     "Administradores",
     "Empresas",
     "Planes",
+    "Membresías",
+    "Simulador",
     "Búsquedas",
     "Consultoria",
   ];
@@ -58,12 +66,6 @@ const AdminDashboard = () => {
             <p className="font-semibold">Administrador</p>
             <p>{user?.email}</p>
           </div>
-          <a
-            href="/dashboard/admin/account"
-            className="ml-auto bg-white text-[#6D4098] px-3 py-2 rounded-md cursor-pointer text-sm hover:opacity-90"
-          >
-            Mi cuenta
-          </a>
         </div>
       </div>
 

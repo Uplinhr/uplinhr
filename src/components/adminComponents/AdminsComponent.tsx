@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { FaUserCircle, FaTimes, FaSearch } from "react-icons/fa";
+import { FaUserCircle, FaTimes, FaSearch, FaBars } from "react-icons/fa";
 import { ImSpinner8 } from "react-icons/im";
 import { useAdminStore } from "@/store/useAdminStore";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -12,63 +12,51 @@ import { toast } from "sonner";
 export default function AdminsComponent() {
   const { users, fetchUsers } = useAdminStore();
   const { user: currentUser } = useAuthStore();
-  const [showModal, setShowModal] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  
+  // State for layout and selection
   const [selectedAdmin, setSelectedAdmin] = useState<User | null>(null);
+  const [showAdminList, setShowAdminList] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  
+  // State for Modals
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [userSearchTerm, setUserSearchTerm] = useState("");
+  const [selectedUserIdToAdd, setSelectedUserIdToAdd] = useState<string | null>(null);
+  
   const [loading, setLoading] = useState(false);
-  const [operationType, setOperationType] = useState<"add" | "remove" | null>(null);
 
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
 
-  useEffect(() => {
-    if (showModal || showDeleteModal) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [showModal, showDeleteModal]);
-
+  // Filter admins (excluding current user if needed)
   const admins = users.filter((u) => u.rol === "admin" && u.id !== currentUser?.id);
 
-  const clientUsers = users.filter((u) => u.rol === "cliente" && u.active);
-
-  const filteredUsers = clientUsers.filter(
-    (user) =>
-      user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.apellido?.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter for the list view
+  const filteredAdmins = admins.filter(
+    (admin) =>
+      admin.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      admin.apellido?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      admin.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleAddAdminClick = () => {
-    setShowModal(true);
-  };
-
-  const handleUserClick = (userId: number) => {
-    setSelectedUserId(userId);
-  };
-
-  const handleAdminClick = (admin: User) => {
-    setSelectedAdmin(admin);
-    setShowDeleteModal(true);
-  };
+  // Logic for "Add Admin" modal (Promote user)
+  const clientUsers = users.filter((u) => u.rol === "cliente" && u.active);
+  const filteredClientUsers = clientUsers.filter(
+    (user) =>
+      user.nombre.toLowerCase().includes(userSearchTerm.toLowerCase()) ||
+      user.apellido?.toLowerCase().includes(userSearchTerm.toLowerCase())
+  );
 
   const handleAddAdmin = async () => {
-    if (!selectedUserId) return;
-
+    if (!selectedUserIdToAdd) return;
     setLoading(true);
-    setOperationType("add");
     try {
-      const userToUpdate = users.find((u) => u.id === selectedUserId);
+      const userToUpdate = users.find((u) => u.id === selectedUserIdToAdd);
       if (!userToUpdate) return;
 
-      await editUser(selectedUserId, {
+      await editUser(selectedUserIdToAdd, {
         nombre: userToUpdate.nombre,
         apellido: userToUpdate.apellido || "",
         email: userToUpdate.email,
@@ -78,24 +66,21 @@ export default function AdminsComponent() {
       });
 
       await fetchUsers();
-      setSelectedUserId(null);
-      setShowModal(false);
-      setSearchTerm("");
+      setSelectedUserIdToAdd(null);
+      setShowAddModal(false);
+      setUserSearchTerm("");
       toast.success("Usuario convertido a administrador exitosamente");
     } catch (error) {
       console.error("Error al agregar administrador:", error);
       toast.error("Error al convertir usuario a administrador");
     } finally {
       setLoading(false);
-      setOperationType(null);
     }
   };
 
   const handleRemoveAdmin = async () => {
     if (!selectedAdmin) return;
-
     setLoading(true);
-    setOperationType("remove");
     try {
       await editUser(selectedAdmin.id, {
         nombre: selectedAdmin.nombre,
@@ -115,210 +100,213 @@ export default function AdminsComponent() {
       toast.error("Error al eliminar administrador");
     } finally {
       setLoading(false);
-      setOperationType(null);
     }
-  };
-
-  const handleCancel = () => {
-    setSelectedUserId(null);
-    setShowModal(false);
-    setSearchTerm("");
-  };
-
-  const handleCloseModal = () => {
-    setSelectedUserId(null);
-    setShowModal(false);
-    setSearchTerm("");
-  };
-
-  const closeDeleteModal = () => {
-    setShowDeleteModal(false);
-    setSelectedAdmin(null);
   };
 
   const formatDate = (dateString?: string) => {
     if (!dateString) return "Fecha no disponible";
-
     try {
-      const options: Intl.DateTimeFormatOptions = {
+      return new Date(dateString).toLocaleDateString("es-ES", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
-      };
-      return new Date(dateString).toLocaleDateString("es-ES", options);
+      });
     } catch (error) {
-      console.log(error);
       return "Fecha inválida";
     }
   };
 
   return (
-    <div className="w-full bg-white shadow-2xl p-6 rounded-md">
-      <h1 className="text-xl md:text-2xl text-center font-bold text-white bg-[#6d4098] p-3 md:p-4 rounded-lg mb-4 md:mb-6">
-        Administradores
-      </h1>
-      <div className="flex gap-4 flex-wrap justify-center">
-        {admins.map((admin) => (
-          <div
-            key={admin.id}
-            className="flex items-center border border-[#6d4098] rounded-md p-2 w-64 hover:scale-105 transform transition cursor-pointer"
-            onClick={() => handleAdminClick(admin)}
-          >
-            <FaUserCircle size={40} className="text-[#6d4098] mr-3" />
-            <p className="text-md">
-              {admin.nombre} {admin.apellido || ""}
-            </p>
-          </div>
-        ))}
-
-        <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-400 rounded-md p-3 w-64">
-          <p className="text-gray-500 text-center mb-2 text-xs">
-            ¿Deseas agregar un administrador?
-          </p>
-          <button
-            className="bg-[#6d4098] text-white px-3 py-1 rounded-md text-sm hover:bg-[#55307a] transition cursor-pointer"
-            onClick={handleAddAdminClick}
-          >
-            Agregar un admin
-          </button>
-        </div>
+    <div className="min-h-[90%] flex flex-col lg:flex-row gap-4 mb-8 font-poppins">
+      {/* Mobile Header for List Toggle */}
+      <div className="lg:hidden flex justify-between items-center bg-[#6d4098] text-white p-3 rounded-md">
+        <span>Lista de administradores</span>
+        <button onClick={() => setShowAdminList(!showAdminList)}>
+          {showAdminList ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
 
-      {showDeleteModal && selectedAdmin && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-          <div
-            className="absolute inset-0 bg-black opacity-60"
-            onClick={closeDeleteModal}
-          ></div>
+      {/* Left Panel: Admin List */}
+      {(showAdminList || !selectedAdmin) && (
+        <div className="w-full lg:w-1/4 bg-white shadow-2xl p-4 flex flex-col rounded-md">
+          <button
+            className="mt-2 py-2 border border-[#6d4098] rounded-md text-white bg-[#6d4098] hover:bg-white mb-4 hover:text-[#6d4098] transition cursor-pointer"
+            onClick={() => setShowAddModal(true)}
+          >
+            Agregar nuevo admin
+          </button>
+          
+          <div className="relative mb-4">
+            <FaSearch className="absolute left-3 top-3 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Buscar administrador"
+              className="pl-10 pr-4 py-2 w-full border rounded-md text-gray-600"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
-          <div className="bg-white rounded-lg p-6 w-full max-w-xs mx-4 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl relative z-10">
+          <div className="flex-1 overflow-y-auto overflow-x-hidden space-y-2 max-h-80 lg:max-h-none">
+            {filteredAdmins.length > 0 ? (
+              filteredAdmins.map((admin) => (
+                <div
+                  key={admin.id}
+                  className={`flex items-center gap-3 bg-white shadow-md p-2 rounded-md transform transition-transform hover:scale-105 cursor-pointer ${
+                    selectedAdmin?.id === admin.id ? "border-l-4 border-[#6d4098]" : ""
+                  }`}
+                  onClick={() => {
+                    setSelectedAdmin(admin);
+                    if (window.innerWidth < 1024) setShowAdminList(false);
+                  }}
+                >
+                  <FaUserCircle size={32} className="text-[#6d4098]" />
+                  <div className="flex flex-col text-sm overflow-hidden">
+                    <p className="font-medium truncate">
+                      {admin.nombre} {admin.apellido}
+                    </p>
+                    <p className="text-gray-500 truncate">{admin.email}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-gray-400 italic py-4">
+                No se encontraron coincidencias
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Right Panel: Admin Details */}
+      {selectedAdmin ? (
+        <div className="w-full lg:w-3/4 bg-white shadow-2xl p-4 flex flex-col items-center justify-center rounded-md relative">
+           {/* Close button for mobile mostly, or just deselect */}
+           <button 
+             className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 lg:hidden"
+             onClick={() => setSelectedAdmin(null)}
+           >
+             <FaTimes size={24} />
+           </button>
+
+          <div className="flex flex-col items-center text-center max-w-md w-full">
+            <FaUserCircle size={100} className="text-[#6d4098] mb-4" />
+            
+            <h2 className="text-2xl font-bold text-[#6d4098] mb-1">
+              {selectedAdmin.nombre} {selectedAdmin.apellido}
+            </h2>
+            <p className="text-gray-600 mb-4">{selectedAdmin.email}</p>
+            
+            <div className="bg-gray-50 p-4 rounded-lg w-full mb-6 border border-gray-100">
+              <p className="text-sm text-gray-500 mb-2">
+                <strong>Fecha de Alta:</strong> {formatDate(selectedAdmin.fecha_alta)}
+              </p>
+              <p className="text-sm text-gray-500">
+                <strong>Rol:</strong> Administrador
+              </p>
+            </div>
+
             <button
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 cursor-pointer"
-              onClick={closeDeleteModal}
-              disabled={loading}
+              className="bg-red-100 text-red-700 px-6 py-2 rounded-md hover:bg-red-200 transition cursor-pointer flex items-center gap-2"
+              onClick={() => setShowDeleteModal(true)}
             >
-              <FaTimes size={20} />
+              Eliminar como Administrador
             </button>
+          </div>
+        </div>
+      ) : (
+        <div className="hidden lg:flex w-3/4 bg-white shadow-2xl p-4 items-center justify-center rounded-md">
+          <div className="text-center text-gray-400">
+            <FaUserCircle size={64} className="mx-auto mb-4 opacity-50" />
+            <p className="text-lg">Seleccione un administrador para ver sus detalles</p>
+          </div>
+        </div>
+      )}
 
-            <div className="flex flex-col items-center text-center">
-              <FaUserCircle size={60} className="text-[#6d4098] mb-4" />
+      {/* Add Admin Modal */}
+      {showAddModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
+          <div className="absolute inset-0 bg-black opacity-60" onClick={() => setShowAddModal(false)}></div>
+          <div className="bg-white rounded-lg p-6 w-full max-w-md relative z-10">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-[#6d4098]">Agregar Administrador</h3>
+              <button onClick={() => setShowAddModal(false)}><FaTimes /></button>
+            </div>
+            
+            <div className="relative mb-4">
+              <FaSearch className="absolute left-3 top-3 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Buscar usuario para promover"
+                className="pl-10 pr-4 py-2 w-full border rounded-md"
+                value={userSearchTerm}
+                onChange={(e) => setUserSearchTerm(e.target.value)}
+              />
+            </div>
 
-              <h3 className="text-lg font-semibold mb-1">
-                {selectedAdmin.nombre} {selectedAdmin.apellido || ""}
-              </h3>
+            <div className="max-h-60 overflow-y-auto space-y-2 mb-4">
+              {filteredClientUsers.length > 0 ? (
+                filteredClientUsers.map(user => (
+                  <div 
+                    key={user.id}
+                    className={`p-2 border rounded cursor-pointer flex items-center gap-2 ${selectedUserIdToAdd === user.id ? 'border-[#6d4098] bg-purple-50' : ''}`}
+                    onClick={() => setSelectedUserIdToAdd(user.id)}
+                  >
+                    <FaUserCircle className="text-gray-400" />
+                    <div className="text-sm">
+                      <p className="font-medium">{user.nombre} {user.apellido}</p>
+                      <p className="text-xs text-gray-500">{user.email}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center text-gray-500 text-sm">No se encontraron usuarios</p>
+              )}
+            </div>
 
-              <p className="text-gray-600 text-sm mb-3 break-words">
-                {selectedAdmin.email}
-              </p>
-
-              <p className="text-gray-500 text-xs mb-5">
-                Fecha de Alta: {formatDate(selectedAdmin.fecha_alta)}
-              </p>
-
-              <button
-                className="bg-red-600 text-white px-4 py-2 rounded-md text-sm hover:bg-red-700 transition cursor-pointer w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                onClick={handleRemoveAdmin}
-                disabled={loading}
+            <div className="flex justify-end gap-2">
+              <button 
+                onClick={() => setShowAddModal(false)}
+                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded"
               >
-                {loading && operationType === "remove" && (
-                  <ImSpinner8 className="animate-spin" />
-                )}
-                {loading ? "Procesando..." : "Eliminar como Administrador"}
+                Cancelar
+              </button>
+              <button 
+                onClick={handleAddAdmin}
+                disabled={!selectedUserIdToAdd || loading}
+                className="px-4 py-2 bg-[#6d4098] text-white rounded hover:bg-[#5a3685] disabled:opacity-50 flex items-center gap-2"
+              >
+                {loading && <ImSpinner8 className="animate-spin" />}
+                Confirmar
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {showModal && (
+      {/* Delete Admin Modal */}
+      {showDeleteModal && selectedAdmin && (
         <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
-          <div
-            className="absolute inset-0 bg-black opacity-60"
-            onClick={handleCloseModal}
-          ></div>
-
-          <div className="bg-white rounded-lg p-6 w-full max-w-xs mx-4 sm:max-w-sm md:max-w-md lg:max-w-2xl max-h-[80vh] overflow-y-auto relative z-10">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-[#6d4098]">
-                Selecciona el usuario para convertirlo en admin
-              </h3>
-              <button
-                onClick={handleCloseModal}
-                className="text-gray-500 hover:text-gray-700 cursor-pointer"
-                disabled={loading}
-              >
-                <FaTimes size={20} />
-              </button>
-            </div>
-
-            <div className="relative mb-4">
-              <FaSearch className="absolute left-3 top-3 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Buscar usuario"
-                className="pl-10 pr-4 py-2 w-full border rounded-md text-gray-600"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                disabled={loading}
-              />
-            </div>
-
-            <div className="space-y-2 mb-6 max-h-96 overflow-y-auto border border-gray-200 rounded-md p-2">
-              {filteredUsers.length > 0 ? (
-                filteredUsers.map((user) => (
-                  <div
-                    key={user.id}
-                    className={`flex items-center border rounded-md p-2 hover:scale-[1.02] transform transition cursor-pointer ${
-                      selectedUserId === user.id
-                        ? "border-2 border-[#6d4098] bg-[#f5f0fa]"
-                        : "border-gray-300"
-                    } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
-                    onClick={() => !loading && handleUserClick(user.id)}
-                  >
-                    <FaUserCircle
-                      size={24}
-                      className={`mr-3 ${
-                        selectedUserId === user.id
-                          ? "text-[#6d4098]"
-                          : "text-gray-400"
-                      }`}
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p className="font-medium truncate text-sm">
-                        {user.nombre} {user.apellido || ""}
-                      </p>
-                      <p className="text-xs text-gray-500 truncate">
-                        {user.empresas?.nombre || "Sin empresa"}
-                      </p>
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p className="text-center text-gray-500 py-4">
-                  {searchTerm
-                    ? "No se encontraron coincidencias"
-                    : "No hay usuarios disponibles"}
-                </p>
-              )}
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
-              <button
-                onClick={handleCancel}
-                className="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition cursor-pointer order-2 sm:order-1 disabled:opacity-50 disabled:cursor-not-allowed"
-                disabled={loading}
+          <div className="absolute inset-0 bg-black opacity-60" onClick={() => setShowDeleteModal(false)}></div>
+          <div className="bg-white rounded-lg p-6 w-full max-w-sm relative z-10 text-center">
+            <h3 className="text-lg font-bold text-gray-800 mb-2">¿Estás seguro?</h3>
+            <p className="text-gray-600 mb-6">
+              {selectedAdmin.nombre} dejará de ser administrador y volverá a ser un usuario cliente.
+            </p>
+            <div className="flex justify-center gap-4">
+              <button 
+                onClick={() => setShowDeleteModal(false)}
+                className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded"
               >
                 Cancelar
               </button>
-              <button
-                onClick={handleAddAdmin}
-                disabled={!selectedUserId || loading}
-                className="px-6 py-2 rounded-md transition cursor-pointer bg-green-700 text-white hover:bg-green-800 disabled:bg-gray-400 disabled:cursor-not-allowed order-1 sm:order-2 flex items-center justify-center gap-2"
+              <button 
+                onClick={handleRemoveAdmin}
+                disabled={loading}
+                className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 disabled:opacity-50 flex items-center gap-2"
               >
-                {loading && operationType === "add" && (
-                  <ImSpinner8 className="animate-spin" />
-                )}
-                {loading ? "Procesando..." : "Aceptar"}
+                {loading && <ImSpinner8 className="animate-spin" />}
+                Confirmar
               </button>
             </div>
           </div>

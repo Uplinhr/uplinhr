@@ -8,6 +8,7 @@ import {
   Empresa,
   RenovarPlan,
   compraCreditos,
+  MembershipPlan,
 } from "@/interfaces";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -49,7 +50,7 @@ export const getUser = async (): Promise<User[]> => {
   }
 };
 
-export const getUserById = async (id: number): Promise<User | null> => {
+export const getUserById = async (id: string): Promise<User | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/usuarios/${id}`, {
@@ -71,14 +72,14 @@ export const getUserById = async (id: number): Promise<User | null> => {
 };
 
 export const editUser = async (
-  id: number,
+  id: string,
   body: {
     nombre: string;
     apellido: string;
     email: string;
     active: boolean;
     rol: string;
-    id_plan: number | null;
+    id_plan: string | null;
   }
 ): Promise<User | null> => {
   try {
@@ -124,7 +125,7 @@ export const getBusquedas = async (): Promise<Busqueda[]> => {
   }
 };
 
-export const getBusquedaById = async (id: number): Promise<Busqueda | null> => {
+export const getBusquedaById = async (id: string): Promise<Busqueda | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/busqueda/${id}`, {
@@ -146,15 +147,15 @@ export const getBusquedaById = async (id: number): Promise<Busqueda | null> => {
 };
 
 export const editBusqueda = async (
-  id: number,
+  id: string,
   body: {
     info_busqueda: string;
     creditos_usados: number;
     observaciones: string;
     estado: string;
-    id_cred: number;
+    id_cred: string;
   }
-): Promise<Busqueda> => {
+): Promise<Busqueda | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/busquedas/${id}`, {
@@ -179,7 +180,7 @@ export const editBusqueda = async (
     throw error;
   }
 };
-export const deleteBusqueda = async (id: number): Promise<void> => {
+export const deleteBusqueda = async (id: string): Promise<void> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/busquedas/${id}`, {
@@ -272,7 +273,7 @@ export const registerUser = async (body: {
 };
 
 export const deleteUser = async (
-  id: number,
+  id: string,
   body: {
     nombre: string;
     apellido: string;
@@ -280,7 +281,7 @@ export const deleteUser = async (
     active: boolean;
     rol: string;
   }
-): Promise<User> => {
+): Promise<User | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/usuarios/${id}`, {
@@ -307,9 +308,9 @@ export const deleteUser = async (
 };
 
 export const resetPassword = async (
-  id: number,
+  id: string,
   contrasenia: string
-): Promise<User> => {
+): Promise<User | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/auth/editPassword/${id}`, {
@@ -332,7 +333,7 @@ export const resetPassword = async (
   }
 };
 
-export const activateUser = async (id: number) => {
+export const activateUser = async (id: string) => {
   const token = getToken();
 
   const url = `${API_URL}/api/usuarios/enable/${id}`;
@@ -350,7 +351,7 @@ export const activateUser = async (id: number) => {
   return await response.json();
 };
 
-export const getPlanById = async (id: number): Promise<Plan | null> => {
+export const getPlanById = async (id: string): Promise<Plan | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/planes/${id}`, {
@@ -402,7 +403,7 @@ export const createPlan = async (body: {
 };
 
 export const editPlan = async (
-  id: number,
+  id: string,
   body: {
     nombre: string;
     creditos_mes: number;
@@ -411,8 +412,9 @@ export const editPlan = async (
     precio: string;
     active: boolean;
     custom: boolean;
+    features?: any;
   }
-): Promise<Plan> => {
+): Promise<Plan | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/planes/${id}`, {
@@ -447,7 +449,7 @@ export const crearEmpresa = async (body: {
   domicilio_legal_ciudad: string;
   domicilio_legal_pais: string;
   codigo_postal: string;
-  id_usuario: number;
+  id_usuario: string;
 }): Promise<Empresa> => {
   const token = getToken();
   const res = await fetch(`${API_URL}/api/empresas`, {
@@ -467,7 +469,7 @@ export const crearEmpresa = async (body: {
 };
 
 export const editEmpresa = async (
-  id: number,
+  id: string,
   body: {
     nombre: string;
     email: string;
@@ -481,9 +483,9 @@ export const editEmpresa = async (
     domicilio_legal_pais: string;
     codigo_postal: string;
     active: boolean;
-    id_usuario: number;
+    id_usuario: string;
   }
-): Promise<Empresa> => {
+): Promise<Empresa | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/empresas/${id}`, {
@@ -530,7 +532,7 @@ export const getEmpresas = async (): Promise<Empresa[]> => {
   }
 };
 
-export const getEmpresaById = async (id: number): Promise<Empresa> => {
+export const getEmpresaById = async (id: string): Promise<Empresa | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/empresas/${id}`, {
@@ -571,7 +573,7 @@ export const getConsultas = async (): Promise<Consulta[]> => {
     throw error;
   }
 };
-export const getConsultaById = async (id: number): Promise<Consulta | null> => {
+export const getConsultaById = async (id: string): Promise<Consulta | null> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/consultas/${id}`, {
@@ -593,12 +595,12 @@ export const getConsultaById = async (id: number): Promise<Consulta | null> => {
 };
 
 export const editConsulta = async (
-  id: number,
+  id: string,
   body: {
     cantidad_horas: number;
     observaciones: string;
     estado: string;
-    id_consultoria: number;
+    id_consultoria: string;
   }
 ): Promise<Consulta> => {
   try {
@@ -622,7 +624,7 @@ export const editConsulta = async (
     throw error;
   }
 };
-export const deleteConsulta = async (id: number): Promise<void> => {
+export const deleteConsulta = async (id: string): Promise<void> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/consultas/${id}`, {
@@ -695,7 +697,7 @@ export const comprarCreditos = async (body: {
   observaciones: string;
   cantidad: number;
   vencimiento: string;
-  id_usuario: number;
+  id_usuario: string;
 }): Promise<compraCreditos> => {
   const token = getToken();
   const res = await fetch(`${API_URL}/api/compra_creditos`, {
@@ -714,7 +716,7 @@ export const comprarCreditos = async (body: {
   return data.data;
 };
 
-export const unlinkUserFromEmpresa = async (id: number): Promise<void> => {
+export const unlinkUserFromEmpresa = async (id: string): Promise<void> => {
   try {
     const token = getToken();
     const res = await fetch(`${API_URL}/api/empresas/unlinkUser/${id}`, {
@@ -731,6 +733,131 @@ export const unlinkUserFromEmpresa = async (id: number): Promise<void> => {
     if (!data.success) throw new Error("No se pudo desvincular usuario");
   } catch (error) {
     console.error("Error en unlinkUserFromEmpresa:", error);
+    throw error;
+  }
+};
+
+
+export const getMembershipPlans = async (): Promise<MembershipPlan[]> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/admin/memberships/plans`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener planes de membresía");
+
+    const data: { success: boolean; data: MembershipPlan[] } = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getMembershipPlans:", error);
+    throw error;
+  }
+};
+
+export const upsertMembershipPlan = async (body: Partial<MembershipPlan>): Promise<MembershipPlan> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/admin/memberships/plans`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error("Error al guardar plan de membresía");
+
+    const data: { success: boolean; data: MembershipPlan } = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en upsertMembershipPlan:", error);
+    throw error;
+  }
+};
+
+export const getTalentSearchServices = async (): Promise<any[]> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/admin/talent-search-services`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al obtener servicios de búsqueda");
+
+    const data: { success: boolean; data: any[] } = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en getTalentSearchServices:", error);
+    throw error;
+  }
+};
+
+export const createTalentSearchService = async (body: any): Promise<any> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/admin/talent-search-services`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error("Error al crear servicio de búsqueda");
+
+    const data: { success: boolean; data: any } = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en createTalentSearchService:", error);
+    throw error;
+  }
+};
+
+export const updateTalentSearchService = async (id: string, body: any): Promise<any> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/admin/talent-search-services/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (!res.ok) throw new Error("Error al actualizar servicio de búsqueda");
+
+    const data: { success: boolean; data: any } = await res.json();
+    return data.data;
+  } catch (error) {
+    console.error("Error en updateTalentSearchService:", error);
+    throw error;
+  }
+};
+
+export const deleteTalentSearchService = async (id: string): Promise<void> => {
+  try {
+    const token = getToken();
+    const res = await fetch(`${API_URL}/api/admin/talent-search-services/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Error al eliminar servicio de búsqueda");
+  } catch (error) {
+    console.error("Error en deleteTalentSearchService:", error);
     throw error;
   }
 };

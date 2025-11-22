@@ -2,6 +2,7 @@
 import Button from "@/components/Button/Button";
 import Image from "next/image";
 import { data } from "@/utils/paquetes";
+import { Paquetes } from "@/utils/paquetes";
 import { CardCreditos } from "@/components/CardServices/CardCreditos";
 import CardBeneficiosCreditos from "@/components/CardServices/CardBeneficiosCreditos";
 import { Banner2 } from "@/components/banner/banner";
@@ -9,8 +10,95 @@ import CreditSimulatorModal from "@/components/simulador/CreditSimulatorModal";
 import { QAView } from "../qaView";
 import { PlayCircle } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
+import { useState, useEffect } from "react";
 
 export default function Creditos() {
+  const [planes, setPlanes] = useState<Paquetes[]>(data); // Initialize with hardcoded data as fallback
+
+  useEffect(() => {
+    const fetchPlanes = async () => {
+      try {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+        const res = await fetch(`${API_URL}/api/plans-public/plans`);
+        if (!res.ok) throw new Error("Failed to fetch plans");
+        
+        const response = await res.json();
+        const backendPlans = response.data || [];
+
+        // Map backend data to frontend format
+        const mappedPlanes: Paquetes[] = backendPlans
+          .filter((p: any) => p.active)
+          .sort((a: any, b: any) => Number(a.precio) - Number(b.precio))
+          .map((p: any) => {
+            // Parse features - it can be a string or an object
+            let featuresObj: any = {};
+            if (typeof p.features === 'string') {
+              try {
+                featuresObj = JSON.parse(p.features);
+              } catch {
+                featuresObj = {};
+              }
+            } else if (typeof p.features === 'object' && p.features !== null) {
+              featuresObj = p.features;
+            }
+
+            // Extract features from the features JSON
+            const features: string[] = [];
+            if (featuresObj.creditos_mes || featuresObj.creditos) {
+              features.push(`${featuresObj.creditos_mes || featuresObj.creditos} créditos incluidos`);
+            }
+            if (featuresObj.vacantes) {
+              features.push(`Vacantes posibles: ${featuresObj.vacantes}`);
+            }
+            if (featuresObj.proceso) {
+              features.push(featuresObj.proceso);
+            }
+            if (featuresObj.soporte) {
+              features.push(featuresObj.soporte);
+            }
+            if (featuresObj.onboarding) {
+              features.push(featuresObj.onboarding);
+            }
+            if (featuresObj.garantia) {
+              features.push(featuresObj.garantia);
+            }
+            if (featuresObj.vencimiento) {
+              features.push(featuresObj.vencimiento);
+            }
+            if (featuresObj.pago) {
+              features.push(featuresObj.pago);
+            }
+
+            // Calculate discount if present
+            const oldPrice = featuresObj.oldPrice;
+            const discount = featuresObj.descuento;
+
+            return {
+              id: p.nombre.toLowerCase().replace(/\s+/g, '-'),
+              title: p.nombre,
+              description: p.description || `Plan ideal para tu empresa`,
+              price: Number(p.precio),
+              oldPrice: oldPrice,
+              discount: discount,
+              buttonText: `Comprar ${p.nombre}`,
+              buttonLink: featuresObj.buttonLink || `https://u030x.share.hsforms.com/2MdBclWfdRSq5x_BbXUzjzA`,
+              features: features
+            };
+          });
+
+        if (mappedPlanes.length > 0) {
+          console.log('Successfully fetched and mapped plans:', mappedPlanes);
+          setPlanes(mappedPlanes);
+        }
+      } catch (error) {
+        console.error("Error fetching plans:", error);
+        // Keep using hardcoded data as fallback
+      }
+    };
+
+    fetchPlanes();
+  }, []);
+
   const handleHeaderTTS = () => {
     const text = "Créditos de talento para Startups y Pymes. Un modelo inteligente para optimizar tu reclutamiento. Compra créditos de búsquedas de talento y diseña tu proceso a medida. Sin vencimiento, flexible y con la garantía de Uplin.";
     speakText(text);
@@ -86,7 +174,7 @@ export default function Creditos() {
         </h2>
 
         <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-          {data.map((paquete) => (
+          {planes.map((paquete) => (
             <CardCreditos key={paquete.id} paquetes={paquete} />
           ))}
         </div>

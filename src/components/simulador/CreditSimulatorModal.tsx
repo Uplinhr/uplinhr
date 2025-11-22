@@ -7,6 +7,7 @@ import {
   LEVELS,
   PACKAGES,
   PRICE_PER_INDIVIDUAL_CREDIT,
+  Level,
 } from "@/utils/infocreditos";
 
 const DISCOUNT_BY_NAME: Record<string, number> = {
@@ -48,18 +49,65 @@ export default function CreditSimulatorModal({
   const [open, setOpen] = useState(false);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
 
+  // Dynamic state for data
+  const [levels, setLevels] = useState<Level[]>(LEVELS);
+  const [additionalServices, setAdditionalServices] = useState<typeof ADDITIONAL_SERVICES>(ADDITIONAL_SERVICES);
+
   const [qty, setQty] = useState<number[]>(() => Array(LEVELS.length).fill(0));
   const [svcQty, setSvcQty] = useState<number[]>(() =>
     Array(ADDITIONAL_SERVICES.length).fill(0)
   );
 
+  // Fetch data from backend
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const API_URL = process.env.NEXT_PUBLIC_API_URL;
+        const res = await fetch(`${API_URL}/api/talent-search-services`);
+        if (!res.ok) throw new Error("Failed to fetch services");
+        
+        const data = await res.json();
+        // The controller returns { success: true, data: [...] } or just [...] depending on implementation.
+        // AdminTalentSearchController.getAllServices returns res.json(successResponse(services...))
+        // successResponse format usually is { success: true, data: ..., message: ... }
+        // Let's check helper, but usually it's data.data or just data if direct.
+        // Based on previous files, it seems to be standard response structure.
+        
+        const services = data.data || []; 
+
+        const newLevels: Level[] = services
+          .filter((s: any) => s.category === 'VACANTE' && s.isActive)
+          .map((s: any) => ({ name: s.name, credits: s.price }));
+        
+        const newAdditionalServices = services
+          .filter((s: any) => s.category === 'ADICIONAL' && s.isActive)
+          .map((s: any) => ({ name: s.name, creditsPerUnit: s.price }));
+
+        if (newLevels.length > 0) {
+            setLevels(newLevels);
+            setQty(new Array(newLevels.length).fill(0));
+        }
+        
+        if (newAdditionalServices.length > 0) {
+            setAdditionalServices(newAdditionalServices);
+            setSvcQty(new Array(newAdditionalServices.length).fill(0));
+        }
+
+      } catch (error) {
+        console.error("Error fetching simulator data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const totalCreditsVacancies = useMemo(
     () =>
       qty.reduce(
-        (acc, n, i) => acc + (Number(n) || 0) * Number(LEVELS[i].credits),
+        (acc, n, i) => acc + (Number(n) || 0) * Number(levels[i]?.credits || 0),
         0
       ),
-    [qty]
+    [qty, levels]
   );
   const totalVacanciesUSD = totalCreditsVacancies * PRICE_PER_INDIVIDUAL_CREDIT;
 
@@ -68,10 +116,10 @@ export default function CreditSimulatorModal({
       svcQty.reduce(
         (acc, n, i) =>
           acc +
-          (Number(n) || 0) * Number(ADDITIONAL_SERVICES[i].creditsPerUnit),
+          (Number(n) || 0) * Number(additionalServices[i]?.creditsPerUnit || 0),
         0
       ),
-    [svcQty]
+    [svcQty, additionalServices]
   );
   const totalServicesUSD = totalCreditsServices * PRICE_PER_INDIVIDUAL_CREDIT;
 
@@ -132,8 +180,8 @@ export default function CreditSimulatorModal({
   }, [open]);
 
   const reset = () => {
-    setQty(Array(LEVELS.length).fill(0));
-    setSvcQty(Array(ADDITIONAL_SERVICES.length).fill(0));
+    setQty(Array(levels.length).fill(0));
+    setSvcQty(Array(additionalServices.length).fill(0));
   };
 
   return (
@@ -185,7 +233,7 @@ export default function CreditSimulatorModal({
                 </summary>
 
                 <div className="p-4 space-y-4">
-                  {LEVELS.map((level, i) => (
+                  {levels.map((level, i) => (
                     <div key={level.name} className="grid grid-cols-1 sm:grid-cols-12 items-center gap-3 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] rounded-2xl px-4 py-3">
                       <div className="sm:col-span-7 min-w-0">
                         <p className="font-semibold text-[#3b2b57] text-base">{level.name}</p>
@@ -213,7 +261,7 @@ export default function CreditSimulatorModal({
 
                 <div className="p-4 space-y-4">
                   <div className="space-y-3">
-                    {ADDITIONAL_SERVICES.map((svc, i) => {
+                    {additionalServices.map((svc, i) => {
                       const credits = (Number(svcQty[i]) || 0) * Number(svc.creditsPerUnit);
                       return (
                         <div key={svc.name} className="grid grid-cols-1 sm:grid-cols-12 items-center gap-3 bg-white shadow-[0_2px_10px_rgba(0,0,0,0.06)] rounded-2xl px-4 py-3">

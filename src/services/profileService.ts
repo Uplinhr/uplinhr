@@ -3,38 +3,61 @@ import { getAuthToken } from "./authService";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function uploadAvatar(file: File) {
-  const auth0Token = typeof window !== 'undefined' ? localStorage.getItem('auth0Token') : null;
-  if (!auth0Token) throw new Error('No hay sesión Auth0 para subir avatar');
+  if (typeof window === "undefined") {
+    throw new Error("No hay sesión para subir avatar");
+  }
+
+  const localToken = localStorage.getItem("authToken");
+  const auth0Token = localStorage.getItem("auth0Token");
+
+  // Si hay token local, priorizar flujo JWT local (/avatar)
+  const token = localToken ?? auth0Token;
+  if (!token) throw new Error("No hay sesión para subir avatar");
+
+  const endpoint = localToken
+    ? "/api/auth/avatar"
+    : "/api/auth/auth0/avatar";
 
   const form = new FormData();
-  form.append('file', file);
+  form.append("file", file);
 
-  const res = await fetch(`${API_URL}/api/auth/auth0/avatar`, {
-    method: 'POST',
+  const res = await fetch(`${API_URL}${endpoint}`, {
+    method: "POST",
     headers: {
-      Authorization: `Bearer ${auth0Token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: form,
-    credentials: 'include',
+    credentials: "include",
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data?.error || 'No se pudo subir el avatar');
+  if (!res.ok) throw new Error(data?.error || "No se pudo subir el avatar");
   return data;
 }
 
 export async function deleteAvatar() {
-  const auth0Token = typeof window !== 'undefined' ? localStorage.getItem('auth0Token') : null;
-  if (!auth0Token) throw new Error('No hay sesión Auth0 para eliminar avatar');
+  if (typeof window === "undefined") {
+    throw new Error("No hay sesión para eliminar avatar");
+  }
 
-  const res = await fetch(`${API_URL}/api/auth/auth0/avatar`, {
-    method: 'DELETE',
+  const localToken = localStorage.getItem("authToken");
+  const auth0Token = localStorage.getItem("auth0Token");
+
+  const token = localToken ?? auth0Token;
+  if (!token) throw new Error("No hay sesión para eliminar avatar");
+
+  const endpoint = localToken
+    ? "/api/auth/avatar"
+    : "/api/auth/auth0/avatar";
+
+  const res = await fetch(`${API_URL}${endpoint}`, {
+    method: "DELETE",
     headers: {
-      Authorization: `Bearer ${auth0Token}`,
+      Authorization: `Bearer ${token}`,
     },
-    credentials: 'include',
+    credentials: "include",
   });
   const data = await res.json();
-  if (!res.ok) throw new Error(data?.error || 'No se pudo eliminar el avatar');
+  if (!res.ok) throw new Error(data?.error || "No se pudo eliminar el avatar");
   return data;
 }
 
