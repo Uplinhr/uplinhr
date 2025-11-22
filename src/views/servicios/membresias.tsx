@@ -15,45 +15,59 @@ export default function Membresias() {
 
   return (
     <div>
-      <section className="relative w-full max-w-6xl mx-auto px-4 pt-20 pb-10 flex flex-col items-center text-center">
-        {/* Botón de audio */}
-        <button
-          onClick={handleHeroTTS}
-          className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
-          aria-label="Escuchar Membresías"
-          title="Escuchar texto"
-          type="button"
-          style={{ pointerEvents: "auto" }}
-        >
-          <PlayCircle size={28} className="text-[#502B7D]" />
-        </button>
+<section className="relative w-full max-w-6xl mx-auto px-4 pt-20 pb-10 flex flex-col items-center text-center">
+  {/* Botón de audio */}
+  <button
+    onClick={handleHeroTTS}
+    className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+    aria-label="Escuchar Membresías"
+    title="Escuchar texto"
+    type="button"
+    style={{ pointerEvents: "auto" }}
+  >
+    <PlayCircle size={28} className="text-[#502B7D]" />
+  </button>
 
-        {/* Imagen decorativa de fondo (el óvalo verde) */}
-        <div className="absolute pointer-events-none -z-10 opacity-90">
-          <Image
-            src="/marco.uplin.png"
-            alt="Marco decorativo"
-            width={1200}
-            height={600}
-            className="max-w-xl object-contain
-              pl-10 ml-[380px]
-              md:pl-6 md:ml-[200px]
-              sm:pl-2 sm:ml-[60px]"
-          />
-        </div>
+  {/* Título */}
+<h1 className="font-poppins text-[30px] md:text-[36px] font-semibold leading-tight text-[#000000] text-center">
+  Potenciá tu gestión de talento
+  <br />
+  con nuestras{" "}
+  
+  {/* SOLO envolver esta parte */}
+  <span className="relative inline-block">
+    <span className="relative z-10">
+      membresías empresariales
+    </span>
 
-        {/* Texto principal */}
-        <h1 className="font-poppins text-[30px] md:text-[36px] font-semibold leading-tight text-[#000000]">
-          Potenciá tu gestión de talento
-          <br />
-          <span>con nuestras membresías empresariales</span>
-        </h1>
+    {/* El óvalo verde → SOLO se ajusta a este span */}
+    <Image
+      src="/marco.uplin.png"
+      alt="Óvalo"
+      width={900}
+      height={200}
+      className="
+        pointer-events-none
+        absolute
+        left-1/2 -translate-x-1/2
+        -z-0
+        top-1/2 -translate-y-1/2
 
-        <p className="mt-4 text-lg md:text-base max-w-2xl leading-relaxed text-[#333]">
-          Suscribite a nuestras membresías empresariales y accedé a todo lo que
-          tu organización necesita para gestionar tu talento.
-        </p>
-      </section>
+        /* Ajustes responsivos del tamaño del óvalo */
+        w-[160%]     /* Desktop */
+        md:w-[150%]
+        sm:w-[135%]
+      "
+    />
+  </span>
+</h1>
+
+
+  <p className="mt-4 text-lg md:text-base max-w-2xl leading-relaxed text-[#333]">
+    Suscribite a nuestras membresías empresariales y accedé a todo lo que
+    tu organización necesita para gestionar tu talento.
+  </p>
+</section>
 
       <section className="w-ful flex justify-center px-4">
         <div className="relative w-full max-w-5xl flex justify-items-">
