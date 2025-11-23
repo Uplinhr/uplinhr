@@ -1,5 +1,9 @@
+"use client"
 import { IPlanCardProps } from "@/interfaces";
 import Link from "next/link";
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
+
 const PlanCard = ({
   plan,
   description,
@@ -13,6 +17,12 @@ const PlanCard = ({
   link
 }: IPlanCardProps) => {
   const isGrowth = plan.toLowerCase() === "growth";
+
+  const handleTTS = () => {
+    const includesText = includes.join(", ");
+    const excludesText = excludes.length > 0 ? `No incluye: ${excludes.join(", ")}` : "";
+    speakText(`Plan ${plan}. ${description}. Precio: ${price}. Incluye: ${includesText}. ${excludesText}`);
+  };
 
   return (
     <div
@@ -46,7 +56,20 @@ const PlanCard = ({
 
       <div className="p-6 flex flex-col h-full font-poppins ">
         <div className="min-h-[180px] mb-2">
-          <h3 className="text-2xl font-bold text-black">{plan}</h3>
+          <div className="flex items-center gap-2">
+            <h3 className="text-2xl font-bold text-black">{plan}</h3>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleTTS();
+              }}
+              className="p-1 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0"
+              aria-label={`Escuchar plan ${plan}`}
+              title="Escuchar texto"
+            >
+              <PlayCircle size={20} className="text-[#502B7D]" />
+            </button>
+          </div>
           <p className="mt-3 w-64 h-28 justify-center text-black/80 text-base font-normal leading-normal">{description}</p>
         </div>
 
