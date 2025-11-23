@@ -1,8 +1,16 @@
+"use client"
 import Image from "next/image";
 import { Consultorias } from "@/utils/consultorias";
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
 
 export default function ConsultoriasCard({ consultorias }: { consultorias: Consultorias }) {
   const { name, tags, description, imageUrl} = consultorias;
+
+  const handleTTS = () => {
+    const tagsText = tags.join(", ");
+    speakText(`${name}. ${tagsText}. ${description}`);
+  };
 
   return (
     <article
@@ -30,10 +38,18 @@ export default function ConsultoriasCard({ consultorias }: { consultorias: Consu
       {/* Contenido */}
       <div className="flex-1 min-w-0 w-full text-center md:text-left">
         <header className="flex items-start justify-center md:justify-between gap-3">
-          <div className="w-full">
+          <div className="flex items-center gap-2 w-full justify-center md:justify-start">
             <h3 className="text-2xl md:text-2xl font-semibold text-[#4B2C7C]">
               {name}
             </h3>
+            <button
+              onClick={handleTTS}
+              className="p-1 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0"
+              aria-label={`Escuchar ${name}`}
+              title="Escuchar texto"
+            >
+              <PlayCircle size={22} className="text-[#4B2C7C]" />
+            </button>
           </div>
 
         </header>

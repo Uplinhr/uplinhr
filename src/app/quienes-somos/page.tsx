@@ -33,6 +33,11 @@ const AboutUs = () => {
     speakText(text);
   };
 
+  const handleSaberMasTTS = () => {
+    const text = "¿Querés saber más? Si estás liderando una startup, escalando tu equipo o buscando una forma más humana de gestionar el talento, estamos acá para acompañarte.";
+    speakText(text);
+  };
+
   return (
     <div className="font-[Poppins]">
       <div className="px-4 sm:px-6 lg:px-10 mx-auto max-w-7xl">
@@ -167,7 +172,15 @@ const AboutUs = () => {
       </section>
 
       <section className="flex items-center justify-center my-10 sm:my-14 px-4">
-        <div className="bg-white p-6 sm:p-10 md:p-16 rounded-xl shadow-lg max-w-4xl w-full text-center">
+        <div className="bg-white p-6 sm:p-10 md:p-16 rounded-xl shadow-lg max-w-4xl w-full text-center relative">
+          <button
+            onClick={handleSaberMasTTS}
+            className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+            aria-label="Escuchar sección ¿Querés saber más?"
+            title="Escuchar texto"
+          >
+            <PlayCircle size={24} className="text-[#502B7D]" />
+          </button>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">
             ¿Querés saber más?
           </h2>
