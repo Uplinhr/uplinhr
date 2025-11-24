@@ -1,15 +1,33 @@
+"use client"
 import Image from "next/image";
+import { PlayCircle } from "lucide-react";
+import { speakText } from "@/utils/textToSpeech";
 
 export const StrategicAlliances = () => {
+  const handleTTS = () => {
+    const text = "Programa de alianzas estratégicas. En Uplin creemos en el poder de la colaboración. Nuestro programa de alianzas estratégicas está diseñado para conectar con empresas que, como nosotros, impulsan el crecimiento y la innovación en el talento humano. Buscamos consultoras de Recursos Humanos, empresas de tecnología, agencias de reclutamiento, y proveedores de servicios complementarios que quieran potenciar su propuesta de valor junto a nosotros.";
+    speakText(text);
+  };
+
   return (
     <section className="bg-white py-12 md:py-20 px-4">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         {/* Columna izquierda: título, texto y botón */}
         <div className="text-left">
-          <h2 className="text-2xl md:text-[32px] leading-tight md:leading-[40px] font-semibold font-poppins text-black mb-6">
-            Programa de<br />
-            <span className="text-[#6C4099]">alianzas</span> estratégicas
-          </h2>
+          <div className="flex items-start gap-3 mb-6">
+            <h2 className="text-2xl md:text-[32px] leading-tight md:leading-[40px] font-semibold font-poppins text-black">
+              Programa de<br />
+              <span className="text-[#6C4099]">alianzas</span> estratégicas
+            </h2>
+            <button
+              onClick={handleTTS}
+              className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0 mt-1"
+              aria-label="Escuchar texto de alianzas estratégicas"
+              title="Escuchar texto"
+            >
+              <PlayCircle size={28} className="text-[#6C4099]" />
+            </button>
+          </div>
           <p className="text-base text-[#333] mb-4 max-w-md">
             En Uplin creemos en el poder de la colaboración. Nuestro programa de alianzas estratégicas
             está diseñado para conectar con empresas que, como nosotros, impulsan el crecimiento y la 
@@ -56,7 +74,17 @@ export const StrategicAlliances = () => {
       className="relative w-full md:w-[280px] min-h-[140px] bg-white p-4 md:p-5 pr-24 md:pr-20 rounded-[18px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex flex-row items-center overflow-visible"
     >
       <div className="flex flex-col text-left flex-1 pr-2">
-        <h3 className="text-sm font-semibold mb-2 text-[#6C4099]">{item.title}</h3>
+        <div className="flex items-center gap-1 mb-2">
+          <h3 className="text-sm font-semibold text-[#6C4099]">{item.title}</h3>
+          <button
+            onClick={() => speakText(`${item.title}. ${item.description}`)}
+            className="p-1 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0"
+            aria-label={`Escuchar ${item.title}`}
+            title="Escuchar texto"
+          >
+            <PlayCircle size={18} className="text-[#6C4099]" />
+          </button>
+        </div>
         <p className="text-xs text-[#555] leading-relaxed">{item.description}</p>
       </div>
       <Image src={item.icon} alt={item.title} width={130} height={130} className="absolute -right-5 md:-right-7 top-1/2 -translate-y-1/2 flex-shrink-0 w-24 h-24 md:w-28 md:h-28 lg:w-[130px] lg:h-[130px]" />

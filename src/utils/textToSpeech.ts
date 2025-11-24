@@ -1,8 +1,11 @@
 // Utilidad centralizada para Text-to-Speech
 export const speakText = (text: string) => {
   if ('speechSynthesis' in window) {
-    // Cancela cualquier speech en curso
-    window.speechSynthesis.cancel();
+    // Si está hablando, lo para (toggle)
+    if (window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      return;
+    }
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'es-ES';
@@ -36,9 +39,17 @@ export const speakText = (text: string) => {
     if (window.speechSynthesis.getVoices().length > 0) {
       setVoice();
     } else {
-      window.speechSynthesis.onvoiceschanged = setVoice;
+      // Usar once: true para que solo se ejecute una vez y no cause loops
+      window.speechSynthesis.addEventListener('voiceschanged', setVoice, { once: true });
     }
   } else {
     console.warn('Text-to-speech no está disponible en este navegador');
+  }
+};
+
+// Función para detener el speech manualmente
+export const stopSpeech = () => {
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
   }
 };

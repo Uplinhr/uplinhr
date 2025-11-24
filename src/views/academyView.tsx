@@ -28,6 +28,18 @@ function AcademyView() {
     speakText(text);
   };
 
+  // Función TTS para la primera card
+  const handleCard1TTS = () => {
+    const text = "Descubrí nuestras próximas sesiones diseñadas para ayudarte a escalar tu empresa, resolver desafíos reales y conectar con referentes del mundo HR.";
+    speakText(text);
+  };
+
+  // Función TTS para la segunda card
+  const handleCard2TTS = () => {
+    const text = "Aprendé lo que realmente mueve la aguja en talento, cultura y liderazgo. Participá en vivo y llevá tus preguntas directo a quienes están en el campo de acción. Accedé a recursos exclusivos, pensados para quienes lideran el cambio.";
+    speakText(text);
+  };
+
   return (
     <>
       <section className="w-full mt-4 py-8 md:py-10 px-4 sm:px-6 flex justify-center items-center">
@@ -61,7 +73,15 @@ function AcademyView() {
               background: "linear-gradient(180deg, #502b7d, rgba(80,43,125,0))",
             }}
           >
-            <div className="bg-white rounded-[20px] h-full w-full flex items-center p-6">
+            <div className="bg-white rounded-[20px] h-full w-full flex items-center p-6 relative">
+              <button
+                onClick={handleCard1TTS}
+                className="absolute top-2 right-2 p-1 hover:bg-gray-100 rounded-full transition-colors duration-200"
+                aria-label="Escuchar texto"
+                title="Escuchar texto"
+              >
+                <PlayCircle size={20} className="text-[#6C4099]" />
+              </button>
               <p className="text-[18px] font-light text-black text-center w-full">
                 Descubrí nuestras próximas sesiones diseñadas para ayudarte a
                 escalar tu empresa, resolver desafíos reales y conectar con
@@ -76,7 +96,15 @@ function AcademyView() {
               background: "linear-gradient(0deg, #502b7d, rgba(80,43,125,0))",
             }}
           >
-            <div className="bg-white rounded-[20px] h-full w-full flex items-start p-6">
+            <div className="bg-white rounded-[20px] h-full w-full flex items-start p-6 relative">
+              <button
+                onClick={handleCard2TTS}
+                className="absolute top-2 right-2 p-1 hover:bg-gray-100 rounded-full transition-colors duration-200"
+                aria-label="Escuchar texto"
+                title="Escuchar texto"
+              >
+                <PlayCircle size={20} className="text-[#6C4099]" />
+              </button>
               <ul className="space-y-4 w-full">
                 <li className="text-[14px] font-normal text-black pl-6 relative">
                   <span className="absolute left-0 text-[#6C4099]">✓</span>

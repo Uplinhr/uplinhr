@@ -16,6 +16,16 @@ export default function Creditos() {
     speakText(text);
   };
 
+  const handlePaquetesTTS = () => {
+    const text = "Encontrá el paquete perfecto para tu empresa. Tenemos cuatro opciones: Starter con 50 créditos, Growth con 100 créditos, Scale con 250 créditos y Enterprise con 500 créditos. Simulá tu paquete para encontrar el ideal para vos.";
+    speakText(text);
+  };
+
+  const handleCreditosIndividualesTTS = () => {
+    const text = "Si tu paquete no se adapta a tus necesidades, comprá créditos individuales.";
+    speakText(text);
+  };
+
   return (
     <main className="min-h-screen">
       {/* HEADER */}
@@ -79,11 +89,21 @@ export default function Creditos() {
 
       {/* PAQUETES */}
       <section className="py-16 px-4 bg-gray-50">
-        <h2 className="font-poppins text-[28px] font-semibold text-center mb-8 mt-8">
-          <span className="text-black">Encontrá el</span>{" "}
-          <span className="text-[#502B7D]">paquete perfecto</span>{" "}
-          <span className="text-black">para tu empresa</span>
-        </h2>
+        <div className="flex items-center justify-center gap-2 mb-8 mt-8">
+          <h2 className="font-poppins text-[28px] font-semibold text-center">
+            <span className="text-black">Encontrá el</span>{" "}
+            <span className="text-[#502B7D]">paquete perfecto</span>{" "}
+            <span className="text-black">para tu empresa</span>
+          </h2>
+          <button
+            onClick={handlePaquetesTTS}
+            className="p-2 hover:bg-gray-200 rounded-full transition-colors duration-200"
+            aria-label="Escuchar sección de paquetes"
+            title="Escuchar texto"
+          >
+            <PlayCircle size={24} className="text-[#502B7D]" />
+          </button>
+        </div>
 
         <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
           {data.map((paquete) => (
@@ -102,10 +122,20 @@ export default function Creditos() {
       {/* CRÉDITOS INDIVIDUALES */}
       <section>
         <div className="bg-[#6C4099] rounded-lg p-6 mb-6 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white">
-          <h2>
-            Si tu paquete no se adapta a tus necesidades, comprá créditos
-            individuales
-          </h2>
+          <div className="flex items-center gap-2">
+            <h2>
+              Si tu paquete no se adapta a tus necesidades, comprá créditos
+              individuales
+            </h2>
+            <button
+              onClick={handleCreditosIndividualesTTS}
+              className="p-2 hover:bg-white/20 rounded-full transition-colors duration-200 flex-shrink-0"
+              aria-label="Escuchar texto"
+              title="Escuchar texto"
+            >
+              <PlayCircle size={22} className="text-white" />
+            </button>
+          </div>
           <Button
             link="https://u030x.share.hsforms.com/2dXErlXkESgeW2hE4_Xmnaw"
             tag="Adquirir aquí"

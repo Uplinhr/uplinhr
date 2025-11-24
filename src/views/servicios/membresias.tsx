@@ -15,22 +15,11 @@ export default function Membresias() {
 
   return (
     <div>
-<section className="relative w-full max-w-6xl mx-auto px-4 pt-20 pb-10 flex flex-col items-center text-center">
-  {/* Botón de audio */}
-  <button
-    onClick={handleHeroTTS}
-    className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
-    aria-label="Escuchar Membresías"
-    title="Escuchar texto"
-    type="button"
-    style={{ pointerEvents: "auto" }}
-  >
-    <PlayCircle size={28} className="text-[#502B7D]" />
-  </button>
-
+<section className="w-full max-w-6xl mx-auto px-4 pt-20 pb-10 flex flex-col items-center text-center">
   {/* Título */}
-<h1 className="font-poppins text-[30px] md:text-[36px] font-semibold leading-tight text-[#000000] text-center">
-  Potenciá tu gestión de talento
+  <div className="flex items-center justify-center gap-2">
+    <h1 className="font-poppins text-[30px] md:text-[36px] font-semibold leading-tight text-[#000000] text-center">
+      Potenciá tu gestión de talento
   <br />
   con nuestras{" "}
   
@@ -61,7 +50,15 @@ export default function Membresias() {
     />
   </span>
 </h1>
-
+    <button
+      onClick={handleHeroTTS}
+      className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0"
+      aria-label="Escuchar Membresías"
+      title="Escuchar texto"
+    >
+      <PlayCircle size={28} className="text-[#502B7D]" />
+    </button>
+  </div>
 
   <p className="mt-4 text-lg md:text-base max-w-2xl leading-relaxed text-[#333]">
     Suscribite a nuestras membresías empresariales y accedé a todo lo que
@@ -123,9 +120,19 @@ export default function Membresias() {
       </section>
 
       <section>
-        <h1 className="font-poppins text-[28px] font-semibold text-center mt-12 p-5">
+        <div className="flex items-center justify-center gap-2 mt-12 p-5">
+          <h1 className="font-poppins text-[28px] font-semibold text-center">
           Todo en un plan mensual que evoluciona con tu empresa 
         </h1>
+          <button
+            onClick={() => speakText("Todo en un plan mensual que evoluciona con tu empresa. Elegí el plan que mejor se adapte a las necesidades de tu organización.")}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0"
+            aria-label="Escuchar título de planes"
+            title="Escuchar texto"
+          >
+            <PlayCircle size={24} className="text-[#502B7D]" />
+          </button>
+        </div>
         <CardsPlan />
       </section>
       <section>
