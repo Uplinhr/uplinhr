@@ -132,23 +132,30 @@ export interface RegisterPayload {
   apellido?: string;
   email: string;
   contrasenia: string;
+  num_celular?: string;
   // Campos B2B opcionales (actualmente el backend ignora la mayoría)
   companyName?: string;
   country?: string;
   website?: string;
   linkedin?: string;
+  companyEmail?: string;
+  companyPhone?: string;
+  companyAddress?: string;
+  companyTaxId?: string;
 }
 
-export async function registerUser(payload: RegisterPayload) {
-  const response = await fetch(`${API_URL}/api/auth/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+export const registerUser = async (payload: RegisterPayload) => {
+  const res = await fetch(`${API_URL}/api/auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(payload),
   });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.message || 'Error al registrarse');
+  const data = await res.json();
+  if (!res.ok) throw new Error(data?.message || "Error al registrarse");
   return data;
-}
+};
 
 // =====================
 // Email verification

@@ -1,4 +1,5 @@
 import { getAuthToken } from "./authService";
+import { User } from "@/interfaces";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -78,4 +79,43 @@ export async function changePassword(userId: string, newPassword: string, tokenO
   const data = await res.json();
   if (!res.ok) throw new Error(data?.message || 'No se pudo cambiar la contraseña');
   return data;
+}
+
+export interface ProfileData {
+  nombre?: string;
+  apellido?: string;
+  email?: string;
+  num_celular?: string;
+  country?: string;
+  linkedin?: string;
+  companyName?: string;
+  website?: string;
+  companyEmail?: string;
+  companyPhone?: string;
+  companyAddress?: string;
+  companyTaxId?: string;
+}
+
+export async function editProfile(userId: string, data: ProfileData): Promise<User> {
+  const token = getAuthToken(); // Usa el helper que ya verifica localStorage
+  // Nota: getAuthToken es async en authService.ts, pero aquí no lo importamos como tal.
+  // Revisando imports: import { getAuthToken } from "./authService";
+  // getAuthToken devuelve Promise<string | null>
+  
+  const authToken = await getAuthToken();
+  if (!authToken) throw new Error('No hay sesión activa');
+
+  const res = await fetch(`${API_URL}/api/usuarios/fullName/${userId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${authToken}`,
+    },
+    body: JSON.stringify(data),
+    credentials: 'include',
+  });
+
+  const responseData = await res.json();
+  if (!res.ok) throw new Error(responseData?.message || 'Error al actualizar perfil');
+  return responseData.data;
 }

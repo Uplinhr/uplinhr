@@ -149,11 +149,31 @@ export interface Empresa {
 }
 
 
+export interface UserProfile {
+  id?: string;
+  userId?: string;
+  linkedinUrl?: string;
+  country?: string;
+}
+
+export interface CompanyProfile {
+  id?: string;
+  userId?: string;
+  companyName?: string;
+  website?: string;
+  companyEmail?: string;
+  companyPhone?: string;
+  address?: string;
+  taxId?: string;
+  country?: string;
+}
+
 export interface User {
   id: string;
   nombre: string;
   apellido: string;
   email: string;
+  emailVerified?: boolean;
   rol: string;
   active?: boolean;
   fecha_alta?: string;
@@ -162,6 +182,8 @@ export interface User {
   creditos?: Creditos[];
   consultorias?: Consultoria;
   empresas?: Empresa;
+  profile?: UserProfile;
+  company?: CompanyProfile;
   num_celular?: string;
   pictureUrl?: string | null;
 }

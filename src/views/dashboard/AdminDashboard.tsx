@@ -56,20 +56,9 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="flex flex-col md:flex-row justify-between items-stretch w-[90vw] mt-4 gap-4">
-        <div className="w-full md:w-[65%] bg-[#6D4098] p-4 rounded-md text-xl font-semibold text-white text-center flex items-center justify-center">
-          Hola {user?.nombre}
-        </div>
-        <div className="w-full md:w-[35%] bg-[#6D4098] p-4 rounded-md flex items-center justify-center md:justify-start gap-3 text-white">
-          <FaUserCircle size={40} />
-          <div className="flex flex-col text-sm">
-            <p className="font-semibold">Administrador</p>
-            <p>{user?.email}</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="w-[90vw] mt-4 md:hidden">
+      {/* Header eliminado - información redundante */}
+      
+      <div className="w-[90vw] mt-6 md:hidden">
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="w-full bg-[#6D4098] text-white p-3 rounded-md flex items-center justify-between"
