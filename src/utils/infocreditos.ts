@@ -12,8 +12,8 @@ export const LEVELS: Level[] = [
   { name: "Junior", credits: 120 },
   { name: "Semi-Senior", credits: 130 },
   { name: "Senior", credits: 220 },
-  { name: "Director", credits: 310 },
-  { name: "Leader", credits: 595 },
+  { name: "Leader", credits: 310 },
+  { name: "Director", credits: 595 },
 ];
 
 export const PACKAGES: Pkg[] = [
