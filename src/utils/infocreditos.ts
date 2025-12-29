@@ -3,7 +3,7 @@ export type Pkg = {
   name: string;
   credits: number;
   price: number;
-  features: string[];
+  features: string[] ;
   link: string;
 };
 
