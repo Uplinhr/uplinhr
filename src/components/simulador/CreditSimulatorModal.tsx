@@ -11,7 +11,7 @@ import {
 
 const DISCOUNT_BY_NAME: Record<string, number> = {
   Pro: 0.05,
-  Premium: 0.07,
+  Premium: 0.7,
   Platinum: 0.1,
 };
 

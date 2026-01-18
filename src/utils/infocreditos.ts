@@ -34,7 +34,7 @@ export const PACKAGES: Pkg[] = [
   {
     name: "Pro",
     credits: 710,
-    price: 4260,
+    price: 4047,
     features: [
       "710 créditos incluidos",
       "Vacantes posibles: hasta 5 Juniors",
@@ -50,7 +50,7 @@ export const PACKAGES: Pkg[] = [
   {
     name: "Premium",
     credits: 1136,
-    price: 6816,
+    price: 6339,
     features: [
       "1136 créditos incluidos",
       "Vacantes posibles: hasta 8 Juniors",
@@ -66,7 +66,7 @@ export const PACKAGES: Pkg[] = [
   {
     name: "Platinum",
     credits: 1420,
-    price: 9372,
+    price: 7668,
     features: [
       "1420 créditos incluidos",
       "Vacantes posibles: hasta 10 Juniors",
