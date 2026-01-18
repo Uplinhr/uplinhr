@@ -11,8 +11,8 @@ import {
 
 const DISCOUNT_BY_NAME: Record<string, number> = {
   Pro: 0.05,
-  Premium: 0.1,
-  Platinum: 0.15,
+  Premium: 0.07,
+  Platinum: 0.1,
 };
 
 type PkgShape = {
