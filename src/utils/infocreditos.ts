@@ -8,21 +8,22 @@ export type Pkg = {
 };
 
 export const LEVELS: Level[] = [
-  { name: "Entry / Principiante", credits: 117 },
+
+  { name: "Entry / Principiante", credits: 125 },
   { name: "Junior", credits: 142 },
-  { name: "Semi-Senior", credits: 150 },
-  { name: "Senior", credits: 234 },
-  { name: "Leader", credits: 310 },
+  { name: "Semi-Senior", credits: 185 },
+  { name: "Senior", credits: 235 },
+  { name: "Leader", credits: 325 }
   { name: "Director", credits: 595 },
 ];
 
 export const PACKAGES: Pkg[] = [
   {
     name: "Single Hire",
-    credits: 120,
-    price: 720,
+    credits: 142,
+    price: 852,
     features: [
-      "120 créditos incluidos",
+      "142 créditos incluidos",
       "Vacantes posibles: 1 (Entry o Junior)",
       "Proceso básico de selección",
       "Soporte y acompañamiento",
@@ -33,10 +34,10 @@ export const PACKAGES: Pkg[] = [
   },
   {
     name: "Pro",
-    credits: 660,
-    price: 3762,
+    credits: 710,
+    price: 4047,
     features: [
-      "660 créditos incluidos",
+      "710 créditos incluidos",
       "Vacantes posibles: hasta 5 Juniors",
       "Proceso básico de selección",
       "Soporte y acompañamiento",
@@ -49,10 +50,10 @@ export const PACKAGES: Pkg[] = [
   },
   {
     name: "Premium",
-    credits: 990,
-    price: 5346,
+    credits: 1136,
+    price: 6339,
     features: [
-      "990 créditos incluidos",
+      "1136 créditos incluidos",
       "Vacantes posibles: hasta 8 Juniors",
       "Proceso básico de selección",
       "Soporte y acompañamiento",
@@ -65,11 +66,11 @@ export const PACKAGES: Pkg[] = [
   },
   {
     name: "Platinum",
-    credits: 1320,
-    price: 6732,
+    credits: 1420,
+    price: 7668,
     features: [
-      "1320 créditos incluidos",
-      "Vacantes posibles: hasta 11 Juniors",
+      "1420 créditos incluidos",
+      "Vacantes posibles: hasta 10 Juniors",
       "Proceso básico de selección",
       "Soporte y acompañamiento",
       "Onboarding asistido",
