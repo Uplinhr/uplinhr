@@ -3,16 +3,17 @@ export type Pkg = {
   name: string;
   credits: number;
   price: number;
-  features: string[];
+  features: string[] ;
   link: string;
 };
 
 export const LEVELS: Level[] = [
+
   { name: "Entry / Principiante", credits: 125 },
   { name: "Junior", credits: 142 },
   { name: "Semi-Senior", credits: 185 },
   { name: "Senior", credits: 235 },
-  { name: "Leader", credits: 325 },
+  { name: "Leader", credits: 325 }
   { name: "Director", credits: 595 },
 ];
 

@@ -9,21 +9,21 @@ const BenefitsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-white relative">
-      <button
-        onClick={handleBenefitsTTS}
-        className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
-        aria-label="Escuchar beneficios"
-        title="Escuchar texto"
-        type="button"
-        style={{ pointerEvents: 'auto' }}
-      >
-        <PlayCircle size={24} className="text-[#502B7D]" />
-      </button>
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl lg:text-4xl font-bold text-gray-800">
-          Beneficios <span className="text-[#502B7D]">claves</span>
-        </h2>
+        <div className="flex items-center justify-center gap-2">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800">
+            Beneficios <span className="text-[#502B7D]">claves</span>
+          </h2>
+          <button
+            onClick={handleBenefitsTTS}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+            aria-label="Escuchar beneficios"
+            title="Escuchar texto"
+          >
+            <PlayCircle size={24} className="text-[#502B7D]" />
+          </button>
+        </div>
         <p className="mt-2 text-gray-600 mb-12">
           Descubre por qué las empresas eligen People Partner Staffing para sus necesidades de RR.HH.
         </p>

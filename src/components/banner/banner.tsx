@@ -61,16 +61,21 @@ export function Banner() {
 }
 
 export function Banner2() {
+  const handleBanner2TTS = () => {
+    const text = "¿Necesitás ayuda antes de iniciar? Comunicate gratis con nuestro equipo especializado. ¡Te están esperando! Transformá tu forma de reclutar. Con Uplin pagás solo por lo que necesitás y hacés crecer tu equipo de manera inteligente.";
+    speakText(text);
+  };
+
   return (
     <div className="bg-gradient-to-r from-[#8F68AC] to-[#CDBADA] rounded-lg p-6 mb-6 flex flex-col max-w-6xl mx-auto text-white space-y-6">
-      
+
       {/* Fila con imagen, textos y botón */}
       <div className="flex flex-col md:flex-row items-center justify-between w-full gap-4">
         {/* Imagen + textos */}
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 relative rounded-full overflow-hidden flex-shrink-0">
             <Image
-              src="/llamada.jpg" 
+              src="/llamada.jpg"
               alt="Asesor especialista"
               fill
               className="object-cover"
@@ -82,10 +87,19 @@ export function Banner2() {
               ¿Necesitás ayuda antes de iniciar?
             </h2>
             <p className="text-sm text-white/90">
-              Comunicate gratis con nuestro equipo especializado.  
+              Comunicate gratis con nuestro equipo especializado.
               ¡Te están esperando!
             </p>
           </div>
+
+          <button
+            onClick={handleBanner2TTS}
+            className="p-2 hover:bg-white/20 rounded-full transition-colors duration-200"
+            aria-label="Escuchar texto del banner"
+            title="Escuchar texto"
+          >
+            <PlayCircle size={28} className="text-white" />
+          </button>
         </div>
 
         {/* Botón */}

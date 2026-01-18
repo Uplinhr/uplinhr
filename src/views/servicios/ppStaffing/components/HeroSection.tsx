@@ -11,24 +11,25 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="bg-white py-16 relative">
-      <button
-        onClick={handleHeroTTS}
-        className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
-        aria-label="Escuchar People Partner Staffing"
-        title="Escuchar texto"
-        type="button"
-        style={{ pointerEvents: 'auto' }}
-      >
-        <PlayCircle size={24} className="text-[#502B7D]" />
-      </button>
+    <section className="bg-white py-16">
       <div className="container mx-auto px-4 lg:flex items-center">
         <div className="lg:w-1/2 mb-8 lg:mb-0">
-          <h1 className="text-4xl lg:text-5xl font-bold">
-            <span className="text-[#AF93CC]">People Partner</span>
-            <br />
-            <span className="text-gray-800">Staffing</span>
-          </h1>
+          <div className="flex items-start gap-2">
+            <h1 className="text-4xl lg:text-5xl font-bold">
+              <span className="text-[#AF93CC]">People Partner</span>
+              <br />
+              <span className="text-gray-800">Staffing</span>
+            </h1>
+            <button
+              onClick={handleHeroTTS}
+              className="p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 mt-1"
+              aria-label="Escuchar People Partner Staffing"
+              title="Escuchar texto"
+              type="button"
+            >
+              <PlayCircle size={24} className="text-[#502B7D]" />
+            </button>
+          </div>
           <p className="mt-4 text-gray-600 max-w-lg">
             ¿Necesitas un experto para tu equipo de People pero no quieres sumar
             a alguien a nómina? Imagina tener a un profesional de recursos
