@@ -1,9 +1,5 @@
 import { Vacante } from "@/interfaces";
-
-type SheetRow = { c: Array<{ v: string | boolean | number | null }> };
-
-const SHEETS_RESPONSE_REGEX =
-  /google\.visualization\.Query\.setResponse\(([\s\S]+)\);/;
+import { fetchSheetRows, SheetRow } from "./googleSheets/sheets.utils";
 
 const capitalize = (s: string) => s.replace(/\b\w/g, (c) => c.toUpperCase());
 
@@ -27,17 +23,7 @@ export async function fetchVacantes(): Promise<FetchVacantesResult> {
   const url = process.env.NEXT_PUBLIC_VACANTES_SHEET_URL;
   if (!url) throw new Error("NEXT_PUBLIC_VACANTES_SHEET_URL no está configurada");
 
-  const res = await fetch(url);
-  if (!res.ok)
-    throw new Error(`Error al conectar con la fuente de vacantes (${res.status})`);
-
-  const text = await res.text();
-  const jsonStr = text.match(SHEETS_RESPONSE_REGEX)?.[1];
-  if (!jsonStr)
-    throw new Error("La respuesta de la hoja de cálculo tiene un formato inesperado");
-
-  const json = JSON.parse(jsonStr);
-  const rows: SheetRow[] = json.table?.rows ?? [];
+  const rows = await fetchSheetRows(url);
   const vacantes = rows.slice(1).map(parseRow);
   const areas = Array.from(
     new Set(vacantes.map((v) => v.area).filter((a) => a !== ""))

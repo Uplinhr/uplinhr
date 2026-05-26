@@ -61,6 +61,22 @@ export interface CardCursoProps {
   link: string;
 }
 
+export interface SimulatorLevel {
+  name: string;
+  credits: number;
+}
+
+export interface AdditionalService {
+  name: string;
+  creditsPerUnit: number;
+}
+
+export interface SimulatorData {
+  creditPriceUsd: number;
+  levels: SimulatorLevel[];
+  additionalServices: AdditionalService[];
+}
+
 export interface Vacante {
   nombre_empresa: string;
   es_anonimo: boolean;
