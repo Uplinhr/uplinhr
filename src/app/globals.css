@@ -1,15 +1,214 @@
 
 @import "tailwindcss";
 
+@theme {
+  /* FUENTE */
+  --font-sans: var(--font-poppins), sans-serif;
+ 
+  /* COLORES — MORADOS (color principal del logo) */
+  --color-uplin-purple-deep:  #3C0E36;   /* Logo principal */
+  --color-uplin-purple:       #6D4098;   /* Aplicación primaria */
+  --color-uplin-purple-2:     #532B86;
+  --color-uplin-purple-3:     #7C51A0;
+  --color-uplin-purple-4:     #8F68AC;
+  --color-uplin-purple-5:     #A482BB;
+  --color-uplin-purple-6:     #BB9ECA;
+  --color-uplin-purple-7:     #CDBADA;
+  --color-uplin-purple-8:     #E0D6EA;
+ 
+  /* COLORES — VERDES (acento del pico de la "u") */
+  --color-uplin-green:        #72BF58;   /* Verde acento principal */
+  --color-uplin-green-dark:   #45AC34;
+  --color-uplin-green-2:      #8AC874;
+  --color-uplin-green-3:      #A2D18F;
+  --color-uplin-green-4:      #BADCAC;
+  --color-uplin-green-5:      #D2E8C9;
+  --color-uplin-green-6:      #EAF4E5;
+ 
+  /* COLORES — NARANJAS (acentos cálidos) */
+  --color-uplin-orange:       #F89A1C;
+  --color-uplin-orange-dark:  #F18610;
+  --color-uplin-orange-2:     #F9A22E;
+  --color-uplin-orange-3:     #FBB354;
+  --color-uplin-orange-4:     #FDC57C;
+  --color-uplin-orange-5:     #FFD6A1;
+  --color-uplin-orange-6:     #FDE6C7;
+  --color-uplin-orange-7:     #FEF0DE;
+ 
+  /* COLORES — NEUTRALES / INK */
+  --color-uplin-bg:           #FAF7FC;   /* Fondo de página */
+  --color-uplin-white:        #FFFFFF;
+  --color-uplin-ink:          #2A0824;   /* Texto principal */
+  --color-uplin-ink-soft:     #5A4566;   /* Texto secundario */
+  --color-uplin-ink-muted:    #8B7A95;   /* Texto terciario / placeholders */
+  --color-uplin-line:         rgba(60, 14, 54, 0.08); /* Divisores */
+ 
+  /* GLASS — sistema de transparencias Usado en: cards, navbar, botón secundario, dropdowns */
+  --color-uplin-glass-bg:           rgba(255, 255, 255, 0.32);
+  --color-uplin-glass-bg-strong:    rgba(255, 255, 255, 0.45);
+  --color-uplin-glass-border:       rgba(255, 255, 255, 0.70);
+ 
+  /* ----------------------------------------------------------
+     ESPACIADO FLUIDO
+     ---------------------------------------------------------- */
+  --spacing-uplin-xs:   0.5rem;
+  --spacing-uplin-sm:   1rem;
+  --spacing-uplin-md:   2rem;
+  --spacing-uplin-lg:   4rem;
+  --spacing-uplin-xl:   7rem;
+ 
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+     ---------------------------------------------------------- */
+  --radius-uplin-sm:    12px;
+  --radius-uplin-md:    20px;
+  --radius-uplin-lg:    28px;
+  --radius-uplin-xl:    40px;
+  --radius-uplin-pill:  9999px;
+ 
+  /* ----------------------------------------------------------
+     TIPOGRAFÍA — ESCALA
+     ---------------------------------------------------------- */
+ 
+  /* Tamaños de texto — clamp() para fluidez responsive */
+  --text-uplin-h1:        clamp(2.2rem, 5vw, 3.8rem);
+  --text-uplin-h2:        clamp(1.9rem, 4vw, 3rem);
+  --text-uplin-h2-sm:     clamp(1.7rem, 3.5vw, 2.4rem);
+  --text-uplin-h3:        1.35rem;
+  --text-uplin-h4:        1.1rem;
+  --text-uplin-h5:        0.98rem;
+  --text-uplin-lead:      1.08rem;
+  --text-uplin-body:      0.95rem;
+  --text-uplin-sm:        0.88rem;
+  --text-uplin-xs:        0.82rem;
+  --text-uplin-eyebrow:   0.78rem;
+  --text-uplin-nav:       0.88rem;
+ 
+  /* Pesos */
+  --font-weight-uplin-regular:    400;
+  --font-weight-uplin-medium:     500;
+  --font-weight-uplin-semibold:   600;
+  --font-weight-uplin-bold:       700;
+  --font-weight-uplin-extrabold:  800;
+ 
+  /* Tracking (letter-spacing) */
+  --tracking-uplin-h1:      -0.035em;
+  --tracking-uplin-h2:      -0.025em;
+  --tracking-uplin-h3:      -0.015em;
+  --tracking-uplin-h4:      -0.010em;
+  --tracking-uplin-eyebrow:  0.060em;
+  --tracking-uplin-badge:    0.150em;
+ 
+  /* Line heights */
+  --leading-uplin-heading:  1.05;
+  --leading-uplin-title:    1.10;
+  --leading-uplin-subhead:  1.15;
+  --leading-uplin-body:     1.60;
+  --leading-uplin-card:     1.55;
+ 
+  /* ----------------------------------------------------------
+     SOMBRAS
+     ---------------------------------------------------------- */
+  --shadow-uplin-glass:
+    0 12px 40px -8px  rgba(60, 14, 54, 0.18),
+    0 2px  6px        rgba(60, 14, 54, 0.06),
+    inset 0 1px 0     rgba(255, 255, 255, 0.70);
+ 
+  --shadow-uplin-card-hover:
+    0 24px 50px -12px rgba(60, 14, 54, 0.22),
+    inset 0 1px 0     rgba(255, 255, 255, 0.90);
+ 
+  --shadow-uplin-btn-primary:
+    0 8px 20px -6px   rgba(60, 14, 54, 0.40);
+ 
+  --shadow-uplin-btn-green:
+    0 14px 28px -8px  rgba(114, 191, 88, 0.50);
+ 
+  --shadow-uplin-nav:
+    0 8px 32px -8px   rgba(60, 14, 54, 0.15),
+    inset 0 1px 0     rgba(255, 255, 255, 0.90);
+ 
+  --shadow-uplin-icon:
+    0 8px 20px -6px   rgba(60, 14, 54, 0.25);
+ 
+  /* ----------------------------------------------------------
+     TRANSICIONES
+     ---------------------------------------------------------- */
+  --ease-uplin:             cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-uplin-fast:    0.20s;
+  --duration-uplin-base:    0.35s;
+  --duration-uplin-slow:    0.60s;
+ 
+  --transition-uplin-fast:  0.20s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-uplin-base:  0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-uplin-slow:  0.60s cubic-bezier(0.4, 0, 0.2, 1);
+ 
+}
+
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 
 body {
   font-family: var(--font-poppins), sans-serif;
+  background-color: var(--color-uplin-bg);
+  color: var(--color-uplin-ink);
+  line-height: var(--leading-uplin-body);
+  font-weight: var(--font-weight-uplin-regular);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
 }
 
+/* ============================================================
+   GRADIENTES DE TEXTO — clase utilitaria reutilizable
+   Uso: <span className="text-gradient-uplin">texto</span>
+   ============================================================ */
+
+.text-gradient-uplin {
+  background: linear-gradient(
+    135deg,
+    var(--color-uplin-purple-deep)  0%,
+    var(--color-uplin-purple)       45%,
+    var(--color-uplin-green)        100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================================================
+   GLASSMORPHISM — clase utilitaria base
+   Uso: <div className="glass-card">...</div>
+   ============================================================ */
+
+.glass-card {
+  background: var(--color-uplin-glass-bg-strong);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  backdrop-filter: blur(24px) saturate(170%);
+  border: 1px solid var(--color-uplin-glass-border);
+  box-shadow: var(--shadow-uplin-glass);
+}
+
+/* ============================================================
+   SELECT — estilos para opciones nativas del navegador
+   ============================================================ */
+
+select option {
+  color: var(--color-uplin-purple);
+  background: #ffffff;
+  cursor: pointer;
+}
+
+select option:checked {
+  background: var(--color-uplin-purple) !important;
+  color: #ffffff !important;
+}
+
+/* ESTO DESPUES SE BORRA*/
 select option {
   color: #6d4098;
   background: #ffffff;
