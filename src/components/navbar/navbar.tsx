@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { IoEyeSharp } from "react-icons/io5";
@@ -10,16 +10,58 @@ import { IoMdClose } from "react-icons/io";
 import { toast } from "sonner";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useUserStore } from "@/store/useUserStore";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { EditPasswordRequest } from "@/services/userService";
+
+const ease = [0.4, 0, 0.2, 1] as const;
+const fast = { duration: 0.22, ease };
+const base = { duration: 0.35, ease };
+
+const serviceLinks = [
+  { href: "/servicios/creditos", label: "Búsqueda de talento" },
+  { href: "/servicios/ppStaffing", label: "People Partner Staffing" },
+  { href: "/servicios/consultorias", label: "Consultorías" },
+  { href: "/servicios/membresias", label: "Membresías" },
+];
+
+const bibliotecaLinks = [
+  { href: "/biblioteca/plantillas", label: "Plantillas accionables" },
+  { href: "/biblioteca/guias", label: "Guías descargables" },
+  { href: "/biblioteca/webinars", label: "Webinars Grabados" },
+];
+
+const dropdownLinkClass =
+  "nav-dropdown-item block px-6 py-3 pl-7 text-uplin-purple text-uplin-nav font-medium rounded-lg transition-all relative " +
+  "focus-visible:bg-uplin-purple/10 " +
+  "before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent " +
+  "hover:before:bg-uplin-purple focus-visible:before:bg-uplin-purple focus-visible:outline-none";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-
-  // Dropdown de Servicios
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [bibliotecaOpen, setBibliotecaOpen] = useState(false);
+
+  const servicesLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const bibliotecaLeaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const toggleServices = () => setServicesOpen((s) => !s);
+  const toggleBiblioteca = () => setBibliotecaOpen((b) => !b);
+
+  const openServices = () => {
+    if (servicesLeaveTimer.current) clearTimeout(servicesLeaveTimer.current);
+    setServicesOpen(true);
+  };
+  const closeServices = () => {
+    servicesLeaveTimer.current = setTimeout(() => setServicesOpen(false), 120);
+  };
+  const openBiblioteca = () => {
+    if (bibliotecaLeaveTimer.current) clearTimeout(bibliotecaLeaveTimer.current);
+    setBibliotecaOpen(true);
+  };
+  const closeBiblioteca = () => {
+    bibliotecaLeaveTimer.current = setTimeout(() => setBibliotecaOpen(false), 120);
+  };
 
   const { user, logout } = useAuthStore();
   const { cambiarClave } = useUserStore();
@@ -64,15 +106,15 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  // helper para cerrar todos los overlays
   const closeAllMenus = () => {
     setIsOpen(false);
     setUserMenuOpen(false);
     setServicesOpen(false);
+    setBibliotecaOpen(false);
   };
 
   return (
-    <nav className="font-[Poppins] bg-white shadow-gray-300 shadow-md relative">
+    <nav className="font-[Poppins] bg-white shadow-uplin-nav relative">
       <div className="container mx-auto px-10 py-3 flex justify-between items-center">
         <Link href="/" className="self-start">
           <Image
@@ -85,101 +127,154 @@ const Navbar = () => {
         </Link>
 
         {/* DESKTOP */}
-        <div className="hidden lg:flex gap-12 items-center">
-          <a
+        <div className="hidden lg:flex gap-10 items-center">
+          <motion.a
             href="/quienes-somos"
-            className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
+            className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
+            whileHover={{ y: -2 }}
+            transition={fast}
           >
             Quiénes somos
-          </a>
+          </motion.a>
 
-          <div className="relative">
-            <button
+          {/* Dropdown Servicios */}
+          <div
+            className="relative"
+            onMouseEnter={openServices}
+            onMouseLeave={closeServices}
+          >
+            <motion.button
               type="button"
               onClick={toggleServices}
               aria-expanded={servicesOpen}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 transition-colors
-      ${
-        servicesOpen
-          ? "bg-[#502B7D] text-white"
-          : "text-[#502B7D] hover:bg-[#502B7D] hover:text-white"
-      }`}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={fast}
+              className={`flex items-center gap-2 text-uplin-nav font-medium rounded-xl px-4 py-2 transition-colors ${
+                servicesOpen
+                  ? "bg-uplin-purple-8 text-uplin-purple"
+                  : "text-uplin-ink hover:bg-uplin-purple-8 hover:text-uplin-purple"
+              }`}
             >
               <span>Servicios</span>
-              <FaChevronDown
-                className={`transition-transform hover:text-white ${
-                  servicesOpen ? "rotate-180 text-white" : "text-[#502B7D]"
-                }`}
-              />
-            </button>
-
-            {servicesOpen && (
-              <div
-                className="absolute left-0 mt-3 w-[320px] bg-white rounded-2xl shadow-lg py-4 z-30"
-                onMouseLeave={() => setServicesOpen(false)}
+              <motion.span
+                animate={{ rotate: servicesOpen ? 180 : 0 }}
+                transition={fast}
+                className="flex items-center"
               >
-                {/* ▼▼▼ AJUSTE: hover sutil sin subrayado ▼▼▼ */}
-                <a
-                  href="/servicios/creditos"
-                  className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
-                  onClick={closeAllMenus}
+                <FaChevronDown />
+              </motion.span>
+            </motion.button>
+
+            <AnimatePresence>
+              {servicesOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                  transition={fast}
+                  className="absolute left-0 mt-3 w-[320px] bg-white rounded-2xl shadow-uplin-glass border border-uplin-line py-4 z-30"
+                  onMouseEnter={openServices}
+                  onMouseLeave={closeServices}
                 >
-                  Búsqueda de talento
-                </a>
-                <a
-                  href="/servicios/ppStaffing"
-                  className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
-                  onClick={closeAllMenus}
-                >
-                  People Partner Staffing
-                </a>
-                <a
-                  href="/servicios/consultorias"
-                  className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
-                  onClick={closeAllMenus}
-                >
-                  Consultorías
-                </a>
-                <a
-                  href="/servicios/membresias"
-                  className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
-                  onClick={closeAllMenus}
-                >
-                  Membresías
-                </a>
-              </div>
-            )}
+                  {serviceLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className={dropdownLinkClass}
+                      onClick={closeAllMenus}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
-          <a
-            href="/academy"
-            className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
-          >
-            Uplin Academy
-          </a>
-          <a
+          <motion.a
             href="/careers"
-            className="text-[#502B7D] hover:text-[#6b4699] cursor-pointer"
+            className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
+            whileHover={{ y: -2 }}
+            transition={fast}
           >
             Uplin Careers
-          </a>
-          <a
+          </motion.a>
+
+          {/* Dropdown Biblioteca Uplin */}
+          <div
+            className="relative"
+            onMouseEnter={openBiblioteca}
+            onMouseLeave={closeBiblioteca}
+          >
+            <motion.button
+              type="button"
+              onClick={toggleBiblioteca}
+              aria-expanded={bibliotecaOpen}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={fast}
+              className={`flex items-center gap-2 text-uplin-nav font-medium rounded-xl px-4 py-2 transition-colors ${
+                bibliotecaOpen
+                  ? "bg-uplin-purple-8 text-uplin-purple"
+                  : "text-uplin-ink hover:bg-uplin-purple-8 hover:text-uplin-purple"
+              }`}
+            >
+              <span>Biblioteca Uplin</span>
+              <motion.span
+                animate={{ rotate: bibliotecaOpen ? 180 : 0 }}
+                transition={fast}
+                className="flex items-center"
+              >
+                <FaChevronDown />
+              </motion.span>
+            </motion.button>
+
+            <AnimatePresence>
+              {bibliotecaOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                  transition={fast}
+                  className="absolute left-0 mt-3 w-[280px] bg-white rounded-2xl shadow-uplin-glass border border-uplin-line py-4 z-30"
+                  onMouseEnter={openBiblioteca}
+                  onMouseLeave={closeBiblioteca}
+                >
+                  {bibliotecaLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className={dropdownLinkClass}
+                      onClick={closeAllMenus}
+                    >
+                      {link.label}
+                    </a>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <motion.a
             href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
-            className="border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white cursor-pointer"
+            className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
+            whileHover={{ y: -2 }}
+            transition={fast}
           >
             Contacto
-          </a>
+          </motion.a>
 
-          {/* User menu */}
+          {/* User menu — oculto visualmente, lógica preservada para reincorporar
           <div className="relative">
             <button
               onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="text-[#502B7D] p-2 rounded-full cursor-pointer hover:opacity-80"
+              className="text-uplin-purple-deep p-2 rounded-full cursor-pointer hover:opacity-80"
             >
               <FaUserCircle size={28} />
             </button>
             {userMenuOpen && (
-              <div className="absolute text-[#502B7D] right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-20">
+              <div className="absolute text-uplin-purple-deep right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-20">
                 {!user ? (
                   <Link
                     href="/login"
@@ -192,7 +287,7 @@ const Navbar = () => {
                   <>
                     <button
                       onClick={handleLogout}
-                      className="block text-[#502B7D] w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      className="block text-uplin-purple-deep w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                     >
                       Cerrar sesión
                     </button>
@@ -201,7 +296,7 @@ const Navbar = () => {
                         setIsModalPasswordOpen(true);
                         setUserMenuOpen(false);
                       }}
-                      className="block text-[#502B7D] w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      className="block text-uplin-purple-deep w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
                     >
                       Cambiar contraseña
                     </button>
@@ -210,131 +305,204 @@ const Navbar = () => {
               </div>
             )}
           </div>
+          */}
         </div>
 
         {/* HAMBURGER */}
-        <button
-          className="lg:hidden text-[#502B7D] focus:outline-none"
+        <motion.button
+          className="lg:hidden text-uplin-purple-deep focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
+          whileTap={{ scale: 0.97 }}
+          transition={fast}
         >
-          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
+          <AnimatePresence mode="wait" initial={false}>
+            {isOpen ? (
+              <motion.span
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={fast}
+                className="flex"
+              >
+                <FaTimes size={24} />
+              </motion.span>
+            ) : (
+              <motion.span
+                key="open"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={fast}
+                className="flex"
+              >
+                <FaBars size={24} />
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
       </div>
 
       {/* MOBILE */}
-      {isOpen && (
-        <div className="lg:hidden mt-4 pb-4 space-y-3">
-          <a
-            href="/quienes-somos"
-            className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded cursor-pointer"
-            onClick={closeAllMenus}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={base}
+            className="lg:hidden overflow-hidden"
           >
-            Quiénes Somos
-          </a>
+            <div className="pb-4 px-4 space-y-1">
+              <a
+                href="/quienes-somos"
+                className="block text-uplin-ink text-uplin-nav font-medium hover:text-uplin-purple py-2 px-4 hover:bg-uplin-purple/10 rounded-lg cursor-pointer transition-colors"
+                onClick={closeAllMenus}
+              >
+                Quiénes Somos
+              </a>
 
-          {/* Servicios con submenú en mobile */}
-          <button
-            type="button"
-            onClick={() => setServicesOpen((s) => !s)}
-            aria-expanded={servicesOpen}
-            className={`flex items-center gap-2 rounded-lg px-3 py-2 cursor-pointer transition-colors
-            ${servicesOpen ? "bg-[#502B7D] text-white" : "text-[#502B7D]"}
-            hover:bg-[#502B7D] hover:text-white`}
-          >
-            <span>Servicios</span>
-            <FaChevronDown
-              className={`transition-transform ${
-                servicesOpen ? "rotate-180 text-white" : "text-[#502B7D]"
-              }`}
-            />
-          </button>
+              {/* Servicios con submenú en mobile */}
+              <button
+                type="button"
+                onClick={toggleServices}
+                aria-expanded={servicesOpen}
+                className={`flex items-center gap-2 w-full text-uplin-nav font-medium rounded-lg px-4 py-2 cursor-pointer transition-colors ${
+                  servicesOpen
+                    ? "bg-uplin-purple-deep text-white"
+                    : "text-uplin-ink hover:bg-uplin-purple/10 hover:text-uplin-purple"
+                }`}
+              >
+                <span>Servicios</span>
+                <motion.span
+                  animate={{ rotate: servicesOpen ? 180 : 0 }}
+                  transition={fast}
+                  className="flex items-center"
+                >
+                  <FaChevronDown />
+                </motion.span>
+              </button>
 
-          {servicesOpen && (
-            <div className="ml-4 space-y-1">
-              {/* ▼▼▼ AJUSTE: hover sutil sin subrayado ▼▼▼ */}
+              <AnimatePresence>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={fast}
+                    className="overflow-hidden ml-4 space-y-1"
+                  >
+                    {serviceLinks.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className={dropdownLinkClass}
+                        onClick={closeAllMenus}
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               <a
-                href="/servicios/creditos"
-                className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
+                href="/careers"
+                className="block text-uplin-ink text-uplin-nav font-medium hover:text-uplin-purple py-2 px-4 hover:bg-uplin-purple/10 rounded-lg cursor-pointer transition-colors"
                 onClick={closeAllMenus}
               >
-                Búsqueda de talento
+                Uplin Careers
               </a>
-              <a
-                href="/servicios/ppStaffing"
-                className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
-                onClick={closeAllMenus}
+
+              {/* Biblioteca Uplin con submenú en mobile */}
+              <button
+                type="button"
+                onClick={toggleBiblioteca}
+                aria-expanded={bibliotecaOpen}
+                className={`flex items-center gap-2 w-full text-uplin-nav font-medium rounded-lg px-4 py-2 cursor-pointer transition-colors ${
+                  bibliotecaOpen
+                    ? "bg-uplin-purple-deep text-white"
+                    : "text-uplin-ink hover:bg-uplin-purple/10 hover:text-uplin-purple"
+                }`}
               >
-                People Partner Staffing
-              </a>
-              <a
-                href="/servicios/consultorias"
-                className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
-                onClick={closeAllMenus}
-              >
-                Consultorías
-              </a>
-              <a
-                href="/servicios/membresias"
-                className="block px-6 py-3 pl-7 text-[#502B7D] rounded-lg transition-colors relative hover:bg-[#502B7D]/10 focus-visible:bg-[#502B7D]/10 before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:h-3 before:w-[3px] before:rounded-full before:bg-transparent hover:before:bg-[#502B7D] focus-visible:before:bg-[#502B7D] focus-visible:outline-none"
-                onClick={closeAllMenus}
-              >
-                Membresías
-              </a>
+                <span>Biblioteca Uplin</span>
+                <motion.span
+                  animate={{ rotate: bibliotecaOpen ? 180 : 0 }}
+                  transition={fast}
+                  className="flex items-center"
+                >
+                  <FaChevronDown />
+                </motion.span>
+              </button>
+
+              <AnimatePresence>
+                {bibliotecaOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={fast}
+                    className="overflow-hidden ml-4 space-y-1"
+                  >
+                    {bibliotecaLinks.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className={dropdownLinkClass}
+                        onClick={closeAllMenus}
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              <div className="pt-2">
+                <a
+                  href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
+                  className="inline-block text-uplin-nav font-medium border-2 border-uplin-purple-deep text-uplin-purple-deep px-5 py-1.5 rounded-lg hover:bg-uplin-purple-deep hover:text-white cursor-pointer transition-colors"
+                  onClick={closeAllMenus}
+                >
+                  Contacto
+                </a>
+              </div>
+
+              {/* Sesión de usuario — oculta visualmente, lógica preservada para reincorporar
+              {!user ? (
+                <Link
+                  href="/login"
+                  className="block text-uplin-purple-deep px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                  onClick={closeAllMenus}
+                >
+                  Iniciar sesión
+                </Link>
+              ) : (
+                <>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-uplin-purple-deep text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                  >
+                    Cerrar sesión
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsModalPasswordOpen(true);
+                      setIsOpen(false);
+                    }}
+                    className="block w-full text-uplin-purple-deep text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
+                  >
+                    Cambiar contraseña
+                  </button>
+                </>
+              )}
+              */}
             </div>
-          )}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-          <a
-            href="/academy"
-            className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded cursor-pointer"
-            onClick={closeAllMenus}
-          >
-            Uplin Academy
-          </a>
-          <a
-            href="/careers"
-            className="block text-[#502B7D] hover:text-[#6b4699] py-2 px-4 hover:bg-[#502B7D]/10 rounded cursor-pointer"
-            onClick={closeAllMenus}
-          >
-            Uplin Careers
-          </a>
-          <a
-            href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
-            className="inline-block border-[#502B7D] border-2 px-5 py-1 rounded-lg hover:bg-[#502B7D] hover:text-white mt-2 cursor-pointer"
-            onClick={closeAllMenus}
-          >
-            Contacto
-          </a>
-
-          {!user ? (
-            <Link
-              href="/login"
-              className="block text-[#502B7D] px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-              onClick={closeAllMenus}
-            >
-              Iniciar sesión
-            </Link>
-          ) : (
-            <>
-              <button
-                onClick={handleLogout}
-                className="block w-full text-[#502B7D] text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-              >
-                Cerrar sesión
-              </button>
-              <button
-                onClick={() => {
-                  setIsModalPasswordOpen(true);
-                  setIsOpen(false);
-                }}
-                className="block w-full text-[#502B7D] text-left px-4 py-2 hover:bg-gray-100 rounded cursor-pointer"
-              >
-                Cambiar contraseña
-              </button>
-            </>
-          )}
-        </div>
-      )}
-
+      {/* Modal cambio de contraseña — oculto visualmente, lógica preservada para reincorporar
       {isModalPasswordOpen && (
         <div className="fixed inset-0 z-50 flex justify-center items-center">
           <div
@@ -344,19 +512,19 @@ const Navbar = () => {
           <div className="relative bg-white rounded-2xl p-6 w-full max-w-md shadow-xl z-10 mx-4">
             <button
               onClick={() => setIsModalPasswordOpen(false)}
-              className="absolute top-3 right-3 text-[#6D4098] cursor-pointer hover:opacity-70"
+              className="absolute top-3 right-3 text-uplin-purple cursor-pointer hover:opacity-70"
             >
               <IoMdClose size={24} />
             </button>
 
-            <h2 className="text-xl font-semibold text-[#6D4098] mb-4 text-center">
+            <h2 className="text-xl font-semibold text-uplin-purple mb-4 text-center">
               Cambiar contraseña
             </h2>
 
             <div className="relative mb-4">
               <label
                 htmlFor="newPassword"
-                className="block text-[#6D4098] font-normal mb-2"
+                className="block text-uplin-purple font-normal mb-2"
               >
                 Nueva contraseña
               </label>
@@ -365,12 +533,12 @@ const Navbar = () => {
                 type={showNew ? "text" : "password"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-white border border-[#6D4098] text-black focus:outline-none focus:ring-2 focus:ring-[#502b7d] pr-12"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-uplin-purple text-uplin-ink focus:outline-none focus:ring-2 focus:ring-uplin-purple-deep pr-12"
                 placeholder="Ingresa tu nueva contraseña"
               />
               <button
                 type="button"
-                className="absolute right-3 bottom-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+                className="absolute right-3 bottom-3 text-uplin-ink-muted hover:text-uplin-ink-soft cursor-pointer"
                 onClick={() => setShowNew(!showNew)}
               >
                 {showNew ? <IoEyeSharp size={20} /> : <FaEyeSlash size={20} />}
@@ -380,7 +548,7 @@ const Navbar = () => {
             <div className="relative mb-1">
               <label
                 htmlFor="confirmPassword"
-                className="block text-[#6D4098] font-normal mb-2"
+                className="block text-uplin-purple font-normal mb-2"
               >
                 Repetir contraseña
               </label>
@@ -390,13 +558,13 @@ const Navbar = () => {
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className={`w-full px-4 py-3 rounded-xl bg-white border ${
-                  passwordsMatch ? "border-[#6D4098]" : "border-red-500"
-                } text-black focus:outline-none focus:ring-2 focus:ring-[#502b7d] pr-12`}
+                  passwordsMatch ? "border-uplin-purple" : "border-red-500"
+                } text-uplin-ink focus:outline-none focus:ring-2 focus:ring-uplin-purple-deep pr-12`}
                 placeholder="Confirma tu nueva contraseña"
               />
               <button
                 type="button"
-                className="absolute right-3 bottom-3 text-gray-500 hover:text-gray-700 cursor-pointer"
+                className="absolute right-3 bottom-3 text-uplin-ink-muted hover:text-uplin-ink-soft cursor-pointer"
                 onClick={() => setShowConfirm(!showConfirm)}
               >
                 {showConfirm ? (
@@ -414,20 +582,21 @@ const Navbar = () => {
             )}
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={fast}
               onClick={handleChangePassword}
               disabled={loading}
-              className="w-full bg-[#72bf58] border-4 border-[#72bf58] py-2 px-5 rounded-lg text-white font-semibold text-center cursor-pointer flex items-center justify-center gap-2"
+              className="w-full bg-uplin-green border-4 border-uplin-green py-2 px-5 rounded-lg text-white font-semibold text-center cursor-pointer flex items-center justify-center gap-2 shadow-uplin-btn-green"
             >
               {loading ? "Procesando..." : "Cambiar Contraseña"}
             </motion.button>
           </div>
         </div>
       )}
+      */}
     </nav>
   );
 };
 
 export default Navbar;
-
