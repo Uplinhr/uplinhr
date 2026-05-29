@@ -3,7 +3,7 @@ import Button from "@/components/Button/Button";
 import Needs from "@/views/Needs";
 import Image from "next/image";
 import { FaLinkedin } from "react-icons/fa";
-import { PlayCircle } from "lucide-react";
+import { Volume2 } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
 
 const AboutUs = () => {
@@ -44,13 +44,12 @@ const AboutUs = () => {
         <section className="bg-[#502B7D] rounded-2xl p-6 sm:p-8 md:p-12 my-6 sm:my-8 relative">
           <button
             onClick={handleHeroTTS}
-            className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+            className="uplin-tts-btn absolute top-4 right-4 z-50"
             aria-label="Escuchar Quiénes somos"
             title="Escuchar texto"
             type="button"
-            style={{ pointerEvents: 'auto' }}
           >
-            <PlayCircle size={24} className="text-white" />
+            <Volume2 size={22} />
           </button>
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="w-full">
@@ -81,13 +80,12 @@ const AboutUs = () => {
       <section className="py-5 px-4 sm:px-6 lg:px-10 mx-auto max-w-7xl relative">
         <button
           onClick={handleDescriptionTTS}
-          className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+          className="uplin-tts-btn absolute top-4 right-4 z-50"
           aria-label="Escuchar descripción de Uplin"
           title="Escuchar texto"
           type="button"
-          style={{ pointerEvents: 'auto' }}
         >
-          <PlayCircle size={24} className="text-[#502B7D]" />
+          <Volume2 size={22} />
         </button>
         <div className="grid md:grid-cols-2 items-center gap-8">
           <div className="relative flex justify-center order-2 md:order-1 px-0 md:pl-10 lg:pl-20">
@@ -175,11 +173,11 @@ const AboutUs = () => {
         <div className="bg-white p-6 sm:p-10 md:p-16 rounded-xl shadow-lg max-w-4xl w-full text-center relative">
           <button
             onClick={handleSaberMasTTS}
-            className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
+            className="uplin-tts-btn absolute top-4 right-4"
             aria-label="Escuchar sección ¿Querés saber más?"
             title="Escuchar texto"
           >
-            <PlayCircle size={24} className="text-[#502B7D]" />
+            <Volume2 size={22} />
           </button>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6">
             ¿Querés saber más?

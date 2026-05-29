@@ -1,62 +1,188 @@
 "use client"
+import { useState } from "react"
 import Image from "next/image"
 import Button from "../Button/Button"
-import { PlayCircle } from "lucide-react"
+import { Volume2, ArrowRight, CalendarDays, PlayCircle } from "lucide-react"
 import { speakText } from "@/utils/textToSpeech"
+import { motion } from "framer-motion"
 
 export function Banner() {
-  // Función para el TTS del banner
+  const [isHovered, setIsHovered] = useState(false)
+
   const handleBannerTTS = () => {
     const text = "¿Necesitás ayuda antes de iniciar? Comunicate gratis con nuestro equipo especializado. ¡Te están esperando!";
     speakText(text);
   };
 
   return (
-    <div className="bg-gradient-to-r from-[#8F68AC] to-[#CDBADA] rounded-lg p-6 mb-6 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white">
-      {/* Text Section */}
-      <div className="flex items-center gap-4">
-        {/* Imagen */}
-        <div className="w-12 h-12 relative rounded-full overflow-hidden flex-shrink-0">
-          <Image
-            src="/llamada.jpg"
-            alt="Asesor especialista"
-            fill
-            className="object-cover"
-          />
-        </div>
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
+      style={{
+        maxWidth: 1280,
+        margin: "0 auto",
+        padding: "0 clamp(1.25rem, 4vw, 3rem)",
+        paddingTop: "var(--spacing-uplin-xl)",
+        paddingBottom: "var(--spacing-uplin-xl)",
+      }}
+    >
+      <style>{`
+        @keyframes livePulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(1.4); }
+        }
+      `}</style>
 
-        {/* Texts */}
-        <div>
-          <h2 className="text-lg font-semibold">
-            ¿Necesitás ayuda antes de iniciar?
-          </h2>
-          <p className="text-sm text-white/90">
-            Comunicate gratis con nuestro equipo especializado.
-            ¡Te están esperando!
+      <div
+        style={{
+          background: "linear-gradient(135deg, var(--color-uplin-purple) 0%, var(--color-uplin-purple-deep) 100%)",
+          borderRadius: "var(--radius-uplin-xl)",
+          padding: "2.5rem",
+          color: "white",
+          position: "relative",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          boxShadow: "0 30px 60px -20px rgba(60,14,54,0.4)",
+        }}
+      >
+        {/* Blob verde */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-50%",
+            right: "-30%",
+            width: 500,
+            height: 500,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(114,191,88,0.35), transparent 70%)",
+            filter: "blur(40px)",
+            pointerEvents: "none",
+          }}
+        />
+        {/* Blob naranja */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: "-30%",
+            left: "-20%",
+            width: 400,
+            height: 400,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(248,154,28,0.3), transparent 70%)",
+            filter: "blur(50px)",
+            pointerEvents: "none",
+          }}
+        />
+
+        {/* Contenido */}
+        <div style={{ position: "relative", zIndex: 1 }}>
+          {/* Badge "en línea" */}
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.4rem 0.9rem",
+              background: "rgba(255,255,255,0.12)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              borderRadius: "var(--radius-uplin-pill)",
+              fontSize: "var(--text-uplin-eyebrow)",
+              fontWeight: 500,
+              color: "white",
+              marginBottom: "1.2rem",
+              alignSelf: "flex-start",
+            }}
+          >
+            <span
+              style={{
+                display: "inline-block",
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                background: "var(--color-uplin-green)",
+                boxShadow: "0 0 10px var(--color-uplin-green)",
+                animation: "livePulse 2s ease-in-out infinite",
+              }}
+            />
+            Soporte disponible
+          </div>
+
+          <h3
+            style={{
+              fontSize: "clamp(1.5rem, 3vw, 2.1rem)",
+              fontWeight: 700,
+              lineHeight: "var(--leading-uplin-subhead)",
+              letterSpacing: "var(--tracking-uplin-h3)",
+              marginBottom: "1rem",
+              position: "relative",
+            }}
+          >
+            ¿Necesitás agendar una llamada?
+          </h3>
+
+          <p
+            style={{
+              color: "rgba(255,255,255,0.85)",
+              marginBottom: "1.8rem",
+              fontSize: "var(--text-uplin-body)",
+              position: "relative",
+            }}
+          >
+            Comunicate gratis con nuestro equipo especializado. ¡Te están esperando!
           </p>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+            <button
+              onClick={handleBannerTTS}
+              className="uplin-tts-btn"
+              aria-label="Escuchar texto del banner"
+              title="Escuchar texto"
+              style={{
+                background: "rgba(255,255,255,0.15)",
+                borderColor: "rgba(255,255,255,0.2)",
+                color: "white",
+              }}
+            >
+              <Volume2 size={20} />
+            </button>
+
+            <motion.a
+              href="https://meetings.hubspot.com/llopez-ramirez"
+              target="_blank"
+              rel="noopener"
+              whileHover={{ y: -2 }}
+              onHoverStart={() => setIsHovered(true)}
+              onHoverEnd={() => setIsHovered(false)}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                padding: "0.75rem 1.4rem",
+                fontSize: "var(--text-uplin-sm)",
+                fontWeight: 600,
+                color: isHovered ? "white" : "var(--color-uplin-purple-deep)",
+                background: isHovered ? "var(--color-uplin-green)" : "white",
+                borderRadius: "var(--radius-uplin-pill)",
+                transition: "all var(--transition-uplin-base)",
+                whiteSpace: "nowrap",
+                boxShadow: isHovered ? "0 12px 24px -6px rgba(114,191,88,0.5)" : "none",
+                textDecoration: "none",
+              }}
+            >
+              <CalendarDays width={13} height={13} />
+              Agendá una llamada
+              <motion.span animate={{ x: isHovered ? 3 : 0 }}>
+                <ArrowRight width={13} height={13} />
+              </motion.span>
+            </motion.a>
+          </div>
         </div>
-
-        {/* Botón TTS separado */}
-        <button
-          onClick={handleBannerTTS}
-          className="p-2 hover:bg-white/20 rounded-full transition-colors duration-200"
-          aria-label="Escuchar texto del banner"
-          title="Escuchar texto"
-        >
-          <PlayCircle size={28} className="text-white" />
-        </button>
       </div>
-
-      {/* Button */}
-      <Button
-            link="https://meetings.hubspot.com/llopez-ramirez"
-            tag="Agendá una llamada"
-            mode={3}
-            height={50}
-            width={250}
-            ariaLabel="Agendar una llamada con el equipo de UplinHR"
-          />
-    </div>
+    </motion.div>
   )
 }
 

@@ -3,7 +3,7 @@
 
 @theme {
   /* FUENTE */
-  --font-sans: var(--font-poppins), sans-serif;
+  --font-sans: var(--font-inter-tight), sans-serif;
  
   /* COLORES — MORADOS (color principal del logo) */
   --color-uplin-purple-deep:  #3C0E36;   /* Logo principal */
@@ -152,7 +152,7 @@ html {
 
 
 body {
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--font-inter-tight), sans-serif;
   background-color: var(--color-uplin-bg);
   color: var(--color-uplin-ink);
   line-height: var(--leading-uplin-body);
@@ -233,4 +233,68 @@ select option {
 select option:checked {
   background: #6d4098 !important;
   color: #ffffff !important;
+}
+
+/* ============================================================
+   BOTÓN TTS / VOLUMEN — clase utilitaria reutilizable
+   Uso: <button className="uplin-tts-btn">
+   ============================================================ */
+
+.uplin-tts-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem;
+  border-radius: 50%;
+  border: 1.5px solid #EAF4E5;
+  background: #EAF4E5;
+  color: #1C7A08;
+  cursor: pointer;
+  transition:
+    background    0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color  0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    color         0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.uplin-tts-btn:hover {
+  background:  #72BF58;
+  border-color: #72BF58;
+  color: #EAF4E5;
+}
+
+.uplin-hero-mask {
+  mask-image:
+    radial-gradient(
+      ellipse 88% 88% at 50% 50%,
+      black 50%,
+      transparent 100%
+    );
+
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse 88% 88% at 50% 50%,
+      black 50%,
+      transparent 100%
+    );
+}
+
+.uplin-hero-image {
+  filter: saturate(.88) contrast(1.04) brightness(1.02);
+}
+
+@keyframes scrollInfinite {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.carrusel-track {
+  animation: scrollInfinite 28s linear infinite;
+}
+
+.carrusel-track:hover {
+  animation-play-state: paused;
 }

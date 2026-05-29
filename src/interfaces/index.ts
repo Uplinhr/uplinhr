@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface IPlan {
   plan: string;
   description: string;
@@ -18,7 +20,8 @@ export interface QaItem {
   initialExpanded?: boolean;
 }
 export interface SolutionProps{
-  icon: string;
+  icon: ReactNode;
+  iconBg?: string;
   title: string;
   description: string;
 }

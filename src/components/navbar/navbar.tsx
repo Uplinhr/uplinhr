@@ -114,7 +114,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="font-[Poppins] bg-white shadow-uplin-nav relative">
+    <nav className="font-sans bg-white shadow-uplin-nav relative">
       <div className="container mx-auto px-10 py-3 flex justify-between items-center">
         <Link href="/" className="self-start">
           <Image

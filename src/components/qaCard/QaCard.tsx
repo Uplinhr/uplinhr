@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { PlayCircle } from 'lucide-react';
+import { Volume2 } from 'lucide-react';
 import { QaItem } from '@/interfaces/index';
 import { speakText } from '@/utils/textToSpeech';
 
@@ -36,7 +36,7 @@ export const QaCard = ({ question, answer, initialExpanded = false }: QaItem) =>
             role="button"
             tabIndex={0}
             onClick={(e) => {
-              e.stopPropagation(); // evita expand/collapse
+              e.stopPropagation();
               handleQaTTS();
             }}
             onKeyDown={(e) => {
@@ -46,11 +46,11 @@ export const QaCard = ({ question, answer, initialExpanded = false }: QaItem) =>
                 handleQaTTS();
               }
             }}
-            className="p-1.5 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 cursor-pointer"
+            className="uplin-tts-btn"
             aria-label={`Escuchar pregunta: ${question}`}
             title="Escuchar pregunta y respuesta"
           >
-            <PlayCircle size={20} className="text-[#6C4099]" />
+            <Volume2 size={18} />
           </span>
 
           {isExpanded ? (

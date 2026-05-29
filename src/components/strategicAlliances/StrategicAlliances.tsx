@@ -1,110 +1,351 @@
 "use client"
-import Image from "next/image";
-import { PlayCircle } from "lucide-react";
-import { speakText } from "@/utils/textToSpeech";
+import { useState } from "react"
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { Volume2, TrendingUp, Eye, Puzzle, ArrowRight, CoffeeIcon} from "lucide-react"
+import { speakText } from "@/utils/textToSpeech"
+
+const alliances = [
+  {
+    id: 1,
+    title: "Co-Crecimiento",
+    description: "Oportunidades conjuntas de negocio y nuevos proyectos.",
+    icon: <TrendingUp className="w-5 h-5" />,
+    iconBg: "linear-gradient(135deg, var(--color-uplin-green), var(--color-uplin-green-dark))",
+  },
+  {
+    id: 2,
+    title: "Visibilidad",
+    description: "Aparece en nuestro ecosistema y acciones compartidas.",
+    icon: <Eye className="w-5 h-5" />,
+    iconBg: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-purple-deep))",
+  },
+  {
+    id: 3,
+    title: "Integración",
+    description: "Amplía tu portafolio con staffing, créditos y consultoría.",
+    icon: <Puzzle className="w-5 h-5" />,
+    iconBg: "linear-gradient(135deg, var(--color-uplin-orange), var(--color-uplin-orange-dark))",
+  },
+  {
+    id: 4,
+    title: "Soporte",
+    description: "Materiales, entrenamiento y acompañamiento continuo.",
+    icon: <CoffeeIcon className="w-5 h-5" />,
+    iconBg: "linear-gradient(135deg, var(--color-uplin-purple-3), var(--color-uplin-purple-2))",
+  },
+]
 
 export const StrategicAlliances = () => {
+  const [isCTAHovered, setIsCTAHovered] = useState(false)
+
   const handleTTS = () => {
-    const text = "Programa de alianzas estratégicas. En Uplin creemos en el poder de la colaboración. Nuestro programa de alianzas estratégicas está diseñado para conectar con empresas que, como nosotros, impulsan el crecimiento y la innovación en el talento humano. Buscamos consultoras de Recursos Humanos, empresas de tecnología, agencias de reclutamiento, y proveedores de servicios complementarios que quieran potenciar su propuesta de valor junto a nosotros.";
-    speakText(text);
-  };
+    const text =
+      "Programa de alianzas estratégicas. En Uplin creemos en el poder de la colaboración. Nuestro programa de alianzas estratégicas está diseñado para conectar con empresas que, como nosotros, impulsan el crecimiento y la innovación en el talento humano. Buscamos consultoras de Recursos Humanos, empresas de tecnología, agencias de reclutamiento, y proveedores de servicios complementarios que quieran potenciar su propuesta de valor junto a nosotros."
+    speakText(text)
+  }
 
   return (
-    <section className="bg-white py-12 md:py-20 px-4">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-        {/* Columna izquierda: título, texto y botón */}
-        <div className="text-left">
-          <div className="flex items-start gap-3 mb-6">
-            <h2 className="text-2xl md:text-[32px] leading-tight md:leading-[40px] font-semibold font-poppins text-black">
-              Programa de<br />
-              <span className="text-[#6C4099]">alianzas</span> estratégicas
-            </h2>
-            <button
-              onClick={handleTTS}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0 mt-1"
-              aria-label="Escuchar texto de alianzas estratégicas"
-              title="Escuchar texto"
-            >
-              <PlayCircle size={28} className="text-[#6C4099]" />
-            </button>
-          </div>
-          <p className="text-base text-[#333] mb-4 max-w-md">
-            En Uplin creemos en el poder de la colaboración. Nuestro programa de alianzas estratégicas
-            está diseñado para conectar con empresas que, como nosotros, impulsan el crecimiento y la 
-            innovación en el talento humano.
-          </p>
-          <p className="text-base text-[#333] mb-8 max-w-md">
-            Buscamos consultoras de RRHH, empresas de tecnología, agencias de reclutamiento, y proveedores
-            de servicios complementarios que quieran potenciar su propuesta de valor junto a nosotros.
-          </p>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSc1uYUAIh7E867j83LHlaKAV4ynZFdlZvmHo81JzRodVqExXw/viewform?usp=publish-editor"
-            className="bg-[#6C4099] text-white font-semibold py-3 px-6 rounded-lg inline-block hover:bg-[#5a3480] transition-colors"
-          >
-            Únete como partner
-          </a>
-        </div>
-
-     {/* Columna derecha: tarjetas */}
-<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:ml-auto w-full lg:w-fit">
-  {[
-    {
-      title: "Co-Crecimiento",
-      description: "Accede a oportunidades conjuntas de negocio y desarrollo de nuevos proyectos.",
-      icon: "/manos.png",
-    },
-    {
-      title: "Visibilidad y posicionamiento",
-      description: "Aparece en nuestro ecosistema de partners y participa en acciones de marketing compartidas.",
-      icon: "/visibilidad.png",
-    },
-    {
-      title: "Integración de servicios",
-      description: "Amplía tu portafolio con soluciones de staffing, créditos de talento y consultoría estratégica.",
-      icon: "/integracion.png",
-    },
-    {
-      title: "Soporte y capacitación",
-      description: "Recibe materiales, entrenamiento y acompañamiento para potenciar la colaboración.",
-      icon: "/soporte.png",
-    },
-  ].map((item, index) => (
-    <div
-      key={index}
-      className="relative w-full md:w-[280px] min-h-[140px] bg-white p-4 md:p-5 pr-24 md:pr-20 rounded-[18px] shadow-[0_4px_4px_rgba(0,0,0,0.25)] flex flex-row items-center overflow-visible"
+    <motion.section
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
+      style={{ padding: "var(--spacing-uplin-xl) 0 var(--spacing-uplin-lg)", position: "relative" }}
     >
-      <div className="flex flex-col text-left flex-1 pr-2">
-        <div className="flex items-center gap-1 mb-2">
-          <h3 className="text-sm font-semibold text-[#6C4099]">{item.title}</h3>
-          <button
-            onClick={() => speakText(`${item.title}. ${item.description}`)}
-            className="p-1 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0"
-            aria-label={`Escuchar ${item.title}`}
-            title="Escuchar texto"
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 clamp(1.25rem, 4vw, 3rem)" }}>
+        {/* Card glassmorphism principal — grid responsive */}
+        <div
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] items-center"
+          style={{
+            background: "var(--color-uplin-glass-bg-strong)",
+            backdropFilter: "blur(24px) saturate(180%)",
+            WebkitBackdropFilter: "blur(24px) saturate(180%)",
+            border: "1px solid var(--color-uplin-glass-border)",
+            borderRadius: "var(--radius-uplin-xl)",
+            boxShadow: "var(--shadow-uplin-glass)",
+            padding: "clamp(2rem, 5vw, 4rem)",
+            position: "relative",
+            overflow: "hidden",
+            gap: "3rem",
+          }}
+        >
+          {/* Blob verde decorativo */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-50%",
+              right: "-20%",
+              width: 500,
+              height: 500,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(114,191,88,0.3), transparent 70%)",
+              filter: "blur(40px)",
+              pointerEvents: "none",
+            }}
+          />
+          {/* Blob naranja decorativo */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-30%",
+              left: "-15%",
+              width: 400,
+              height: 400,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(248,154,28,0.2), transparent 70%)",
+              filter: "blur(50px)",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* ── Columna izquierda ── */}
+          <div style={{ position: "relative", zIndex: 1 }}>
+            {/* Eyebrow badge */}
+            <div style={{ display: "flex", gap: "0.7rem", marginBottom: "1rem" }}>
+              <span
+                style={{
+                  background: "var(--color-uplin-glass-bg-strong)",
+                  backdropFilter: "blur(14px)",
+                  WebkitBackdropFilter: "blur(14px)",
+                  border: "1px solid var(--color-uplin-glass-border)",
+                  borderRadius: "var(--radius-uplin-pill)",
+                  padding: "0.35rem 0.9rem",
+                  fontSize: "var(--text-uplin-eyebrow)",
+                  fontWeight: 600,
+                  color: "var(--color-uplin-purple-deep)",
+                  letterSpacing: "var(--tracking-uplin-eyebrow)",
+                  textTransform: "uppercase",
+                }}
+              >
+                PARTNERS
+              </span>
+              {/* Botón TTS */}
+              <button
+                onClick={handleTTS}
+                className="uplin-tts-btn"
+                aria-label="Escuchar texto de alianzas estratégicas"
+                title="Escuchar texto"
+              >
+                <Volume2 size={22} />
+              </button>
+            </div>
+
+            {/* Título */}
+            <h2
+              style={{
+                fontSize: "var(--text-uplin-h2-sm)",
+                fontWeight: 700,
+                lineHeight: "var(--leading-uplin-subhead)",
+                letterSpacing: "var(--tracking-uplin-h2)",
+                color: "var(--color-uplin-ink)",
+                marginBottom: "1rem",
+              }}
+            >
+              Programa de alianzas estratégicas
+            </h2>
+
+            {/* Párrafo 1 */}
+            <p
+              style={{
+                color: "var(--color-uplin-ink-soft)",
+                marginBottom: "0.9rem",
+                fontSize: "var(--text-uplin-body)",
+              }}
+            >
+              En Uplin creemos en el poder de la colaboración. Conectamos con empresas que, como nosotros, impulsan el crecimiento y la innovación en el talento humano.
+            </p>
+
+            {/* Párrafo 2 */}
+            <p
+              style={{
+                color: "var(--color-uplin-ink-soft)",
+                marginBottom: "0.9rem",
+                fontSize: "var(--text-uplin-body)",
+              }}
+            >
+              Buscamos consultoras de RRHH, empresas de tecnología, agencias de reclutamiento y proveedores que quieran potenciar su propuesta junto a nosotros.
+            </p>
+
+
+            {/* Botón CTA */}
+            <motion.a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc1uYUAIh7E867j83LHlaKAV4ynZFdlZvmHo81JzRodVqExXw/viewform?usp=publish-editor"
+              whileHover={{ y: -2 }}
+              onHoverStart={() => setIsCTAHovered(true)}
+              onHoverEnd={() => setIsCTAHovered(false)}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                marginTop: "1rem",
+                padding: "0.75rem 1.4rem",
+                fontSize: "var(--text-uplin-sm)",
+                fontWeight: 600,
+                color: "white",
+                background: isCTAHovered
+                  ? "linear-gradient(135deg, var(--color-uplin-green), var(--color-uplin-green-dark))"
+                  : "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-purple-deep))",
+                borderRadius: "var(--radius-uplin-pill)",
+                boxShadow: "var(--shadow-uplin-btn-primary)",
+                transition: "all var(--transition-uplin-base)",
+                textDecoration: "none",
+              }}
+            >
+              Únete como partner
+              <motion.span animate={{ x: isCTAHovered ? 3 : 0 }}>
+                <ArrowRight size={12} />
+              </motion.span>
+            </motion.a>
+          </div>
+
+          {/* ── Columna derecha: grilla de mini cards ── */}
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2"
+            style={{ gap: "1rem", position: "relative" }}
           >
-            <PlayCircle size={18} className="text-[#6C4099]" />
-          </button>
+            {alliances.map((item) => (
+              <motion.div
+                key={item.id}
+                whileHover={{
+                  y: -3,
+                  background: "rgba(255,255,255,0.65)",
+                  boxShadow: "0 14px 28px -8px rgba(60,14,54,0.18)",
+                }}
+                style={{
+                  background: "rgba(255,255,255,0.4)",
+                  border: "1px solid rgba(255,255,255,0.6)",
+                  borderRadius: "var(--radius-uplin-md)",
+                  padding: "1.2rem",
+                  transition: "all var( --transition-uplin-fast)",
+                }}
+              >
+                {/* Contenedor del ícono */}
+                <div
+                  style={{
+                    width: 42,
+                    height: 42,
+                    borderRadius: 12,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "white",
+                    marginBottom: "0.7rem",
+                    boxShadow: "0 6px 14px -4px rgba(60,14,54,0.2)",
+                    background: item.iconBg,
+                  }}
+                >
+                  {item.icon}
+                </div>
+
+                <h5
+                  style={{
+                    fontSize: "var(--text-uplin-h5)",
+                    fontWeight: 700,
+                    color: "var(--color-uplin-ink)",
+                    marginBottom: "0.3rem",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  {item.title}
+                </h5>
+
+                <p
+                  style={{
+                    fontSize: "var(--text-uplin-xs)",
+                    color: "var(--color-uplin-ink-soft)",
+                    lineHeight: "var(--leading-uplin-card)",
+                    margin: 0,
+                  }}
+                >
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
-        <p className="text-xs text-[#555] leading-relaxed">{item.description}</p>
-      </div>
-      <Image src={item.icon} alt={item.title} width={130} height={130} className="absolute -right-5 md:-right-7 top-1/2 -translate-y-1/2 flex-shrink-0 w-24 h-24 md:w-28 md:h-28 lg:w-[130px] lg:h-[130px]" />
-    </div>
-  ))}
-</div>
-
-
       </div>
 
-      {/* Logos de empresas colaboradoras */}
-      <div className="mt-12 md:mt-20 text-center px-4">
-        <p className="text-xl md:text-2xl lg:text-3xl font-semibold mb-6">Nuestros partners</p>
-        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
-          <Image src="/teamtailor-logo.png" alt="Teamtailor" width={250} height={100} className="w-40 md:w-48 lg:w-52 h-auto" />
-          <Image src="/buk-logo.png" alt="Buk" width={140} height={50} className="w-28 md:w-36 h-auto" />
+      {/* Nuestros partners */}
+      <div
+        style={{
+          maxWidth: 1280,
+          margin: "0 auto",
+          padding: "0 clamp(1.25rem, 4vw, 3rem)",
+          marginTop: "2.5rem",
+          textAlign: "center",
+        }}
+      >
+        <span
+          style={{
+            fontSize: "var(--text-uplin-eyebrow)",
+            fontWeight: 600,
+            letterSpacing: "var(--tracking-uplin-eyebrow)",
+            textTransform: "uppercase",
+            color: "var(--color-uplin-ink-muted)",
+            marginBottom: "1.5rem",
+            display: "block",
+          }}
+        >
+          Nuestros partners
+        </span>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "3rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              background: "var(--color-uplin-glass-bg-strong)",
+              backdropFilter: "blur(14px)",
+              border: "1px solid var(--color-uplin-glass-border)",
+              borderRadius: "var(--radius-uplin-md)",
+              padding: "1.2rem 2rem",
+              boxShadow: "var(--shadow-uplin-glass)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              src="/TEAMTAILOR LOGO PARTNER.png"
+              alt="Teamtailor"
+              width={160}
+              height={48}
+              style={{ objectFit: "contain", height: "auto" }}
+            />
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+            style={{
+              background: "var(--color-uplin-glass-bg-strong)",
+              backdropFilter: "blur(14px)",
+              border: "1px solid var(--color-uplin-glass-border)",
+              borderRadius: "var(--radius-uplin-md)",
+              padding: "1.2rem 2rem",
+              boxShadow: "var(--shadow-uplin-glass)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              src="/ALKEMY LOGO PARTNER.png"
+              alt="Alkemy"
+              width={140}
+              height={48}
+              style={{ objectFit: "contain", height: "auto" }}
+            />
+          </motion.div>
         </div>
       </div>
-    </section>
-  );
-};
-
-
+    </motion.section>
+  )
+}

@@ -2,76 +2,115 @@ import Solutions from "@/views/Solutions";
 import Presentation from "@/views/Presentation";
 import { CardServices } from "@/components/CardServices/cardServices";
 import { Banner } from "@/components/banner/banner";
-import { CiSearch } from "react-icons/ci";
-import { PiUsersThreeLight } from "react-icons/pi";
-import { SlBriefcase } from "react-icons/sl";
-import { MdOutlineCardMembership } from "react-icons/md";
+import { Search, Users, Briefcase, Star, GraduationCap } from "lucide-react";
 import { StrategicAlliances } from "@/components/strategicAlliances/StrategicAlliances";
+import { AliadosCarrusel } from "@/components/strategicAlliances/AliadosCarrusel";
+import Testimonios from "@/components/Testimonios/Testimonios";
 
 export default function TestTailwind() {
   return (
     <div className="min-h-screen bg-white ">
       <Presentation />
-      <div className="relative w-full bg-gradient-to-r from-[#6C4099] to-[#502B7D] overflow-hidden">
-        <div className="relative" style={{ paddingBottom: "5.208%" }}>
-          {" "}
-          {/* 150/1440*100 = 5.208% */}
-          <svg
-            className="absolute top-0 left-0 w-full h-full"
-            viewBox="0 0 1440 150"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="#FFFFFF"
-              d="M0,80 C480,160 960,0 1440,80 L1440,150 L0,150 Z"
-            />
-          </svg>
-        </div>
-      </div>
-      
-      {/** 
+      <AliadosCarrusel />
+
+      {/**
       <CardsPlan />
       <AditionalServices />
       <ComparativeCard /> */}
-      <h1 className="font-poppins text-[28px] text-black font-semibold text-center mb-8 mt-8">
-        Servicios que apoyan la gestión y crecimiento de tu organización
-      </h1>
-      <CardServices
-        icon={<CiSearch className="w-4 h-4 text-[#6C4099]" />}
-        title="Búsqueda de talentos"
-        description="Accedé a paquetes de créditos diseñados según tus necesidades. Podés simular tu plan y crear un modelo flexible y a medida para tu proceso de reclutamiento."
-        linkHref="/servicios/creditos"
-        imageSrc="/S-busqueda.jpeg"
-        imageAlt="Busqueda de talentos"
-      />
-      <CardServices
-        icon={<PiUsersThreeLight className="w-4 h-4 text-[#6C4099]" />}
-        title="People Partner Staffing"
-        description="Nos convertimos en tu socio estratégico de talento. Te acompañamos en la contratación, integración y gestión de tu equipo con un enfoque humano y cercano."
-        linkHref="/servicios/ppStaffing"
-        imageSrc="/S-ppstaffing.jpeg"
-        imageAlt="Peple Partner Staffing"
-      />
-      <CardServices
-        icon={<SlBriefcase className="w-4 h-4 text-[#6C4099]" />}
-        title="Consultorías"
-        description="Asesoría especializada en recursos humanos para impulsar tu negocio. Te damos claridad y soluciones prácticas para enfrentar tus retos de gestión de personas."
-        linkHref="/servicios/consultorias"
-        imageSrc="/S-consultorias.jpeg"
-        imageAlt="Consultorias"
-      />
-      <CardServices
-        icon={<MdOutlineCardMembership className="w-4 h-4 text-[#6C4099]" />}
-        title="Membresías"
-        description="Un plan flexible para acceder a beneficios y soporte continuo en RRHH. Acompañamos a tu organización con soluciones adaptadas a cada etapa de crecimiento."
-        linkHref="/servicios/membresias"
-        imageSrc="/S-membresias.jpeg"
-        imageAlt="Membresías"
-      />
 
+      {/* Encabezado de sección */}
+      <div
+        style={{
+          maxWidth: "780px",
+          margin: "0 auto",
+          textAlign: "center",
+          marginBottom: "3rem",
+          marginTop: "var(--spacing-uplin-md)",
+        }}
+      >
+        <span
+          style={{
+            background: "var(--color-uplin-glass-bg-strong)",
+            backdropFilter: "blur(14px)",
+            border: "1px solid var(--color-uplin-glass-border)",
+            borderRadius: "var(--radius-uplin-pill)",
+            padding: "0.35rem 0.9rem",
+            fontSize: "var(--text-uplin-eyebrow)",
+            fontWeight: 600,
+            color: "var(--color-uplin-purple-deep)",
+            letterSpacing: "var(--tracking-uplin-eyebrow)",
+            textTransform: "uppercase",
+            boxShadow: "0 4px 12px -4px rgba(60,14,54,0.1)",
+            display: "inline-block",
+            marginBottom: "1rem",
+          }}
+        >
+          SERVICIOS
+        </span>
+        <h2
+          style={{
+            fontSize: "var(--text-uplin-h2)",
+            fontWeight: 700,
+            letterSpacing: "var(--tracking-uplin-h2)",
+            lineHeight: "var(--leading-uplin-title)",
+            color: "var(--color-uplin-ink)",
+            marginBottom: "1rem",
+          }}
+        >
+          Servicios que apoyan la gestión y el{" "}
+          <span className="text-gradient-uplin">crecimiento </span>
+           de tu organización
+        </h2>
+        <p
+          style={{
+            fontSize: "var(--text-uplin-lead)",
+            color: "var(--color-uplin-ink-soft)",
+            lineHeight: "var(--leading-uplin-body)",
+          }}
+        >
+          Cuatro líneas de servicio diseñadas para acompañarte en cada etapa, con la flexibilidad de combinarlas según tu necesidad real.
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <CardServices
+          icon={<Search className="w-[26px] h-[26px]" />}
+          title="Búsqueda de talentos"
+          description="Accedé a paquetes de créditos diseñados según tus necesidades. Podés simular tu plan y crear un modelo flexible y a medida para tu proceso de reclutamiento."
+          linkHref="/servicios/creditos"
+        />
+        <CardServices
+          icon={<Users className="w-[26px] h-[26px]" />}
+          iconBg="var(--color-uplin-green)"
+          title="People Partner Staffing"
+          description="Nos convertimos en tu socio estratégico de talento. Te acompañamos en la contratación, integración y gestión de tu equipo con un enfoque humano y cercano."
+          linkHref="/servicios/ppStaffing"
+        />
+        <CardServices
+          icon={<Briefcase className="w-[26px] h-[26px]" />}
+          iconBg="var(--color-uplin-orange)"
+          title="Consultorías"
+          description="Asesoría especializada en recursos humanos para impulsar tu negocio. Te damos claridad y soluciones prácticas para enfrentar tus retos de gestión de personas."
+          linkHref="/servicios/consultorias"
+        />
+        <CardServices
+          icon={<Star className="w-[26px] h-[26px]" />}
+          title="Membresías"
+          description="Un plan flexible para acceder a beneficios y soporte continuo en RRHH. Acompañamos a tu organización con soluciones adaptadas a cada etapa de crecimiento."
+          linkHref="/servicios/membresias"
+        />
+         <div className="md:col-span-2 flex justify-center">
+          <CardServices
+            icon={<GraduationCap className="w-[26px] h-[26px]" />}
+            iconBg="var(--color-uplin-green)"
+            title="Formación organizacional"
+            description="Diseñamos programas de formación y consultoría para potenciar liderazgo, productividad, comunicación e inteligencia artificial en equipos y organizaciones. Adaptamos cada experiencia a los desafíos reales del negocio, combinando habilidades humanas, tecnología y aprendizaje aplicado. Trabajamos con empresas de Latinoamérica en formatos virtuales, presenciales e híbridos."
+            linkHref=""
+          />
+        </div>
+      </div>
       <Solutions />
       <StrategicAlliances />
+      <Testimonios />
       <Banner />
     </div>
   );
