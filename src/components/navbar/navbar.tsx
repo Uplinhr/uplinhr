@@ -114,233 +114,235 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="font-sans bg-white shadow-uplin-nav relative">
-      <div className="container mx-auto px-10 py-3 flex justify-between items-center">
-        <Link href="/" className="self-start">
-          <Image
-            src="/logoUplin.svg"
-            alt="Logo Uplin"
-            width={80}
-            height={40}
-            className="w-20 h-10 block"
-          />
-        </Link>
+    <nav className="fixed top-4 left-0 right-0 z-50 px-4">
+      <div className="max-w-7xl mx-auto rounded-[28px] border border-uplin-line bg-uplin-bg shadow-uplin-nav">
+        <div className="pl-4 pr-6 py-3 flex justify-between items-center">
+          <Link href="/" className="self-start">
+            <Image
+              src="/logoUplin.svg"
+              alt="Logo Uplin"
+              width={80}
+              height={40}
+              className="w-20 h-10 block"
+            />
+          </Link>
 
-        {/* DESKTOP */}
-        <div className="hidden lg:flex gap-10 items-center">
-          <motion.a
-            href="/quienes-somos"
-            className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
-            whileHover={{ y: -2 }}
-            transition={fast}
-          >
-            Quiénes somos
-          </motion.a>
-
-          {/* Dropdown Servicios */}
-          <div
-            className="relative"
-            onMouseEnter={openServices}
-            onMouseLeave={closeServices}
-          >
-            <motion.button
-              type="button"
-              onClick={toggleServices}
-              aria-expanded={servicesOpen}
+          {/* DESKTOP */}
+          <div className="hidden lg:flex gap-10 items-center">
+            <motion.a
+              href="/quienes-somos"
+              className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
               whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.97 }}
               transition={fast}
-              className={`flex items-center gap-2 text-uplin-nav font-medium rounded-xl px-4 py-2 transition-colors ${
-                servicesOpen
-                  ? "bg-uplin-purple-8 text-uplin-purple"
-                  : "text-uplin-ink hover:bg-uplin-purple-8 hover:text-uplin-purple"
-              }`}
             >
-              <span>Servicios</span>
-              <motion.span
-                animate={{ rotate: servicesOpen ? 180 : 0 }}
+              Quiénes somos
+            </motion.a>
+
+            {/* Dropdown Servicios */}
+            <div
+              className="relative"
+              onMouseEnter={openServices}
+              onMouseLeave={closeServices}
+            >
+              <motion.button
+                type="button"
+                onClick={toggleServices}
+                aria-expanded={servicesOpen}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
                 transition={fast}
-                className="flex items-center"
+                className={`flex items-center gap-2 text-uplin-nav font-medium rounded-xl px-4 py-2 transition-colors ${
+                  servicesOpen
+                    ? "bg-uplin-purple-8 text-uplin-purple"
+                    : "text-uplin-ink hover:bg-uplin-purple-8 hover:text-uplin-purple"
+                }`}
               >
-                <FaChevronDown />
-              </motion.span>
-            </motion.button>
-
-            <AnimatePresence>
-              {servicesOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                <span>Servicios</span>
+                <motion.span
+                  animate={{ rotate: servicesOpen ? 180 : 0 }}
                   transition={fast}
-                  className="absolute left-0 mt-3 w-[320px] bg-white rounded-2xl shadow-uplin-glass border border-uplin-line py-4 z-30"
-                  onMouseEnter={openServices}
-                  onMouseLeave={closeServices}
+                  className="flex items-center"
                 >
-                  {serviceLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className={dropdownLinkClass}
-                      onClick={closeAllMenus}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+                  <FaChevronDown />
+                </motion.span>
+              </motion.button>
 
-          <motion.a
-            href="/careers"
-            className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
-            whileHover={{ y: -2 }}
-            transition={fast}
-          >
-            Uplin Careers
-          </motion.a>
-
-          {/* Dropdown Biblioteca Uplin */}
-          <div
-            className="relative"
-            onMouseEnter={openBiblioteca}
-            onMouseLeave={closeBiblioteca}
-          >
-            <motion.button
-              type="button"
-              onClick={toggleBiblioteca}
-              aria-expanded={bibliotecaOpen}
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              transition={fast}
-              className={`flex items-center gap-2 text-uplin-nav font-medium rounded-xl px-4 py-2 transition-colors ${
-                bibliotecaOpen
-                  ? "bg-uplin-purple-8 text-uplin-purple"
-                  : "text-uplin-ink hover:bg-uplin-purple-8 hover:text-uplin-purple"
-              }`}
-            >
-              <span>Biblioteca Uplin</span>
-              <motion.span
-                animate={{ rotate: bibliotecaOpen ? 180 : 0 }}
-                transition={fast}
-                className="flex items-center"
-              >
-                <FaChevronDown />
-              </motion.span>
-            </motion.button>
-
-            <AnimatePresence>
-              {bibliotecaOpen && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -8, scale: 0.97 }}
-                  transition={fast}
-                  className="absolute left-0 mt-3 w-[280px] bg-white rounded-2xl shadow-uplin-glass border border-uplin-line py-4 z-30"
-                  onMouseEnter={openBiblioteca}
-                  onMouseLeave={closeBiblioteca}
-                >
-                  {bibliotecaLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className={dropdownLinkClass}
-                      onClick={closeAllMenus}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <motion.a
-            href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
-            className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
-            whileHover={{ y: -2 }}
-            transition={fast}
-          >
-            Contacto
-          </motion.a>
-
-          {/* User menu — oculto visualmente, lógica preservada para reincorporar
-          <div className="relative">
-            <button
-              onClick={() => setUserMenuOpen(!userMenuOpen)}
-              className="text-uplin-purple-deep p-2 rounded-full cursor-pointer hover:opacity-80"
-            >
-              <FaUserCircle size={28} />
-            </button>
-            {userMenuOpen && (
-              <div className="absolute text-uplin-purple-deep right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-20">
-                {!user ? (
-                  <Link
-                    href="/login"
-                    className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    onClick={() => setUserMenuOpen(false)}
+              <AnimatePresence>
+                {servicesOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                    transition={fast}
+                    className="absolute left-0 mt-3 w-[320px] bg-white rounded-2xl shadow-uplin-glass border border-uplin-line py-4 z-30"
+                    onMouseEnter={openServices}
+                    onMouseLeave={closeServices}
                   >
-                    Iniciar sesión
-                  </Link>
-                ) : (
-                  <>
-                    <button
-                      onClick={handleLogout}
-                      className="block text-uplin-purple-deep w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      Cerrar sesión
-                    </button>
-                    <button
-                      onClick={() => {
-                        setIsModalPasswordOpen(true);
-                        setUserMenuOpen(false);
-                      }}
-                      className="block text-uplin-purple-deep w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                    >
-                      Cambiar contraseña
-                    </button>
-                  </>
+                    {serviceLinks.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className={dropdownLinkClass}
+                        onClick={closeAllMenus}
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </motion.div>
                 )}
-              </div>
-            )}
-          </div>
-          */}
-        </div>
+              </AnimatePresence>
+            </div>
 
-        {/* HAMBURGER */}
-        <motion.button
-          className="lg:hidden text-uplin-purple-deep focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-          whileTap={{ scale: 0.97 }}
-          transition={fast}
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            {isOpen ? (
-              <motion.span
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
+            <motion.a
+              href="/careers"
+              className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
+              whileHover={{ y: -2 }}
+              transition={fast}
+            >
+              Uplin Careers
+            </motion.a>
+
+            {/* Dropdown Biblioteca Uplin */}
+            <div
+              className="relative"
+              onMouseEnter={openBiblioteca}
+              onMouseLeave={closeBiblioteca}
+            >
+              <motion.button
+                type="button"
+                onClick={toggleBiblioteca}
+                aria-expanded={bibliotecaOpen}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
                 transition={fast}
-                className="flex"
+                className={`flex items-center gap-2 text-uplin-nav font-medium rounded-xl px-4 py-2 transition-colors ${
+                  bibliotecaOpen
+                    ? "bg-uplin-purple-8 text-uplin-purple"
+                    : "text-uplin-ink hover:bg-uplin-purple-8 hover:text-uplin-purple"
+                }`}
               >
-                <FaTimes size={24} />
-              </motion.span>
-            ) : (
-              <motion.span
-                key="open"
-                initial={{ rotate: 90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: -90, opacity: 0 }}
-                transition={fast}
-                className="flex"
+                <span>Biblioteca Uplin</span>
+                <motion.span
+                  animate={{ rotate: bibliotecaOpen ? 180 : 0 }}
+                  transition={fast}
+                  className="flex items-center"
+                >
+                  <FaChevronDown />
+                </motion.span>
+              </motion.button>
+
+              <AnimatePresence>
+                {bibliotecaOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                    transition={fast}
+                    className="absolute left-0 mt-3 w-[280px] bg-white rounded-2xl shadow-uplin-glass border border-uplin-line py-4 z-30"
+                    onMouseEnter={openBiblioteca}
+                    onMouseLeave={closeBiblioteca}
+                  >
+                    {bibliotecaLinks.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        className={dropdownLinkClass}
+                        onClick={closeAllMenus}
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <motion.a
+              href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"
+              className="text-uplin-ink text-uplin-nav font-medium px-4 py-2 rounded-xl hover:bg-uplin-purple-8 hover:text-uplin-purple cursor-pointer transition-colors"
+              whileHover={{ y: -2 }}
+              transition={fast}
+            >
+              Contacto
+            </motion.a>
+
+            {/* User menu — oculto visualmente, lógica preservada para reincorporar
+            <div className="relative">
+              <button
+                onClick={() => setUserMenuOpen(!userMenuOpen)}
+                className="text-uplin-purple-deep p-2 rounded-full cursor-pointer hover:opacity-80"
               >
-                <FaBars size={24} />
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.button>
+                <FaUserCircle size={28} />
+              </button>
+              {userMenuOpen && (
+                <div className="absolute text-uplin-purple-deep right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 z-20">
+                  {!user ? (
+                    <Link
+                      href="/login"
+                      className="block px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      Iniciar sesión
+                    </Link>
+                  ) : (
+                    <>
+                      <button
+                        onClick={handleLogout}
+                        className="block text-uplin-purple-deep w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      >
+                        Cerrar sesión
+                      </button>
+                      <button
+                        onClick={() => {
+                          setIsModalPasswordOpen(true);
+                          setUserMenuOpen(false);
+                        }}
+                        className="block text-uplin-purple-deep w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      >
+                        Cambiar contraseña
+                      </button>
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
+            */}
+          </div>
+
+          {/* HAMBURGER */}
+          <motion.button
+            className="lg:hidden text-uplin-purple-deep focus:outline-none"
+            onClick={() => setIsOpen(!isOpen)}
+            whileTap={{ scale: 0.97 }}
+            transition={fast}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {isOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={fast}
+                  className="flex"
+                >
+                  <FaTimes size={24} />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="open"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={fast}
+                  className="flex"
+                >
+                  <FaBars size={24} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
+        </div>
       </div>
 
       {/* MOBILE */}

@@ -102,7 +102,7 @@ export const AliadosCarrusel = () => {
                 style={{
                   width: "calc(100% - 1rem)",
                   height: "calc(100% - 0.75rem)",
-                  background: "var(--color-uplin-purple-8)",
+                  background: "rgba(109, 64, 152, 0.08)",
                   borderRadius: "calc(var(--radius-uplin-md) - 6px)",
                 }}
               >

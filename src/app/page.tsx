@@ -9,7 +9,7 @@ import Testimonios from "@/components/Testimonios/Testimonios";
 
 export default function TestTailwind() {
   return (
-    <div className="min-h-screen bg-white ">
+    <div className="min-h-screen">
       <Presentation />
       <AliadosCarrusel />
 
@@ -30,7 +30,7 @@ export default function TestTailwind() {
       >
         <span
           style={{
-            background: "var(--color-uplin-glass-bg-strong)",
+            
             backdropFilter: "blur(14px)",
             border: "1px solid var(--color-uplin-glass-border)",
             borderRadius: "var(--radius-uplin-pill)",

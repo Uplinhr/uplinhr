@@ -42,7 +42,7 @@ const Presentation = () => {
 
   const c0 = useAnimatedCounter(150, 1400, statsInView);
   const c1 = useAnimatedCounter(25,  1400, statsInView); // 25 → "2.5"
-  const c2 = useAnimatedCounter(98,  1400, statsInView);
+  const c2 = useAnimatedCounter(100,  1400, statsInView);
 
   const handleTTS = () => {
     speakText(
@@ -56,7 +56,7 @@ const Presentation = () => {
     <section className="uplin-hero">
       <style>{`
         .uplin-hero {
-          background-color: #FAF7FC;
+          
           position: relative;
           overflow: hidden;
           padding-top: 2rem;
