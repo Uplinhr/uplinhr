@@ -1,8 +1,9 @@
 "use client"
 import Button from "@/components/Button/Button";
 import Image from "next/image";
-import { data } from "@/utils/paquetes";
+import { usePaquetes } from "@/hooks/usePaquetes";
 import { CardCreditos } from "@/components/CardServices/CardCreditos";
+import { TbLoader2 } from "react-icons/tb";
 import CardBeneficiosCreditos from "@/components/CardServices/CardBeneficiosCreditos";
 import { Banner2 } from "@/components/banner/banner";
 import CreditSimulatorModal from "@/components/simulador/CreditSimulatorModal";
@@ -11,6 +12,7 @@ import { PlayCircle } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
 
 export default function Creditos() {
+  const { paquetes, loading, error } = usePaquetes();
   const handleHeaderTTS = () => {
     const text = "Créditos de talento para Startups y Pymes. Un modelo inteligente para optimizar tu reclutamiento. Compra créditos de búsquedas de talento y diseña tu proceso a medida. Sin vencimiento, flexible y con la garantía de Uplin.";
     speakText(text);
@@ -105,13 +107,20 @@ export default function Creditos() {
           </button>
         </div>
 
-        <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-          {data.map((paquete) => (
-            <CardCreditos key={paquete.id} paquetes={paquete} />
-          ))}
-        </div>
+        {loading ? (
+          <div className="flex justify-center items-center py-12">
+            <TbLoader2 className="animate-spin text-[#6C4099] text-4xl" />
+          </div>
+        ) : error ? (
+          <p className="text-center text-red-500 py-12">{error}</p>
+        ) : (
+          <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+            {paquetes.map((paquete) => (
+              <CardCreditos key={paquete.title} paquetes={paquete} />
+            ))}
+          </div>
+        )}
 
-        {/* 🔹 Botón del simulador movido debajo de los paquetes */}
         <div className="flex justify-center mt-12">
           <CreditSimulatorModal>
             <Button tag="Simulá tu paquete" mode={2} height={46} width={300} />

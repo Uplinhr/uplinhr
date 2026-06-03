@@ -1,8 +1,8 @@
-import { Paquetes } from "@/utils/paquetes";
+import { Paquete } from "@/interfaces";
 import { IoIosCheckmark } from "react-icons/io";
 
 type Props = {
-  paquetes: Paquetes;
+  paquetes: Paquete;
 };
 
 export function CardCreditos({ paquetes }: Props) {

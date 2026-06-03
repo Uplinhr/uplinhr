@@ -64,6 +64,17 @@ export interface CardCursoProps {
   link: string;
 }
 
+export interface Paquete {
+  title: string;
+  description: string;
+  price: number;
+  oldPrice?: number;
+  discount?: string;
+  buttonText: string;
+  buttonLink: string;
+  features: string[];
+}
+
 export interface SimulatorLevel {
   name: string;
   credits: number;
