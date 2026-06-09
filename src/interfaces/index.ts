@@ -73,6 +73,7 @@ export interface Paquete {
   buttonText: string;
   buttonLink: string;
   features: string[];
+  credits: number;
 }
 
 export interface SimulatorLevel {

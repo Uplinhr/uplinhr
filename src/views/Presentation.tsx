@@ -56,10 +56,10 @@ const Presentation = () => {
     <section className="uplin-hero">
       <style>{`
         .uplin-hero {
-          
+
           position: relative;
           overflow: hidden;
-          padding-top: 2rem;
+          padding-top: 7rem;
           padding-bottom: 5rem;
         }
         .uplin-hero-grid {
@@ -371,9 +371,9 @@ const Presentation = () => {
               uplin-team-float
               relative
                z-[1]
-              w-[320px]
-              sm:w-[420px]
-              lg:w-[500px]
+              w-[220px]
+              sm:w-[280px]
+              lg:w-[340px]
             "
           >
             <Image

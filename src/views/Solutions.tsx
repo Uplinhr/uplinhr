@@ -2,6 +2,8 @@
 import CardSolution from "@/components/CardSolution/CardSolution"
 import { Volume2, Layers, PiggyBank, Users, TrendingUp } from "lucide-react"
 import { speakText } from "@/utils/textToSpeech"
+import SectionTag from "@/components/SectionTag/SectionTag"
+import BotonVolume from "@/components/BotonVolume/BotonVolume"
 
 const Solutions = () => {
   const handleSolutionsTTS = () => {
@@ -20,39 +22,33 @@ const Solutions = () => {
           marginTop: "var(--spacing-uplin-xl)",
         }}
       >
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <span
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
             style={{
-              background: "var(--color-uplin-glass-bg-strong)",
-              backdropFilter: "blur(14px)",
-              border: "1px solid var(--color-uplin-glass-border)",
-              borderRadius: "var(--radius-uplin-pill)",
-              padding: "0.35rem 0.9rem",
-              fontSize: "var(--text-uplin-eyebrow)",
-              fontWeight: 600,
-              color: "var(--color-uplin-purple-deep)",
-              letterSpacing: "var(--tracking-uplin-eyebrow)",
-              textTransform: "uppercase",
-              boxShadow: "0 4px 12px -4px rgba(60,14,54,0.1)",
-              display: "inline-block",
-              marginBottom: "1rem",
+              position: "relative",
+              display: "inline-flex",
+              alignItems: "center",
             }}
           >
-            POR QUÉ UPLIN
-          </span>
+            <SectionTag text="POR QUÉ UPLIN" />
 
-          <div style={{display: "flex", justifyContent: "flex-end", alignItems: "center"}}>
-            <button
+            <BotonVolume
               onClick={handleSolutionsTTS}
-              className="uplin-tts-btn"
-              aria-label="Escuchar soluciones"
-              title="Escuchar texto"
-            >
-              <Volume2 size={20} />
-            </button>
+              size={20}
+              ariaLabel="Escuchar soluciones"
+              style={{
+                position: "absolute",
+                left: "calc(100% + 12px)",
+              }}
+            />
           </div>
         </div>
-
         <h2
           style={{
             fontSize: "var(--text-uplin-h2)",

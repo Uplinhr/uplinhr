@@ -1,4 +1,5 @@
 "use client"
+import { CSSProperties } from "react";
 import { motion } from "framer-motion";
 import { Volume2 } from "lucide-react";
 
@@ -7,6 +8,7 @@ interface BotonVolumeProps {
   size?: number;
   ariaLabel?: string;
   className?: string;
+  style?: CSSProperties;
 }
 
 const BotonVolume = ({
@@ -14,6 +16,7 @@ const BotonVolume = ({
   size = 15,
   ariaLabel = "Escuchar texto",
   className = "",
+  style,
 }: BotonVolumeProps) => {
   return (
     <motion.button
@@ -25,6 +28,7 @@ const BotonVolume = ({
       aria-label={ariaLabel}
       title="Escuchar texto"
       type="button"
+      style={style}
     >
       <Volume2 size={size} />
     </motion.button>

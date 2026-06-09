@@ -1,15 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
-import { Volume2 } from 'lucide-react';
+import { ChevronDown, Volume2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { QaItem } from '@/interfaces/index';
 import { speakText } from '@/utils/textToSpeech';
 
 export const QaCard = ({ question, answer, initialExpanded = false }: QaItem) => {
   const [isExpanded, setIsExpanded] = useState(initialExpanded);
 
-  // Función para el TTS de cada pregunta
   const handleQaTTS = () => {
     const answerText = Array.isArray(answer) ? answer.join('. ') : answer;
     const text = `${question}. ${answerText}`;
@@ -17,21 +16,41 @@ export const QaCard = ({ question, answer, initialExpanded = false }: QaItem) =>
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto mb-4">
+    <div
+      style={{
+        background: "var(--color-uplin-glass-bg-strong)",
+        backdropFilter: "blur(20px) saturate(170%)",
+        border: "1px solid var(--color-uplin-glass-border)",
+        borderRadius: "var(--radius-uplin-lg)",
+        overflow: "hidden",
+        transition: "background 0.2s ease",
+      }}
+      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.background = "rgba(255,255,255,0.55)"; }}
+      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.background = "var(--color-uplin-glass-bg-strong)"; }}
+    >
       <button
         type="button"
-        className={`w-full p-4 flex justify-between items-center cursor-pointer bg-white rounded-lg
-          hover:bg-[#F3EBF8] transition-colors border border-gray-200
-          ${isExpanded ? 'rounded-b-none' : ''}`}
+        style={{
+          width: "100%",
+          padding: "1.2rem 1.5rem",
+          textAlign: "left",
+          fontSize: "1rem",
+          fontWeight: 600,
+          color: "var(--color-uplin-ink)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          gap: "1rem",
+          background: "transparent",
+          border: "none",
+          cursor: "pointer",
+        }}
         onClick={() => setIsExpanded(!isExpanded)}
         aria-expanded={isExpanded}
       >
-        <h3 className="text-[#6C4099] text-start font-poppins text-base font-semibold leading-6 w-full">
-          {question}
-        </h3>
+        <span style={{ flex: 1 }}>{question}</span>
 
-        <div className="flex items-center gap-2 ml-2 flex-shrink-0">
-          {/* ✅ No es <button> para evitar <button> dentro de <button> */}
+        <div className="flex items-center gap-2 flex-shrink-0">
           <span
             role="button"
             tabIndex={0}
@@ -53,32 +72,46 @@ export const QaCard = ({ question, answer, initialExpanded = false }: QaItem) =>
             <Volume2 size={18} />
           </span>
 
-          {isExpanded ? (
-            <FaChevronUp className="text-[#6D4098]" />
-          ) : (
-            <FaChevronDown className="text-[#6D4098]" />
-          )}
+          <motion.span
+            animate={{ rotate: isExpanded ? 180 : 0 }}
+            transition={{ duration: 0.25 }}
+            style={{ color: "var(--color-uplin-purple)", display: "flex" }}
+          >
+            <ChevronDown size={18} />
+          </motion.span>
         </div>
       </button>
 
-      {isExpanded && (
-        <div className="p-4 bg-white border border-gray-200 border-t-0 rounded-b-lg">
-          {Array.isArray(answer) ? (
-            answer.map((paragraph, idx) => (
-              <p
-                key={idx}
-                className="text-gray-950 font-poppins text-base font-normal leading-6 mb-2 last:mb-0"
-              >
-                {paragraph}
-              </p>
-            ))
-          ) : (
-            <p className="text-black font-poppins text-base font-normal leading-6">
-              {answer}
-            </p>
-          )}
-        </div>
-      )}
+      <AnimatePresence>
+        {isExpanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.2, 0.7, 0.2, 1] }}
+            style={{ overflow: "hidden" }}
+          >
+            <div
+              style={{
+                padding: "0 1.5rem 1.4rem",
+                fontSize: "0.93rem",
+                lineHeight: 1.6,
+                color: "var(--color-uplin-ink-soft)",
+              }}
+            >
+              {Array.isArray(answer) ? (
+                answer.map((paragraph, idx) => (
+                  <p key={idx} style={{ marginBottom: idx < answer.length - 1 ? "0.5rem" : 0 }}>
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p>{answer}</p>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

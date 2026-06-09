@@ -4,6 +4,8 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Volume2, TrendingUp, Eye, Puzzle, ArrowRight, CoffeeIcon} from "lucide-react"
 import { speakText } from "@/utils/textToSpeech"
+import SectionTag from "../SectionTag/SectionTag"
+import BotonVolume from "../BotonVolume/BotonVolume"
 
 const alliances = [
   {
@@ -103,32 +105,13 @@ export const StrategicAlliances = () => {
           <div style={{ position: "relative", zIndex: 1 }}>
             {/* Eyebrow badge */}
             <div style={{ display: "flex", gap: "0.7rem", marginBottom: "1rem" }}>
-              <span
-                style={{
-                  background: "var(--color-uplin-glass-bg-strong)",
-                  backdropFilter: "blur(14px)",
-                  WebkitBackdropFilter: "blur(14px)",
-                  border: "1px solid var(--color-uplin-glass-border)",
-                  borderRadius: "var(--radius-uplin-pill)",
-                  padding: "0.35rem 0.9rem",
-                  fontSize: "var(--text-uplin-eyebrow)",
-                  fontWeight: 600,
-                  color: "var(--color-uplin-purple-deep)",
-                  letterSpacing: "var(--tracking-uplin-eyebrow)",
-                  textTransform: "uppercase",
-                }}
-              >
-                PARTNERS
-              </span>
-              {/* Botón TTS */}
-              <button
+              <SectionTag text="PARTNERS" />
+              <BotonVolume 
                 onClick={handleTTS}
-                className="uplin-tts-btn"
+                className="shrink-0"
                 aria-label="Escuchar texto de alianzas estratégicas"
-                title="Escuchar texto"
-              >
-                <Volume2 size={22} />
-              </button>
+              />
+              
             </div>
 
             {/* Título */}
@@ -314,11 +297,11 @@ export const StrategicAlliances = () => {
             }}
           >
             <Image
-              src="/TEAMTAILOR LOGO PARTNER.png"
+              src="/TEAMTAILOR_LOGO.png"
               alt="Teamtailor"
               width={160}
               height={48}
-              style={{ objectFit: "contain", height: "auto" }}
+              style={{ objectFit: "contain", width: "170px", height: "58px" }}
             />
           </motion.div>
           <motion.div
@@ -337,11 +320,11 @@ export const StrategicAlliances = () => {
             }}
           >
             <Image
-              src="/ALKEMY LOGO PARTNER.png"
+              src="/ALKEMY_LOGO.png"
               alt="Alkemy"
-              width={140}
+              width={160}
               height={48}
-              style={{ objectFit: "contain", height: "auto" }}
+              style={{ objectFit: "contain", width: "160px", height: "48px" }}
             />
           </motion.div>
         </div>

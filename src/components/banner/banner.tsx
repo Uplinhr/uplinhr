@@ -2,7 +2,8 @@
 import { useState } from "react"
 import Image from "next/image"
 import Button from "../Button/Button"
-import { Volume2, ArrowRight, CalendarDays, PlayCircle } from "lucide-react"
+import { ArrowRight, CalendarDays, PlayCircle } from "lucide-react"
+import BotonVolume from "@/components/BotonVolume/BotonVolume"
 import { speakText } from "@/utils/textToSpeech"
 import { motion } from "framer-motion"
 
@@ -21,7 +22,7 @@ export function Banner() {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
       style={{
-        maxWidth: 1280,
+        maxWidth: 1500,
         margin: "0 auto",
         padding: "0 clamp(1.25rem, 4vw, 3rem)",
         paddingTop: "var(--spacing-uplin-xl)",
@@ -39,7 +40,7 @@ export function Banner() {
         style={{
           background: "linear-gradient(135deg, var(--color-uplin-purple) 0%, var(--color-uplin-purple-deep) 100%)",
           borderRadius: "var(--radius-uplin-xl)",
-          padding: "2.5rem",
+          padding: "1.25rem 2rem",
           color: "white",
           position: "relative",
           overflow: "hidden",
@@ -78,6 +79,41 @@ export function Banner() {
           }}
         />
 
+        {/* CTA — esquina superior derecha */}
+        <motion.a
+          href="https://meetings.hubspot.com/llopez-ramirez"
+          target="_blank"
+          rel="noopener"
+          whileHover={{ y: -2 }}
+          onHoverStart={() => setIsHovered(true)}
+          onHoverEnd={() => setIsHovered(false)}
+          style={{
+            position: "absolute",
+            top: "1.5rem",
+            right: "1.5rem",
+            zIndex: 2,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.45rem",
+            padding: "0.75rem 1.4rem",
+            fontSize: "var(--text-uplin-h5)",
+            fontWeight: 700,
+            color: isHovered ? "white" : "var(--color-uplin-purple-deep)",
+            background: isHovered ? "var(--color-uplin-green)" : "white",
+            borderRadius: "var(--radius-uplin-pill)",
+            transition: "all var(--transition-uplin-base)",
+            whiteSpace: "nowrap",
+            boxShadow: isHovered ? "0 12px 24px -6px rgba(114,191,88,0.5)" : "none",
+            textDecoration: "none",
+          }}
+        >
+          
+          Agendar
+          <motion.span animate={{ x: isHovered ? 3 : 0 }}>
+            <ArrowRight width={13} height={13} />
+          </motion.span>
+        </motion.a>
+
         {/* Contenido */}
         <div style={{ position: "relative", zIndex: 1 }}>
           {/* Badge "en línea" */}
@@ -111,75 +147,41 @@ export function Banner() {
             Soporte disponible
           </div>
 
-          <h3
-            style={{
-              fontSize: "clamp(1.5rem, 3vw, 2.1rem)",
-              fontWeight: 700,
-              lineHeight: "var(--leading-uplin-subhead)",
-              letterSpacing: "var(--tracking-uplin-h3)",
-              marginBottom: "1rem",
-              position: "relative",
-            }}
-          >
-            ¿Necesitás agendar una llamada?
-          </h3>
-
-          <p
-            style={{
-              color: "rgba(255,255,255,0.85)",
-              marginBottom: "1.8rem",
-              fontSize: "var(--text-uplin-body)",
-              position: "relative",
-            }}
-          >
-            Comunicate gratis con nuestro equipo especializado. ¡Te están esperando!
-          </p>
-
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-            <button
+          {/* Fila: título + botón TTS */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
+            <h3
+              style={{
+                fontSize: "clamp(1.5rem, 3vw, 2.1rem)",
+                fontWeight: 700,
+                lineHeight: "var(--leading-uplin-subhead)",
+                letterSpacing: "var(--tracking-uplin-h3)",
+                margin: 0,
+                position: "relative",
+              }}
+            >
+              ¿Necesitás agendar una llamada?
+            </h3>
+            <BotonVolume
               onClick={handleBannerTTS}
-              className="uplin-tts-btn"
-              aria-label="Escuchar texto del banner"
-              title="Escuchar texto"
+              ariaLabel="Escuchar texto del banner"
               style={{
                 background: "rgba(255,255,255,0.15)",
                 borderColor: "rgba(255,255,255,0.2)",
                 color: "white",
               }}
-            >
-              <Volume2 size={20} />
-            </button>
-
-            <motion.a
-              href="https://meetings.hubspot.com/llopez-ramirez"
-              target="_blank"
-              rel="noopener"
-              whileHover={{ y: -2 }}
-              onHoverStart={() => setIsHovered(true)}
-              onHoverEnd={() => setIsHovered(false)}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.45rem",
-                padding: "0.75rem 1.4rem",
-                fontSize: "var(--text-uplin-sm)",
-                fontWeight: 600,
-                color: isHovered ? "white" : "var(--color-uplin-purple-deep)",
-                background: isHovered ? "var(--color-uplin-green)" : "white",
-                borderRadius: "var(--radius-uplin-pill)",
-                transition: "all var(--transition-uplin-base)",
-                whiteSpace: "nowrap",
-                boxShadow: isHovered ? "0 12px 24px -6px rgba(114,191,88,0.5)" : "none",
-                textDecoration: "none",
-              }}
-            >
-              <CalendarDays width={13} height={13} />
-              Agendá una llamada
-              <motion.span animate={{ x: isHovered ? 3 : 0 }}>
-                <ArrowRight width={13} height={13} />
-              </motion.span>
-            </motion.a>
+            />
           </div>
+
+          <p
+            style={{
+              color: "rgba(255,255,255,0.85)",
+              fontSize: "var(--text-uplin-body)",
+              position: "relative",
+              margin: 0,
+            }}
+          >
+            Comunicate gratis con nuestro equipo especializado. ¡Te están esperando!
+          </p>
         </div>
       </div>
     </motion.div>

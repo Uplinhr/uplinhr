@@ -1,18 +1,28 @@
 "use client"
+import { useState } from "react";
+import { motion } from "framer-motion";
 import Button from "@/components/Button/Button";
 import Image from "next/image";
 import { usePaquetes } from "@/hooks/usePaquetes";
 import { CardCreditos } from "@/components/CardServices/CardCreditos";
 import { TbLoader2 } from "react-icons/tb";
 import CardBeneficiosCreditos from "@/components/CardServices/CardBeneficiosCreditos";
-import { Banner2 } from "@/components/banner/banner";
+import { Banner, Banner2 } from "@/components/banner/banner";
 import CreditSimulatorModal from "@/components/simulador/CreditSimulatorModal";
 import { QAView } from "../qaView";
 import { PlayCircle } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
+import EyebrowPill from "@/components/EyebrowPill/EyebrowPill";
+import BotonVolume from "@/components/BotonVolume/BotonVolume";
+import SectionTag from "@/components/SectionTag/SectionTag";
+import BotonPrimario from "@/components/BotonPrimario/BotonPrimario";
+import BotonSecundario from "@/components/BotonSecundario/BotonSecundario";
+import { fadeUp } from "@/utils/animations";
+import BotonVerde from "@/components/BotonTerceario/BotónVerde";
 
 export default function Creditos() {
   const { paquetes, loading, error } = usePaquetes();
+
   const handleHeaderTTS = () => {
     const text = "Créditos de talento para Startups y Pymes. Un modelo inteligente para optimizar tu reclutamiento. Compra créditos de búsquedas de talento y diseña tu proceso a medida. Sin vencimiento, flexible y con la garantía de Uplin.";
     speakText(text);
@@ -31,80 +41,192 @@ export default function Creditos() {
   return (
     <main className="min-h-screen">
       {/* HEADER */}
-      <section className="bg-[#502B7D] text-white py-16 px-4 relative">
-        <button
-          onClick={handleHeaderTTS}
-          className="absolute top-4 right-4 p-2 hover:bg-white/20 rounded-full transition-colors duration-200 z-50 cursor-pointer"
-          aria-label="Escuchar Créditos de talento"
-          title="Escuchar texto"
-          type="button"
-          style={{ pointerEvents: 'auto' }}
+      <style>{`
+        .creditos-header {
+          position: relative;
+          padding: 7rem 0 4rem;
+          z-index: 1;
+        }
+        @media (max-width: 900px) {
+          .creditos-header { padding-top: 6rem; }
+        }
+      `}</style>
+      <section className="creditos-header">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-14 items-center max-w-[1280px] mx-auto"
+          style={{ padding: "0 clamp(1.25rem, 4vw, 3rem)" }}
         >
-          <PlayCircle size={24} className="text-white" />
-        </button>
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left side - Image */}
-            <div className="order-2 lg:order-1">
-              <div className="relative rounded-lg overflow-hidden shadow-lg">
-                <Image
-                  src="/C-landing.png"
-                  alt="Crédito de talentos"
-                  width={400}
-                  height={300}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
-              </div>
+          {/* Columna izquierda — contenido */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
+            className="order-1 lg:order-none"
+            style={{ position: "relative", zIndex: 2 }}
+          >
+            {/* Fila eyebrow + TTS */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.7rem", marginBottom: "1.5rem" }}>
+            
+              <EyebrowPill text="Búsqueda de Talento" />
+              
+              <BotonVolume
+              onClick={handleHeaderTTS}
+              ariaLabel="Escuchar presentación"
+              />
             </div>
 
-            {/* Right side - Content */}
-            <div className="order-1 lg:order-2 space-y-6">
-              <div className="space-y-2">
-                <h1 className="text-3xl lg:text-4xl font-bold leading-tight text-balance text-center lg:text-left">
-                  Créditos de talento
-                  <br />
-                  para Startups y Pymes
-                </h1>
-              </div>
+            {/* Título */}
+            <h1
+              style={{
+                fontSize: "clamp(2.2rem, 4.5vw, 3.4rem)",
+                fontWeight: 700,
+                lineHeight: 1.05,
+                letterSpacing: "-0.02em",
+                margin: "0 0 1rem",
+                color: "var(--color-uplin-ink)",
+              }}
+            >
+              <span
+                style={{
+                  background: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-green-dark), var(--color-uplin-orange))",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                }}
+              >
+                Vacantes por niveles
+              </span>{" "}
+              para Startups y Pymes
+            </h1>
 
-              <div className="space-y-4">
-                <h2 className="text-lg lg:text-xl font-semibold text-white">
-                  Un modelo inteligente para optimizar tu reclutamiento
-                </h2>
+            {/* Párrafo intro */}
+            <p
+              className="lead-intro"
+              style={{ margin: "0 0 0.5rem" }}
+            >
+              Un modelo inteligente para optimizar tu reclutamiento
+            </p>
 
-                <div className="space-y-2 text-white/90">
-                  <p className="text-sm lg:text-base leading-relaxed">
-                    Compra créditos de búsquedas de talento y diseña tu proceso
-                    a medida.
-                  </p>
-                  <p className="text-sm lg:text-base leading-relaxed">
-                    Sin vencimiento, flexible y con la garantía de Uplin.
-                  </p>
-                </div>
-              </div>
-              {/* 🔹 Se quitó el botón del header */}
+            {/* Párrafo lead */}
+            <p
+              style={{
+                fontSize: "1.05rem",
+                lineHeight: 1.7,
+                color: "var(--color-uplin-ink-soft)",
+                maxWidth: 540,
+                margin: "0 0 2rem",
+              }}
+            >
+              Adquirí paquetes de vacantes por niveles y diseñá tu proceso a medida. Sin vencimiento, flexible y con la garantía de Uplin.
+            </p>
+
+            {/* CTAs */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.8rem" }}>
+              <motion.div
+                custom={3} variants={fadeUp} initial="hidden" animate="visible"
+                style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}
+              >
+                <BotonPrimario text="Ver paquetes →" href="/servicios" />
+                <BotonSecundario text="Habla con un experto" href="/contacto" />
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
+
+          {/* Columna derecha — imagen */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.2, 0.7, 0.2, 1], delay: 0.2 }}
+            className="order-2 lg:order-none"
+            style={{
+              position: "relative",
+              width: "100%",
+              maxWidth: 520,
+              marginLeft: "auto",
+              pointerEvents: "none",
+            }}
+          >
+            {/* Halo decorativo */}
+            <div
+              style={{
+                position: "absolute",
+                inset: "-15% -18% -15% -12%",
+                borderRadius: "50%",
+                zIndex: -1,
+                filter: "blur(40px)",
+                background:
+                  "radial-gradient(ellipse at 30% 30%, rgba(248,154,28,0.25) 0%, transparent 55%), " +
+                  "radial-gradient(ellipse at 70% 75%, rgba(109,64,152,0.28) 0%, transparent 55%), " +
+                  "radial-gradient(ellipse at center, rgba(114,191,88,0.15) 0%, transparent 60%)",
+                animation: "teamHaloPulse 12s ease-in-out infinite",
+              }}
+            />
+
+            <Image
+              src="/busqueda_de_talento.jpeg"
+              alt="Búsqueda de talento"
+              width={520}
+              height={347}
+              priority
+              style={{
+                width: "100%",
+                height: "auto",
+                display: "block",
+                aspectRatio: "3/2",
+                objectFit: "cover",
+                objectPosition: "center",
+                filter: "saturate(0.88) contrast(1.04) brightness(1.02)",
+                opacity: 0.92,
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 60% 70% at center, #000 0%, rgba(0,0,0,.92) 25%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.25) 72%, rgba(0,0,0,.05) 88%, transparent 100%)",
+                maskImage:
+                  "radial-gradient(ellipse 60% 70% at center, #000 0%, rgba(0,0,0,.92) 25%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.25) 72%, rgba(0,0,0,.05) 88%, transparent 100%)",
+                WebkitMaskSize: "100% 100%",
+                maskSize: "100% 100%",
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                animation: "teamFloat 9s ease-in-out infinite",
+              }}
+            />
+          </motion.div>
         </div>
       </section>
 
       {/* PAQUETES */}
-      <section className="py-16 px-4 bg-gray-50">
-        <div className="flex items-center justify-center gap-2 mb-8 mt-8">
-          <h2 className="font-poppins text-[28px] font-semibold text-center">
-            <span className="text-black">Encontrá el</span>{" "}
-            <span className="text-[#502B7D]">paquete perfecto</span>{" "}
-            <span className="text-black">para tu empresa</span>
-          </h2>
-          <button
-            onClick={handlePaquetesTTS}
-            className="p-2 hover:bg-gray-200 rounded-full transition-colors duration-200"
-            aria-label="Escuchar sección de paquetes"
-            title="Escuchar texto"
+      <section className="py-16">
+        <div className="max-w-[780px] mx-auto text-center mb-14">
+          <SectionTag text="PAQUETES" />
+          <BotonVolume onClick={handlePaquetesTTS} ariaLabel="Escuchar sección de paquetes" size={18} />
+          <motion.h1
+            custom={1} variants={fadeUp} initial="hidden" animate="visible"
+            style={{
+              fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.035em",
+              lineHeight: 1.05,
+              color: "#2A0824",
+              margin: "0 0 1rem",
+            }}
           >
-            <PlayCircle size={24} className="text-[#502B7D]" />
-          </button>
+            Encontrá el{" "}
+            <span style={{ position: "relative", display: "inline-block" }}>
+              <span className="text-gradient-uplin"> paquete perfecto</span>
+              
+            </span>{" "}para tu empresa
+            
+          </motion.h1>
+          <motion.p
+            custom={2} variants={fadeUp} initial="hidden" animate="visible"
+            style={{
+              fontSize: "1.07rem",
+              lineHeight: 1.6,
+              color: "#5A4566",
+              margin: "0 0 0.5rem",
+            }}
+          >
+            Cuatro opciones diseñadas para cada etapa de crecimiento. Sin vencimiento, a tu ritmo.
+          </motion.p>
+          
         </div>
 
         {loading ? (
@@ -114,58 +236,71 @@ export default function Creditos() {
         ) : error ? (
           <p className="text-center text-red-500 py-12">{error}</p>
         ) : (
-          <div className="max-w-6xl mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
-            {paquetes.map((paquete) => (
-              <CardCreditos key={paquete.title} paquetes={paquete} />
+          <div className="max-w-[1280px] mx-auto grid gap-6 sm:grid-cols-2 lg:grid-cols-4 items-stretch">
+            {paquetes.map((paquete, index) => (
+              <CardCreditos key={paquete.title} paquetes={paquete} index={index} />
             ))}
           </div>
         )}
 
         <div className="flex justify-center mt-12">
           <CreditSimulatorModal>
-            <Button tag="Simulá tu paquete" mode={2} height={46} width={300} />
+            <BotonVerde text="Simula tu paquete"/>
           </CreditSimulatorModal>
         </div>
       </section>
 
       {/* CRÉDITOS INDIVIDUALES */}
       <section>
-        <div className="bg-[#6C4099] rounded-lg p-6 mb-6 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white">
+        <div className="bg-[#6C4099] rounded-xl p-3 mb-5 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white mb-10 mt-10">
           <div className="flex items-center gap-2">
             <h2>
               Si tu paquete no se adapta a tus necesidades, comprá créditos
               individuales
             </h2>
-            <button
+            <BotonVolume
               onClick={handleCreditosIndividualesTTS}
-              className="p-2 hover:bg-white/20 rounded-full transition-colors duration-200 flex-shrink-0"
-              aria-label="Escuchar texto"
-              title="Escuchar texto"
-            >
-              <PlayCircle size={22} className="text-white" />
-            </button>
+              ariaLabel="Escuchar texto"
+            />
           </div>
-          <Button
-            link="https://u030x.share.hsforms.com/2dXErlXkESgeW2hE4_Xmnaw"
-            tag="Adquirir aquí"
-            mode={2}
-            height={50}
-            width={250}
-          />
+          <BotonVerde text="Adquirir aquí" href="https://u030x.share.hsforms.com/2dXErlXkESgeW2hE4_Xmnaw"/>
         </div>
       </section>
 
       {/* BENEFICIOS + QA + BANNER */}
       <section>
-        <h2 className="font-poppins text-[28px] font-semibold text-center mt-8">
-          <span className="text-[#502B7D]">Beneficios</span>{" "}
-          <span className="text-[#70C157]">+</span>
-        </h2>
+        
+        <div className="text-center mb-10 mt-10">
+          <SectionTag text="BENEFICIOS" />
+          <h2
+            style={{
+              fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.035em",
+              lineHeight: 1.05,
+              color: "var(--color-uplin-ink)",
+              whiteSpace: "nowrap",
+              margin: "0.5rem 0 0",
+            }}
+          >
+            Por qué{" "}
+            <span
+              style={{
+                background: "linear-gradient(135deg, var(--color-uplin-orange), var(--color-uplin-orange-dark))",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+              }}
+            >
+              elegirnos
+            </span>
+          </h2>
+        </div>
         <CardBeneficiosCreditos />
 
         <QAView />
 
-        <Banner2 />
+        <Banner />
       </section>
     </main>
   );

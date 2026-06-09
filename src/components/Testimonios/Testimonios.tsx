@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Star } from "lucide-react"
+import SectionTag from "../SectionTag/SectionTag"
 
 const testimonios = [
   {
@@ -157,24 +158,7 @@ export default function Testimonios() {
             marginBottom: "3rem",
           }}
         >
-          <span
-            style={{
-              background: "var(--color-uplin-glass-bg-strong)",
-              backdropFilter: "blur(14px)",
-              border: "1px solid var(--color-uplin-glass-border)",
-              borderRadius: "var(--radius-uplin-pill)",
-              padding: "0.35rem 0.9rem",
-              fontSize: "var(--text-uplin-eyebrow)",
-              fontWeight: 600,
-              color: "var(--color-uplin-purple-deep)",
-              letterSpacing: "var(--tracking-uplin-eyebrow)",
-              textTransform: "uppercase",
-              display: "inline-block",
-              marginBottom: "1.2rem",
-            }}
-          >
-            TESTIMONIOS
-          </span>
+          <SectionTag text="TESTIMONIOS" />
           <h2
             style={{
               fontSize: "var(--text-uplin-h2)",
