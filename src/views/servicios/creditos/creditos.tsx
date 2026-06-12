@@ -250,8 +250,45 @@ export default function Creditos() {
 
       {/* CRÉDITOS INDIVIDUALES */}
       <section>
-        <div className="bg-[#6C4099] rounded-xl p-3 mb-5 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white mb-10 mt-10">
-          <div className="flex items-center gap-2">
+        <div
+          className="p-5 flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white mb-10 mt-10"
+          style={{
+            background: "linear-gradient(135deg, var(--color-uplin-purple) 0%, var(--color-uplin-purple-deep) 100%)",
+            borderRadius: "var(--radius-uplin-xl)",
+            boxShadow: "0 30px 60px -20px rgba(60,14,54,0.4)",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          {/* Blob verde */}
+          <div
+            style={{
+              position: "absolute",
+              top: "-50%",
+              right: "-30%",
+              width: 500,
+              height: 500,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(114,191,88,0.35), transparent 70%)",
+              filter: "blur(40px)",
+              pointerEvents: "none",
+            }}
+          />
+          {/* Blob naranja */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-30%",
+              left: "-20%",
+              width: 400,
+              height: 400,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(248,154,28,0.3), transparent 70%)",
+              filter: "blur(50px)",
+              pointerEvents: "none",
+            }}
+          />
+          <div className="flex items-center gap-2" style={{ position: "relative", zIndex: 1 }}>
             <h2>
               Si tu paquete no se adapta a tus necesidades, comprá créditos
               individuales
@@ -261,7 +298,9 @@ export default function Creditos() {
               ariaLabel="Escuchar texto"
             />
           </div>
-          <BotonVerde text="Adquirir aquí" href="https://u030x.share.hsforms.com/2dXErlXkESgeW2hE4_Xmnaw"/>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <BotonVerde text="Adquirir aquí" href="https://u030x.share.hsforms.com/2dXErlXkESgeW2hE4_Xmnaw"/>
+          </div>
         </div>
       </section>
 
