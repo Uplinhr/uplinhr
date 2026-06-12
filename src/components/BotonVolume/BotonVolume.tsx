@@ -20,7 +20,7 @@ const BotonVolume = ({
 }: BotonVolumeProps) => {
   return (
     <motion.button
-      onClick={onClick}
+      onClick={(e) => { e.stopPropagation(); onClick(); }}
       whileHover={{ scale: 1.08 }}
       whileTap={{ scale: 0.97 }}
       transition={{ duration: 0.22, ease: [0.4, 0, 0.2, 1] }}

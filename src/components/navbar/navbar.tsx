@@ -2,11 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef } from "react";
-import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
-import { IoEyeSharp } from "react-icons/io5";
-import { FaEyeSlash } from "react-icons/fa";
-import { IoMdClose } from "react-icons/io";
 import { toast } from "sonner";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useUserStore } from "@/store/useUserStore";
