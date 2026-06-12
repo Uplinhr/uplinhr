@@ -1,6 +1,6 @@
 "use client"
 import Button from "@/components/Button/Button";
-import Needs from "@/views/Needs";
+import Needs from "@/views/quienes-somos/Needs";
 import Image from "next/image";
 import { FaLinkedin } from "react-icons/fa";
 import { Volume2 } from "lucide-react";

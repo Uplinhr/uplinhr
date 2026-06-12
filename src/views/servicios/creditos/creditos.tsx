@@ -1,16 +1,14 @@
 "use client"
-import { useState } from "react";
 import { motion } from "framer-motion";
-import Button from "@/components/Button/Button";
 import Image from "next/image";
 import { usePaquetes } from "@/hooks/usePaquetes";
 import { CardCreditos } from "@/components/CardServices/CardCreditos";
 import { TbLoader2 } from "react-icons/tb";
-import CardBeneficiosCreditos from "@/components/CardServices/CardBeneficiosCreditos";
-import { Banner, Banner2 } from "@/components/banner/banner";
+import Card from "@/components/Card/Card";
+import { creditosFeatures } from "./creditos.utils";
+import { Banner } from "@/components/banner/banner";
 import CreditSimulatorModal from "@/components/simulador/CreditSimulatorModal";
-import { QAView } from "../qaView";
-import { PlayCircle } from "lucide-react";
+import { QAView } from "@/views/preguntas-frecuentes/qaView";
 import { speakText } from "@/utils/textToSpeech";
 import EyebrowPill from "@/components/EyebrowPill/EyebrowPill";
 import BotonVolume from "@/components/BotonVolume/BotonVolume";
@@ -296,7 +294,11 @@ export default function Creditos() {
             </span>
           </h2>
         </div>
-        <CardBeneficiosCreditos />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1280px] mx-auto px-6">
+          {creditosFeatures.map((feature, index) => (
+            <Card key={feature.title} {...feature} tts animationDelay={index * 0.1} />
+          ))}
+        </div>
 
         <QAView />
 

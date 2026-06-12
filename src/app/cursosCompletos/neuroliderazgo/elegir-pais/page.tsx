@@ -1,4 +1,4 @@
-import CountriesView from "@/views/countriesView";
+import CountriesView from "@/views/countries/countriesView";
 
 const countriesMaterLider = [
   { name: "Argentina", code: "ar", href: "https://app.uplinhr.com/certificacion-neurohabilidades" },

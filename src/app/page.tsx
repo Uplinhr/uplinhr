@@ -1,5 +1,5 @@
-import Solutions from "@/views/Solutions";
-import Presentation from "@/views/Presentation";
+import Solutions from "@/views/home/Solutions";
+import Presentation from "@/views/home/Presentation";
 import { CardServices } from "@/components/CardServices/cardServices";
 import { Banner } from "@/components/banner/banner";
 import { Search, Users, Briefcase, Star, GraduationCap } from "lucide-react";

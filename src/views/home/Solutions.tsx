@@ -1,9 +1,9 @@
 "use client"
-import CardSolution from "@/components/CardSolution/CardSolution"
-import { Volume2, Layers, PiggyBank, Users, TrendingUp } from "lucide-react"
+import Card from "@/components/Card/Card"
 import { speakText } from "@/utils/textToSpeech"
 import SectionTag from "@/components/SectionTag/SectionTag"
 import BotonVolume from "@/components/BotonVolume/BotonVolume"
+import { solutionsCards } from "./solutions.utils"
 
 const Solutions = () => {
   const handleSolutionsTTS = () => {
@@ -66,30 +66,9 @@ const Solutions = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        <CardSolution
-          icon={<Layers className="w-[28px] h-[28px]" />}
-          iconBg="linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-purple-deep))"
-          title="Flexibilidad"
-          description="Adaptabilidad total a las necesidades cambiantes de la empresa."
-        />
-        <CardSolution
-          icon={<PiggyBank className="w-[28px] h-[28px]" />}
-          iconBg="linear-gradient(135deg, var(--color-uplin-orange), var(--color-uplin-orange-dark))"
-          title="Ahorro de costos"
-          description="Más valor, menos costos asociados a consultorías tradicionales."
-        />
-        <CardSolution
-          icon={<Users className="w-[28px] h-[28px]" />}
-          iconBg="linear-gradient(135deg, var(--color-uplin-green), var(--color-uplin-green-dark))"
-          title="Acceso a expertos"
-          description="Disponibilidad de un equipo de RRHH especializado."
-        />
-        <CardSolution
-          icon={<TrendingUp className="w-[28px] h-[28px]" />}
-          iconBg="linear-gradient(135deg, var(--color-uplin-purple-3), var(--color-uplin-purple-2))"
-          title="Escalabilidad"
-          description="Ajuste de servicios según el crecimiento o la necesidad."
-        />
+        {solutionsCards.map((card, index) => (
+          <Card key={card.title} {...card} animationDelay={index * 0.1} />
+        ))}
       </div>
     </div>
   )

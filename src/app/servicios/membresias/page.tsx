@@ -1,4 +1,4 @@
-import Membresias from '@/views/servicios/membresias'
+import Membresias from '@/views/servicios/membresias/membresias'
 
 
 function MembresiasPage() {

@@ -1,7 +1,7 @@
 "use client"
-import CardsPlan from "@/views/cardsPlan";
+import CardsPlan from "@/views/planes/cardsPlan";
 import Button from "@/components/Button/Button";
-import ComparativeCard from "@/views/comparativeCard";
+import ComparativeCard from "@/views/planes/comparativeCard";
 import { Volume2 } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
 

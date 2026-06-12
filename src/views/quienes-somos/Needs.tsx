@@ -1,4 +1,4 @@
-import CardSolution from "@/components/CardSolution/CardSolution";
+import Card from "@/components/Card/Card"
 
 const Needs = () => {
   return (
@@ -7,41 +7,41 @@ const Needs = () => {
         Todo lo que necesitás para hacer crecer tu equipo, en un solo lugar
       </h1>
       <div className="flex flex-wrap gap-6 justify-center mb-10">
-        <CardSolution
-          icon="/iconPersonalizacion.svg"
+        <Card
+          icon={<img src="/iconPersonalizacion.svg" alt="" className="w-8 h-8" />}
           title="Personalización"
           description="Consultoría flexible y a medida"
         />
-        <CardSolution
-          icon="/iconHiring.svg"
+        <Card
+          icon={<img src="/iconHiring.svg" alt="" className="w-8 h-8" />}
           title="Hiring a tu ritmo"
           description="Créditos para búsquedas de talento"
         />
-        <CardSolution
-          icon="/iconAcomp.svg"
+        <Card
+          icon={<img src="/iconAcomp.svg" alt="" className="w-8 h-8" />}
           title="Acompañamiento"
           description="Apoyo profesional de expertos"
         />
       </div>
       <div className="flex flex-wrap gap-6 justify-center">
-        <CardSolution
-          icon="/iconComunidad.svg"
+        <Card
+          icon={<img src="/iconComunidad.svg" alt="" className="w-8 h-8" />}
           title="Comunidad"
           description="Networking y contacto"
         />
-        <CardSolution
-          icon="/iconHerramientas.svg"
+        <Card
+          icon={<img src="/iconHerramientas.svg" alt="" className="w-8 h-8" />}
           title="Herramientas y Formación"
           description="Recursos prácticos, Workshops y webinars en vivo"
         />
-        <CardSolution
-          icon="/iconSoporte.svg"
+        <Card
+          icon={<img src="/iconSoporte.svg" alt="" className="w-8 h-8" />}
           title="Soporte"
           description="Email y reuniones online"
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Needs;
+export default Needs

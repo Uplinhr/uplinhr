@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export interface IPlan {
   plan: string;
   description: string;
@@ -19,13 +17,6 @@ export interface QaItem {
   answer: string | string[];
   initialExpanded?: boolean;
 }
-export interface SolutionProps{
-  icon: ReactNode;
-  iconBg?: string;
-  title: string;
-  description: string;
-}
-
 export interface IOption {
   id: string;
   text: string;

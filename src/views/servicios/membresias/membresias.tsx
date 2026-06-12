@@ -1,6 +1,7 @@
 "use client";
-import CardBeneficiosMembresia from "@/components/CardServices/CardBeneficiosMembresia";
-import CardsPlan from "@/views/cardsPlan";
+import Card from "@/components/Card/Card";
+import { membresiasFeatures } from "./membresias.utils";
+import CardsPlan from "@/views/planes/cardsPlan";
 import Image from "next/image";
 import { Banner } from "@/components/banner/banner";
 import { PlayCircle } from "lucide-react";
@@ -116,7 +117,11 @@ export default function Membresias() {
           <span className="text-[#502B7D]">Beneficios</span>{" "}
           <span className="text-[#70C157]">+</span>
         </h2>
-        <CardBeneficiosMembresia />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
+          {membresiasFeatures.map((feature, index) => (
+            <Card key={feature.title} {...feature} tts animationDelay={index * 0.1} />
+          ))}
+        </div>
       </section>
 
       <section>
