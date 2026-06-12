@@ -6,6 +6,7 @@ import { ArrowRight, CalendarDays, PlayCircle } from "lucide-react"
 import BotonVolume from "@/components/BotonVolume/BotonVolume"
 import { speakText } from "@/utils/textToSpeech"
 import { motion } from "framer-motion"
+import BotonSecundario from "../BotonSecundario/BotonSecundario"
 
 export function Banner() {
   const [isHovered, setIsHovered] = useState(false)
@@ -79,41 +80,6 @@ export function Banner() {
           }}
         />
 
-        {/* CTA — esquina superior derecha */}
-        <motion.a
-          href="https://meetings.hubspot.com/llopez-ramirez"
-          target="_blank"
-          rel="noopener"
-          whileHover={{ y: -2 }}
-          onHoverStart={() => setIsHovered(true)}
-          onHoverEnd={() => setIsHovered(false)}
-          style={{
-            position: "absolute",
-            top: "1.5rem",
-            right: "1.5rem",
-            zIndex: 2,
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.45rem",
-            padding: "0.75rem 1.4rem",
-            fontSize: "var(--text-uplin-h5)",
-            fontWeight: 700,
-            color: isHovered ? "white" : "var(--color-uplin-purple-deep)",
-            background: isHovered ? "var(--color-uplin-green)" : "white",
-            borderRadius: "var(--radius-uplin-pill)",
-            transition: "all var(--transition-uplin-base)",
-            whiteSpace: "nowrap",
-            boxShadow: isHovered ? "0 12px 24px -6px rgba(114,191,88,0.5)" : "none",
-            textDecoration: "none",
-          }}
-        >
-          
-          Agendar
-          <motion.span animate={{ x: isHovered ? 3 : 0 }}>
-            <ArrowRight width={13} height={13} />
-          </motion.span>
-        </motion.a>
-
         {/* Contenido */}
         <div style={{ position: "relative", zIndex: 1 }}>
           {/* Badge "en línea" */}
@@ -147,41 +113,45 @@ export function Banner() {
             Soporte disponible
           </div>
 
-          {/* Fila: título + botón TTS */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1rem" }}>
-            <h3
-              style={{
-                fontSize: "clamp(1.5rem, 3vw, 2.1rem)",
-                fontWeight: 700,
-                lineHeight: "var(--leading-uplin-subhead)",
-                letterSpacing: "var(--tracking-uplin-h3)",
-                margin: 0,
-                position: "relative",
-              }}
-            >
-              ¿Necesitás agendar una llamada?
-            </h3>
-            <BotonVolume
-              onClick={handleBannerTTS}
-              ariaLabel="Escuchar texto del banner"
-              style={{
-                background: "rgba(255,255,255,0.15)",
-                borderColor: "rgba(255,255,255,0.2)",
-                color: "white",
-              }}
-            />
-          </div>
+          {/* Fila: bloque texto + CTA alineados al centro */}
+          <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "2rem" }}>
+            {/* Bloque título + descripción */}
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.35rem" }}>
+                <h3
+                  style={{
+                    fontSize: "clamp(1.5rem, 3vw, 2.1rem)",
+                    fontWeight: 700,
+                    lineHeight: "var(--leading-uplin-subhead)",
+                    letterSpacing: "var(--tracking-uplin-h3)",
+                    margin: 0,
+                  }}
+                >
+                  ¿Necesitás agendar una llamada?
+                </h3>
+                <BotonVolume
+                  onClick={handleBannerTTS}
+                  ariaLabel="Escuchar texto del banner"
+                  style={{
+                    background: "rgba(255,255,255,0.15)",
+                    borderColor: "rgba(255,255,255,0.2)",
+                    color: "white",
+                  }}
+                />
+              </div>
+              <p
+                style={{
+                  color: "rgba(255,255,255,0.85)",
+                  fontSize: "var(--text-uplin-body)",
+                  margin: 0,
+                }}
+              >
+                Comunicate gratis con nuestro equipo especializado. ¡Te están esperando!
+              </p>
+            </div>
 
-          <p
-            style={{
-              color: "rgba(255,255,255,0.85)",
-              fontSize: "var(--text-uplin-body)",
-              position: "relative",
-              margin: 0,
-            }}
-          >
-            Comunicate gratis con nuestro equipo especializado. ¡Te están esperando!
-          </p>
+            <BotonSecundario text="Agendar ->" href="https://meetings.hubspot.com/llopez-ramirez" />
+          </div>
         </div>
       </div>
     </motion.div>

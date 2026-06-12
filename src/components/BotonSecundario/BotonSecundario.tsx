@@ -16,18 +16,21 @@ const BotonSecundario = ({ text, href, onClick }: BotonSecundarioProps) => {
           align-items: center;
           padding: 0.75rem 1.75rem;
           border-radius: 9999px;
-          color: #3C0E36;
+          background: #ffffff !important;
+          color: var(--color-uplin-purple, #6B3FA0);
           font-size: 0.92rem;
           font-weight: 600;
           text-decoration: none;
           cursor: pointer;
           transition:
             background  0.35s cubic-bezier(0.4,0,0.2,1),
+            color       0.35s cubic-bezier(0.4,0,0.2,1),
             box-shadow  0.35s cubic-bezier(0.4,0,0.2,1),
             transform   0.20s cubic-bezier(0.4,0,0.2,1);
         }
         .uplin-btn-secondary:hover {
-          background: rgba(255,255,255,0.95) !important;
+          background: #72BF58 !important;
+          color: #ffffff !important;
         }
       `}</style>
       <motion.a

@@ -55,6 +55,19 @@ export interface CardCursoProps {
   link: string;
 }
 
+export interface Membresia {
+  tipo: string;
+  title: string;
+  credits: number;
+  discount?: string;
+  idealPara: string;
+  includes: string[];
+  excludes: string[];
+  price: number;
+  oldPrice?: number;
+  buttonLink: string;
+}
+
 export interface Paquete {
   title: string;
   description: string;
