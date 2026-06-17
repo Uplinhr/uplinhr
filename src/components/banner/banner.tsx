@@ -17,15 +17,13 @@ export function Banner() {
   };
 
   return (
-    <motion.div
+    <motion.div className="max-w-7xl mx-auto"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.8, ease: [0.2, 0.7, 0.2, 1] }}
       style={{
-        maxWidth: 1500,
-        margin: "0 auto",
-        padding: "0 clamp(1.25rem, 4vw, 3rem)",
+        padding: "0 1rem",
         paddingTop: "var(--spacing-uplin-xl)",
         paddingBottom: "var(--spacing-uplin-xl)",
       }}
