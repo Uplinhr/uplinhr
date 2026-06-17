@@ -42,6 +42,7 @@ export default function Creditos() {
       <style>{`
         .creditos-header {
           position: relative;
+          overflow: hidden;
           padding: 7rem 0 4rem;
           z-index: 1;
         }

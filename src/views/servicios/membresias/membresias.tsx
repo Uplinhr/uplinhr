@@ -25,6 +25,7 @@ export default function Membresias() {
       <style>{`
         .membresias-header {
           position: relative;
+          overflow: hidden;
           padding: 7rem 0 4rem;
           z-index: 1;
         }
@@ -198,9 +199,9 @@ export default function Membresias() {
           </div>
       </section>
 
-      <section>
-        <div className="flex items-center justify-center gap-2 mt-12 p-5">
+      <section className="flex flex-col items-center gap-2 mt-12 p-5">
           <SectionTag text="PLANES" />
+          <div className="flex items-center justify-center">
            <h1
               style={{
                 fontSize: "clamp(2.2rem, 4.5vw, 3.4rem)",
@@ -224,17 +225,16 @@ export default function Membresias() {
               </span>
             </h1>
         
-        <BotonVolume 
-          onClick={() => speakText("Todo en un plan mensual que evoluciona con tu empresa. Elegí el plan que mejor se adapte a las necesidades de tu organización.")}
-          aria-label="Escuchar título de planes"
-        />
-          
-        </div>
+            <BotonVolume 
+              onClick={() => speakText("Todo en un plan mensual que evoluciona con tu empresa. Elegí el plan que mejor se adapte a las necesidades de tu organización.")}
+              aria-label="Escuchar título de planes"
+            /> 
+          </div>
+     
         <CardsPlan />
       </section>
-      <section>
-        <Banner />
-      </section>
+      <Banner />
+      
     </div>
   );
 }

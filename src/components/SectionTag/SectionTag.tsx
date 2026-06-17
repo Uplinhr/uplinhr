@@ -11,7 +11,7 @@ const SectionTag = ({ text }: SectionTagProps) => {
         borderRadius: "var(--radius-uplin-pill)",
         padding: "0.35rem 0.9rem",
         fontSize: "var(--text-uplin-eyebrow)",
-        fontWeight: 600,
+        fontWeight: 700,
         color: "var(--color-uplin-purple-deep)",
         letterSpacing: "var(--tracking-uplin-eyebrow)",
         textTransform: "uppercase",

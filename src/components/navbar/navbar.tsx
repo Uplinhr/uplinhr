@@ -352,7 +352,7 @@ const Navbar = () => {
             transition={base}
             className="lg:hidden overflow-hidden"
           >
-            <div className="pb-4 px-4 space-y-1">
+            <div className="pb-4 px-4 pt-2 space-y-1 mt-2 rounded-[20px] border border-uplin-line bg-uplin-bg shadow-uplin-nav">
               <a
                 href="/quienes-somos"
                 className="block text-uplin-ink text-uplin-nav font-medium hover:text-uplin-purple py-2 px-4 hover:bg-uplin-purple/10 rounded-lg cursor-pointer transition-colors"
