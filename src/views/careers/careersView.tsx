@@ -1,10 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { IoRocket, IoNotifications } from "react-icons/io5";
 import { SlEnvolopeLetter } from "react-icons/sl";
 import { PlayCircle } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
+import ServiceHero from "@/components/ServiceHero/ServiceHero";
+import SectionTag from "@/components/SectionTag/SectionTag";
+import { Banner } from "@/components/banner/banner";
 
 const CareersView = () => {
   const buttonAnimations = {
@@ -19,15 +21,10 @@ const CareersView = () => {
 
   // Función TTS para el header
   const handleHeaderTTS = () => {
-    const text = "Uplin Careers. Conecta con oportunidades que te impulsen a crecer.";
+    const text = "Uplin Careers. Conecta con oportunidades que te impulsen a crecer. Te conectamos con las mejores startups y empresas de tecnología de Latam. Culturas que ponen a las personas en el centro, proyectos que inspiran y retos que impulsan tu desarrollo.";
     speakText(text);
   };
 
-  // Función TTS para la descripción
-  const handleDescriptionTTS = () => {
-    const text = "Te conectamos con las mejores startups y empresas de tecnología de Latam. Culturas que ponen a las personas en el centro, proyectos que inspiran y retos que impulsan tu desarrollo.";
-    speakText(text);
-  };
 
   // Función TTS para base de talentos
   const handleTalentPoolTTS = () => {
@@ -36,66 +33,32 @@ const CareersView = () => {
   };
 
   return (
-    <>
-      <section className="font-poppins text-white bg-[radial-gradient(50%_50%_at_50%_50%,#8F68AC_0%,#6C4099_100%)] text-center h-auto min-h-[30vh] md:min-h-[60vh] w-full flex flex-col justify-center items-center p-5 box-border">
-        <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
-          <h1 className="text-3xl md:text-4xl font-normal text-center relative z-0">
-            Uplin Careers
-          </h1>
-          <button
-            onClick={handleHeaderTTS}
-            className="p-2 hover:bg-white/20 rounded-full transition-colors duration-200"
-            aria-label="Escuchar Uplin Careers"
-            title="Escuchar texto"
-          >
-            <PlayCircle size={24} className="text-white" />
-          </button>
-        </div>
-        <h3 className="text-base md:text-lg font-normal relative z-0">
-          Conecta con oportunidades que te impulsen a crecer
-        </h3>
-      </section>
+    <main className="min-h-screen">
+      <ServiceHero
+      tag="Uplin Careers"
+        title={{
+          before: "Uplin",
+          gradient: "Careers",
+        }}
+        description={
+          <>
+            <p className="lead-intro" style={{ margin: "0 0 0.5rem" }}>
+              Conecta con oportunidades que te impulsen a crecer
+            </p>
+            Te conectamos con las mejores startups y empresas de tecnología de Latam. Culturas que ponen a las personas en el centro, proyectos que inspiran y retos que impulsan tu desarrollo.
+          </>
+        }
+        primaryBtn={{ text: "Ver vacantes →", href: "/servicios" }}
+        secondaryBtn={{ text: "Unirme a la base de talentos", href: "/contacto" }}
+        image={{ src: "/busqueda_de_talento.jpeg", alt: "Búsqueda de talento" }}
+        onTTS={handleHeaderTTS}
+        />
+      
 
-      <section className="font-poppins text-[#502B7D] bg-white text-center md:text-left h-auto min-h-[30vh] md:min-h-[60vh] w-full flex items-center p-5 box-border">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full max-w-6xl mx-auto">
-          <div className="flex justify-center md:justify-center order-1 md:order-2">
-            <Image
-              src="/careersImg.jpg"
-              alt="Careers"
-              width={600}
-              height={600}
-              className="w-72 h-56 md:w-[28rem] md:h-80 rounded-2xl object-cover"
-            />
-          </div>
+      <section className=" flex items-center ">
+        <SectionTag text="TU PROXIMO PASO" />
 
-          <div className="flex flex-col justify-center items-center md:items-start order-2 md:order-1">
-            <div className="flex items-start gap-2 mb-4 md:mb-5">
-              <h3 className="text-base md:text-lg font-normal">
-                Te conectamos con las mejores startups y empresas de tecnología de
-                Latam. Culturas que ponen a las personas en el centro, proyectos
-                que inspiran y retos que impulsan tu desarrollo.
-              </h3>
-              <button
-                onClick={handleDescriptionTTS}
-                className="p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 flex-shrink-0"
-                aria-label="Escuchar descripción de Careers"
-                title="Escuchar texto"
-              >
-                <PlayCircle size={24} className="text-[#502B7D]" />
-              </button>
-            </div>
-            <motion.a
-              href="/careers/jobOpenings"
-              className="bg-white border border-[#6C4099] text-[#6C4099] rounded-full px-4 py-2 md:px-6 md:py-3 no-underline font-bold
-             hover:bg-[#6C4099] hover:text-white transition-colors duration-300"
-              whileHover="hover"
-              whileTap="tap"
-              variants={buttonAnimations}
-            >
-              Ver vacantes
-            </motion.a>
-          </div>
-        </div>
+        
       </section>
 
       <section className="font-poppins text-[#502B7D] bg-white text-center h-auto min-h-[60vh] md:min-h-[50vh] w-full flex flex-col justify-center items-center p-5 box-border mt-10 mb-16">
@@ -181,7 +144,10 @@ const CareersView = () => {
           Unirme a la base de talentos
         </motion.a>
       </section>
-    </>
+
+      <Banner />
+
+    </main>
   );
 };
 
