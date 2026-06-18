@@ -6,6 +6,7 @@ import BotonPrimario from "@/components/BotonPrimario/BotonPrimario";
 import BotonSecundario from "@/components/BotonSecundario/BotonSecundario";
 import { fadeUp } from "@/utils/animations";
 import EyebrowPill from "../EyebrowPill/EyebrowPill";
+import Title from "../Title/Title";
 
 interface ServiceHeroProps {
   tag: string;
@@ -21,14 +22,6 @@ interface ServiceHeroProps {
   onTTS: () => void;
   ttsAriaLabel?: string;
 }
-
-const gradientStyle: React.CSSProperties = {
-  background:
-    "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-green-dark), var(--color-uplin-orange))",
-  WebkitBackgroundClip: "text",
-  backgroundClip: "text",
-  color: "transparent",
-};
 
 export default function ServiceHero({
   tag,
@@ -79,20 +72,11 @@ export default function ServiceHero({
               <BotonVolume onClick={onTTS} ariaLabel={ttsAriaLabel} />
             </div>
 
-            <h1
-              style={{
-                fontSize: "clamp(2.2rem, 4.5vw, 3.4rem)",
-                fontWeight: 700,
-                lineHeight: 1.05,
-                letterSpacing: "-0.02em",
-                margin: "0 0 1rem",
-                color: "var(--color-uplin-ink)",
-              }}
-            >
-              {title.before}
-              <span style={gradientStyle}>{title.gradient}</span>
-              {title.after}
-            </h1>
+            <Title
+              before={title.before}
+              gradient={title.gradient}
+              after={title.after}
+            />
 
             <div
               style={{

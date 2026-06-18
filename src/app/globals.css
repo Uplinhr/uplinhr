@@ -164,16 +164,39 @@ body {
 }
 
 /* ============================================================
-   GRADIENTES DE TEXTO — clase utilitaria reutilizable
-   Uso: <span className="text-gradient-uplin">texto</span>
+   GRADIENTES DE TEXTO — clases utilitarias reutilizables
+   Uso: <span className="gradient-purple-green">texto</span>
    ============================================================ */
 
-.text-gradient-uplin {
+.gradient-purple-green {
   background: linear-gradient(
     135deg,
     var(--color-uplin-purple-deep)  0%,
     var(--color-uplin-purple)       45%,
     var(--color-uplin-green)        100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-purple-green-orange {
+  background: linear-gradient(
+    135deg,
+    var(--color-uplin-purple),
+    var(--color-uplin-green-dark),
+    var(--color-uplin-orange)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-purple-orange {
+  background: linear-gradient(
+    135deg,
+    var(--color-uplin-purple),
+    var(--color-uplin-orange)
   );
   -webkit-background-clip: text;
   background-clip: text;

@@ -4,89 +4,112 @@ import { useVacantes } from "@/hooks/useVacantes";
 import CardVacante from "@/components/careers/CardVacante";
 import FilterDropdown from "@/components/careers/FilterDropdown";
 import EmptyVacantes from "@/components/careers/EmptyVacantes";
-import { TbLoader2 } from "react-icons/tb";
 import Link from "next/link";
-import Image from "next/image";
-import { FiArrowLeft, FiRefreshCw } from "react-icons/fi";
+import { ArrowLeft, RefreshCw, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import ServiceHero from "@/components/ServiceHero/ServiceHero";
+import { speakText } from "@/utils/textToSpeech";
+import SectionTag from "@/components/SectionTag/SectionTag";
+import Title from "@/components/Title/Title";
 
 const VacantesView = () => {
   const { vacantes, areas, loading, error, selectedArea, setSelectedArea, refresh } =
     useVacantes();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  const handleHeaderTTS = () => {
+      const text = "Conecta con oportunidades que te impulsen a crecer.Te conectamos con las mejores oportunidades en startups líderes y empresas de tecnología de Latam. Compañías con culturas centradas en las personas, donde el desarrollo profesional y personal van de la mano.";
+      speakText(text);
+    };
+
   return (
-    <>
-      <section className="font-poppins text-white bg-[radial-gradient(50%_50%_at_50%_50%,#8F68AC_0%,#6C4099_100%)] text-center h-auto min-h-[30vh] md:min-h-[60vh] w-full flex flex-col justify-center items-center p-5 box-border">
-        <h1 className="text-3xl md:text-4xl font-normal text-center mb-3 md:mb-4">
-          Uplin Careers
-        </h1>
-        <h3 className="text-base md:text-lg font-normal">
-          Conecta con oportunidades que te impulsen a crecer
-        </h3>
-      </section>
+    <main className="min-h-screen">
+      <ServiceHero
+        tag="Uplin Careers"
+        title={{
+          before: "Uplin",
+          gradient: "Careers",
+        }}
+        description={
+          <>
+            <p className="lead-intro" style={{ margin: "0 0 0.5rem" }}>
+              Conecta con oportunidades que te impulsen a crecer
+            </p>
+              Te conectamos con las mejores oportunidades en startups líderes y empresas de tecnología de Latam. Compañías con culturas centradas en las personas, donde el desarrollo profesional y personal van de la mano.
+          </>
+        }
+        primaryBtn={{ text: "Ver vacantes →", href: "/careers/jobOpenings" }}
+        secondaryBtn={{ text: "Atras", href: "/careers" }}
+        image={{ src: "/Vacantes_jobOpening.jpg", alt: "Vacantes Abiertas" }}
+        onTTS={handleHeaderTTS}
+      />
 
-      <section className="w-full flex flex-col md:flex-row items-center justify-center gap-6 py-8 px-5">
-        <div className="order-1 md:order-2 w-full md:w-4/12 bg-white shadow-lg rounded-2xl overflow-hidden transform transition-transform duration-300 hover:scale-105 flex justify-center items-center h-56 md:h-64 cursor-pointer">
-          <Image
-            src="/careersImg2.jpg"
-            alt="Careers"
-            width={300}
-            height={300}
-            className="w-full h-full object-cover"
-          />
+      <section className="flex flex-col items-center">
+        <SectionTag text="OPORTUNIDADES" />
+        <Title before="Vacantes " gradient="Abiertas" />
+        <div
+          style={{
+            fontSize: "1.05rem",
+            lineHeight: 1.7,
+            color: "var(--color-uplin-ink-soft)",
+            maxWidth: 700,
+            margin: "0 0 2rem",
+          }}
+        >
+          Explorá las oportunidades disponibles y filtrá por área para encontrar la posición ideal para ti.
         </div>
-        <div className="order-2 md:order-1 w-full md:w-4/12 bg-white shadow-lg rounded-2xl p-4 flex flex-col justify-center items-center text-center transform transition-transform duration-300 hover:scale-105 h-56 md:h-64 cursor-pointer">
-          <h3 className="font-poppins text-[#502B7D] font-semibold text-center text-sm md:text-base">
-            Te conectamos con las mejores oportunidades en startups líderes y
-            empresas de tecnología de Latam. Compañías con culturas centradas en
-            las personas, donde el desarrollo profesional y personal van de la
-            mano.
-          </h3>
-        </div>
-      </section>
-
-      <section className="w-full flex flex-wrap justify-center gap-4 py-4 px-5 mt-6">
         <Link href="/careers">
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
+            whileHover={{ x: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="inline-flex items-center gap-[0.45rem] font-semibold text-[0.95rem] px-[0.9rem] py-[0.55rem] rounded-full cursor-pointer transition-all"
+            style={{
+              color: "var(--color-uplin-purple)",
+              transition: "background var(--transition-uplin-fast)",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--color-uplin-purple-8)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
-            <FiArrowLeft />
+            <ArrowLeft size={14} />
             Atrás
           </motion.div>
         </Link>
+        
+        <div className="flex flex-row justify-center items-center gap-4 mt-6">
+          <FilterDropdown
+            areas={areas}
+            selectedArea={selectedArea}
+            open={dropdownOpen}
+            onToggle={() => setDropdownOpen((o) => !o)}
+            onSelect={(area) => {
+              setSelectedArea(area);
+              setDropdownOpen(false);
+            }}
+          />
 
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
-          onClick={refresh}
-        >
-          <FiRefreshCw className="animate-spin-on-hover hover:animate-spin" />
-          Actualizar
-        </motion.div>
+          <motion.button
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="inline-flex items-center gap-[0.45rem] font-semibold text-[0.95rem] text-white px-[1.2rem] py-[0.62rem] rounded-full cursor-pointer"
+            style={{
+              background: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-purple-2))",
+              boxShadow: "0 6px 18px -6px rgba(109,64,152,0.5)",
+              border: "none",
+              transition: "all var(--transition-uplin-fast)",
+            }}
+            onClick={refresh}
+          >
+            <RefreshCw size={16} />
+            Actualizar
+          </motion.button>
 
-        <FilterDropdown
-          areas={areas}
-          selectedArea={selectedArea}
-          open={dropdownOpen}
-          onToggle={() => setDropdownOpen((o) => !o)}
-          onSelect={(area) => {
-            setSelectedArea(area);
-            setDropdownOpen(false);
-          }}
-        />
+        </div>
       </section>
 
-      <section className="min-h-[60vh] flex justify-center p-6 font-poppins">
-        <div className="w-full">
-          {vacantes.length > 0 && (
-            <h2 className="text-2xl font-bold mb-6 text-[#6C4099] text-center">
-              Vacantes disponibles
-            </h2>
-          )}
+      <section className="flex justify-center p-6">
+        <div className="w-full" style={{ maxWidth: "980px", margin: "0 auto" }}>
 
           {error && (
             <p className="text-red-500 text-center py-10">{error}</p>
@@ -94,7 +117,12 @@ const VacantesView = () => {
 
           {loading ? (
             <div className="flex justify-center items-center py-20">
-              <TbLoader2 className="animate-spin text-[#6C4099] text-4xl" />
+              <motion.div
+                className="w-8 h-8 rounded-full border-2 border-t-transparent"
+                style={{ borderColor: "var(--color-uplin-purple)" }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              />
             </div>
           ) : (
             <div className="grid gap-6 mb-8">
@@ -107,7 +135,7 @@ const VacantesView = () => {
           )}
         </div>
       </section>
-    </>
+    </main>
   );
 };
 

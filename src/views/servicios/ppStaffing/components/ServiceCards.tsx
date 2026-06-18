@@ -31,7 +31,7 @@ const ServiceCards = () => {
           >
             People Partner Staffing{" "}
             <span style={{ position: "relative", display: "inline-block" }}>
-              <span className="text-gradient-uplin"> de Uplin</span>
+              <span className="gradient-purple-green"> de Uplin</span>
               
             </span>
             

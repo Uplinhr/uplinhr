@@ -14,12 +14,7 @@ export const QAView = () => {
           style={{ color: "var(--color-uplin-ink)", fontSize: "clamp(2.2rem, 5vw, 3.8rem)" }}
         >
           Preguntas{" "}
-          <span style={{
-            background: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-orange))",
-            WebkitBackgroundClip: "text",
-            backgroundClip: "text",
-            color: "transparent",
-          }}>
+          <span className="gradient-purple-orange">
             frecuentes
           </span>
         </h2>

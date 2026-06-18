@@ -4,6 +4,7 @@ import { speakText } from "@/utils/textToSpeech"
 import SectionTag from "@/components/SectionTag/SectionTag"
 import BotonVolume from "@/components/BotonVolume/BotonVolume"
 import { solutionsCards } from "./solutions.utils"
+import Title from "@/components/Title/Title"
 
 const Solutions = () => {
   const handleSolutionsTTS = () => {
@@ -49,20 +50,7 @@ const Solutions = () => {
             />
           </div>
         </div>
-        <h2
-          style={{
-            fontSize: "var(--text-uplin-h2)",
-            fontWeight: 700,
-            letterSpacing: "var(--tracking-uplin-h2)",
-            lineHeight: "var(--leading-uplin-title)",
-            color: "var(--color-uplin-ink)",
-            marginBottom: "1rem",
-          }}
-        >
-          Soluciones de talento{" "}
-          <span className="text-gradient-uplin">flexibles </span>
-          con el acompañamiento que necesitas
-        </h2>
+        <Title as="h3" before="Soluciones de talento " gradient="flexibles " after="con el acompañamiento que necesitas" gradientClass="gradient-purple-green"  />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">

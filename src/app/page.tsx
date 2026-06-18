@@ -7,6 +7,7 @@ import { StrategicAlliances } from "@/components/strategicAlliances/StrategicAll
 import { AliadosCarrusel } from "@/components/strategicAlliances/AliadosCarrusel";
 import Testimonios from "@/components/Testimonios/Testimonios";
 import SectionTag from "@/components/SectionTag/SectionTag";
+import Title from "@/components/Title/Title";
 
 export default function TestTailwind() {
   return (
@@ -30,20 +31,7 @@ export default function TestTailwind() {
         }}
       >
         <SectionTag text="SERVICIOS" />
-        <h2
-          style={{
-            fontSize: "var(--text-uplin-h2)",
-            fontWeight: 700,
-            letterSpacing: "var(--tracking-uplin-h2)",
-            lineHeight: "var(--leading-uplin-title)",
-            color: "var(--color-uplin-ink)",
-            marginBottom: "1rem",
-          }}
-        >
-          Servicios que apoyan la gestión y el{" "}
-          <span className="text-gradient-uplin">crecimiento </span>
-           de tu organización
-        </h2>
+        <Title before="Servicios que apoyan la gestión y el " gradient="crecimiento " after="de tu organización" gradientClass="gradient-purple-green" />
         <p
           style={{
             fontSize: "var(--text-uplin-lead)",

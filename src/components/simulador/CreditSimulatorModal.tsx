@@ -182,7 +182,7 @@ export default function CreditSimulatorModal({
               style={{ color: "var(--color-uplin-ink)" }}
             >
               Simulá tu{" "}
-              <span className="text-gradient-uplin">paquete ideal</span>
+              <span className="gradient-purple-green">paquete ideal</span>
             </h2>
 
             {loading ? (

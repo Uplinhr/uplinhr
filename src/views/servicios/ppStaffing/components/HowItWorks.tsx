@@ -50,7 +50,7 @@ const HowItWorks = () => {
           >
             Un proceso{" "}
             <span style={{ position: "relative", display: "inline-block" }}>
-              <span className="text-gradient-uplin"> simple y eficiente</span> 
+              <span className="gradient-purple-green"> simple y eficiente</span> 
             </span>
             
           </motion.h1>

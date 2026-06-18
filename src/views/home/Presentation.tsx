@@ -248,7 +248,7 @@ const Presentation = () => {
           >
             La primera<br />
             <span style={{ position: "relative", display: "inline-block" }}>
-              <span className="text-gradient-uplin">consultora</span>
+              <span className="gradient-purple-green">consultora</span>
               <span className="uplin-accent-line" />
             </span>{" "}de
             <br />servicios RRHH

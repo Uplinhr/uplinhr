@@ -73,7 +73,7 @@ export default function Creditos() {
           >
             Encontrá el{" "}
             <span style={{ position: "relative", display: "inline-block" }}>
-              <span className="text-gradient-uplin"> paquete perfecto</span>
+              <span className="gradient-purple-green"> paquete perfecto</span>
               
             </span>{" "}para tu empresa
             

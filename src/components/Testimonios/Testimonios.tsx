@@ -170,7 +170,7 @@ export default function Testimonios() {
             }}
           >
             Lo que dicen{" "}
-            <span className="text-gradient-uplin">nuestros clientes</span>
+            <span className="gradient-purple-green">nuestros clientes</span>
           </h2>
           <p
             style={{

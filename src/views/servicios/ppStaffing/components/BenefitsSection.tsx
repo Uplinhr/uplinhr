@@ -57,7 +57,7 @@ const BenefitsSection = () => {
           >
             Por qué eligen{" "}
             <span style={{ position: "relative", display: "inline-block" }}>
-              <span className="text-gradient-uplin"> People Partner Staffing</span>   
+              <span className="gradient-purple-green"> People Partner Staffing</span>   
             </span>
             
           </motion.h3>
