@@ -2,6 +2,7 @@
 import ConsultoriasCard from "@/components/ConsultoriasCard/ConsultoriasCard";
 import { consultorias } from "@/utils/consultorias";
 import { Banner } from "@/components/banner/banner";
+import BotonPrimario from "@/components/BotonPrimario/BotonPrimario";
 import { speakText } from "@/utils/textToSpeech";
 import SectionTag from "@/components/SectionTag/SectionTag";
 import ServiceHero from "@/components/ServiceHero/ServiceHero";
@@ -54,6 +55,9 @@ export default function ConsultoriasPage() {
           <ConsultoriasCard key={e.id} consultorias={e} />
         ))}
       </section>
+      <div className="flex justify-center py-10">
+        <BotonPrimario text="Conoce las opiniones de nuestros clientes" href="/#testimonios" />
+      </div>
       <Banner />
     </main>
   );

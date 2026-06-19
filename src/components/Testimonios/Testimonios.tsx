@@ -133,6 +133,7 @@ function TestimonioCard({ testimonio, delay }: { testimonio: typeof testimonios[
 export default function Testimonios() {
   return (
     <motion.section
+      id="testimonios"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}

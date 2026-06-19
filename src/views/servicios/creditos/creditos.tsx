@@ -6,6 +6,7 @@ import { TbLoader2 } from "react-icons/tb";
 import Card from "@/components/Card/Card";
 import { creditosFeatures } from "./creditos.utils";
 import { Banner } from "@/components/banner/banner";
+import BotonPrimario from "@/components/BotonPrimario/BotonPrimario";
 import CreditSimulatorModal from "@/components/simulador/CreditSimulatorModal";
 import { QAView } from "@/views/preguntas-frecuentes/qaView";
 import { speakText } from "@/utils/textToSpeech";
@@ -185,6 +186,9 @@ export default function Creditos() {
 
         <QAView />
 
+        <div className="flex justify-center py-10">
+          <BotonPrimario text="Conoce las opiniones de nuestros clientes" href="/#testimonios" />
+        </div>
         <Banner />
       </section>
     </main>

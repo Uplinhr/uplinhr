@@ -3,6 +3,7 @@ import Card from "@/components/Card/Card";
 import { membresiasFeatures } from "./membresias.utils";
 import CardsPlan from "@/views/planes/cardsPlan";
 import { Banner } from "@/components/banner/banner";
+import BotonPrimario from "@/components/BotonPrimario/BotonPrimario";
 import { speakText } from "@/utils/textToSpeech";
 import SectionTag from "@/components/SectionTag/SectionTag";
 import BotonVolume from "@/components/BotonVolume/BotonVolume";
@@ -61,6 +62,9 @@ export default function Membresias() {
      
         <CardsPlan />
       </section>
+      <div className="flex justify-center py-10">
+        <BotonPrimario text="Conoce las opiniones de nuestros clientes" href="/#testimonios" />
+      </div>
       <Banner />
       
     </div>
