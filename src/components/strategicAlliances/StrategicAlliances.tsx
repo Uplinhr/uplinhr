@@ -104,7 +104,7 @@ export const StrategicAlliances = () => {
           {/* ── Columna izquierda ── */}
           <div style={{ position: "relative", zIndex: 1 }}>
             {/* Eyebrow badge */}
-            <div style={{ display: "flex", gap: "0.7rem", marginBottom: "1rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.7rem", marginBottom: "1rem" }}>
               <SectionTag text="PARTNERS" />
               <BotonVolume 
                 onClick={handleTTS}

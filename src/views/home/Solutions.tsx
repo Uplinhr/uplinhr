@@ -21,6 +21,7 @@ const Solutions = () => {
           textAlign: "center",
           marginBottom: "2.5rem",
           marginTop: "var(--spacing-uplin-xl)",
+          padding: "0 1rem",
         }}
       >
         <div
@@ -53,7 +54,7 @@ const Solutions = () => {
         <Title as="h3" before="Soluciones de talento " gradient="flexibles " after="con el acompañamiento que necesitas" gradientClass="gradient-purple-green"  />
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
         {solutionsCards.map((card, index) => (
           <Card key={card.title} {...card} animationDelay={index * 0.1} />
         ))}

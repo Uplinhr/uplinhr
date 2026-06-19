@@ -14,6 +14,7 @@ import SectionTag from "@/components/SectionTag/SectionTag";
 import { fadeUp } from "@/utils/animations";
 import BotonVerde from "@/components/BotonTerceario/BotónVerde";
 import ServiceHero from "@/components/ServiceHero/ServiceHero";
+import Title from "@/components/Title/Title";
 
 export default function Creditos() {
   const { paquetes, loading, error } = usePaquetes();
@@ -174,29 +175,7 @@ export default function Creditos() {
         
         <div className="text-center mb-10 mt-10">
           <SectionTag text="BENEFICIOS" />
-          <h2
-            style={{
-              fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
-              fontWeight: 700,
-              letterSpacing: "-0.035em",
-              lineHeight: 1.05,
-              color: "var(--color-uplin-ink)",
-              whiteSpace: "nowrap",
-              margin: "0.5rem 0 0",
-            }}
-          >
-            Por qué{" "}
-            <span
-              style={{
-                background: "linear-gradient(135deg, var(--color-uplin-orange), var(--color-uplin-orange-dark))",
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                color: "transparent",
-              }}
-            >
-              elegirnos
-            </span>
-          </h2>
+          <Title before="Por qué " gradient="elegirnos" gradientClass="gradient-purple-orange" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1280px] mx-auto px-6">
           {creditosFeatures.map((feature, index) => (

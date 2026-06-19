@@ -28,6 +28,7 @@ export default function TestTailwind() {
           textAlign: "center",
           marginBottom: "3rem",
           marginTop: "var(--spacing-uplin-md)",
+          padding: "0 1rem",
         }}
       >
         <SectionTag text="SERVICIOS" />
@@ -42,7 +43,7 @@ export default function TestTailwind() {
           Cuatro líneas de servicio diseñadas para acompañarte en cada etapa, con la flexibilidad de combinarlas según tu necesidad real.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
         <CardServices
           icon={<Search className="w-[26px] h-[26px]" />}
           title="Búsqueda de talentos"

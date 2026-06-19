@@ -1,8 +1,9 @@
 interface SectionTagProps {
   text: string;
+  marginBottom?: string;
 }
 
-const SectionTag = ({ text }: SectionTagProps) => {
+const SectionTag = ({ text, marginBottom = "0" }: SectionTagProps) => {
   return (
     <span
       style={{
@@ -17,7 +18,7 @@ const SectionTag = ({ text }: SectionTagProps) => {
         textTransform: "uppercase",
         boxShadow: "0 4px 12px -4px rgba(60,14,54,0.1)",
         display: "inline-block",
-        marginBottom: "1rem",
+        marginBottom,
       }}
     >
       {text}
