@@ -1,29 +1,31 @@
 "use client";
 
 import { motion, useAnimationControls } from "framer-motion";
-import { ImageIcon } from "lucide-react";
+import Image from "next/image";
 import { useEffect } from "react";
 
 type Ally = {
   id: number;
   name: string;
+  src: string;
 };
 
-const allies: Ally[] = [
-  { id: 1, name: "Aliado 1" },
-  { id: 2, name: "Aliado 2" },
-  { id: 3, name: "Aliado 3" },
-  { id: 4, name: "Aliado 4" },
-  { id: 5, name: "Aliado 5" },
-  { id: 6, name: "Aliado 6" },
-  { id: 7, name: "Aliado 7" },
-  { id: 8, name: "Aliado 8" },
+const baseAllies: Ally[] = [
+  { id: 1, name: "Colven", src: "/Colven_logo.jpeg" },
+  { id: 2, name: "Isavisa", src: "/Isavisa_logo.jpeg" },
+  { id: 3, name: "TrueLogic", src: "/TrueLogic_logo.png" },
 ];
+
+// Repetir hasta completar 9 slots (múltiplo de 3) para que no haya contenedores vacíos
+const allies: Ally[] = Array.from({ length: 9 }, (_, i) => ({
+  ...baseAllies[i % baseAllies.length],
+  id: i + 1,
+}));
 
 export const AliadosCarrusel = () => {
   // Duplicar el array para el efecto seamless:
   // cada item ocupa 180px + 20px (marginRight) = 200px
-  // total track = 16 × 200px = 3200px → -50% = -1600px = exactamente 8 items
+  // total track = 18 × 200px = 3600px → -50% = -1800px = exactamente 9 items
   const doubled = [...allies, ...allies];
   const controls = useAnimationControls();
 
@@ -96,29 +98,14 @@ export const AliadosCarrusel = () => {
                 transition: { duration: 0.2, ease: "easeOut" },
               }}
             >
-              {/* Placeholder: se reemplaza por <Image> cuando lleguen los logos reales */}
-              <div
-                className="flex flex-col items-center justify-center gap-1"
-                style={{
-                  width: "calc(100% - 1rem)",
-                  height: "calc(100% - 0.75rem)",
-                  background: "rgba(109, 64, 152, 0.08)",
-                  borderRadius: "calc(var(--radius-uplin-md) - 6px)",
-                }}
-              >
-                <ImageIcon
-                  size={20}
-                  style={{ color: "var(--color-uplin-purple-4)" }}
-                />
-                <span
-                  style={{
-                    fontSize: "var(--text-uplin-xs)",
-                    color: "var(--color-uplin-ink-muted)",
-                  }}
-                >
-                  Logo aliado
-                </span>
-              </div>
+              <Image
+                src={ally.src}
+                alt={ally.name}
+                width={140}
+                height={70}
+                className="object-contain"
+                style={{ maxWidth: "140px", maxHeight: "70px" }}
+              />
             </motion.div>
           ))}
         </motion.div>

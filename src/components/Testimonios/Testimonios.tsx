@@ -7,10 +7,10 @@ import SectionTag from "../SectionTag/SectionTag"
 const testimonios = [
   {
     id: 1,
-    text: "Uplin transformó completamente nuestra forma de reclutar. En menos de dos semanas teníamos candidatos de altísimo nivel que jamás hubiéramos encontrado solos.",
-    name: "María González",
-    role: "CEO · Empresa Tech",
-    initials: "MG",
+    text: "Destaco la rapidez para conseguir candidatos y la calidad de los mismos",
+    name: "Nicolás Montoya",
+    role: "Engineering Manager - Olaclick",
+    initials: "NM",
     avatarBg: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-purple-deep))",
   },
   {
