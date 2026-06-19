@@ -39,7 +39,7 @@ const CareersView = () => {
       <ServiceHero
       tag="Uplin Careers"
         title={{
-          before: "Uplin",
+          before: "Uplin ",
           gradient: "Careers",
         }}
         description={

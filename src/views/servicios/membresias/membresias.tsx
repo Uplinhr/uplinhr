@@ -7,6 +7,7 @@ import { speakText } from "@/utils/textToSpeech";
 import SectionTag from "@/components/SectionTag/SectionTag";
 import BotonVolume from "@/components/BotonVolume/BotonVolume";
 import ServiceHero from "@/components/ServiceHero/ServiceHero";
+import Title from "@/components/Title/Title";
 
 export default function Membresias() {
   const handleHeroTTS = () => {
@@ -34,32 +35,9 @@ export default function Membresias() {
       <section>      
         <div className="text-center mb-7">
           <SectionTag text="BENEFICIOS+" />
-          <div className="flex items-center justify-center gap-2">
-            <h1
-              style={{
-                fontSize: "clamp(2.2rem, 4.5vw, 3.4rem)",
-                fontWeight: 700,
-                lineHeight: 1.05,
-                letterSpacing: "-0.02em",
-                margin: "0 0 1rem",
-                color: "var(--color-uplin-ink)",
-              }}
-            >
-              Una sola suscripción,{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-green-dark), var(--color-uplin-orange))",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                }}
-              >
-                todo el talento cubierto
-              </span>{" "}
-              
-            </h1>
-          
-          
+          <div className="flex items-center justify-center gap-2 max-w-[1000px] mx-auto">
+            <Title before="Una sola suscripción, " gradient="todo el talento cubierto" gradientClass="gradient-purple-green-orange" />
+
           </div>
         </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto px-4">
@@ -70,35 +48,15 @@ export default function Membresias() {
       </section>
 
       <section className="flex flex-col items-center gap-2 mt-12 p-5">
-          <SectionTag text="PLANES" />
-          <div className="flex items-center justify-center">
-           <h1
-              style={{
-                fontSize: "clamp(2.2rem, 4.5vw, 3.4rem)",
-                fontWeight: 700,
-                lineHeight: 1.05,
-                letterSpacing: "-0.02em",
-                margin: "0 0 1rem",
-                color: "var(--color-uplin-ink)",
-              }}
-            >
-              Todo en un plan mensual que{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-green-dark), var(--color-uplin-orange))",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                }}
-              >
-                evoluciona con tu empresa
-              </span>
-            </h1>
-        
-            <BotonVolume 
+          <div className="flex items-center justify-center gap-3">
+            <SectionTag text="PLANES" />
+            <BotonVolume
               onClick={() => speakText("Todo en un plan mensual que evoluciona con tu empresa. Elegí el plan que mejor se adapte a las necesidades de tu organización.")}
               aria-label="Escuchar título de planes"
-            /> 
+            />
+          </div>
+          <div className="text-center max-w-[1000px] mx-auto w-full">
+            <Title before="Todo en un plan mensual que " gradient="evoluciona con tu empresa" gradientClass="gradient-purple-green-orange" />
           </div>
      
         <CardsPlan />

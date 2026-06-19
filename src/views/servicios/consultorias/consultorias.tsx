@@ -5,6 +5,7 @@ import { Banner } from "@/components/banner/banner";
 import { speakText } from "@/utils/textToSpeech";
 import SectionTag from "@/components/SectionTag/SectionTag";
 import ServiceHero from "@/components/ServiceHero/ServiceHero";
+import Title from "@/components/Title/Title";
 
 export default function ConsultoriasPage() {
   const handleHeroTTS = () => {
@@ -38,37 +39,15 @@ export default function ConsultoriasPage() {
       {/* Grid de Cards */}
       <div className="text-center mb-7">
         <SectionTag text="Áreas de consultoría" />
-        <div className="flex items-center justify-center gap-2">
-                      <h1
-              style={{
-                fontSize: "clamp(2.2rem, 4.5vw, 3.4rem)",
-                fontWeight: 700,
-                lineHeight: 1.05,
-                letterSpacing: "-0.02em",
-                margin: "0 0 1rem",
-                color: "var(--color-uplin-ink)",
-              }}
-            >
-              Soluciones que cubren{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-green-dark), var(--color-uplin-orange))",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                }}
-              >
-                todo el ciclo de talento
-              </span>{" "}
-              
-            </h1>
-          
-          
-        </div>
-        <p className="mt-3" style={{ color: "var(--color-uplin-ink-soft)", fontSize: "1.1rem",}}>
+        <div className="flex flex-col items-center justify-center gap-2 max-w-[1000px] mx-auto">
+        <Title before="Soluciones que cubren " gradient="todo el ciclo de talento" gradientClass="gradient-purple-green-orange" />
+         <p className="mt-3" style={{ color: "var(--color-uplin-ink-soft)", fontSize: "1.1rem",}}>
           Agrupamos nuestra consultoría en temáticas clave para acompañarte en cada etapa: 
           atracción, desarrollo, cultura, tecnología y cumplimiento.
-        </p>
+        </p>         
+          
+        </div>
+        
       </div>
       <section className="container mx-auto p-10 px-4 sm:px-6 lg:px-8 grid grid-cols-1 gap-4 max-w-[1060px]">
         {consultorias.map((e) => (
