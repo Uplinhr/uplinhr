@@ -15,10 +15,12 @@ interface ServiceHeroProps {
     gradient: string;
     after?: string;
   };
+  gradientClass?: string;
   description: React.ReactNode;
   primaryBtn: { text: string; href: string };
   secondaryBtn: { text: string; href: string };
-  image: { src: string; alt: string };
+  image?: { src: string; alt: string };
+  mediaSlot?: React.ReactNode;
   onTTS: () => void;
   ttsAriaLabel?: string;
 }
@@ -26,10 +28,12 @@ interface ServiceHeroProps {
 export default function ServiceHero({
   tag,
   title,
+  gradientClass = "gradient-purple-green-orange",
   description,
   primaryBtn,
   secondaryBtn,
   image,
+  mediaSlot,
   onTTS,
   ttsAriaLabel = "Escuchar presentación",
 }: ServiceHeroProps) {
@@ -76,6 +80,7 @@ export default function ServiceHero({
               before={title.before}
               gradient={title.gradient}
               after={title.after}
+              gradientClass={gradientClass}
             />
 
             <div
@@ -102,7 +107,7 @@ export default function ServiceHero({
             </motion.div>
           </motion.div>
 
-          {/* Columna derecha — imagen */}
+          {/* Columna derecha — imagen o slot de media */}
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -113,49 +118,55 @@ export default function ServiceHero({
               width: "100%",
               maxWidth: 520,
               marginLeft: "auto",
-              pointerEvents: "none",
+              pointerEvents: mediaSlot ? "auto" : "none",
             }}
           >
-            <div
-              style={{
-                position: "absolute",
-                inset: "-15% -18% -15% -12%",
-                borderRadius: "50%",
-                zIndex: -1,
-                filter: "blur(40px)",
-                background:
-                  "radial-gradient(ellipse at 30% 30%, rgba(248,154,28,0.25) 0%, transparent 55%), " +
-                  "radial-gradient(ellipse at 70% 75%, rgba(109,64,152,0.28) 0%, transparent 55%), " +
-                  "radial-gradient(ellipse at center, rgba(114,191,88,0.15) 0%, transparent 60%)",
-                animation: "teamHaloPulse 12s ease-in-out infinite",
-              }}
-            />
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={520}
-              height={347}
-              priority
-              style={{
-                width: "100%",
-                height: "auto",
-                display: "block",
-                aspectRatio: "3/2",
-                objectFit: "cover",
-                objectPosition: "center",
-                filter: "saturate(0.88) contrast(1.04) brightness(1.02)",
-                opacity: 0.92,
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 60% 70% at center, #000 0%, rgba(0,0,0,.92) 25%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.25) 72%, rgba(0,0,0,.05) 88%, transparent 100%)",
-                maskImage:
-                  "radial-gradient(ellipse 60% 70% at center, #000 0%, rgba(0,0,0,.92) 25%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.25) 72%, rgba(0,0,0,.05) 88%, transparent 100%)",
-                WebkitMaskSize: "100% 100%",
-                maskSize: "100% 100%",
-                WebkitMaskRepeat: "no-repeat",
-                maskRepeat: "no-repeat",
-                animation: "teamFloat 9s ease-in-out infinite",
-              }}
-            />
+            {mediaSlot ? (
+              mediaSlot
+            ) : image ? (
+              <>
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: "-15% -18% -15% -12%",
+                    borderRadius: "50%",
+                    zIndex: -1,
+                    filter: "blur(40px)",
+                    background:
+                      "radial-gradient(ellipse at 30% 30%, rgba(248,154,28,0.25) 0%, transparent 55%), " +
+                      "radial-gradient(ellipse at 70% 75%, rgba(109,64,152,0.28) 0%, transparent 55%), " +
+                      "radial-gradient(ellipse at center, rgba(114,191,88,0.15) 0%, transparent 60%)",
+                    animation: "teamHaloPulse 12s ease-in-out infinite",
+                  }}
+                />
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={520}
+                  height={347}
+                  priority
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    display: "block",
+                    aspectRatio: "3/2",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    filter: "saturate(0.88) contrast(1.04) brightness(1.02)",
+                    opacity: 0.92,
+                    WebkitMaskImage:
+                      "radial-gradient(ellipse 60% 70% at center, #000 0%, rgba(0,0,0,.92) 25%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.25) 72%, rgba(0,0,0,.05) 88%, transparent 100%)",
+                    maskImage:
+                      "radial-gradient(ellipse 60% 70% at center, #000 0%, rgba(0,0,0,.92) 25%, rgba(0,0,0,.6) 50%, rgba(0,0,0,.25) 72%, rgba(0,0,0,.05) 88%, transparent 100%)",
+                    WebkitMaskSize: "100% 100%",
+                    maskSize: "100% 100%",
+                    WebkitMaskRepeat: "no-repeat",
+                    maskRepeat: "no-repeat",
+                    animation: "teamFloat 9s ease-in-out infinite",
+                  }}
+                />
+              </>
+            ) : null}
           </motion.div>
         </div>
       </section>
