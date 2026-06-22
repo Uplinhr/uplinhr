@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  distDir: "C:/dev/uplinhr-next",
-};
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
