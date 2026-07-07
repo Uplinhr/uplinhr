@@ -142,7 +142,46 @@
   --transition-uplin-fast:  0.20s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-uplin-base:  0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-uplin-slow:  0.60s cubic-bezier(0.4, 0, 0.2, 1);
- 
+
+  /* ----------------------------------------------------------
+     BIBLIOTECA UPLIN — tokens adicionales
+     ---------------------------------------------------------- */
+
+  /* Radios con prefijo r- (generan rounded-r-sm, etc.) */
+  --radius-r-sm:   12px;
+  --radius-r-md:   20px;
+  --radius-r-lg:   28px;
+  --radius-r-xl:   40px;
+  --radius-r-pill: 999px;
+
+  /* Sombras sin prefijo uplin- (shadow-glass, shadow-sm/md/lg) */
+  --shadow-glass:
+    0 12px 40px -8px rgba(60, 14, 54, 0.18),
+    0 2px 6px        rgba(60, 14, 54, 0.06),
+    inset 0 1px 0    rgba(255, 255, 255, 0.7);
+  --shadow-sm: 0 2px 8px rgba(60, 14, 54, 0.06);
+  --shadow-md: 0 12px 32px -8px rgba(60, 14, 54, 0.16);
+  --shadow-lg: 0 24px 60px -12px rgba(60, 14, 54, 0.22);
+
+  /* Neutrales sin prefijo uplin- (alias de los existentes) */
+  --color-bg:       #faf7fc;
+  --color-ink:      #2a0824;
+  --color-ink-soft: #5a4566;
+  --color-muted:    #8b7a95;
+
+}
+
+/* Variables planas sin prefijo --color- usadas en radial-gradient de BibliotecaBackground */
+:root {
+  --uplin-purple-deep: #3c0e36;
+  --uplin-purple-5:    #a482bb;
+  --uplin-purple-6:    #bb9eca;
+  --uplin-purple-7:    #cdbada;
+  --uplin-purple-8:    #e0d6ea;
+  --uplin-green-3:     #a2d18f;
+  --uplin-green-5:     #d2e8c9;
+  --uplin-orange-4:    #fdc57c;
+  --uplin-orange-6:    #fde6c7;
 }
 
 html {

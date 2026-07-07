@@ -249,3 +249,40 @@ export interface compraCreditos{
   vencimiento:string,
   id_usuario:number
 }
+
+// ============================================================================
+//  BIBLIOTECA UPLIN
+// ============================================================================
+
+export type TipoRecurso = "pdf" | "video" | "xlsx" | "doc";
+
+export type CategoriaSlug = "reportes" | "webinars" | "plantillas" | "guias";
+
+export interface RecursoBiblioteca {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  tipo: TipoRecurso;
+  meta?: string;
+  href?: string;
+  locked?: boolean;
+  descarga?: boolean;
+  externo?: boolean;
+}
+
+export interface CategoriaBiblioteca {
+  slug: CategoriaSlug;
+  titulo: string;
+  subtitulo: string;
+  recursos: RecursoBiblioteca[];
+}
+
+export interface RegistroBibliotecaForm {
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono: string;
+  empresa: string;
+  rol: string;
+  pais: string;
+}
