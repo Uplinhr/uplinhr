@@ -1,18 +1,22 @@
-import BibliotecaBackground from "@/components/biblioteca/BibliotecaBackground";
-import RegistroForm from "@/components/biblioteca/RegistroForm";
-import {
-  heroStats,
-  queEncontraras,
-  beneficios,
-  stats,
-  paraQuien,
-} from "@/utils/biblioteca/landingData";
+"use client";
 
-const iconBg: Record<string, string> = {
-  green: "from-uplin-green to-uplin-green-dark",
-  violet: "from-uplin-purple to-uplin-purple-deep",
-  orange: "from-uplin-orange to-uplin-orange-dark",
-};
+import RegistroForm from "@/components/biblioteca/RegistroForm";
+import EyebrowPill from "@/components/EyebrowPill/EyebrowPill";
+import ServiceHero from "@/components/ServiceHero/ServiceHero";
+import Card from "@/components/Card/Card";
+import QueEncontraras from "@/views/biblioteca/QueEncontraras";
+import Beneficios from "@/views/biblioteca/Beneficios";
+import { speakText } from "@/utils/textToSpeech";
+import { heroStats, stats } from "@/utils/biblioteca/landingData";
+import Title from "@/components/Title/Title";
+
+const paraQuien = [
+  "Founders de startups en etapa de crecimiento (Seed → Serie B)",
+  "CEOs que ya no pueden gestionar todo desde su cabeza",
+  "Líderes que necesitan ordenar procesos de talento",
+  "Operadores y COOs buscando frameworks aplicables",
+  "Empresas escalando sin RR.HH. consolidado todavía",
+];
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
@@ -24,36 +28,34 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 export default function BibliotecaView() {
+  const handleHeroTTS = () => {
+    speakText(
+      "Desbloquea recursos estratégicos gratis para escalar tu equipo con mejores decisiones. Accede a guías, documentos y videos exclusivos pensados para founders, CEOs y líderes que quieren ordenar su gestión de talento, optimizar procesos y crecer con más claridad."
+    );
+  };
+
   return (
-    <>
-      <BibliotecaBackground />
 
       <main className="relative">
         {/* ===================== HERO ===================== */}
-        <section className="px-6 pb-20 pt-32 md:pt-40">
-          <div className="mx-auto grid max-w-6xl grid-cols-1 items-start gap-12 lg:grid-cols-2">
-            <div>
-              <div className="mb-5 inline-flex items-center gap-2 rounded-r-pill border border-uplin-purple/20 bg-white/50 px-3.5 py-1.5 text-xs font-semibold text-uplin-purple-deep">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-uplin-green" />
-                Recursos exclusivos · Acceso gratuito
-              </div>
-
-              <h1 className="text-4xl font-extrabold leading-[1.08] tracking-tight text-uplin-purple-deep md:text-5xl">
-                Desbloquea recursos estratégicos{" "}
-                <span className="text-uplin-green-dark">gratis</span> para
-                escalar tu equipo con{" "}
-                <span className="text-uplin-orange-dark">
-                  mejores decisiones
-                </span>
-                .
-              </h1>
-
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft">
-                Accede a guías, documentos y videos exclusivos pensados para
-                founders, CEOs y líderes que quieren ordenar su gestión de
-                talento, optimizar procesos y crecer con más claridad.
-              </p>
-
+        <ServiceHero
+          tag="Recursos exclusivos · Acceso gratuito"
+          titleSlot={
+            <h1 className="text-5xl font-extrabold leading-[1.08] tracking-tight text-uplin-purple-deep md:text-5xl">
+              Desbloquea recursos estratégicos{" "}
+              <span className="gradient-purple-green">gratis</span> para
+              escalar tu equipo con{" "}
+              <span className="text-uplin-orange-dark">
+                mejores decisiones
+              </span>
+              .
+            </h1>
+          }
+          description={
+            <>
+              Accede a guías, documentos y videos exclusivos pensados para
+              founders, CEOs y líderes que quieren ordenar su gestión de
+              talento, optimizar procesos y crecer con más claridad.
               <div className="mt-8 flex flex-wrap gap-8">
                 {heroStats.map((s) => (
                   <div key={s.num}>
@@ -66,48 +68,30 @@ export default function BibliotecaView() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* formulario */}
+            </>
+          }
+          mediaSlot={
             <div id="registro">
               <RegistroForm />
             </div>
-          </div>
-        </section>
+          }
+          onTTS={handleHeroTTS}
+          ttsAriaLabel="Escuchar presentación de la biblioteca"
+        />
 
         {/* ===================== QUÉ VAS A ENCONTRAR ===================== */}
         <section className="px-6 py-16">
           <div className="mx-auto max-w-6xl">
-            <Eyebrow>Qué vas a encontrar</Eyebrow>
-            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-uplin-purple-deep">
-              Material <em className="not-italic text-uplin-green-dark">real</em>
-              , listo para aplicar.
-            </h2>
+            <EyebrowPill text="Qué vas a encontrar"/>
+            <Title before="Material " gradient="real" after=", listo para aplicar." gradientClass="gradient-purple-green"/>
             <p className="mt-3 max-w-xl text-ink-soft">
               Contenido pensado para founders, CEOs y líderes que ya saben que el
               éxito no está en más teoría, sino en mejores herramientas.
             </p>
 
             <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-              {queEncontraras.map((card) => (
-                <div
-                  key={card.titulo}
-                  className="group rounded-r-lg border border-white/70 bg-white/45 p-8 shadow-glass backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/60"
-                >
-                  <div
-                    className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${iconBg[card.color]} text-white shadow-md transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-105`}
-                  >
-                    <span className="text-lg font-bold">
-                      {card.titulo.charAt(0)}
-                    </span>
-                  </div>
-                  <h3 className="mb-2 text-xl font-bold tracking-tight text-uplin-purple-deep">
-                    {card.titulo}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-ink-soft">
-                    {card.descripcion}
-                  </p>
-                </div>
+              {QueEncontraras.map((item, index) => (
+                <Card key={index} {...item} animationDelay={index * 0.08} />
               ))}
             </div>
           </div>
@@ -117,30 +101,10 @@ export default function BibliotecaView() {
         <section className="px-6 py-16">
           <div className="mx-auto max-w-6xl">
             <Eyebrow>Beneficios</Eyebrow>
-            <h2 className="max-w-2xl text-3xl font-bold tracking-tight text-uplin-purple-deep">
-              Todo lo que necesitas para tomar{" "}
-              <em className="not-italic text-uplin-green-dark">
-                mejores decisiones
-              </em>
-              .
-            </h2>
-
+            <Title before="Todo lo que necesitas para tomar " gradient="mejores decisiones" gradientClass="gradient-purple-green"/>
             <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {beneficios.map((b, i) => (
-                <div
-                  key={b.titulo}
-                  className="rounded-r-md border border-white/70 bg-white/45 p-6 shadow-glass backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/60"
-                >
-                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-uplin-purple to-uplin-purple-deep text-sm font-bold text-white shadow-md">
-                    {i + 1}
-                  </div>
-                  <h3 className="mb-2 text-base font-bold leading-tight text-uplin-purple-deep">
-                    {b.titulo}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-ink-soft">
-                    {b.descripcion}
-                  </p>
-                </div>
+              {Beneficios.map((item, index) => (
+                <Card key={index} {...item} animationDelay={index * 0.08} />
               ))}
             </div>
           </div>
@@ -198,11 +162,11 @@ export default function BibliotecaView() {
               que sus procesos internos.
             </p>
 
-            <ul className="mx-auto mt-11 max-w-xl text-left">
+            <ul className="mx-auto mt-11 w-fit max-w-xl">
               {paraQuien.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-4 border-b border-uplin-purple-deep/8 py-4 text-[0.95rem] font-medium text-ink last:border-none"
+                  className="flex items-center gap-4 border-b border-uplin-purple-deep/8 py-4 text-left text-[0.95rem] font-medium text-ink last:border-none"
                 >
                   <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-uplin-green to-uplin-green-dark text-white shadow-sm">
                     <svg
@@ -247,6 +211,5 @@ export default function BibliotecaView() {
           </div>
         </section>
       </main>
-    </>
   );
 }

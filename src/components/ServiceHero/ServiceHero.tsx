@@ -8,35 +8,68 @@ import { fadeUp } from "@/utils/animations";
 import EyebrowPill from "../EyebrowPill/EyebrowPill";
 import Title from "../Title/Title";
 
+function getYoutubeEmbedUrl(url: string): string | null {
+  const patterns = [
+    /youtu\.be\/([^?&/]+)/,
+    /youtube\.com\/watch\?v=([^&]+)/,
+    /youtube\.com\/embed\/([^?&/]+)/,
+  ];
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) return `https://www.youtube.com/embed/${match[1]}`;
+  }
+  return null;
+}
+
 interface ServiceHeroProps {
   tag: string;
-  title: {
+  title?: {
     before?: string;
     gradient: string;
     after?: string;
   };
+  titleSlot?: React.ReactNode;
   gradientClass?: string;
   description: React.ReactNode;
-  primaryBtn: { text: string; href: string };
-  secondaryBtn: { text: string; href: string };
+  primaryBtn?: { text: string; href: string };
+  secondaryBtn?: { text: string; href: string };
   image?: { src: string; alt: string };
+  video?: { url: string; title?: string };
   mediaSlot?: React.ReactNode;
-  onTTS: () => void;
+  mediaMaxWidth?: number;
+  onTTS?: () => void;
   ttsAriaLabel?: string;
 }
 
 export default function ServiceHero({
   tag,
   title,
+  titleSlot,
   gradientClass = "gradient-purple-green-orange",
   description,
   primaryBtn,
   secondaryBtn,
   image,
+  video,
   mediaSlot,
+  mediaMaxWidth,
   onTTS,
   ttsAriaLabel = "Escuchar presentación",
 }: ServiceHeroProps) {
+  const videoEmbedUrl = video ? getYoutubeEmbedUrl(video.url) : null;
+  const resolvedMediaSlot =
+    mediaSlot ??
+    (videoEmbedUrl ? (
+      <div className="aspect-video w-full overflow-hidden rounded-2xl">
+        <iframe
+          src={videoEmbedUrl}
+          className="h-full w-full"
+          title={video?.title ?? "Video"}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    ) : undefined);
   return (
     <>
       <style>{`
@@ -73,15 +106,18 @@ export default function ServiceHero({
           >
             <div style={{ display: "flex", alignItems: "center", gap: "0.7rem", marginBottom: "1.5rem" }}>
               <EyebrowPill text={tag} />
-              <BotonVolume onClick={onTTS} ariaLabel={ttsAriaLabel} />
+              {onTTS && <BotonVolume onClick={onTTS} ariaLabel={ttsAriaLabel} />}
             </div>
 
-            <Title
-              before={title.before}
-              gradient={title.gradient}
-              after={title.after}
-              gradientClass={gradientClass}
-            />
+            {titleSlot ??
+              (title && (
+                <Title
+                  before={title.before}
+                  gradient={title.gradient}
+                  after={title.after}
+                  gradientClass={gradientClass}
+                />
+              ))}
 
             <div
               style={{
@@ -95,16 +131,18 @@ export default function ServiceHero({
               {description}
             </div>
 
-            <motion.div
-              custom={3}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}
-            >
-              <BotonPrimario text={primaryBtn.text} href={primaryBtn.href} />
-              <BotonSecundario text={secondaryBtn.text} href={secondaryBtn.href} />
-            </motion.div>
+            {(primaryBtn || secondaryBtn) && (
+              <motion.div
+                custom={3}
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                style={{ display: "flex", gap: "1rem", alignItems: "center", flexWrap: "wrap" }}
+              >
+                {primaryBtn && <BotonPrimario text={primaryBtn.text} href={primaryBtn.href} />}
+                {secondaryBtn && <BotonSecundario text={secondaryBtn.text} href={secondaryBtn.href} />}
+              </motion.div>
+            )}
           </motion.div>
 
           {/* Columna derecha — imagen o slot de media */}
@@ -116,13 +154,13 @@ export default function ServiceHero({
             style={{
               position: "relative",
               width: "100%",
-              maxWidth: 520,
+              maxWidth: mediaMaxWidth ?? (resolvedMediaSlot ? 560 : 520),
               marginLeft: "auto",
-              pointerEvents: mediaSlot ? "auto" : "none",
+              pointerEvents: resolvedMediaSlot ? "auto" : "none",
             }}
           >
-            {mediaSlot ? (
-              mediaSlot
+            {resolvedMediaSlot ? (
+              resolvedMediaSlot
             ) : image ? (
               <>
                 <div

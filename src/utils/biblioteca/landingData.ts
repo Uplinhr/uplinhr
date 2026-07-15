@@ -4,50 +4,6 @@ export const heroStats = [
   { num: "0$", label: "Sin tarjeta, sin trial, sin letra chica" },
 ];
 
-export const queEncontraras = [
-  {
-    color: "green" as const,
-    titulo: "Plantillas accionables",
-    descripcion:
-      "Documentos listos para adaptar a tu empresa: checklists, guías y marcos de trabajo para liderazgo, talento y procesos.",
-  },
-  {
-    color: "violet" as const,
-    titulo: "Videos breves y útiles",
-    descripcion:
-      "Contenido concreto para mejorar gestión, liderazgo y organización del equipo. Sin teoría de manual.",
-  },
-  {
-    color: "orange" as const,
-    titulo: "Recursos descargables",
-    descripcion:
-      "Reportes estratégicos, frameworks y herramientas pensadas para aplicar de inmediato en tu operación diaria.",
-  },
-];
-
-export const beneficios = [
-  {
-    titulo: "Acceso gratuito a recursos exclusivos",
-    descripcion:
-      "Material premium pensado para founders, CEOs y equipos en crecimiento. Sin paywall.",
-  },
-  {
-    titulo: "Guías prácticas, no teoría",
-    descripcion:
-      "Documentos y videos para ordenar procesos y tomar mejores decisiones desde el día uno.",
-  },
-  {
-    titulo: "Pensado para empresas en crecimiento",
-    descripcion:
-      "Contenido para startups y empresas que necesitan escalar sin sumar fricción interna.",
-  },
-  {
-    titulo: "Aplicable desde el primer día",
-    descripcion:
-      "Puerta de entrada a servicios más estratégicos: consultoría, acompañamiento y diagnóstico.",
-  },
-];
-
 export const stats = [
   {
     valor: "72%",
@@ -66,10 +22,3 @@ export const stats = [
   },
 ];
 
-export const paraQuien = [
-  "Founders de startups en etapa de crecimiento (Seed → Serie B)",
-  "CEOs que ya no pueden gestionar todo desde su cabeza",
-  "Líderes que necesitan ordenar procesos de talento",
-  "Operadores y COOs buscando frameworks aplicables",
-  "Empresas escalando sin RR.HH. consolidado todavía",
-];

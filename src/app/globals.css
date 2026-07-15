@@ -15,6 +15,7 @@
   --color-uplin-purple-6:     #BB9ECA;
   --color-uplin-purple-7:     #CDBADA;
   --color-uplin-purple-8:     #E0D6EA;
+  --color-uplin-cards: linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-purple-deep));
  
   /* COLORES — VERDES (acento del pico de la "u") */
   --color-uplin-green:        #72BF58;   /* Verde acento principal */
