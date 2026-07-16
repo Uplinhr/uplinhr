@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import BibliotecaBackground from "@/components/biblioteca/BibliotecaBackground";
 import ResourceFilters from "@/components/biblioteca/ResourceFilters";
 import CategoryBlock from "@/components/biblioteca/CategoryBlock";
 import { categorias, totalRecursos } from "@/utils/biblioteca/catalogData";
@@ -22,9 +21,6 @@ export default function RecursosView() {
   const [filtro, setFiltro] = useState("all");
 
   return (
-    <>
-      <BibliotecaBackground />
-
       <main className="relative">
         {/* ===================== HEADER ===================== */}
         <section className="px-6 pb-4 pt-32 text-center md:pt-40">
@@ -74,6 +70,5 @@ export default function RecursosView() {
           </div>
         </section>
       </main>
-    </>
   );
 }

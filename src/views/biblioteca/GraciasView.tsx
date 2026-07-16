@@ -1,5 +1,4 @@
 import Link from "next/link";
-import BibliotecaBackground from "@/components/biblioteca/BibliotecaBackground";
 import { IconoFlecha } from "@/components/biblioteca/BibliotecaIcons";
 
 const pasos = [
@@ -31,9 +30,6 @@ const pasos = [
 
 export default function GraciasView() {
   return (
-    <>
-      <BibliotecaBackground />
-
       <main className="relative">
         {/* ===================== HERO ÉXITO ===================== */}
         <section className="px-6 pb-16 pt-32 text-center md:pt-44">
@@ -159,6 +155,5 @@ export default function GraciasView() {
           </div>
         </section>
       </main>
-    </>
   );
 }
