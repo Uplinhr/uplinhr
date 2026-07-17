@@ -1,12 +1,51 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import BotonVolume from "@/components/BotonVolume/BotonVolume";
 import BotonPrimario from "@/components/BotonPrimario/BotonPrimario";
 import BotonSecundario from "@/components/BotonSecundario/BotonSecundario";
 import { fadeUp } from "@/utils/animations";
 import EyebrowPill from "../EyebrowPill/EyebrowPill";
 import Title from "../Title/Title";
+
+function useAnimatedCounter(target: number, duration: number, trigger: boolean) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!trigger) return;
+    let raf: number;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      setValue(Math.floor(progress * target));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+      else setValue(target);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [trigger, target, duration]);
+  return value;
+}
+
+interface StatItem {
+  value: number;
+  label: string;
+  format?: (value: number) => string;
+}
+
+function StatCounter({ stat, trigger }: { stat: StatItem; trigger: boolean }) {
+  const value = useAnimatedCounter(stat.value, 1400, trigger);
+  return (
+    <div>
+      <div style={{ fontSize: "1.75rem", fontWeight: 700, letterSpacing: "-0.02em", color: "var(--color-uplin-ink)" }}>
+        {stat.format ? stat.format(value) : value}
+      </div>
+      <div style={{ fontSize: "0.80rem", fontWeight: 500, color: "var(--color-uplin-ink-muted)" }}>
+        {stat.label}
+      </div>
+    </div>
+  );
+}
 
 function getYoutubeEmbedUrl(url: string): string | null {
   const patterns = [
@@ -39,6 +78,7 @@ interface ServiceHeroProps {
   mediaMaxWidth?: number;
   onTTS?: () => void;
   ttsAriaLabel?: string;
+  stats?: StatItem[];
 }
 
 export default function ServiceHero({
@@ -55,7 +95,10 @@ export default function ServiceHero({
   mediaMaxWidth,
   onTTS,
   ttsAriaLabel = "Escuchar presentación",
+  stats,
 }: ServiceHeroProps) {
+  const statsRef = useRef<HTMLDivElement>(null);
+  const statsInView = useInView(statsRef, { once: true, margin: "0px 0px -80px 0px" });
   const videoEmbedUrl = video ? getYoutubeEmbedUrl(video.url) : null;
   const resolvedMediaSlot =
     mediaSlot ??
@@ -89,6 +132,13 @@ export default function ServiceHero({
         @keyframes teamFloat {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
+        }
+        .service-hero-stats-divider {
+          border-top: 1px solid rgba(60,14,54,0.08);
+          padding-top: 1.25rem;
+          margin-top: 2rem;
+          display: flex;
+          gap: 2.5rem;
         }
       `}</style>
       <section className="service-hero">
@@ -141,6 +191,21 @@ export default function ServiceHero({
               >
                 {primaryBtn && <BotonPrimario text={primaryBtn.text} href={primaryBtn.href} />}
                 {secondaryBtn && <BotonSecundario text={secondaryBtn.text} href={secondaryBtn.href} />}
+              </motion.div>
+            )}
+
+            {stats && stats.length > 0 && (
+              <motion.div
+                ref={statsRef}
+                custom={4}
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                className="service-hero-stats-divider"
+              >
+                {stats.map((stat) => (
+                  <StatCounter key={stat.label} stat={stat} trigger={statsInView} />
+                ))}
               </motion.div>
             )}
           </motion.div>

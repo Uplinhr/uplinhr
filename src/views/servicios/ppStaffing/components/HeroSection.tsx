@@ -19,7 +19,7 @@ const HeroSection = () => {
       }}
       description="Un profesional de People 100% dedicado a tu equipo, con el criterio y la experiencia para llevar adelante proyectos estratégicos de personas, en el momento justo, por el tiempo exacto que lo necesitás. People Partner Staffing los resuelve, sin el compromiso ni los costos de una contratación a largo plazo."
       primaryBtn={{ text: "Agendá una llamada →", href: "https://meetings.hubspot.com/llopez-ramirez" }}
-      secondaryBtn={{ text: "Habla con un experto", href: "/contacto" }}
+      secondaryBtn={{ text: "Habla con un experto", href: "https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw" }}
       image={{ src: "/empleados-pyme.jpg.jpeg", alt: "People Partner Staffing" }}
       onTTS={handleHeroTTS}
     />

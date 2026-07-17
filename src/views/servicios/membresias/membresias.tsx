@@ -27,7 +27,7 @@ export default function Membresias() {
         }}
         description="Suscribite a nuestras membresías empresariales y accedé a todo lo que tu organización necesita para gestionar tu talento, en un solo plan mensual que evoluciona con vos."
         primaryBtn={{ text: "Ver planes →", href: "/servicios" }}
-        secondaryBtn={{ text: "Habla con un experto", href: "/contacto" }}
+        secondaryBtn={{ text: "Habla con un experto", href: "https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw" }}
         image={{ src: "/membresias-oficina.png", alt: "Membresías Uplin" }}
         onTTS={handleHeroTTS}
       />

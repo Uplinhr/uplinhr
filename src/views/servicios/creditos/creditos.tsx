@@ -51,14 +51,14 @@ export default function Creditos() {
             Adquirí paquetes de vacantes por niveles y diseñá tu proceso a medida. Sin vencimiento, flexible y con la garantía de Uplin.
           </>
         }
-        primaryBtn={{ text: "Ver paquetes →", href: "/servicios" }}
-        secondaryBtn={{ text: "Habla con un experto", href: "/contacto" }}
+        primaryBtn={{ text: "Ver paquetes →", href: "#paquetes" }}
+        secondaryBtn={{ text: "Habla con un experto", href: "https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw" }}
         image={{ src: "/busqueda_de_talento.jpeg", alt: "Búsqueda de talento" }}
         onTTS={handleHeaderTTS}
       />
 
       {/* PAQUETES */}
-      <section className="py-16">
+      <section id="paquetes" className="py-16" style={{ scrollMarginTop: "6rem" }}>
         <div className="max-w-[780px] mx-auto text-center mb-14">
           <SectionTag text="PAQUETES" />
           <BotonVolume onClick={handlePaquetesTTS} ariaLabel="Escuchar sección de paquetes" size={18} />

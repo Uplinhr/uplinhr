@@ -32,7 +32,7 @@ export default function ConsultoriasPage() {
           </>
         }
         primaryBtn={{ text: "Agendá una llamada →", href: "/servicios" }}
-        secondaryBtn={{ text: "Habla con un experto", href: "/contacto" }}
+        secondaryBtn={{ text: "Habla con un experto", href: "https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw" }}
         image={{ src: "/CS-landing.png", alt: "Consultorías Uplin" }}
         onTTS={handleHeroTTS}
       />

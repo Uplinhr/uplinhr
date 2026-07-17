@@ -1,5 +1,6 @@
+"use client";
 import Solutions from "@/views/home/Solutions";
-import Presentation from "@/views/home/Presentation";
+import ServiceHero from "@/components/ServiceHero/ServiceHero";
 import { CardServices } from "@/components/CardServices/cardServices";
 import { Banner } from "@/components/banner/banner";
 import { Search, Users, Briefcase, Star, GraduationCap } from "lucide-react";
@@ -8,11 +9,39 @@ import { AliadosCarrusel } from "@/components/strategicAlliances/AliadosCarrusel
 import Testimonios from "@/components/Testimonios/Testimonios";
 import SectionTag from "@/components/SectionTag/SectionTag";
 import Title from "@/components/Title/Title";
+import { speakText } from "@/utils/textToSpeech";
 
 export default function TestTailwind() {
+  const handleHeroTTS = () => {
+    speakText(
+      "RRHH flexible para tu equipo. La primera consultora de servicios RRHH flexible en Latam. " +
+      "Accede a soluciones de talento y gestión de personal cuando y como las necesites, sin contratos rígidos. " +
+      "Tecnología y acompañamiento humano en un solo lugar."
+    );
+  };
+
   return (
     <div className="min-h-screen">
-      <Presentation />
+      <ServiceHero
+        tag="RRHH flexible para tu equipo"
+        title={{
+          before: "La primera ",
+          gradient: "consultora ",
+          after: "de servicios RRHH flexible en Latam",
+        }}
+        gradientClass="gradient-purple-green"
+        description="Accede a soluciones de talento y gestión de personal cuando y como las necesites, sin contratos rígidos. Tecnología y acompañamiento humano en un solo lugar."
+        primaryBtn={{ text: "Conocer los servicios →", href: "#servicios" }}
+        secondaryBtn={{ text: "Habla con un experto", href: "https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw" }}
+        image={{ src: "/FOTO_EQUIPO.jpg", alt: "Equipo Uplinhr — RRHH flexible en Latam" }}
+        onTTS={handleHeroTTS}
+        ttsAriaLabel="Escuchar presentación"
+        stats={[
+          { value: 150, label: "Empresas activas", format: (v) => `+${v}` },
+          { value: 25, label: "Talentos colocados", format: (v) => `+${(v / 10).toFixed(1)}K` },
+          { value: 100, label: "Satisfacción", format: (v) => `${v}%` },
+        ]}
+      />
       <AliadosCarrusel />
 
       {/**
@@ -22,6 +51,7 @@ export default function TestTailwind() {
 
       {/* Encabezado de sección */}
       <div
+        id="servicios"
         style={{
           maxWidth: "780px",
           margin: "0 auto",
@@ -29,6 +59,7 @@ export default function TestTailwind() {
           marginBottom: "3rem",
           marginTop: "var(--spacing-uplin-md)",
           padding: "0 1rem",
+          scrollMarginTop: "6rem",
         }}
       >
         <SectionTag text="SERVICIOS" />
@@ -76,7 +107,7 @@ export default function TestTailwind() {
             iconBg="var(--color-uplin-green)"
             title="Formación organizacional"
             description="Diseñamos programas de formación y consultoría para potenciar liderazgo, productividad, comunicación e inteligencia artificial en equipos y organizaciones. Adaptamos cada experiencia a los desafíos reales del negocio, combinando habilidades humanas, tecnología y aprendizaje aplicado. Trabajamos con empresas de Latinoamérica en formatos virtuales, presenciales e híbridos."
-            linkHref=""
+            linkHref="/biblioteca"
           />
         </div>
       </div>

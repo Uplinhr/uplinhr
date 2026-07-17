@@ -51,7 +51,7 @@ const CareersView = () => {
           </>
         }
         primaryBtn={{ text: "Ver vacantes →", href: "/careers/jobOpenings" }}
-        secondaryBtn={{ text: "Unirme a la base de talentos", href: "/contacto" }}
+        secondaryBtn={{ text: "Unirme a la base de talentos", href: "https://forms.gle/xoXqjr1dWizknQQTA" }}
         image={{ src: "/busqueda_de_talento.jpeg", alt: "Búsqueda de talento" }}
         onTTS={handleHeaderTTS}
         />
