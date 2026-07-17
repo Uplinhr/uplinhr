@@ -15,29 +15,46 @@ const testimonios = [
   },
   {
     id: 2,
-    text: "El modelo de créditos nos dio la flexibilidad que necesitábamos. Pagamos solo por lo que usamos y el acompañamiento del equipo fue excepcional en todo momento.",
-    name: "Carlos Mendoza",
-    role: "CHRO · Retail Group",
-    initials: "CM",
+    text: "Destacamos la calidad, acompañamiento y la agilidad constante en cada operación. Excelente informe, muy completo, fácil de leer y con la información relevante que necesitamos.",
+    name: "Lucrecia Sandrigo",
+    role: "Responsable de Talento, Formación y Comunicación",
+    initials: "LS",
     avatarBg: "linear-gradient(135deg, var(--color-uplin-green), var(--color-uplin-green-dark))",
   },
   {
     id: 3,
-    text: "La membresía de Uplin es lo mejor que incorporamos este año. Tenemos soporte de RRHH experto sin necesidad de armar un departamento interno.",
-    name: "Laura Sánchez",
-    role: "Directora · Consultora PyME",
-    initials: "LS",
+    text: "Valoro el compromiso y seriedad con la que toman los procesos y la calidad profesional.",
+    name: "Joy",
+    role: "Head of People - TrueLogic",
+    initials: "JY",
+    avatarBg: "linear-gradient(135deg, var(--color-uplin-orange), var(--color-uplin-orange-dark))",
+  },
+  {
+    id: 4,
+    text: "Tuvimos acompañamiento constante en todo el proceso, la rapidez del equipo de Uplin para resolver las peticiones de nuestra empresa, tambien desatacamos mucho la buena disposición al cambio que tuvimos en diferentes momentos ya que se fue adaptando la contratación a los rerquerimientos en diferentes momentos de la empresa.",
+    name: "Richard y Duvan",
+    role: "CEO & CTO - ISAVISA",
+    initials: "R&D",
     avatarBg: "linear-gradient(135deg, var(--color-uplin-orange), var(--color-uplin-orange-dark))",
   },
 ]
 
 const delays = [0, 0.15, 0.3]
 
-function TestimonioCard({ testimonio, delay }: { testimonio: typeof testimonios[0]; delay: number }) {
+function TestimonioCard({
+  testimonio,
+  delay,
+  className,
+}: {
+  testimonio: typeof testimonios[0]
+  delay: number
+  className?: string
+}) {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
     <motion.div
+      className={className}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -6 }}
@@ -58,11 +75,14 @@ function TestimonioCard({ testimonio, delay }: { testimonio: typeof testimonios[
         position: "relative",
         overflow: "hidden",
         minWidth: "280px",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
         transition: "box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
       }}
     >
       {/* Estrellas */}
-      <div style={{ display: "flex", gap: "0.15rem", marginBottom: "1rem" }}>
+      <div style={{ display: "flex", gap: "0.15rem", marginBottom: "1rem", flexShrink: 0 }}>
         {Array.from({ length: 5 }).map((_, i) => (
           <Star
             key={i}
@@ -88,7 +108,7 @@ function TestimonioCard({ testimonio, delay }: { testimonio: typeof testimonios[
       </p>
 
       {/* Autor */}
-      <div style={{ display: "flex", alignItems: "center", gap: "0.8rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginTop: "auto", flexShrink: 0 }}>
         <div
           style={{
             width: 46,
@@ -186,9 +206,19 @@ export default function Testimonios() {
 
         {/* Grilla de cards */}
         <div className="flex lg:grid lg:grid-cols-3 gap-4 lg:gap-6 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0">
-          {testimonios.map((testimonio, i) => (
-            <TestimonioCard key={testimonio.id} testimonio={testimonio} delay={delays[i]} />
-          ))}
+          {testimonios.map((testimonio, i) => {
+            const isLastRowOrphan =
+              i === testimonios.length - 1 && testimonios.length % 3 === 1
+
+            return (
+              <TestimonioCard
+                key={testimonio.id}
+                testimonio={testimonio}
+                delay={delays[i % delays.length]}
+                className={isLastRowOrphan ? "lg:col-start-2" : undefined}
+              />
+            )
+          })}
         </div>
       </div>
     </motion.section>
