@@ -48,7 +48,7 @@ export default function Creditos() {
             <p className="lead-intro" style={{ margin: "0 0 0.5rem" }}>
               Un modelo inteligente para optimizar tu reclutamiento
             </p>
-            Adquirí paquetes de vacantes por niveles y diseñá tu proceso a medida. Sin vencimiento, flexible y con la garantía de Uplin.
+            Adquiere paquetes de vacantes por niveles y diseña tu proceso a medida. Sin vencimiento, flexible y con la garantía de Uplin.
           </>
         }
         primaryBtn={{ text: "Ver paquetes →", href: "#paquetes" }}
@@ -157,7 +157,7 @@ export default function Creditos() {
           />
           <div className="flex items-center gap-2" style={{ position: "relative", zIndex: 1 }}>
             <h2>
-              Si tu paquete no se adapta a tus necesidades, comprá créditos
+              Si tu paquete no se adapta a tus necesidades, compra créditos
               individuales
             </h2>
             <BotonVolume

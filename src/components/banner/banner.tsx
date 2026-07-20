@@ -125,7 +125,7 @@ export function Banner() {
                     margin: 0,
                   }}
                 >
-                  ¿Necesitás agendar una llamada?
+                  ¿Necesitas agendar una llamada?
                 </h3>
                 <BotonVolume
                   onClick={handleBannerTTS}

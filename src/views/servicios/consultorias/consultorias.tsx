@@ -31,7 +31,7 @@ export default function ConsultoriasPage() {
             Explorá cada área para conocer cómo podemos acompañarte en la evolución de tu equipo y en el fortalecimiento de tu organización.
           </>
         }
-        primaryBtn={{ text: "Agendá una llamada →", href: "/servicios" }}
+        primaryBtn={{ text: "Agendá una llamada →", href: "https://meetings.hubspot.com/llopez-ramirez" }}
         secondaryBtn={{ text: "Habla con un experto", href: "https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw" }}
         image={{ src: "/CS-landing.png", alt: "Consultorías Uplin" }}
         onTTS={handleHeroTTS}

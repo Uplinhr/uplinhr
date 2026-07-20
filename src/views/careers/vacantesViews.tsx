@@ -46,7 +46,7 @@ const VacantesView = () => {
 
       <section className="flex flex-col items-center">
         <SectionTag text="OPORTUNIDADES" />
-        <Title before="Vacantes " gradient="Abiertas" />
+        <Title before="Vacantes " gradient="abiertas" />
         <div
           style={{
             fontSize: "1.05rem",
@@ -56,7 +56,7 @@ const VacantesView = () => {
             margin: "0 0 2rem",
           }}
         >
-          Explorá las oportunidades disponibles y filtrá por área para encontrar la posición ideal para ti.
+          Explora las oportunidades disponibles y filtrá por área para encontrar la posición ideal para ti.
         </div>
         <Link href="/careers">
           <motion.div

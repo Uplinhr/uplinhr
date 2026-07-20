@@ -49,7 +49,7 @@ const QuienesSomos = () => {
       <ServiceHero
         tag="Quiénes somos"
         title={{
-          before: "Cuidá a las personas de ",
+          before: "Cuida a las personas de ",
           gradient: "tu equipo ",
           after: "y ellos van a cuidar de tu negocio.",
         }}
@@ -60,7 +60,7 @@ const QuienesSomos = () => {
             centro.
           </p>
         }
-        primaryBtn={{ text: "Descubrí nuestros servicios", href: "/" }}
+        primaryBtn={{ text: "Descubre nuestros servicios", href: "/#servicios" }}
         secondaryBtn={{
           text: "Agenda una llamada inicial",
           href: "https://meetings.hubspot.com/llopez-ramirez",
@@ -315,7 +315,7 @@ const QuienesSomos = () => {
 
       {/* ── Sección Needs ── */}
       <section className="text-center py-10 px-4 sm:px-6 max-w-[1000px] mx-auto">
-        <Title before="Todo lo que necesitás para hacer crecer tu equipo," gradient=" en un solo lugar" gradientClass="gradient-purple-orange"/>
+        <Title before="Todo lo que necesitas para hacer crecer tu equipo," gradient=" en un solo lugar" gradientClass="gradient-purple-orange"/>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mt-7">
           {NeedsData.map((item, index) => (
             <Card key={index} {...item} animationDelay={index * 0.08} />
@@ -361,7 +361,7 @@ const QuienesSomos = () => {
                 color: "#fff",
               }}
             >
-              ¿Querés saber más?
+              ¿Quieres saber más?
             </h2>
 
             <p
@@ -380,8 +380,8 @@ const QuienesSomos = () => {
             <div className="flex flex-wrap gap-[0.9rem] justify-center">
               {/* Botón primario — gradiente purple, igual al sistema */}
               <BotonPrimario
-                text="Descubrí nuestros servicios"
-                href="/"
+                text="Descubre nuestros servicios"
+                href="/#servicios"
               />
 
               {/* Botón secundario — variante para fondo oscuro */}
