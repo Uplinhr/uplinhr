@@ -1,6 +1,37 @@
 "use client"
-import { PlayCircle } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
+import SectionTag from "@/components/SectionTag/SectionTag";
+import { motion } from "framer-motion";
+import { fadeUp } from "@/utils/animations";
+import BotonVolume from "@/components/BotonVolume/BotonVolume";
+import Card, { CardData } from "@/components/Card/Card";
+import { Layers, DollarSign, Check, BrainCog } from "lucide-react";
+
+const benefits: CardData[] = [
+  {
+    icon: <Layers size={26} />,
+    iconBg: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-purple-deep))",
+    title: "+ Flexibilidad",
+    description: "Escala tu equipo de RR.HH. según la demanda, sin contratos a largo plazo.",
+  },
+  {
+    icon: <DollarSign size={26} />,
+    iconBg: "linear-gradient(135deg, var(--color-uplin-green), var(--color-uplin-green-dark))",
+    title: "+ Ahorro de costos",
+    description: "Olvídate de los gastos de nómina, beneficios y procesos de contratación.",
+  },
+  {
+    icon: <Check size={26} />,
+    iconBg: "linear-gradient(135deg, var(--color-uplin-orange), var(--color-uplin-orange-dark))",
+    title: "+ Expertise inmediata",
+    description: "Accede al conocimiento especializado de profesionales de alto nivel, listos para empezar desde el primer día.",
+  },
+  {
+    icon: <BrainCog size={26} />,
+    title: "+ Enfoque estratégico",
+    description: "Dedica tu tiempo a lo importante, mientras un experto se encarga de los proyectos de People Ops que requieren atención.",
+  },
+];
 
 const BenefitsSection = () => {
   const handleBenefitsTTS = () => {
@@ -9,48 +40,34 @@ const BenefitsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 text-center">
+    <section className="w-full max-w-[1280px] mx-auto py-20 px-6">
+      <div className="text-center mb-12">
+        <SectionTag text="BENEFICIOS CLAVES" />
         <div className="flex items-center justify-center gap-2">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800">
-            Beneficios <span className="text-[#502B7D]">claves</span>
-          </h2>
-          <button
-            onClick={handleBenefitsTTS}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
-            aria-label="Escuchar beneficios"
-            title="Escuchar texto"
+          <motion.h3
+            custom={1} variants={fadeUp} initial="hidden" animate="visible"
+            style={{
+              fontSize: "clamp(2.2rem, 5vw, 3.8rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.035em",
+              lineHeight: 1.05,
+              color: "#2A0824",
+              margin: "0 0 1rem",
+            }}
           >
-            <PlayCircle size={24} className="text-[#502B7D]" />
-          </button>
+            Por qué eligen{" "}
+            <span style={{ position: "relative", display: "inline-block" }}>
+              <span className="gradient-purple-green"> People Partner Staffing</span>   
+            </span>
+            
+          </motion.h3>
+          <BotonVolume onClick={handleBenefitsTTS} ariaLabel="Escuchar beneficios" />
         </div>
-        <p className="mt-2 text-gray-600 mb-12">
-          Descubre por qué las empresas eligen People Partner Staffing para sus necesidades de RR.HH.
-        </p>
 
-        <div className="mt-12 text-left max-w-2xl mx-auto">
-          <ul className="list-none space-y-6">
-            <li>
-              <h3 className="text-lg font-semibold text-[#502B7D]">
-                + Flexibilidad: <span className="text-gray-600 font-normal">escala tu equipo de RR.HH. según la demanda, sin contratos a largo plazo.</span>
-              </h3>
-            </li>
-            <li>
-              <h3 className="text-lg font-semibold text-[#502B7D]">
-                + Ahorro de costos: <span className="text-gray-600 font-normal">olvídate de los gastos de nómina, beneficios y procesos de contratación.</span>
-              </h3>
-            </li>
-            <li>
-              <h3 className="text-lg font-semibold text-[#502B7D]">
-                + Expertise inmediata: <span className="text-gray-600 font-normal">accede al conocimiento especializado de profesionales de alto nivel, listos para empezar desde el primer día.</span>
-              </h3>
-            </li>
-            <li>
-              <h3 className="text-lg font-semibold text-[#502B7D]">
-                + Enfoque estratégico: <span className="text-gray-600 font-normal">dedica tu tiempo a lo importante, mientras un experto se encarga de los proyectos de People Ops que requieren atención.</span>
-              </h3>
-            </li>
-          </ul>
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {benefits.map((benefit, i) => (
+            <Card key={benefit.title} {...benefit} animationDelay={i * 0.12} />
+          ))}
         </div>
       </div>
        {/* <h2 className="font-poppins text-[28px] font-semibold text-center">

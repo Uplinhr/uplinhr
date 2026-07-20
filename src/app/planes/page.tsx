@@ -1,8 +1,8 @@
 "use client"
-import CardsPlan from "@/views/cardsPlan";
+import CardsPlan from "@/views/planes/cardsPlan";
 import Button from "@/components/Button/Button";
-import ComparativeCard from "@/views/comparativeCard";
-import { PlayCircle } from "lucide-react";
+import ComparativeCard from "@/views/planes/comparativeCard";
+import { Volume2 } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
 
 const Planes = () => {
@@ -15,13 +15,12 @@ const Planes = () => {
     <section className="bg-white h-auto relative">
       <button
         onClick={handleHeaderTTS}
-        className="absolute top-4 right-4 p-2 hover:bg-[#502B7D]/10 rounded-full transition-colors duration-200 z-50 cursor-pointer"
+        className="uplin-tts-btn absolute top-4 right-4 z-50"
         aria-label="Escuchar Planes"
         title="Escuchar texto"
         type="button"
-        style={{ pointerEvents: 'auto' }}
       >
-        <PlayCircle size={24} className="text-[#502B7D]" />
+        <Volume2 size={22} />
       </button>
       <div className="pt-16 mb-14 font-poppins">
         <h1 className="mb-[30px] text-center font-semibold text-[28px]">

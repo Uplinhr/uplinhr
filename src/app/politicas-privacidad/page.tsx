@@ -1,4 +1,4 @@
-import PrivacyPolicies from "@/views/PrivacyPolicies"
+import PrivacyPolicies from "@/views/legal/PrivacyPolicies"
 
 const page = () => {
   return (

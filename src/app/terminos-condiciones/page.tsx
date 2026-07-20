@@ -1,4 +1,4 @@
-import Conditions from "@/views/TConditions";
+import Conditions from "@/views/legal/TConditions";
 
 const page = () => {
   return (
