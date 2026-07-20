@@ -17,12 +17,6 @@ export interface QaItem {
   answer: string | string[];
   initialExpanded?: boolean;
 }
-export interface SolutionProps{
-  icon: string;
-  title: string;
-  description: string;
-}
-
 export interface IOption {
   id: string;
   text: string;
@@ -59,6 +53,47 @@ export interface CardCursoProps {
   direccion: string;
   imgPersona: string[];
   link: string;
+}
+
+export interface Membresia {
+  tipo: string;
+  title: string;
+  credits: number;
+  discount?: string;
+  idealPara: string;
+  includes: string[];
+  excludes: string[];
+  price: number;
+  oldPrice?: number;
+  buttonLink: string;
+}
+
+export interface Paquete {
+  title: string;
+  description: string;
+  price: number;
+  oldPrice?: number;
+  discount?: string;
+  buttonText: string;
+  buttonLink: string;
+  features: string[];
+  credits: number;
+}
+
+export interface SimulatorLevel {
+  name: string;
+  credits: number;
+}
+
+export interface AdditionalService {
+  name: string;
+  creditsPerUnit: number;
+}
+
+export interface SimulatorData {
+  creditPriceUsd: number;
+  levels: SimulatorLevel[];
+  additionalServices: AdditionalService[];
 }
 
 export interface Vacante {
@@ -213,4 +248,41 @@ export interface compraCreditos{
   cantidad:number,
   vencimiento:string,
   id_usuario:number
+}
+
+// ============================================================================
+//  BIBLIOTECA UPLIN
+// ============================================================================
+
+export type TipoRecurso = "pdf" | "video" | "xlsx" | "doc";
+
+export type CategoriaSlug = "reportes" | "webinars" | "plantillas" | "guias";
+
+export interface RecursoBiblioteca {
+  id: string;
+  titulo: string;
+  descripcion: string;
+  tipo: TipoRecurso;
+  meta?: string;
+  href?: string;
+  locked?: boolean;
+  descarga?: boolean;
+  externo?: boolean;
+}
+
+export interface CategoriaBiblioteca {
+  slug: CategoriaSlug;
+  titulo: string;
+  subtitulo: string;
+  recursos: RecursoBiblioteca[];
+}
+
+export interface RegistroBibliotecaForm {
+  nombre: string;
+  apellido: string;
+  email: string;
+  telefono: string;
+  empresa: string;
+  rol: string;
+  pais: string;
 }

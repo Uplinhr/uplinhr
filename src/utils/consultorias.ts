@@ -1,11 +1,13 @@
+import { LucideIcon, BarChart2, Users, Search, Heart, Cpu, RefreshCw, BookOpen, FileText, TrendingUp, ClipboardList } from "lucide-react";
 
 export type Consultorias = {
   id: string;
   name: string;
-  //role: string;
   tags: string[];
   description: string;
   imageUrl: string;
+  icon: LucideIcon;
+  color: string;
 };
 
 export const consultorias: Consultorias[] = [
@@ -15,14 +17,17 @@ export const consultorias: Consultorias[] = [
     tags: ["People analytics", "Performance", "Analítica de datos", "Dashboards de talento"],
     description: "Transforma datos de RR.HH. en decisiones estratégicas. Optimiza rendimiento, retención y gestión de talento con base en el análisis de información y la ciencia del comportamiento.",
     imageUrl: "/CO_1.png",
+    icon: BarChart2,
+    color: "var(--color-uplin-purple)",
   },
-
   {
     id: "liderazgo",
     name: "Liderazgo, coaching y desarrollo de equipos",
     tags: ["Liderazgo de equipos", "Coaching", "Formación y desarrollo", "Performance management"],
     description: "Fortalece las habilidades de liderazgo y maximiza el potencial de tus equipos. Implementamos programas de coaching, mentoría y desarrollo para líderes en todos los niveles.",
     imageUrl: "/CO_2.png",
+    icon: Users,
+    color: "var(--color-uplin-green)",
   },
   {
     id: "talent-acquisition",
@@ -30,6 +35,8 @@ export const consultorias: Consultorias[] = [
     tags: ["Talent acquisition", "Estrategias de atracción", "Employer branding", "Entrevistas basadas en competencias"],
     description: "Diseña y ejecuta procesos de selección que atraen y retienen el mejor talento. Incluye el diseño de la experiencia del candidato y el uso de tecnologías para la captación.",
     imageUrl: "/CO_3.png",
+    icon: Search,
+    color: "var(--color-uplin-orange-dark)",
   },
   {
     id: "diversidad-inclusion",
@@ -37,6 +44,8 @@ export const consultorias: Consultorias[] = [
     tags: ["Gestión de personas", "Diversidad e inclusión (D&I)", "Cultura y cambio organizacional", "Sostenibilidad"],
     description: "Crea y promueve entornos de trabajo inclusivos y equitativos que impulsan el compromiso y el desarrollo sostenible.",
     imageUrl: "/CO_4.png",
+    icon: Heart,
+    color: "var(--color-uplin-purple)",
   },
   {
     id: "automatizacion-ia",
@@ -44,6 +53,8 @@ export const consultorias: Consultorias[] = [
     tags: ["Digitalización", "Automatización", "IA en selección", "Sistemas de gestión de talento (HRIS)"],
     description: "Digitaliza y automatiza procesos clave de selección y gestión de personas para liberar tiempo y aumentar la eficiencia operativa.",
     imageUrl: "/CO_5.png",
+    icon: Cpu,
+    color: "var(--color-uplin-green)",
   },
   {
     id: "transformacion-cambio-organizacional",
@@ -51,6 +62,8 @@ export const consultorias: Consultorias[] = [
     tags: ["Transformación tecnológica", "Gestión del cambio", "Diseño organizacional"],
     description: "Prepara tu organización para el futuro. Impulsa cambios tecnológicos y estructurales con un enfoque centrado en el cliente y en lo que mueve el negocio.",
     imageUrl: "/CO_6.png",
+    icon: RefreshCw,
+    color: "var(--color-uplin-orange-dark)",
   },
   {
     id: "desarrollo-competencias",
@@ -58,6 +71,8 @@ export const consultorias: Consultorias[] = [
     tags: ["Planes de carrera", "Upskilling", "Evaluación de competencias", "Medición de impacto de formación"],
     description: "Diseña rutas de aprendizaje efectivas y programas de capacitación basados en analítica para medir el impacto real en el desarrollo profesional y la empleabilidad.",
     imageUrl: "/CO_7.png",
+    icon: BookOpen,
+    color: "var(--color-uplin-purple)",
   },
   {
     id: "legales-nomina-compensaciones",
@@ -65,6 +80,8 @@ export const consultorias: Consultorias[] = [
     tags: ["Nómina", "Legales laborales", "Contrataciones internacionales", "Compensaciones y beneficios (C&B)"],
     description: "Asegura el cumplimiento legal y la competitividad salarial. Asesoría en normativas laborales, estructuras de compensación y gestión de nómina eficiente.",
     imageUrl: "/CO_8.png",
+    icon: FileText,
+    color: "var(--color-uplin-green)",
   },
   {
     id: "estrategia-comercial",
@@ -72,6 +89,8 @@ export const consultorias: Consultorias[] = [
     tags: ["Liderazgo comercial", "Escalado de equipos de ventas", "Retención de clientes", "Performance comercial"],
     description: "Acelera el crecimiento de startups y equipos comerciales. Maximiza la retención de clientes y transforma las operaciones de ventas en unidades de crecimiento sostenido.",
     imageUrl: "/CO_9.png",
+    icon: TrendingUp,
+    color: "var(--color-uplin-orange-dark)",
   },
   {
     id: "gestion-politicas-rrhh",
@@ -79,5 +98,7 @@ export const consultorias: Consultorias[] = [
     tags: ["Gestión de personas", "Políticas de RR.HH.", "Onboarding/offboarding", "Manuales de empleado"],
     description: "Diseña e implementa políticas y procesos de RR.HH. que aseguran el buen funcionamiento de la gestión de personal y el cumplimiento interno.",
     imageUrl: "/CO_10.png",
+    icon: ClipboardList,
+    color: "var(--color-uplin-purple)",
   },
 ];

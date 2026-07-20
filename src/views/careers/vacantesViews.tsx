@@ -1,248 +1,141 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Vacante } from "@/interfaces";
+import { useState } from "react";
+import { useVacantes } from "@/hooks/useVacantes";
 import CardVacante from "@/components/careers/CardVacante";
-import { TbLoader2 } from "react-icons/tb";
+import FilterDropdown from "@/components/careers/FilterDropdown";
+import EmptyVacantes from "@/components/careers/EmptyVacantes";
 import Link from "next/link";
-import Image from "next/image";
-import { FiArrowLeft, FiRefreshCw, FiChevronDown } from "react-icons/fi";
-import { FaFilter } from "react-icons/fa";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeft, RefreshCw, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import ServiceHero from "@/components/ServiceHero/ServiceHero";
+import { speakText } from "@/utils/textToSpeech";
+import SectionTag from "@/components/SectionTag/SectionTag";
+import Title from "@/components/Title/Title";
 
 const VacantesView = () => {
-  const [vacantes, setVacantes] = useState<Vacante[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [areas, setAreas] = useState<string[]>([]);
-  const [selectedArea, setSelectedArea] = useState<string>("");
+  const { vacantes, areas, loading, error, selectedArea, setSelectedArea, refresh } =
+    useVacantes();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          "https://docs.google.com/spreadsheets/d/1fAEiXSCTge9b19EV613Jjh6hAZ-uf4PafACQ8TTFPjQ/gviz/tq?tqx=out:json"
-        );
-        const text = await res.text();
-        const jsonStr = text.match(
-          /google\.visualization\.Query\.setResponse\(([\s\S]+)\);/
-        )?.[1];
-
-        if (!jsonStr) throw new Error("Formato de respuesta inválido");
-
-        const json = JSON.parse(jsonStr);
-        const rows = json.table.rows || [];
-
-        const capitalize = (s: string) =>
-          s.replace(/\b\w/g, (c) => c.toUpperCase());
-
-        const data: Vacante[] = rows.slice(1).map(
-          (row: { c: Array<{ v: string | boolean | number | null }> }) => ({
-            nombre_empresa: row.c[0]?.v?.toString() || "",
-            es_anonimo: row.c[1]?.v?.toString() === "Si",
-            nombre_puesto: row.c[2]?.v?.toString() || "",
-            modalidad_trabajo: row.c[3]?.v?.toString() || "",
-            descripcion_empleo: row.c[4]?.v?.toString() || "",
-            ubicacion_empleo: row.c[5]?.v?.toString() || "",
-            enlace_formulario: row.c[6]?.v?.toString() || "",
-            area: row.c[7]?.v ? capitalize(row.c[7]?.v.toString().trim()) : "",
-          })
-        );
-
-        setVacantes(data);
-
-        const uniqueAreas = Array.from(
-          new Set(data.map((v) => v.area).filter((a) => a !== ""))
-        );
-        setAreas(uniqueAreas);
-      } catch (err) {
-        console.error("Error al cargar vacantes:", err);
-      } finally {
-        setLoading(false);
-      }
+  const handleHeaderTTS = () => {
+      const text = "Conecta con oportunidades que te impulsen a crecer.Te conectamos con las mejores oportunidades en startups líderes y empresas de tecnología de Latam. Compañías con culturas centradas en las personas, donde el desarrollo profesional y personal van de la mano.";
+      speakText(text);
     };
 
-    fetchData();
-  }, []);
-
-  const vacantesFiltradas =
-    selectedArea && selectedArea !== "Todas"
-      ? vacantes.filter((v) => v.area === selectedArea)
-      : vacantes;
-
   return (
-    <>
-      <section className="font-poppins text-white bg-[radial-gradient(50%_50%_at_50%_50%,#8F68AC_0%,#6C4099_100%)] text-center h-auto min-h-[30vh] md:min-h-[60vh] w-full flex flex-col justify-center items-center p-5 box-border">
-        <h1 className="text-3xl md:text-4xl font-normal text-center mb-3 md:mb-4">
-          Uplin Careers
-        </h1>
-        <h3 className="text-base md:text-lg font-normal">
-          Conecta con oportunidades que te impulsen a crecer
-        </h3>
-      </section>
+    <main className="min-h-screen">
+      <ServiceHero
+        tag="Uplin Careers"
+        title={{
+          before: "Uplin",
+          gradient: "Careers",
+        }}
+        description={
+          <>
+            <p className="lead-intro" style={{ margin: "0 0 0.5rem" }}>
+              Conecta con oportunidades que te impulsen a crecer
+            </p>
+              Te conectamos con las mejores oportunidades en startups líderes y empresas de tecnología de Latam. Compañías con culturas centradas en las personas, donde el desarrollo profesional y personal van de la mano.
+          </>
+        }
+        primaryBtn={{ text: "Ver vacantes →", href: "/careers/jobOpenings" }}
+        secondaryBtn={{ text: "Atras", href: "/careers" }}
+        image={{ src: "/Vacantes_jobOpening.jpg", alt: "Vacantes Abiertas" }}
+        onTTS={handleHeaderTTS}
+      />
 
-      <section className="w-full flex flex-col md:flex-row items-center justify-center gap-6 py-8 px-5">
-        <div className="order-1 md:order-2 w-full md:w-4/12 bg-white shadow-lg rounded-2xl overflow-hidden transform transition-transform duration-300 hover:scale-105 flex justify-center items-center h-56 md:h-64 cursor-pointer">
-          <Image
-            src="/careersImg2.jpg"
-            alt="Careers"
-            width={300}
-            height={300}
-            className="w-full h-full object-cover"
-          />
+      <section className="flex flex-col items-center">
+        <SectionTag text="OPORTUNIDADES" />
+        <Title before="Vacantes " gradient="abiertas" />
+        <div
+          style={{
+            fontSize: "1.05rem",
+            lineHeight: 1.7,
+            color: "var(--color-uplin-ink-soft)",
+            maxWidth: 700,
+            margin: "0 0 2rem",
+          }}
+        >
+          Explora las oportunidades disponibles y filtrá por área para encontrar la posición ideal para ti.
         </div>
-
-        <div className="order-2 md:order-1 w-full md:w-4/12 bg-white shadow-lg rounded-2xl p-4 flex flex-col justify-center items-center text-center transform transition-transform duration-300 hover:scale-105 h-56 md:h-64 cursor-pointer">
-          <h3 className="font-poppins text-[#502B7D] font-semibold text-center text-sm md:text-base">
-            Te conectamos con las mejores oportunidades en startups líderes y
-            empresas de tecnología de Latam. Compañías con culturas centradas en
-            las personas, donde el desarrollo profesional y personal van de la
-            mano.
-          </h3>
-        </div>
-      </section>
-
-      <section className="w-full flex flex-wrap justify-center gap-4 py-4 px-5 mt-6">
         <Link href="/careers">
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
+            whileHover={{ x: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="inline-flex items-center gap-[0.45rem] font-semibold text-[0.95rem] px-[0.9rem] py-[0.55rem] rounded-full cursor-pointer transition-all"
+            style={{
+              color: "var(--color-uplin-purple)",
+              transition: "background var(--transition-uplin-fast)",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--color-uplin-purple-8)")}
+            onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
           >
-            <FiArrowLeft />
+            <ArrowLeft size={14} />
             Atrás
           </motion.div>
         </Link>
+        
+        <div className="flex flex-row justify-center items-center gap-4 mt-6">
+          <FilterDropdown
+            areas={areas}
+            selectedArea={selectedArea}
+            open={dropdownOpen}
+            onToggle={() => setDropdownOpen((o) => !o)}
+            onSelect={(area) => {
+              setSelectedArea(area);
+              setDropdownOpen(false);
+            }}
+          />
 
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
-          onClick={() => window.location.reload()}
-        >
-          <FiRefreshCw className="animate-spin-on-hover hover:animate-spin" />
-          Actualizar
-        </motion.div>
-
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="relative flex items-center gap-2 bg-[#6C4099] text-white px-4 py-2 rounded-[10px] w-fit cursor-pointer"
-          onClick={() => setDropdownOpen(!dropdownOpen)}
-        >
-          <FaFilter />
-          <span>{selectedArea || "Filtrar por área"}</span>
-          <motion.div
-            animate={{ rotate: dropdownOpen ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
+          <motion.button
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
+            className="inline-flex items-center gap-[0.45rem] font-semibold text-[0.95rem] text-white px-[1.2rem] py-[0.62rem] rounded-full cursor-pointer"
+            style={{
+              background: "linear-gradient(135deg, var(--color-uplin-purple), var(--color-uplin-purple-2))",
+              boxShadow: "0 6px 18px -6px rgba(109,64,152,0.5)",
+              border: "none",
+              transition: "all var(--transition-uplin-fast)",
+            }}
+            onClick={refresh}
           >
-            <FiChevronDown />
-          </motion.div>
-          <AnimatePresence>
-            {dropdownOpen && areas.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="absolute top-full mt-2 left-0 bg-white text-[#6C4099] shadow-lg rounded-xl py-2 px-4 flex flex-col min-w-[200px] z-10 font-poppins"
-              >
-                <div
-                  className="cursor-pointer py-1 hover:bg-[#6C4099] hover:text-white px-2 rounded-md"
-                  onClick={() => {
-                    setSelectedArea("Todas");
-                    setDropdownOpen(false);
-                  }}
-                >
-                  Todas
-                </div>
-                {areas.map((area, i) => (
-                  <div
-                    key={i}
-                    className="cursor-pointer py-1 hover:bg-[#6C4099] hover:text-white px-2 rounded-md"
-                    onClick={() => {
-                      setSelectedArea(area);
-                      setDropdownOpen(false);
-                    }}
-                  >
-                    {area}
-                  </div>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-          {areas.length === 0 && !dropdownOpen && (
-            <span className="text-white text-sm italic ml-2">
-              No hay áreas disponibles
-            </span>
-          )}
-        </motion.div>
+            <RefreshCw size={16} />
+            Actualizar
+          </motion.button>
+
+        </div>
       </section>
 
-      <section className="min-h-[60vh] flex justify-center p-6 font-poppins">
-        <div className="w-full">
-          {vacantesFiltradas.length > 0 && (
-            <h2 className="text-2xl font-bold mb-6 text-[#6C4099] text-center">
-              Vacantes disponibles
-            </h2>
+      <section className="flex justify-center p-6">
+        <div className="w-full" style={{ maxWidth: "980px", margin: "0 auto" }}>
+
+          {error && (
+            <p className="text-red-500 text-center py-10">{error}</p>
           )}
 
           {loading ? (
             <div className="flex justify-center items-center py-20">
-              <TbLoader2 className="animate-spin text-[#6C4099] text-4xl" />
+              <motion.div
+                className="w-8 h-8 rounded-full border-2 border-t-transparent"
+                style={{ borderColor: "var(--color-uplin-purple)" }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              />
             </div>
           ) : (
             <div className="grid gap-6 mb-8">
-              {vacantesFiltradas.length > 0 ? (
-                vacantesFiltradas.map((v, i) => (
-                  <CardVacante key={i} vacante={v} />
-                ))
+              {vacantes.length > 0 ? (
+                vacantes.map((v, i) => <CardVacante key={i} vacante={v} />)
               ) : (
-                <section className="flex flex-col items-center gap-6 px-4 py-8">
-                  <p className="text-[#6C4099] text-lg font-semibold text-center">
-                    Hoy no tenemos vacantes disponibles
-                  </p>
-
-                  <div className="font-poppins text-center max-w-xl w-full bg-white/5 rounded-lg shadow-lg flex flex-col items-center gap-6 p-6">
-                    <h3 className="text-base md:text-lg font-normal text-[#6C4099] leading-relaxed">
-                      Déjanos tu CV y se parte de nuestra base de talentos.
-                    </h3>
-
-                    <ul className="space-y-4 text-left w-full max-w-md text-[#6C4099]">
-                      <li className="flex items-center">
-                        <span className="w-2 h-2 bg-[#502B7D] rounded-full mr-3"></span>
-                        Te consideraremos para futuras oportunidades
-                      </li>
-                      <li className="flex items-center">
-                        <span className="w-2 h-2 bg-[#502B7D] rounded-full mr-3"></span>
-                        Recibí novedades y vacantes relacionadas a tu perfil
-                      </li>
-                      <li className="flex items-center">
-                        <span className="w-2 h-2 bg-[#502B7D] rounded-full mr-3"></span>
-                        Accede a invitaciones de eventos exclusivos de Uplin.
-                      </li>
-                    </ul>
-
-                    <motion.a
-                      href="https://forms.gle/xoXqjr1dWizknQQTA"
-                      target="_blank"
-                      className="bg-[#502B7D] border-2 border-[#502B7D] text-white rounded-full px-4 py-2 md:px-6 md:py-3 no-underline font-bold cursor-pointer"
-                      whileHover={{
-                        scale: 1.05,
-                        backgroundColor: "#6C4099",
-                        transition: { duration: 0.2 },
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Quiero unirme a la base de talentos
-                    </motion.a>
-                  </div>
-                </section>
+                <EmptyVacantes />
               )}
             </div>
           )}
         </div>
       </section>
-    </>
+    </main>
   );
 };
 

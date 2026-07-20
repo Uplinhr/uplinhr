@@ -1,4 +1,4 @@
-import AcademyView from "@/views/academyView";
+import AcademyView from "@/views/academy/academyView";
 
 const Academy = () => {
   return (

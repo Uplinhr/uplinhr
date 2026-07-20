@@ -1,4 +1,4 @@
-import { QAView } from "@/views/qaView";
+import { QAView } from "@/views/preguntas-frecuentes/qaView";
 
 const page = () => {
   return (

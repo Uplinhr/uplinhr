@@ -1,7 +1,7 @@
 "use client"
 import { IPlanCardProps } from "@/interfaces";
 import Link from "next/link";
-import { PlayCircle } from "lucide-react";
+import { Volume2 } from "lucide-react";
 import { speakText } from "@/utils/textToSpeech";
 
 const PlanCard = ({
@@ -63,11 +63,11 @@ const PlanCard = ({
                 e.stopPropagation();
                 handleTTS();
               }}
-              className="p-1 hover:bg-gray-100 rounded-full transition-colors duration-200 flex-shrink-0"
+              className="uplin-tts-btn flex-shrink-0"
               aria-label={`Escuchar plan ${plan}`}
               title="Escuchar texto"
             >
-              <PlayCircle size={20} className="text-[#502B7D]" />
+              <Volume2 size={18} />
             </button>
           </div>
           <p className="mt-3 w-64 h-28 justify-center text-black/80 text-base font-normal leading-normal">{description}</p>
