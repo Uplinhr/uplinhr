@@ -18,7 +18,6 @@ const serviceLinks = [
   { href: "/servicios/creditos", label: "Búsqueda de talento" },
   { href: "/servicios/ppStaffing", label: "People Partner Staffing" },
   { href: "/servicios/consultorias", label: "Consultorías" },
-  { href: "/servicios/membresias", label: "Membresías" },
 ];
 
 const bibliotecaLinks = [
@@ -199,60 +198,7 @@ const Navbar = () => {
               Uplin Careers
             </motion.a>
 
-            {/* Dropdown Biblioteca Uplin */}
-            <div
-              className="relative"
-              onMouseEnter={openBiblioteca}
-              onMouseLeave={closeBiblioteca}
-            >
-              <motion.button
-                type="button"
-                onClick={toggleBiblioteca}
-                aria-expanded={bibliotecaOpen}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                transition={fast}
-                className={`flex items-center gap-2 text-uplin-nav font-medium rounded-xl px-4 py-2 transition-colors ${
-                  bibliotecaOpen
-                    ? "bg-uplin-purple-8 text-uplin-purple"
-                    : "text-uplin-ink hover:bg-uplin-purple-8 hover:text-uplin-purple"
-                }`}
-              >
-                <span>Biblioteca Uplin</span>
-                <motion.span
-                  animate={{ rotate: bibliotecaOpen ? 180 : 0 }}
-                  transition={fast}
-                  className="flex items-center"
-                >
-                  <FaChevronDown />
-                </motion.span>
-              </motion.button>
 
-              <AnimatePresence>
-                {bibliotecaOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
-                    transition={fast}
-                    className="absolute left-0 mt-3 w-[280px] bg-white rounded-2xl shadow-uplin-glass border border-uplin-line py-4 z-30"
-                    onMouseEnter={openBiblioteca}
-                    onMouseLeave={closeBiblioteca}
-                  >
-                    {bibliotecaLinks.map((link) => (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        className={dropdownLinkClass}
-                        onClick={closeAllMenus}
-                      >
-                        {link.label}
-                      </a>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
             <motion.a
               href="https://u030x.share.hsforms.com/2kmoJRY33TFChFJbTJ37Mlw"

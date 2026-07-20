@@ -224,7 +224,7 @@ export default function CreditSimulatorModal({
                         >
                           <div className="sm:col-span-7 min-w-0">
                             <p style={{ color: "var(--color-uplin-ink)", fontSize: "var(--text-uplin-body)" }}>{level.name}</p>
-                            <p style={{ color: "var(--color-uplin-ink-muted)", fontSize: "var(--text-uplin-xs)" }}>{level.credits} créditos c/u</p>
+                           
                           </div>
                           <div className="sm:col-span-5 flex items-center justify-between sm:justify-end gap-3">
                             <input
@@ -272,7 +272,7 @@ export default function CreditSimulatorModal({
                           >
                             <div className="sm:col-span-8 min-w-0">
                               <p className="break-words" style={{ color: "var(--color-uplin-ink)", fontSize: "var(--text-uplin-body)" }}>{svc.name}</p>
-                              <p style={{ color: "var(--color-uplin-ink-muted)", fontSize: "var(--text-uplin-xs)" }}>{svc.creditsPerUnit} créditos c/u</p>
+
                             </div>
                             <div className="sm:col-span-4 flex items-center justify-end">
                               <input
