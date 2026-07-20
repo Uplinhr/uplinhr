@@ -56,7 +56,7 @@ export function CardCreditos({ paquetes, index = 0 }: Props) {
 
         {/* Título */}
         <div
-          className="text-[1.6rem] font-bold leading-[1.2] tracking-[-0.01em] mb-2 flex items-start min-h-[3.9rem]"
+          className="text-[1.6rem] font-bold leading-[1.2] tracking-[-0.01em] mb-2 flex items-center min-h-[3.9rem]"
           style={{ color: "var(--color-uplin-ink)" }}
         >
           {paquetes.title}
@@ -69,8 +69,8 @@ export function CardCreditos({ paquetes, index = 0 }: Props) {
         >
           {paquetes.description}
         </p>
-
-        {/* Bloque de precio */}
+      
+        {/* Bloque de precio 
         <div
           className="my-[1.2rem] py-4 flex flex-col justify-center min-h-[120px]"
           style={{
@@ -109,7 +109,7 @@ export function CardCreditos({ paquetes, index = 0 }: Props) {
             + impuestos · Pago único
           </p>
         </div>
-
+      */}
         {/* Lista de features */}
         <ul className="flex-1 list-none p-0 mb-6">
           {paquetes.features.map((feature, i) => (

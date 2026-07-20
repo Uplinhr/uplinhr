@@ -88,27 +88,16 @@ export default function TestTailwind() {
           description="Nos convertimos en tu socio estratégico de talento. Te acompañamos en la contratación, integración y gestión de tu equipo con un enfoque humano y cercano."
           linkHref="/servicios/ppStaffing"
         />
-        <CardServices
-          icon={<Briefcase className="w-[26px] h-[26px]" />}
-          iconBg="var(--color-uplin-orange)"
-          title="Consultorías"
-          description="Asesoría especializada en recursos humanos para impulsar tu negocio. Te damos claridad y soluciones prácticas para enfrentar tus retos de gestión de personas."
-          linkHref="/servicios/consultorias"
-        />
-        <CardServices
-          icon={<Star className="w-[26px] h-[26px]" />}
-          title="Membresías"
-          description="Un plan flexible para acceder a beneficios y soporte continuo en RRHH. Acompañamos a tu organización con soluciones adaptadas a cada etapa de crecimiento."
-          linkHref="/servicios/membresias"
-        />
-         <div className="md:col-span-2 flex justify-center">
-          <CardServices
-            icon={<GraduationCap className="w-[26px] h-[26px]" />}
-            iconBg="var(--color-uplin-green)"
-            title="Formación organizacional"
-            description="Diseñamos programas de formación y consultoría para potenciar liderazgo, productividad, comunicación e inteligencia artificial en equipos y organizaciones. Adaptamos cada experiencia a los desafíos reales del negocio, combinando habilidades humanas, tecnología y aprendizaje aplicado. Trabajamos con empresas de Latinoamérica en formatos virtuales, presenciales e híbridos."
-            linkHref="/biblioteca"
-          />
+        <div className="md:col-span-2 flex justify-center">
+          <div className="w-full md:max-w-[calc(50%-0.75rem)]">
+            <CardServices
+              icon={<Briefcase className="w-[26px] h-[26px]" />}
+              iconBg="var(--color-uplin-orange)"
+              title="Consultorías"
+              description="Asesoría especializada en recursos humanos para impulsar tu negocio. Te damos claridad y soluciones prácticas para enfrentar tus retos de gestión de personas."
+              linkHref="/servicios/consultorias"
+            />
+          </div>
         </div>
       </div>
       <Solutions />
