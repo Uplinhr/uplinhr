@@ -93,6 +93,11 @@ export default function Creditos() {
           </motion.p>
           
         </div>
+        <div className="flex justify-center mt-12 mb-12">
+          <CreditSimulatorModal>
+            <BotonVerde text="Simula tu paquete"/>
+          </CreditSimulatorModal>
+        </div>
 
         {loading ? (
           <div className="flex justify-center items-center py-12">
@@ -108,11 +113,7 @@ export default function Creditos() {
           </div>
         )}
 
-        <div className="flex justify-center mt-12">
-          <CreditSimulatorModal>
-            <BotonVerde text="Simula tu paquete"/>
-          </CreditSimulatorModal>
-        </div>
+
       </section>
 
       {/* CRÉDITOS INDIVIDUALES */}
