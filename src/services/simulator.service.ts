@@ -1,6 +1,9 @@
 import { AdditionalService, SimulatorData, SimulatorLevel } from "@/interfaces";
 import { fetchSheetRows, SheetRow } from "./googleSheets/sheets.utils";
 
+const SIMULATOR_SHEET_URL =
+  "https://docs.google.com/spreadsheets/d/1Fc5EpffsCCUiVlAiXjT6HRCTJrCCqVS7AC7tn4zgNjY/gviz/tq?tqx=out:json";
+
 // Actualizar estos gids con los valores reales del spreadsheet
 const SHEETS = {
   CONFIG: "0",
@@ -33,13 +36,10 @@ function parseServiceRow(row: SheetRow): AdditionalService | null {
 }
 
 export async function getSimulatorData(): Promise<SimulatorData> {
-  const base = process.env.NEXT_PUBLIC_SIMULATOR_SHEET_URL;
-  if (!base) throw new Error("NEXT_PUBLIC_SIMULATOR_SHEET_URL no está configurada");
-
   const [configRows, seniorityRows, serviceRows] = await Promise.all([
-    fetchSheetRows(sheetUrl(base, SHEETS.CONFIG)),
-    fetchSheetRows(sheetUrl(base, SHEETS.SENIORITIES)),
-    fetchSheetRows(sheetUrl(base, SHEETS.SERVICES)),
+    fetchSheetRows(sheetUrl(SIMULATOR_SHEET_URL, SHEETS.CONFIG)),
+    fetchSheetRows(sheetUrl(SIMULATOR_SHEET_URL, SHEETS.SENIORITIES)),
+    fetchSheetRows(sheetUrl(SIMULATOR_SHEET_URL, SHEETS.SERVICES)),
   ]);
 
   const creditPriceUsd = parseCreditPrice(configRows);

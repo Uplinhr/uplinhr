@@ -1,6 +1,8 @@
 import { Paquete } from "@/interfaces";
 import { fetchSheetRows, SheetRow } from "./googleSheets/sheets.utils";
 
+const SIMULATOR_SHEET_URL =
+  "https://docs.google.com/spreadsheets/d/1Fc5EpffsCCUiVlAiXjT6HRCTJrCCqVS7AC7tn4zgNjY/gviz/tq?tqx=out:json";
 const PAQUETES_GID = "1039397621";
 const CONFIG_GID = "0";
 const FEATURE_SEPARATOR = "|";
@@ -44,12 +46,9 @@ function parsePaqueteRow(row: SheetRow, creditPriceUsd: number): Paquete | null 
 }
 
 export async function fetchPaquetes(): Promise<Paquete[]> {
-  const base = process.env.NEXT_PUBLIC_SIMULATOR_SHEET_URL;
-  if (!base) throw new Error("NEXT_PUBLIC_SIMULATOR_SHEET_URL no está configurada");
-
   const [configRows, paqueteRows] = await Promise.all([
-    fetchSheetRows(`${base}&gid=${CONFIG_GID}`),
-    fetchSheetRows(`${base}&gid=${PAQUETES_GID}`),
+    fetchSheetRows(`${SIMULATOR_SHEET_URL}&gid=${CONFIG_GID}`),
+    fetchSheetRows(`${SIMULATOR_SHEET_URL}&gid=${PAQUETES_GID}`),
   ]);
 
   const creditPriceUsd = parseCreditPrice(configRows);

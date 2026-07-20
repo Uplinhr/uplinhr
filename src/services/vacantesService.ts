@@ -20,8 +20,8 @@ export type FetchVacantesResult = {
 };
 
 export async function fetchVacantes(): Promise<FetchVacantesResult> {
-  const url = process.env.NEXT_PUBLIC_VACANTES_SHEET_URL;
-  if (!url) throw new Error("NEXT_PUBLIC_VACANTES_SHEET_URL no está configurada");
+  const url =
+    "https://docs.google.com/spreadsheets/d/1fAEiXSCTge9b19EV613Jjh6hAZ-uf4PafACQ8TTFPjQ/gviz/tq?tqx=out:json";
 
   const rows = await fetchSheetRows(url);
   const vacantes = rows.slice(1).map(parseRow);
