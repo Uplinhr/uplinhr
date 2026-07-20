@@ -36,7 +36,7 @@ NEXT_PUBLIC_API_URL=http://backend-uplin.vercel.app   # para el deploy, NO usar 
 El repositorio está organizado siguiendo un flujo de trabajo colaborativo con ramas bien definidas:
 - **main** → rama principal, contiene solo código estable y listo para producción.  
 - **dev** → rama de integración, donde se combinan y testean los desarrollos individuales antes de pasar a producción.  
-- **devTomi, devAndre, devMarco, devDani, devMari, devVicky** → ramas personales para el desarrollo individual de cada integrante del equipo.  
+- **devTomi, devAndre, devMarco, devDani, devMari, devVicky, devMuri** → ramas personales para el desarrollo individual de cada integrante del equipo.  
 
 Cada miembro trabaja en su propia rama y, una vez completadas y probadas las funcionalidades, realiza un **pull request** hacia `dev`.  
 Cuando la rama `dev` alcanza un estado estable y validado, se integra a `main` donde automáticamente se hará el deploy en Vercel.
@@ -51,77 +51,80 @@ Cada integrante del equipo trabajará en su rama individual. Se recomienda:
 ## 📂 Estructura del Proyecto
 ```
 uplinhr/
-├── public/                            # Imágenes y contenido necesario para la web
-├── src/                               # Código fuente del frontend
-│   ├── app/                           # Páginas y redirecciones (Next.js App Router, NO son client components)
-│   │   ├── academy/                   # Submódulo academy
-│   │   ├── careers/                   # Careers y vacantes
-│   │   ├── cursosCompletos/           # Páginas de cursos completos
-│   │   ├── dashboard/                 # Dashboard de user y admin
-│   │   ├── login/                     # Formulario de inicio de sesión
-│   │   ├── planes/                    # Descripción de planes de membresías
-│   │   ├── politicas-privacidad       # Politicas de privacidad
-│   │   ├── preguntas-frecuentes       # Sección desplegable de preguntas y respuestas
-│   │   ├── quienes-somos              # Información sobre la misión de la empresa
-│   │   ├── restablecer-clave          # Formulario para reestablecer contraseñas
-│   │   ├── servicios                  
-│   │   │   ├── consultorias           # Servicios de consultorías
-│   │   │   ├── creditos               # Créditos para la búsqueda de talentos + simulador
-│   │   │   ├── membresias             # Planes de membresias para empresas
-│   │   │   ├── ppstaffing             # Servicio de conexión de talentos
-│   │   └── terminos-condiciones       # Términos y condiciones de la empresa
-│   │
-│   ├── components/         # Componentes reutilizables
-│   │   ├── admincomponents/        # Pestañas del dashboard admin
-│   │   ├── banner/                 # Banners de contacto
-│   │   ├── botPenguin/             # Chatbot
-│   │   ├── button/
-│   │   ├── CardServices/           # Componente de tarjetas reutilizables
-│   │   ├── CardSolution/           # Tarjetas de la landing de home
-│   │   ├── careers/
-│   │   ├── ConsultoriasCard/
-│   │   ├── cursosCompletos/
-│   │   ├── footer/
-│   │   ├── Login/
-│   │   ├── navbar/
-│   │   ├── planCard/               # Tarjetas de las membresías
-│   │   ├── qaCard/                 # Tarjetas reutilizables de preguntas y respuestas
-│   │   ├── resetPassword/
-│   │   ├── ScrollToTop/            # Botón para volver a arriba
-│   │   ├── Simulador/
-│   │   ├── StrategicAlliances/     # Sección de programa de alianzas
-│   │   ├── webinars/               # cursos en vivos
-│   │   └── ProtectedRoute.tsx      # Protección de rutas de UPLIN Management
-│   │ 
-│   ├── interfaces/                 # Tipos e interfaces TypeScript (centralizadas en index.ts)
-│   ├── services/                   # Conexión con el backend usando fetch + try/catch
-│   │   ├── adminService.ts         # Servicios relacionados al dashboard admin
-│   │   ├── authService.ts          # Inicio de sesión
-│   │   └── userService.ts          # Servicios de usuario
-│   ├── store/                      # Estados globales con Zustand
-│   │   ├── useAdminStore.ts
-│   │   ├── useAuthStore.ts
-│   │   └── useUserStore.ts
-│   ├── utils/                      # Funciones utilitarias y datos estáticos
-│   │   ├── cursosCompletos/
-│   │   │   ├── cardDetails.ts
-│   │   │   └── faqs.ts             # Módulos de cada curso (genera las cards)
-│   │   │
-│   │   ├── consultorias.ts
-│   │   ├── infoCreditos.ts
-│   │   ├── paquetes.ts
-│   │   ├── plans.ts
-│   │   ├── qa.ts
-│   │   ├── textToSpeach.ts
-│   │   └── webinarsData.ts         # Texto para generar cards automáticamente
-│   │
-│   └── views/                      # Vistas client-side
-│       ├── careers/                # Pages de careers y vacantes
-│       ├── cursosCompletos/        # Pages de cada curso completo
-│       ├── dashboard/              # Pages de dashboard user y admin
-│       └── servicios/              # Pages de todos los servicios
-│           ├── ppStaffing.tsx
-│           ├── consultorias.tsx
-│           ├── creditos.tsx
-│           └── membresias.tsx
+├── public/                          # assets estáticos
+└── src/
+    ├── app/                         # routing (Next.js App Router)
+    │   ├── academy/
+    │   ├── careers/
+    │   │   └── jobOpenings/
+    │   ├── cursosCompletos/
+    │   │   ├── crearAreaRRHH/elegir-pais/
+    │   │   ├── datosConHumanidad/elegir-pais/
+    │   │   ├── liderazgoDeEquipos/elegir-pais/
+    │   │   ├── maternidadYLiderazgo/elegir-pais/
+    │   │   └── neuroliderazgo/elegir-pais/
+    │   ├── dashboard/
+    │   │   ├── admin/
+    │   │   └── user/
+    │   ├── login/
+    │   ├── planes/
+    │   ├── politicas-privacidad/
+    │   ├── preguntas-frecuentes/
+    │   ├── quienes-somos/
+    │   ├── restablecer-clave/
+    │   ├── servicios/
+    │   │   ├── consultorias/
+    │   │   ├── creditos/elegir-pais/
+    │   │   └── ppStaffing/
+    │   └── terminos-condiciones/
+    │
+    ├── components/                  # UI reutilizable / específica
+    │   ├── adminComponents/
+    │   ├── banner/
+    │   ├── biblioteca/
+    │   ├── BotonPrimario/
+    │   ├── BotonSecundario/
+    │   ├── BotonTerceario/
+    │   ├── BotonVolume/
+    │   ├── botPenguin/
+    │   ├── Button/
+    │   ├── Card/
+    │   ├── CardServices/
+    │   ├── careers/
+    │   ├── ConsultoriasCard/
+    │   ├── cursosCompletos/
+    │   ├── EyebrowPill/
+    │   ├── footer/
+    │   ├── Login/
+    │   ├── navbar/
+    │   ├── planCard/
+    │   ├── qaCard/
+    │   ├── resetPassword/
+    │   ├── ScrollToTop/
+    │   ├── SectionTag/
+    │   ├── ServiceHero/
+    │   ├── simulador/
+    │   ├── strategicAlliances/
+    │   ├── Testimonios/
+    │   ├── Title/
+    │   └── webinars/
+    │
+    ├── hooks/                       # custom hooks (useSimulator, usePaquetes, etc.)
+    ├── interfaces/                  # tipos TS centralizados
+    ├── services/                    # capa de acceso a datos/API
+    │   └── googleSheets/
+    ├── store/                       # estado global (Zustand)
+    ├── utils/                       # datos estáticos y helpers
+    │   ├── biblioteca/
+        ├── home/
+        ├── legal/
+        ├── planes/
+        ├── preguntas-frecuentes/
+        ├── quienes-somos/
+        └── servicios/
+            ├── consultorias/
+            ├── creditos/
+            ├── membresias/
+            └── ppStaffing/
+                └── components/
 ```
